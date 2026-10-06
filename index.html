@@ -110,9 +110,19 @@ button:focus-visible,input:focus-visible,a:focus-visible,.slapp:focus-within{out
 .markering{font-family:var(--f-hand);font-size:22px;color:var(--penna);transform:rotate(-2deg)}
 #rapport{display:block;border:1px solid var(--linje)}
 
-.avstam{margin-top:20px;border:1px solid var(--linje);border-radius:4px;padding:6px 16px 14px;background:var(--bg)}
-.avstam summary{cursor:pointer;font-family:var(--f-rubrik);font-weight:600;font-size:20px;padding-block:8px}
-.avstam summary span{font-family:var(--f-hand);color:var(--penna);font-size:22px;margin-left:6px}
+.avstam{margin-top:20px;border:2px dashed var(--penna);border-radius:4px;padding:6px 16px 14px;background:var(--bg);transition:border-color .15s}
+.avstam[open]{border-style:solid;border-color:var(--linje)}
+.avstam summary{cursor:pointer;list-style:none;padding-block:10px;display:grid;gap:8px}
+.avstam summary::-webkit-details-marker{display:none}
+.s-rad{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.s-titel{font-family:var(--f-rubrik);font-weight:600;font-size:22px}
+.s-valfritt{font-family:var(--f-hand);color:var(--penna);font-size:22px}
+.s-chips{display:flex;flex-wrap:wrap;gap:8px}
+.s-chips i{font-style:normal;font-size:14px;font-weight:600;background:var(--papper);border:1px solid var(--linje);border-radius:20px;padding:4px 12px}
+.s-hint{font-size:15px;font-weight:700;color:var(--penna)}
+.s-hint::after{content:" ▾"}
+.avstam[open] .s-hint{display:none}
+.avstam summary:hover .s-hint{text-decoration:underline}
 .avgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
 .avgrid>*{min-width:0}
 .avstam fieldset{border:0;background:var(--papper);box-shadow:var(--skugga);padding:12px 14px;margin:0}
@@ -236,7 +246,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       </div>
     </div>
     <details class="avstam" id="avstam">
-      <summary>Stäm av mot dina handlingar <span>valfritt</span></summary>
+      <summary><span class="s-rad"><span class="s-titel">Stäm av mot dina handlingar</span><span class="s-valfritt">valfritt, men rekommenderas</span></span><span class="s-chips"><i>Momsdeklarationer</i><i>Skattekontot</i><i>Banken</i><i>Bokslutet</i></span><span class="s-hint">Klicka här och fyll i det du har till hands</span></summary>
       <p class="hjalp" style="margin-top:4px">Fyll i det du har till hands. Uppgifterna jämförs med bokföringen här i webbläsaren och skickas ingenstans.</p>
       <div class="avgrid">
         <fieldset><legend>Banken</legend>

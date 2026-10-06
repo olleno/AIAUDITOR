@@ -44,6 +44,14 @@ LOGGA = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" width="22
 FOTTEXT = '<div class="fot">Kansliet at Nordwik Partners</div>'
 
 EXTRA_STIL = """
+.uppmaning{background:#FFFDF8;border:2px solid #B3261E;border-radius:4px;padding:18px 20px;margin:18px 0}
+.uppmaning h3{margin:0 0 4px;font-size:19px}
+.uppmaning .handstil{font-family:Caveat,'Segoe Print',cursive;color:#B3261E;font-size:22px;line-height:1}
+.uppmaning ul{list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.uppmaning li{background:#F4F3EF;border:1px solid #D9D3C7;padding:10px 12px;border-radius:3px}
+.uppmaning li b{display:block;font-size:15px}
+.uppmaning li span{font-size:13px;color:#4A524D}
+.uppmaning .knapp{display:inline-block;background:#B3261E;color:#fff;padding:11px 18px;font-weight:700;text-decoration:none;border-radius:3px}
 .status{color:#fff;padding:20px 22px;margin:20px 0}.status b{font-size:22px;display:block;font-weight:800}
 .vyer{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.vyer button{font:inherit;font-weight:600;padding:10px 16px;border:1px solid var(--mork);background:var(--vit);color:var(--mork);cursor:pointer}
 .vyer button.aktiv{background:var(--mork);color:#fff}
@@ -176,6 +184,17 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
               + (f' och de uppgifter du fyllt i om {lista(jamfort)}' if jamfort else '') + '. Kvitton, fakturor och avtal har inte setts. '
               + (f'{lista(ej).capitalize()} har inte jämförts' + (' – <a href="#avstam" data-oppna="avstam">fyll i dem och granska igen</a>. ' if webb else '. ') if ej else '')
               + f'Därför kan fel finnas som inte syns här. {len(aktiva)} kontroller har körts.</div>')
+    BEHOV = {"MO11": ("Momsdeklarationer", "Period och ruta 49 (att betala eller få tillbaka)"),
+             "SK05": ("Skattekontot", "Saldot hos Skatteverket på ett datum"),
+             "BA03": ("Banken", "Saldot enligt kontoutdraget på ett datum"),
+             "BO01": ("Bokslutet", "Årets resultat enligt årsredovisningen")}
+    saknas = [r for r in ("MO11", "SK05", "BA03", "BO01") if r not in gjorda]
+    uppmaning = ""
+    if webb and saknas:
+        uppmaning = ('<div class="uppmaning"><p class="handstil">' + ("Inte kontrollerat än" if len(saknas) == 4 else "Fortfarande ej kontrollerat") + '</p>'
+                     '<h3>Stäm av mot dina handlingar</h3><p style="margin:0;color:#4A524D">Bokföringen kan se rätt ut och ändå skilja sig från det som deklarerats eller står på kontot. Fyll i det du har, så jämförs det med bokföringen. Inget skickas iväg.</p>'
+                     '<ul>' + "".join(f'<li><b>{BEHOV[r][0]}</b><span>{BEHOV[r][1]}</span></li>' for r in saknas) + '</ul>'
+                     '<a class="knapp" href="#avstam" data-oppna="avstam">Fyll i och granska igen</a></div>')
     if avst:
         k2 = lambda x: g.kr(0.0 if abs(x) < 0.005 else x)
         avrader = "".join(f'<tr><td>{e(vad)}</td><td class="mono">{k2(doc)}</td><td class="mono">{k2(bk)}</td><td class="mono">{k2(diff)}</td>'
@@ -239,6 +258,7 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
             f'<div class="status" style="background:{farg}"><span style="opacity:.85;font-size:13px">Samlad bedömning: {ord_}</span><b>{rub}</b>{txt}</div>'
             f'<div class="kort"><div class="k"><b>{len(bok["ver"])}</b>verifikationer</div><div class="k"><b style="color:#9B2C1F">{antal[1]}</b>fel</div>'
             f'<div class="k"><b style="color:#9A6A12">{antal[2]}</b>att kontrollera</div><div class="k"><b style="color:#6B726E">{antal[3]}</b>noteringar</div></div>'
+            + uppmaning +
             '<div class="vyer"><button data-vy="sjalv" class="aktiv" onclick="vy(\'sjalv\')">Jag bokför själv</button>'
             '<button data-vy="byra" onclick="vy(\'byra\')">Sammanfattning till min byrå</button>'
             '<button data-vy="revisor" onclick="vy(\'revisor\')">Underlag till revisor</button></div>'
