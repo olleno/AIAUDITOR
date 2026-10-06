@@ -170,7 +170,7 @@ def granska(bok, idag=None, handlingar=None):
              f"(mitten {med} dagar, längst {sena[-1]} dagar).{notis}",
              "Kontrollera att bokföringen sker i tid. Företag med omsättning högst 3 mkr får vänta till betalning; kontanta betalningar ska alltid bokföras senast nästa arbetsdag.")
 
-    def norm(t): return re.sub(r"\(.*?\)|[^a-zåäö ]", "", t.lower()).strip()
+    def norm(t): return re.sub(r"\(.*?\)|[^a-zåäö0-9 ]", "", t.lower()).strip()   # siffror kvar: fakturanummer skiljer
     kostn = [(v, k, round(b, 2)) for v in aktiva if not any(k[0] == "3" for k, _ in v["rader"])
              for k, b in v["rader"] if k[0] in "456" and b >= 10]
     sedda = set()
@@ -210,16 +210,21 @@ def granska(bok, idag=None, handlingar=None):
             else:
                 lagg("MO02", v, f"Moms {kr(moms)} kr på {kr(netto)} kr motsvarar {kvot * 100:.1f} %, utanför alla svenska momssatser.", "Rätta momsbeloppet mot kvittot.")
 
+    def momsfri(k):   # enligt BAS-listan eller kontots eget namn i filen
+        return k in MOMSFRIA_FORS or bool(re.search(r"momsfri|ej moms|utan moms", bok["konton"].get(k, ""), re.I))
+    def momspl(k):    # försäljning som ska ha moms: 30–31, eller annat 3-konto vars namn säger moms
+        if k[0] != "3" or momsfri(k): return False
+        return ar_fors(k) or bool(re.search(r"momspl|moms\s*\d+\s*%", bok["konton"].get(k, ""), re.I))
     def omforing(v):   # bara resultatkonton: flytt mellan konton, ingen affär
         return all(k[0] in "345678" for k, _ in v["rader"])
     for v in aktiva:
         if ar_korrigering(v) or omforing(v): continue
         if any(k[:2] in ("17", "29") for k, _ in v["rader"]): continue   # periodisering: momsen redovisades vid faktureringen
-        forsalj = -sum(b for k, b in v["rader"] if ar_fors(k))
+        forsalj = -sum(b for k, b in v["rader"] if momspl(k))
         utgrader = [(k, -b) for k, b in v["rader"] if ar_utg_moms(k) and k[3] in "01237"]
         if forsalj > 0:
             if not utgrader:
-                if not any(k in MOMSFRIA_FORS for k, _ in v["rader"]):
+                if not any(momsfri(k) for k, _ in v["rader"]):
                     lagg("MO05", v, f"Försäljning {kr(forsalj)} kr bokförd utan moms.", "Kontrollera om försäljningen är momsfri; annars lägg till utgående moms.")
             elif all(sats_for(k) for k, _ in utgrader):
                 underlag = sum(m / sats_for(k) for k, m in utgrader)
@@ -228,10 +233,10 @@ def granska(bok, idag=None, handlingar=None):
                     fel = abs(underlag - forsalj) * utg / underlag
                     lagg("MO04", v, f"Försäljning {kr(forsalj)} kr, men momsen {kr(utg)} kr motsvarar ett underlag på {kr(underlag)} kr. Momsen avviker med cirka {kr(fel)} kr.",
                          "Rätta momsbeloppet eller försäljningskontot.", allvar=1 if fel >= 50 else 2)
-        minsk = sum(b for k, b in v["rader"] if ar_fors(k) and b > 0)
-        okn = sum(-b for k, b in v["rader"] if ar_fors(k) and b < 0)
+        minsk = sum(b for k, b in v["rader"] if momspl(k) and b > 0)
+        okn = sum(-b for k, b in v["rader"] if momspl(k) and b < 0)
         if minsk > 0 and okn == 0 and not any(ar_utg_moms(k) for k, _ in v["rader"]) \
-                and not any(k in MOMSFRIA_FORS or k[:2] in ("17", "29") for k, _ in v["rader"]):
+                and not any(momsfri(k) or k[:2] in ("17", "29") for k, _ in v["rader"]):
             lagg("MO06", v, f"{kr(minsk)} kr bokas som minskad försäljning, men utgående moms rättas inte.",
                  "Om det är en kreditering ska även momsen krediteras. Om det är en kostnad ska den bokas på ett kostnadskonto.")
 
@@ -322,14 +327,22 @@ def granska(bok, idag=None, handlingar=None):
     # ---- Bank och kassa ----
     konton19 = sorted({k for v in bok["ver"] for k, _ in v["rader"] if k.startswith("19")} | {k for k in bok["ib"] if k.startswith("19")})
     for konto in konton19:
-        saldo = bok["ib"].get(konto, 0.0)
-        for v in sorted(bok["ver"], key=lambda x: (x["datum"] or date.min, str(x["nr"]))):
+        # Saldot räknas vid dagens slut: inom en dag spelar bokföringsordningen ingen roll.
+        per_dag = defaultdict(float); sista = {}
+        for v in bok["ver"]:
+            if not v["datum"]: continue
             for k, b in v["rader"]:
-                if k == konto: saldo += b
-            if saldo < -0.005:
-                namn = "kassan" if konto == "1910" else f"konto {konto} ({bok['konton'].get(konto, '')})"
-                lagg("BA01", v, f"Saldot på {namn} blir {kr(saldo)} kr den {v['datum']}.", "Stäm av mot kontoutdraget; troligen saknas ingående saldo eller används fel konto.")
-                break
+                if k == konto: per_dag[v["datum"]] += b; sista[v["datum"]] = v
+        saldo = bok["ib"].get(konto, 0.0); neg = []
+        for d in sorted(per_dag):
+            saldo += per_dag[d]
+            if saldo < -0.005: neg.append((d, saldo))
+        if neg:
+            namn = "kassan" if konto == "1910" else f"konto {konto} ({bok['konton'].get(konto, '')})"
+            d0, s0 = neg[0]; lagst = min(neg, key=lambda x: x[1])
+            mer = f" Det händer {len(neg)} dagar under perioden, som lägst {kr(lagst[1])} kr den {lagst[0]}." if len(neg) > 1 else ""
+            lagg("BA01", sista[d0], f"Saldot på {namn} är {kr(s0)} kr vid dagens slut den {d0}.{mer}",
+                 "Stäm av mot kontoutdraget. Stämmer det är kontot övertrasserat; annars saknas en insättning eller ett ingående saldo, eller fel konto används.")
     anvanda = {k for v in bok["ver"] for k, _ in v["rader"] if k.startswith("19")}
     for konto, ib in bok["ib"].items():
         if konto.startswith("19") and konto != "1910" and abs(ib) > 0.005 and konto not in anvanda and anvanda:
