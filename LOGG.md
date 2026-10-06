@@ -9,3 +9,7 @@
 - SEO: titel, beskrivning, kanonisk adress, delningsbild (bilder/delning.jpg), strukturerad data (WebApplication + FAQPage).
 - Texterna granskade av Gemini och GPT (logg i olleno/granskning).
 - Bilder: Unsplash (skrivbord, Cht Gsml) och Pexels (papper, pärmar) – fria licenser.
+- Branschsidor: 851 sidor under /bransch/ från SCB:s branschnyckeltal (BNTT01, 2024), byggda med verktyg/bygg_sidor.py. Branscher med färre än 30 företag, eller samma siffror som huvudbranschen, får ingen egen sida. SCB:s siffror visas obearbetade med "Källa: SCB" (CC0).
+- Guider: 7 guider under /guider/ för SIE-export (Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted, Briox). Menyvägar från leverantörernas hjälpsidor (källor på varje sida). PE Accounting/Kleer utelämnad – ingen offentlig instruktion hittades. Granskade av Gemini (inga invändningar) och GPT (invändningar avfärdade mot källorna).
+- Avstämning mot handlingar (lager 2): användaren fyller i bankens saldo, skattekontots saldo, momsdeklarationernas ruta 49 och årets resultat enligt årsredovisningen. Regler MO11, SK05, BA03, BO01 aktiverade. Körs i webbläsaren; inget skickas.
+- Startsidan läser ?sni= från branschsidorna och fyller i branschen.

@@ -1,0 +1,61 @@
+/* Gemensam stil för undersidor (branscher, guider). Samma papper, typsnitt och röda penna som startsidan. */
+:root{
+  --bg:#F3F0E9; --papper:#FFFDF8; --text:#1B201C; --sek:#4B524D; --dim:#6E746F; --linje:#D9D3C7; --rutor:#E7E1D4;
+  --mork:#1E3A31; --gron:#4E7A45; --gronljus:#E4ECDF; --penna:#B3261E;
+  --logo-mork:#1E3A31; --logo-gron:#4E7A45; --logo-ljus:#A9B0AB; --skugga:0 1px 2px rgba(40,30,10,.08),0 8px 24px rgba(40,30,10,.10);
+  --f-rubrik:"Newsreader",Georgia,serif; --f-text:"Public Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace; --f-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171B18; --papper:#20261F; --text:#ECEAE3; --sek:#BCC1BA; --dim:#959B94; --linje:#343B34; --rutor:#2A312A;
+  --mork:#D6E5D0; --gron:#93BF88; --gronljus:#253222; --penna:#F08A7E;
+  --logo-mork:#ECEAE3; --logo-gron:#93BF88; --logo-ljus:#5E6A63; --skugga:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--f-text);font-size:17px;line-height:1.6}
+.sida{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:18px 40px}
+a{color:var(--mork);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--f-rubrik);text-wrap:balance;font-weight:600;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:6px 0 14px}
+h2{font-size:clamp(24px,3vw,30px);line-height:1.15;margin:44px 0 12px}
+p{margin:0 0 12px}
+.topp{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:6px 26px}
+.topp nav{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
+.topp nav a{text-decoration:none;color:var(--sek)}
+.topp nav a:hover{color:var(--text);text-decoration:underline}
+.logolank{display:block;line-height:0}
+.logo{width:210px;max-width:60vw;height:auto}
+.logo .m{stroke:var(--logo-mork)}.logo .l{stroke:var(--logo-ljus)}.logo .g{stroke:var(--logo-gron)}.logo .gf{fill:var(--logo-gron)}.logo .t{fill:var(--logo-mork)}.logo .s{fill:var(--sek)}
+.smulor{font-size:14px;color:var(--dim);margin-bottom:10px}
+.smulor a{color:var(--sek)}
+.etikett{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gron);margin:0}
+.ingress{font-size:19px;color:var(--sek);max-width:44em}
+.hand{font-family:var(--f-hand);color:var(--penna);font-size:26px;line-height:1.1;margin:0 0 4px}
+.tabell{overflow-x:auto;background:var(--papper);box-shadow:var(--skugga);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:15px}
+th,td{padding:10px 12px;border-top:1px solid var(--linje);text-align:right;vertical-align:top}
+thead th{border-top:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:500}
+th[scope=row],thead th:first-child{text-align:left}
+th[scope=row]{font-weight:600;min-width:200px}
+.forkl{display:block;font-weight:400;font-size:13px;color:var(--dim);line-height:1.4;margin-top:2px;max-width:34em}
+td.med{font-weight:700}
+td.nl{color:var(--dim)}
+td.fa{font-size:13px;color:var(--dim);text-align:left}
+.not,.kalla{font-size:14px;color:var(--dim);margin-top:10px}
+.kod{font-family:var(--f-mono);font-size:12px;color:var(--dim)}
+.cta{background:var(--papper);box-shadow:var(--skugga);border-top:3px solid var(--penna);padding:26px 28px;margin:40px 0}
+.cta h2{margin:0 0 10px}
+.cta p{color:var(--sek);max-width:46em}
+.knapp{display:inline-block;font-weight:700;padding:12px 20px;border-radius:3px;text-decoration:none;border:1.5px solid var(--mork);margin-top:6px}
+.knapp.prim{background:var(--mork);color:var(--bg)}
+.lankar{list-style:none;padding:0;margin:0;columns:2;column-gap:32px}
+.lankar li{break-inside:avoid;padding:5px 0;border-bottom:1px solid var(--linje)}
+.lankar.stora{columns:1;font-size:19px}
+.grupp h2{font-size:22px;margin-top:32px}
+.guide .steg{counter-reset:s;list-style:none;padding:0;display:grid;gap:14px;max-width:46em}
+.guide .steg li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:10px;background:var(--papper);box-shadow:var(--skugga);padding:14px 16px}
+.guide .steg li::before{content:counter(s);font-family:var(--f-hand);color:var(--penna);font-size:30px;line-height:1}
+code{font-family:var(--f-mono);font-size:.9em}
+.fot{margin-top:64px;padding-top:18px;border-top:1px solid var(--linje);color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.fot a{color:var(--dim)}
+a:focus-visible{outline:3px solid var(--gron);outline-offset:2px}
+@media (max-width:700px){.lankar{columns:1}th[scope=row]{min-width:150px}}

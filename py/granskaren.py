@@ -87,7 +87,7 @@ def ar_lon(k): return "7000" <= k <= "7299" and not k.endswith("90")
 def ar_fors(k): return k[:2] in ("30", "31")
 def ar_utg_moms(k): return k[:3] in ("261", "262", "263")
 
-def granska(bok, idag=None):
+def granska(bok, idag=None, handlingar=None):
     idag = idag or date.today()
     fynd = []
     def lagg(regel, v, beskr, forslag, allvar=None):
@@ -341,6 +341,11 @@ def granska(bok, idag=None):
         lagg("AB03", None, f"Fjolårets resultat ({kr(-bok['ib']['2099'])} kr) ligger kvar på 2099 Årets resultat.",
              "Omför till 2098/2091 enligt årsstämmans beslut.")
 
+    # ---- Lager 2: avstämning mot handlingar som användaren fyllt i ----
+    bok["_avstamning"] = []
+    if handlingar:
+        import avstamning
+        bok["_avstamning"] = avstamning.avstam(bok, handlingar, lagg)
     fynd.sort(key=lambda f: (f["allvar"], f["regel"], int(re.sub(r"\D", "", f["ver"]) or 0)))
     return fynd
 

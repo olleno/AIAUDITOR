@@ -20,13 +20,13 @@ MO07;Moms;Fjolårets moms inte redovisad;Skatteförfarandelagen (2011:1244) 26 k
 MO08;Moms;Årets moms inte redovisad vid årets slut;Skatteförfarandelagen (2011:1244) 26 kap;Utgående saldon på momskonton 261x–264x för avslutat räkenskapsår;1;1;aktiv;1;2026-10-06
 MO09;Moms;Omvänd skattskyldighet går inte jämnt ut;Mervärdesskattelagen (2023:200) (omvänd skattskyldighet);Utgående moms omvänd (2614/2624/2634) ska motsvaras av beräknad ingående moms (2645/2647) i samma verifikation;1;2;aktiv;1;2026-10-06
 MO10;Moms;För högt momsavdrag på personbil;Mervärdesskattelagen (2023:200) (personbil: inget avdrag vid köp, 50 % vid leasing);Moms på köp av personbil (1240) eller mer än 50 % av momsen på leasing (5615);1;1;aktiv;1;2026-10-06
-MO11;Moms;Momsdeklaration stämmer inte med bokföringen;Skatteförfarandelagen (2011:1244) 26 kap;Inlämnad momsdeklaration jämförs ruta för ruta med momskontona;2;1;planerad;1;2026-10-06
+MO11;Moms;Momsdeklaration stämmer inte med bokföringen;Skatteförfarandelagen (2011:1244) 26 kap;Ruta 49 i inlämnad momsdeklaration jämförs med momskontona 2610–2649 för perioden, utan momsredovisningsverifikationer;2;1;aktiv;2;2026-10-06
 MO12;Moms;Periodisk sammanställning saknas eller avviker;Skatteförfarandelagen (2011:1244) 35 kap;EU-försäljning jämförs med inlämnade periodiska sammanställningar;2;2;planerad;1;2026-10-06
 SK01;Skatt;Möjlig privat kostnad;Inkomstskattelagen (1999:1229) 9 kap 2 § (levnadskostnader ej avdragsgilla);Sökord i verifikationstext (Systembolaget, IKEA, Netflix m.fl.) på kostnadskonto;1;3;aktiv;1;2026-10-06
 SK02;Skatt;Representation över avdragsgill nivå;Inkomstskattelagen 16 kap 2 §;Kräver antal deltagare – bedöms av AI ur verifikationstext och underlag;3;2;planerad;1;2026-10-06
 SK03;Skatt;Ej avdragsgilla kostnader inte återlagda i deklarationen;Inkomstskattelagen 9 kap och 16 kap, inkomstdeklaration INK2;Summan på 6072, 6992, 7632 m.fl. jämförs med INK2S;2;2;planerad;1;2026-10-06
 SK04;Skatt;Leverantör saknar F-skatt;Skatteförfarandelagen 10 kap (skatteavdrag och F-skatt);Leverantörer kontrolleras mot Skatteverkets register;2;2;planerad;1;2026-10-06
-SK05;Skatt;Skattekontot stämmer inte med bokföringen;Skatteförfarandelagen 61 kap (skattekonto);Skattekontoutdrag jämförs med konto 1630;2;1;planerad;1;2026-10-06
+SK05;Skatt;Skattekontot stämmer inte med bokföringen;Skatteförfarandelagen 61 kap (skattekonto);Skattekontots saldo enligt Skatteverket jämförs med konto 1630 på samma datum (uppgift som användaren fyller i);2;1;aktiv;2;2026-10-06
 LO01;Lön;Lön utan skatteavdrag;Skatteförfarandelagen 10 kap (skatteavdrag);Lönekonto 70xx–72xx (utom förändring semesterlöneskuld) utan personalskatt 2710 i samma verifikation;1;2;aktiv;1;2026-10-06
 LO02;Lön;Arbetsgivaravgift avviker;Socialavgiftslagen (2000:980);Arbetsgivaravgift/lön avviker från 31,42 % (full avgift) och 10,21 % (äldre). Kontrollera om annan nedsättning gäller, t.ex. för unga.;1;2;aktiv;2;2026-10-06
 LO03;Lön;Semesterlöneskuld saknas vid bokslut;BFNAR 2016:10 (K2) – skulder vid balansdagen;Löner bokförda under avslutat år men inget saldo på 2920;1;3;aktiv;1;2026-10-06
@@ -37,13 +37,13 @@ AV02;Avskrivningar;Avskrivning räknad på belopp inklusive avdragen moms;BFNAR 
 AV03;Avskrivningar;Kostnadsförd inventarie över halvt prisbasbelopp;Inkomstskattelagen 18 kap 4 § (inventarier av mindre värde);Rad på 5400–5419 större än halvt prisbasbelopp (2026: 29 600 kr);1;2;aktiv;1;2026-10-06
 BA01;Bank och kassa;Negativt saldo på kassa eller bank;Bokföringslagen 5 kap 1 §;Löpande saldo på 19xx blir negativt;1;1;aktiv;1;2026-10-06
 BA02;Bank och kassa;Bankkonto med saldo som inte används;Bokföringslagen 5 kap 1 §;Bankkonto med ingående saldo utan transaktioner medan ett annat bankkonto används;1;2;aktiv;1;2026-10-06
-BA03;Bank och kassa;Banksaldot stämmer inte med kontoutdraget;Bokföringslagen 5 kap 1 §;Bankens saldo jämförs med 19xx per månadsskifte;2;1;planerad;1;2026-10-06
+BA03;Bank och kassa;Banksaldot stämmer inte med kontoutdraget;Bokföringslagen 5 kap 1 §;Bankens saldo enligt kontoutdraget jämförs med 19xx på samma datum (uppgift som användaren fyller i);2;1;aktiv;2;2026-10-06
 BA04;Bank och kassa;Kassaregister;Skatteförfarandelagen 39 kap (kassaregister);Kontantförsäljning jämförs med Z-rapporter;2;2;planerad;1;2026-10-06
 AB01;Aktiebolag;Eget kapital under halva aktiekapitalet;Aktiebolagslagen (2005:551) 25 kap 13 § (kontrollbalansräkning);Eget kapital inklusive årets resultat jämförs med halva registrerade aktiekapitalet;1;1;aktiv;1;2026-10-06
 AB02;Aktiebolag;Fordran på aktieägare eller närstående;Aktiebolagslagen 21 kap (förbjudna lån);Saldo på fordringskonto för delägare eller närstående (t.ex. 1685);1;2;aktiv;1;2026-10-06
 AB03;Aktiebolag;Fjolårets resultat inte disponerat;Aktiebolagslagen 7 kap 11 § (årsstämmans beslut om vinst eller förlust);Ingående saldo på 2099 Årets resultat ligger kvar i nytt år;1;3;aktiv;1;2026-10-06
 AB04;Aktiebolag;Utdelning större än fritt eget kapital;Aktiebolagslagen 17 kap 3 § (försiktighetsregeln) och 18 kap;Bokförd utdelning jämförs med fritt eget kapital enligt fastställd balansräkning;2;1;planerad;1;2026-10-06
-BO01;Bokslut;Bokslutet stämmer inte med bokföringen;Årsredovisningslagen (1995:1554), BFNAR 2016:10 (K2);Årsredovisningens resultat- och balansräkning jämförs med utgående saldon;2;1;planerad;1;2026-10-06
+BO01;Bokslut;Bokslutet stämmer inte med bokföringen;Årsredovisningslagen (1995:1554), BFNAR 2016:10 (K2);Årets resultat enligt årsredovisningen jämförs med resultatkontona 3000–8999 (utom 8999);2;1;aktiv;2;2026-10-06
 BO02;Bokslut;Fjolårets utgående balans ≠ årets ingående balans;Bokföringslagen 5 kap 1 §;Två års SIE-filer jämförs konto för konto;2;1;planerad;1;2026-10-06
 BO03;Bokslut;Periodiseringar saknas;BFNAR 2016:10 (K2) – gränsbelopp 7 000 kr för räkenskapsår som börjar efter 31 dec 2025;Återkommande kostnader och intäkter kring balansdagen bedöms;3;2;planerad;1;2026-10-06
 BO04;Bokslut;Kund- och leverantörsreskontra stämmer inte med huvudboken;Bokföringslagen 5 kap 1 §;Reskontralistor jämförs med 1510 och 2440;2;2;planerad;1;2026-10-06

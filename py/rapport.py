@@ -134,7 +134,9 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
     status = "rod" if any(f["allvar"] == 1 for f in fynd) else "gul" if any(f["allvar"] == 2 for f in fynd) else "gron"
     farg, ord_, rub, txt = STATUS[status]
     rar = f"{bok['rar'][0]} – {bok['rar'][1]}" if bok["rar"] else "okänt"
-    aktiva = [r for r in g.KATALOG.values() if r["status"] == "aktiv"]
+    avst = bok.get("_avstamning") or []
+    gjorda = {r[0] for r in avst}
+    aktiva = [r for r in g.KATALOG.values() if r["status"] == "aktiv" and (r["lager"] == "1" or r["id"] in gjorda)]
     antal = {k: sum(1 for f in fynd if f["allvar"] == k) for k in (1, 2, 3)}
 
     # --- fyndkort ---
@@ -167,9 +169,22 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
 
     radhtml = ("<h2>Enkla råd</h2>" + "".join(f'<div class="fynd"><h3>{e(a)}</h3>{e(b)}</div>' for a, b in rad)) if rad else ""
 
-    ejkoll = ('<div class="ruta"><strong>Det här har vi inte kontrollerat.</strong> Granskningen bygger enbart på bokföringsfilen (SIE). '
-              'Kvitton, fakturor och avtal har inte setts. Momsdeklarationer, skattekonto, bankens saldon och bokslut har inte jämförts. '
-              f'Därför kan fel finnas som inte syns här. {len(aktiva)} kontroller har körts.</div>')
+    ej = [t for regel, t in (("MO11", "momsdeklarationer"), ("SK05", "skattekontot"), ("BA03", "bankens saldon"), ("BO01", "bokslutet")) if regel not in gjorda]
+    jamfort = [t for regel, t in (("MO11", "momsdeklarationer"), ("SK05", "skattekontot"), ("BA03", "bankens saldon"), ("BO01", "bokslutet")) if regel in gjorda]
+    lista = lambda xs: (", ".join(xs[:-1]) + " och " + xs[-1]) if len(xs) > 1 else (xs[0] if xs else "")
+    ejkoll = ('<div class="ruta"><strong>Det här har vi inte kontrollerat.</strong> Granskningen bygger på bokföringsfilen (SIE)'
+              + (f' och de uppgifter du fyllt i om {lista(jamfort)}' if jamfort else '') + '. Kvitton, fakturor och avtal har inte setts. '
+              + (f'{lista(ej).capitalize()} har inte jämförts. ' if ej else '')
+              + f'Därför kan fel finnas som inte syns här. {len(aktiva)} kontroller har körts.</div>')
+    if avst:
+        k2 = lambda x: g.kr(0.0 if abs(x) < 0.005 else x)
+        avrader = "".join(f'<tr><td>{e(vad)}</td><td class="mono">{k2(doc)}</td><td class="mono">{k2(bk)}</td><td class="mono">{k2(diff)}</td>'
+                          f'<td style="color:{"#4E7A45" if ok else "#9B2C1F"};font-weight:600">{"Stämmer" if ok else "Avviker"}</td></tr>'
+                          for regel, vad, doc, bk, diff, ok in avst)
+        avsektion = ('<h2>Avstämning mot dina handlingar</h2><table><tr><th>Vad</th><th>Enligt handlingen</th><th>Enligt bokföringen</th><th>Skillnad</th><th>Resultat</th></tr>'
+                     + avrader + '</table><p class="dim">Belopp i kronor. Avvikelser finns också som fynd ovan, med förslag på vad du kan göra.</p>')
+    else:
+        avsektion = ""
     ansvar_kort = '<div class="ansvar">Det här är förslag från en automatisk granskning, inte en revision. Det är du eller styrelsen som ansvarar för bokföringen och bestämmer vad som ska ändras.</div>'
     ansvar_hel = ('<h2>Ansvar</h2><p>Rapporten är framtagen automatiskt utifrån bokföringsfilen och svensk lag och praxis. Den är inte en revision och ersätter inte revisor. '
                   'Ansvaret för bokföringen ligger hos den bokföringsskyldige – i ett aktiebolag styrelsen och vd (aktiebolagslagen 8 kap 4 och 29 §§). '
@@ -197,7 +212,7 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
 
     # --- vyer ---
     sjalv = ('<div id="sjalv" class="vy aktiv"><h2>Att åtgärda</h2>' +
-             ("".join(kort(f, True) for f in fynd) or '<p>Inga anmärkningar.</p>') + nyck + radhtml + aisektion + cta + '</div>')
+             ("".join(kort(f, True) for f in fynd) or '<p>Inga anmärkningar.</p>') + avsektion + nyck + radhtml + aisektion + cta + '</div>')
     fragor = "".join(f'<li><strong>{("Ver " + e(f["ver"]) + " (" + e(f["datum"]) + ")") if f["ver"] != "–" else "Allmänt"}:</strong> '
                      f'{e(f["beskr"])} Kan ni titta på om det stämmer och om något behöver rättas?</li>'
                      for f in fynd if f["allvar"] <= 2)
@@ -213,7 +228,7 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
                          f'<td>{"<strong>" + str(sum(1 for f in fynd if f["regel"] == r["id"])) + " fynd</strong>" if any(f["regel"] == r["id"] for f in fynd) else "Inga fynd"}</td></tr>'
                          for r in aktiva)
     revisor = ('<div id="revisor" class="vy"><h2>Fynd</h2>' + ("".join(kort(f, False) for f in fynd) or "<p>Inga fynd.</p>") +
-               f'<h2>Kontroller som har körts</h2><table><tr><th>Id</th><th>Kontroll</th><th>Regel</th><th>Utfall</th></tr>{regelrader}</table>'
+               avsektion + f'<h2>Kontroller som har körts</h2><table><tr><th>Id</th><th>Kontroll</th><th>Regel</th><th>Utfall</th></tr>{regelrader}</table>'
                + nyck + '<a class="knapp" href="#" onclick="window.print();return false">Spara som PDF</a></div>')
 
     kropp = (LOGGA +

@@ -110,6 +110,20 @@ button:focus-visible,input:focus-visible,a:focus-visible,.slapp:focus-within{out
 .markering{font-family:var(--f-hand);font-size:22px;color:var(--penna);transform:rotate(-2deg)}
 #rapport{display:block;border:1px solid var(--linje)}
 
+.avstam{margin-top:20px;border:1px solid var(--linje);border-radius:4px;padding:6px 16px 14px;background:var(--bg)}
+.avstam summary{cursor:pointer;font-family:var(--f-rubrik);font-weight:600;font-size:20px;padding-block:8px}
+.avstam summary span{font-family:var(--f-hand);color:var(--penna);font-size:22px;margin-left:6px}
+.avgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.avgrid>*{min-width:0}
+.avstam fieldset{border:0;background:var(--papper);box-shadow:var(--skugga);padding:12px 14px;margin:0}
+.avstam legend{font-weight:700;padding:0;float:left;width:100%}
+.avstam .hjalp{clear:both;margin:2px 0 8px}
+.rad3{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.rad3 label{display:flex;flex-direction:column;font-size:13px;color:var(--sek);gap:3px;flex:1 1 120px;min-width:0}
+.rad3 input{font:inherit;font-size:15px;padding:8px 9px;border:1px solid var(--linje);border-radius:3px;background:var(--bg);color:var(--text);width:100%}
+.litenknapp{font:inherit;font-size:14px;font-weight:600;background:none;border:0;color:var(--gron);cursor:pointer;padding:4px 0}
+@media (max-width:900px){.avgrid{grid-template-columns:1fr}}
+
 /* Så går det till */
 .avsnitt{margin-top:84px}
 .steg{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -148,6 +162,7 @@ details{border-top:1px solid var(--linje);padding-block:14px}
 details:last-child{border-bottom:1px solid var(--linje)}
 summary{cursor:pointer;font-family:var(--f-rubrik);font-weight:600;font-size:20px}
 details p{margin-top:8px;color:var(--sek);max-width:46em}
+.fot a{color:var(--dim)}
 .fot{margin-top:72px;padding-top:18px;border-top:1px solid var(--linje);color:var(--dim);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:900px){.hero,.verktyg-grid,.tva,.steg,.kontrollyta{grid-template-columns:1fr}.kort4{grid-template-columns:1fr 1fr}.kontroller{columns:1}.blad{left:-8px;right:8px}.hero{gap:28px}}
 @media (max-width:520px){.kort4{grid-template-columns:1fr}.blad .r{grid-template-columns:38px 1fr auto}.blad .r span:nth-child(2){display:none}.verktyg{padding:18px}.anteckning{right:0}.topp nav{gap:14px}}
@@ -168,7 +183,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       <text class="t" x="98" y="32" textLength="120" lengthAdjust="spacingAndGlyphs" font-family="Inter, system-ui, sans-serif" font-size="27" font-weight="800" letter-spacing="-0.5">AUDITOR</text>
       <text class="s" x="65" y="48" textLength="152" lengthAdjust="spacing" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500">GRANSKNING AV BOKFÖRING</text>
     </svg>
-    <nav aria-label="Huvudmeny"><a href="#sa-gar-det-till">Så går det till</a><a href="#granska">Granska</a><a href="#fragor">Frågor</a></nav>
+    <nav aria-label="Huvudmeny"><a href="#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a href="#fragor">Frågor</a></nav>
   </header>
 
   <section class="hero">
@@ -217,9 +232,32 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
         <label class="falt" for="sni">Bransch (valfritt)</label>
         <input type="text" id="sni" list="sni-lista" placeholder="Skriv t.ex. redovisning, bokförlag eller 69.201" autocomplete="off">
         <datalist id="sni-lista"></datalist>
-        <p class="hjalp">Med bransch jämförs bolaget med SCB:s statistik för samma bransch och storlek. Skriv branschen i ord, eller SNI-koden om du vet den.</p>
+        <p class="hjalp">Med bransch jämförs bolaget med SCB:s statistik för samma bransch och storlek. Skriv branschen i ord, eller SNI-koden om du vet den. Vet du inte hur du får fram filen? <a href="/guider/">Så tar du ut en SIE-fil</a>.</p>
       </div>
     </div>
+    <details class="avstam" id="avstam">
+      <summary>Stäm av mot dina handlingar <span>valfritt</span></summary>
+      <p class="hjalp" style="margin-top:4px">Fyll i det du har till hands. Uppgifterna jämförs med bokföringen här i webbläsaren och skickas ingenstans.</p>
+      <div class="avgrid">
+        <fieldset><legend>Banken</legend>
+          <p class="hjalp">Saldot enligt kontoutdraget, till exempel på räkenskapsårets sista dag.</p>
+          <div class="rad3"><label>Datum<input type="date" id="bank-datum"></label><label>Saldo, kr<input type="text" inputmode="decimal" id="bank-saldo" placeholder="12 345,67"></label><label>Konto<input type="text" inputmode="numeric" id="bank-konto" value="1930"></label></div>
+        </fieldset>
+        <fieldset><legend>Skattekontot</legend>
+          <p class="hjalp">Saldot hos Skatteverket. Plus om du har pengar tillgodo, minus om du har en skuld.</p>
+          <div class="rad3"><label>Datum<input type="date" id="skk-datum"></label><label>Saldo, kr<input type="text" inputmode="decimal" id="skk-saldo" placeholder="−1 200"></label></div>
+        </fieldset>
+        <fieldset><legend>Momsdeklarationer</legend>
+          <p class="hjalp">Perioden och ruta 49: moms att betala (plus) eller få tillbaka (minus).</p>
+          <div id="moms-rader"><div class="rad3 momsrad"><label>Från<input type="date" class="m-fran"></label><label>Till<input type="date" class="m-till"></label><label>Ruta 49, kr<input type="text" inputmode="decimal" class="m-belopp" placeholder="3 462"></label></div></div>
+          <button type="button" class="litenknapp" id="moms-fler">+ Lägg till period</button>
+        </fieldset>
+        <fieldset><legend>Bokslutet</legend>
+          <p class="hjalp">Årets resultat enligt årsredovisningen. Vinst som plus, förlust som minus.</p>
+          <div class="rad3"><label>Årets resultat, kr<input type="text" inputmode="decimal" id="bs-resultat" placeholder="10 183"></label></div>
+        </fieldset>
+      </div>
+    </details>
     <div class="knappar">
       <button class="knapp prim" id="kor" type="button" disabled>Granska</button>
       <button class="knapp sek" id="exempelknapp" type="button">Kör på exempelfilen</button>
@@ -248,7 +286,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
   <section class="avsnitt kontrollyta">
     <div>
       <div class="etikett">Vad vi kontrollerar</div>
-      <h2 style="margin-top:8px">31 kontroller, var och en med lagrum</h2>
+      <h2 style="margin-top:8px">35 kontroller, var och en med lagrum</h2>
       <p style="color:var(--sek)">Varje kontroll bygger på en regel i lag eller god redovisningssed. Rapporten visar regeln, var i bokföringen avvikelsen finns och hur den rättas. Nyckeltalen jämförs med SCB:s branschstatistik för företag med samma bransch och storlek.</p>
       <div class="lagar"><span>Bokföringslagen</span><span>Mervärdesskattelagen</span><span>Skatteförfarandelagen</span><span>Inkomstskattelagen</span><span>Aktiebolagslagen (för aktiebolag)</span><span>Årsredovisningslagen</span><span>BFN:s allmänna råd</span><span>SCB Företagens ekonomi</span></div>
       <img class="parmbild" src="bilder/parmar.jpg" alt="Svarta pärmar med färgade flikar" width="1400" height="934" loading="lazy">
@@ -270,7 +308,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       <div class="etikett">Fördjupad granskning</div>
       <h2 style="margin-top:8px">Låt din egen AI läsa vidare</h2>
       <div class="kommer"><h3>AI-bedömning, i den AI-tjänst du redan använder</h3><p>Rapporten innehåller ett färdigt underlag med instruktion och alla verifikationer. Kopiera det och klistra in i ChatGPT, Claude eller Gemini. AI:n letar efter det fasta regler missar, som fel konto, fel momssats eller kostnader som kan vara privata. Underlaget går bara till den tjänst du själv väljer.</p></div>
-      <div class="kommer"><p class="hand" style="font-size:22px;margin-bottom:4px">På gång</p><h3>Avstämning mot momsdeklaration och skattekonto</h3><p>Välj momsdeklarationen och utdraget från skattekontot, så jämförs de med bokföringen. Det körs också i din webbläsare, och inget skickas iväg.</p></div>
+      <div class="kommer"><h3>Avstämning mot dina handlingar</h3><p>Fyll i bankens saldo, skattekontots saldo, momsdeklarationernas ruta 49 och årets resultat enligt årsredovisningen, så jämförs de med bokföringen. Det görs också i din webbläsare, och inget skickas iväg.</p></div>
     </div>
     <div>
       <div class="etikett">Vanliga frågor</div>
@@ -283,7 +321,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     </div>
   </section>
 
-  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span>Foto: Unsplash och Pexels</span></footer>
+  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · Foto: Unsplash och Pexels</span></footer>
 </div>
 
 <script src="pyodide/pyodide.js"></script>
@@ -294,7 +332,8 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     "Skatt":["Möjlig privat kostnad"],"Lön":["Lön utan skatteavdrag","Arbetsgivaravgift avviker","Semesterlöneskuld saknas vid bokslut"],
     "Avskrivningar":["Avskrivningar saknas","Avskrivning räknad på belopp inklusive avdragen moms","Kostnadsförd inventarie över halvt prisbasbelopp"],
     "Bank och kassa":["Negativt saldo på kassa eller bank","Bankkonto med saldo som inte används"],
-    "Aktiebolag":["Eget kapital under halva aktiekapitalet","Fordran på aktieägare eller närstående","Fjolårets resultat inte disponerat"]};
+    "Aktiebolag":["Eget kapital under halva aktiekapitalet","Fordran på aktieägare eller närstående","Fjolårets resultat inte disponerat"],
+    "Avstämning mot dina handlingar":["Momsdeklarationen stämmer med bokföringen","Skattekontot stämmer med konto 1630","Bankens saldo stämmer med kontoutdraget","Årets resultat stämmer med årsredovisningen"]};
   var kdiv = document.getElementById("kontroller");
   Object.keys(KONTROLLER).forEach(function(k){
     var d = document.createElement("div"); var b = document.createElement("b");
@@ -358,6 +397,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
 
   fetch("scb/sni.json").then(function(r){ return r.json(); }).then(function(l){
     sniLista = l; var dl = document.getElementById("sni-lista"); var frag = document.createDocumentFragment();
+    try { var fr = new URLSearchParams(location.search).get("sni"); if (fr){ var t = l.find(function(x){ return x[0] === fr; }); if (t) sniInput.value = t[0] + " " + t[1]; } } catch(e){}
     l.forEach(function(x){ var o = document.createElement("option"); o.value = x[0] + " " + x[1]; frag.appendChild(o); });
     dl.appendChild(frag);
   }).catch(function(){});
@@ -386,13 +426,34 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     var bas = new URL("pyodide/", location.href).href;
     py = await loadPyodide({ indexURL: bas, stdLibURL: bas + "stdlib.wasm" });
     py.FS.mkdirTree("/aia/data");
-    for (const f of ["granskaren.py","nyckeltal.py","rapport.py","regelkatalog.csv"]){
+    for (const f of ["granskaren.py","nyckeltal.py","rapport.py","avstamning.py","regelkatalog.csv"]){
       const t = await (await fetch("py/" + f)).text(); py.FS.writeFile("/aia/" + f, t);
     }
     await py.runPythonAsync("import sys; sys.path.insert(0, '/aia')");
     return py;
   }
 
+  function tal(t){ if (t == null) return null; t = String(t).replace(/\s|\u00a0/g, "").replace(/[−–]/g, "-").replace(",", "."); if (t === "" || t === "-") return null; var v = Number(t); return isFinite(v) ? v : NaN; }
+  function handlingar(){
+    var h = {}, fel = [];
+    var bd = document.getElementById("bank-datum").value, bs = tal(document.getElementById("bank-saldo").value);
+    if (bd || bs !== null){ if (!bd || bs === null || isNaN(bs)) fel.push("banken"); else h.bank = [{konto: document.getElementById("bank-konto").value.trim() || "1930", datum: bd, saldo: bs}]; }
+    var sd = document.getElementById("skk-datum").value, ss = tal(document.getElementById("skk-saldo").value);
+    if (sd || ss !== null){ if (!sd || ss === null || isNaN(ss)) fel.push("skattekontot"); else h.skattekonto = [{datum: sd, saldo: ss}]; }
+    var m = [];
+    document.querySelectorAll("#moms-rader .momsrad").forEach(function(r){
+      var f = r.querySelector(".m-fran").value, t = r.querySelector(".m-till").value, b = tal(r.querySelector(".m-belopp").value);
+      if (f || t || b !== null){ if (!f || !t || b === null || isNaN(b) || t < f) fel.push("momsdeklarationen"); else m.push({fran: f, till: t, ruta49: b}); }
+    });
+    if (m.length) h.moms = m;
+    var r = tal(document.getElementById("bs-resultat").value);
+    if (r !== null){ if (isNaN(r)) fel.push("bokslutet"); else h.bokslut = {resultat: r}; }
+    return {h: h, fel: fel};
+  }
+  document.getElementById("moms-fler").addEventListener("click", function(){
+    var forsta = document.querySelector("#moms-rader .momsrad"); var ny = forsta.cloneNode(true);
+    ny.querySelectorAll("input").forEach(function(i){ i.value = ""; }); document.getElementById("moms-rader").appendChild(ny);
+  });
   async function granska(buf, kod, egen){
     korBtn.disabled = true; exBtn.disabled = true;
     try {
@@ -403,7 +464,9 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       if (kod){
         try { const d = await (await fetch("scb/" + kod.slice(0,2) + ".json")).text(); p.FS.writeFile("/aia/data/branschnyckeltal.json", d); } catch(e){}
       }
-      p.globals.set("SNI", kod);
+      var hd = egen ? handlingar() : {h: {}, fel: []};
+      if (hd.fel.length){ status("Kontrollera uppgifterna om " + hd.fel.join(", ") + ": datum och belopp behövs, och belopp skrivs som siffror.", true); korBtn.disabled = false; exBtn.disabled = false; return; }
+      p.globals.set("SNI", kod); p.globals.set("HANDLINGAR", JSON.stringify(hd.h));
       const ut = await p.runPythonAsync(`
 import json
 from datetime import date
@@ -413,7 +476,7 @@ if not bok['ver']:
     res = json.dumps({'fel': 'Filen innehåller inga verifikationer. Kontrollera att det är en SIE-fil av typ 4.'})
 else:
     idag = date.today()
-    fynd = g.granska(bok, idag)
+    fynd = g.granska(bok, idag, json.loads(HANDLINGAR) or None)
     css, html = r.bygg(bok, fynd, idag, SNI or None, webb=True)
     res = json.dumps({'css': css, 'html': html, 'namn': bok['namn'], 'antal': len(fynd)})
 res`);
@@ -422,7 +485,7 @@ res`);
       else {
         visa(d.css, d.html, "Granskningsrapport för " + (d.namn || "ditt företag"), false);
         status("Klart. " + d.antal + " anmärkningar. Filen har inte lämnat din dator.");
-        hand(egen ? "granskning-egen-fil" : "granskning-exempel");
+        hand(egen ? "granskning-egen-fil" : "granskning-exempel"); if (egen && Object.keys(hd.h).length) hand("avstamning-" + Object.keys(hd.h).join("-"));
         document.querySelector(".rapportram").scrollIntoView({behavior:"smooth", block:"start"});
       }
     } catch(e){
