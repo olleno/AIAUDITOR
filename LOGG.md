@@ -18,3 +18,9 @@
 ## 2026-10-06 – Byråsidan och motorn efter 39 riktiga SIE-filer
 - /byra/: white label-erbjudande med intresseanmälan (mejl till kansliet@), granskad av Claude (invert), Gemini och GPT. Länkar i meny och sidfot.
 - Motorn rättad efter 39 Fortnox-filer: signerade ändringar räknas inte som fel, programbyte räknas inte som sen bokföring, moms under 5 kr hoppas över, omföringar och periodiseringar ger inte momsfel, konto 2610 räknas som utgående moms.
+
+## 2026-10-06 – Lucka-analys mot lag, BFN och Skatteverket, och nattlig regelbevakning
+- 16 nya kontroller (BF12, MO13, SK06–SK09, FA01, AV04–AV05, BO06–BO09, AB05–AB07); LO02 tar hänsyn till ungdomsnedsättningen 2026–2027. 51 aktiva kontroller, 47 på SIE-filen. Testbanken 41 av 41.
+- Källor kontrollerade av fyra separata genomgångar mot riksdagen.se, Skatteverket, BFN och Srf; granskat av Claude (motsats), Gemini och GPT. Utfall i olleno/granskning/logg.
+- Regelbevakningen körs varje natt 02:47 på Kansliets server (Hetzner) för 23 källor och mejlar Olle vid ändring. Gäller både AI Auditor och Kansliets bokförare.
+- Sajten ligger kvar på GitHub Pages: ingen kunddata passerar den, gratis och driftsäker.

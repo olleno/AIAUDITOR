@@ -84,6 +84,8 @@ MOMSFRIA_FORS = {"3004", "3044", "3045", "3048", "3054", "3055", "3058", "3100",
 PRIVATA_ORD = ["systembolaget", "ikea", "apotek", "netflix", "spotify", "privat", "semester",
                "zalando", "h&m", "barnkläder", "blommor", "gym"]
 PBB = {2024: 57300, 2025: 58800, 2026: 59200}           # prisbasbelopp
+STATSLANERANTA = {2025: 0.0196, 2026: 0.0255}           # schablonintäkt periodiseringsfond (statslåneräntan 30 nov året före)
+UNGA_AVGIFT = (date(2026, 4, 1), date(2027, 9, 30), 0.2081)   # nedsatt arbetsgivaravgift för unga
 LIVSLANGD_MAN = (12, 24, 36, 48, 60, 72, 84, 96, 120)
 
 def kr(x):  return f"{x:,.2f}".replace(",", " ")
@@ -280,7 +282,8 @@ def granska(bok, idag=None, handlingar=None):
         if not any(k == "2710" for k, _ in v["rader"]):
             lagg("LO01", v, f"Lön {kr(lon)} kr bokförd utan personalskatt (2710).", "Kontrollera att skatteavdrag gjorts och redovisats.")
         avg = sum(b for k, b in v["rader"] if k in ("7510", "7511", "7512"))
-        if avg and not any(abs(avg / lon - s) < 0.002 for s in (0.3142, 0.1021)):
+        unga = v["datum"] and UNGA_AVGIFT[0] <= v["datum"] <= UNGA_AVGIFT[1] and UNGA_AVGIFT[2] - 0.002 <= avg / lon <= 0.3142 + 0.002
+        if avg and not unga and not any(abs(avg / lon - s) < 0.002 for s in (0.3142, 0.1021)):
             lagg("LO02", v, f"Arbetsgivaravgift {kr(avg)} kr på lön {kr(lon)} kr motsvarar {avg / lon * 100:.2f} %.",
                  "Kontrollera mot arbetsgivardeklarationen och om nedsatt avgift gäller.")
     if avslutat and lonesumma > 0:
@@ -364,9 +367,129 @@ def granska(bok, idag=None, handlingar=None):
         if "1680" <= k <= "1689" and (k == "1685" or re.search(r"delägare|aktieägare|närstående|ägare", namn)) and s > 0.5:
             lagg("AB02", None, f"Konto {k} ({bok['konton'].get(k, '')}) har ett saldo på {kr(s)} kr.",
                  "Lån till aktieägare och närstående är i regel förbjudna; kontrollera vad fordran avser.")
-    if aktiekapital > 0 and bok["har_ib"] and abs(bok["ib"].get("2099", 0)) > 0.5 and not any(k == "2099" for v in bok["ver"] for k, _ in v["rader"]):
+    if aktiekapital > 0 and bok["har_ib"] and abs(bok["ib"].get("2099", 0)) > 0.5 and not any(k == "2099" for v in bok["ver"] for k, _ in v["rader"]
+                                                           if not any(x == "8999" for x, _ in v["rader"])):   # bokningen av årets resultat räknas inte
         lagg("AB03", None, f"Fjolårets resultat ({kr(-bok['ib']['2099'])} kr) ligger kvar på 2099 Årets resultat.",
              "Omför till 2098/2091 enligt årsstämmans beslut.")
+
+
+    # ---- Bokslut, skatt och fastighet (tillagt 2026-10-06 efter genomgång mot lag, BFN och Skatteverket) ----
+    def saldo_ub(fran, till):
+        return sum(b for k, b in saldon.items() if fran <= k <= till)
+    def namn(k): return bok["konton"].get(k, "")
+    resultat_fore = -sum(b for v in bok["ver"] for k, b in v["rader"] if "3000" <= k <= "8799")
+    har_8999 = any(k == "8999" for v in bok["ver"] for k, _ in v["rader"])
+    arsres = -sum(b for v in bok["ver"] for k, b in v["rader"] if "3000" <= k <= "8989")
+    oms = -sum(b for v in bok["ver"] for k, b in v["rader"] if "3000" <= k <= "3799")
+    balans = sum(b for k, b in saldon.items() if k[0] == "1" and b > 0)
+    ar = rar_slut.year if rar_slut else idag.year
+
+    # BF12 kontanta betalningar
+    sena_kassa = [v for v in aktiva if v["regdatum"] and v["datum"] and any(k == "1910" for k, _ in v["rader"])
+                  and (v["regdatum"] - v["datum"]).days > 3]
+    if sena_kassa:
+        lagg("BF12", sena_kassa[0], f"{len(sena_kassa)} kassaposter registrerades mer än tre dagar efter betalningen.",
+             "Kontanta in- och utbetalningar ska bokföras senast nästa arbetsdag.")
+
+    # MO13 blandad verksamhet
+    fri = -sum(b for v in aktiva for k, b in v["rader"] if k[0] == "3" and momsfri(k))
+    pliktig = -sum(b for v in aktiva for k, b in v["rader"] if momspl(k))
+    ingmoms = sum(b for v in aktiva for k, b in v["rader"] if k in ("2640", "2641", "2645", "2647") and b > 0)
+    if fri > 1000 and pliktig > 1000 and ingmoms > 0:
+        andel = pliktig / (pliktig + fri)
+        lagg("MO13", None, f"Momsfri försäljning {kr0(fri)} kr och momspliktig {kr0(pliktig)} kr under året, och ingående moms {kr0(ingmoms)} kr har dragits av. Momspliktig andel {andel * 100:.0f} %.",
+             "Moms på kostnader som hör till den momsfria delen (t.ex. bostadsuthyrning) får inte dras av. Gemensamma kostnader fördelas efter skälig grund, ofta omsättningen.")
+
+    # SK06 ränteavdragsbegränsning
+    rantenetto = sum(b for v in aktiva for k, b in v["rader"] if "8400" <= k <= "8499" and k != "8423") \
+                 + sum(b for v in aktiva for k, b in v["rader"] if "8300" <= k <= "8399")
+    if rantenetto > 5_000_000:
+        lagg("SK06", None, f"Negativt räntenetto {kr0(rantenetto)} kr, över förenklingsregelns 5 000 000 kr.",
+             "Avdraget begränsas till 30 % av skattemässigt EBITDA. Gränsen 5 mkr gäller för hela intressegemenskapen.")
+    elif rantenetto > 1_000_000:
+        lagg("SK06", None, f"Negativt räntenetto {kr0(rantenetto)} kr i bolaget.",
+             "Förenklingsregelns 5 mkr delas av alla bolag i intressegemenskapen (koncernen). Lägg ihop räntenettot för hela gruppen innan deklarationen.", allvar=3)
+
+    # SK07 ej avdragsgilla kostnader
+    ejavdr = defaultdict(float)
+    for v in aktiva:
+        for k, b in v["rader"]:
+            if k[0] in "5678" and (k in ("6072", "6982", "6992", "7622", "7632", "8423")
+                                   or re.search(r"ej avdr|icke avdr|skattetillägg|förseningsavgift|böter|kontrollavgift", namn(k), re.I)):
+                ejavdr[k] += b
+    ejavdr = {k: b for k, b in ejavdr.items() if b > 0.5}
+    if ejavdr:
+        lagg("SK07", None, "Ej avdragsgilla kostnader: " + "; ".join(f"{k} {namn(k)} {kr0(b)} kr" for k, b in sorted(ejavdr.items()))
+             + f". Sammanlagt {kr0(sum(ejavdr.values()))} kr.", "Lägg tillbaka beloppet i inkomstdeklarationen.")
+
+    # SK08 periodiseringsfonder
+    fonder = []
+    for k in sorted({k for k in saldon if "2110" <= k <= "2149"}):
+        m = re.search(r"(20\d\d)", namn(k))
+        if m and abs(saldon[k]) > 0.5: fonder.append((k, int(m.group(1)), -saldon[k], -bok["ib"].get(k, 0.0)))
+    for k, y, s, ib in fonder:
+        if ar >= y + 6:
+            sist = ar == y + 6
+            lagg("SK08", None, f"Periodiseringsfond {y} (konto {k}) på {kr0(s)} kr står kvar. Den ska återföras senast beskattningsåret {y + 6}.",
+                 "Återför fonden till beskattning (konto 8819/2110-gruppen).", allvar=1 if (ar > y + 6 or (sist and avslutat)) else 2)
+    ib_fonder = sum(ib for _, _, _, ib in fonder if ib > 0)
+    if ib_fonder > 0 and ar in STATSLANERANTA:
+        lagg("SK08", None, f"Periodiseringsfonder vid årets början {kr0(ib_fonder)} kr ger en schablonintäkt på {kr0(ib_fonder * STATSLANERANTA[ar])} kr ({STATSLANERANTA[ar] * 100:.2f} %).",
+             "Ta upp schablonintäkten i inkomstdeklarationen.", allvar=3)
+
+    # SK09 bolagsskatt saknas
+    if aktiekapital > 0 and avslutat and har_8999 and resultat_fore > 1000 and not any("8900" <= k <= "8989" for v in bok["ver"] for k, _ in v["rader"]):
+        lagg("SK09", None, f"Resultatet före skatt är {kr0(resultat_fore)} kr men ingen skatt är bokförd.",
+             "Beräkna och boka årets skatt (20,6 %), om inte underskott från tidigare år täcker vinsten.")
+
+    # FA01 fastighetsskatt / AV04 byggnader / AV05 mark
+    fastighet = saldo_ub("1110", "1159")
+    if avslutat and fastighet > 0 and not any(k == "5191" or re.search(r"fastighetsskatt|fastighetsavgift", namn(k) + " " + v["text"], re.I)
+                                             for v in aktiva for k, b in v["rader"] if k[0] in "5678"):
+        lagg("FA01", None, f"Byggnader och mark för {kr0(fastighet)} kr i balansräkningen, men ingen fastighetsskatt eller fastighetsavgift bokförd.",
+             "Kontrollera om fastigheten är taxerad och om skatt eller avgift ska betalas (nybyggda bostäder kan vara befriade).")
+    byggnader = saldo_ub("1110", "1118")
+    if avslutat and byggnader > 0 and not any(("1110" <= k <= "1119" and b < 0) or "7820" <= k <= "7829" for v in aktiva for k, b in v["rader"]):
+        lagg("AV04", None, f"Byggnader för {kr0(byggnader)} kr men ingen avskrivning under året.", "Boka årets avskrivning på byggnaderna (mark skrivs inte av).")
+    for v in aktiva:
+        if any("1130" <= k <= "1139" and b < 0 for k, b in v["rader"]) and any(k.startswith("78") and b > 0 for k, b in v["rader"]):
+            lagg("AV05", v, "Avskrivning bokförd mot markkonto.", "Mark får inte skrivas av; rätta verifikationen.")
+
+    # BO06 bokslut ej bokfört
+    if avslutat and (idag - rar_slut).days > 182 and not har_8999 and abs(arsres) > 0.5:
+        lagg("BO06", None, f"Räkenskapsåret slutade {rar_slut} men årets resultat ({kr0(arsres)} kr) är inte bokfört mot eget kapital.",
+             "Gör och boka bokslutet. Ett aktiebolags årsredovisning ska vara hos Bolagsverket inom sju månader, annars tas förseningsavgift ut.")
+
+    # BO07 kontantmetod med för hög omsättning
+    if oms > 3_000_000 and not any(("1510" <= k <= "1519" or "2440" <= k <= "2449") for v in aktiva for k, _ in v["rader"]):
+        lagg("BO07", None, f"Nettoomsättningen är {kr0(oms)} kr men inga kundfordringar eller leverantörsskulder är bokförda.",
+             "Över 3 mkr i omsättning ska fakturor bokföras när de kommer in och skickas ut (faktureringsmetoden).")
+
+    # BO08 orimligt tecken / BO09 oklara poster
+    if avslutat:
+        for k, s in sorted(saldon.items()):
+            if ("1510" <= k <= "1519" and s < -1) or (("2440" <= k <= "2449" or k == "2710") and s > 1):
+                lagg("BO08", None, f"Konto {k} ({namn(k)}) har saldo {kr(s)} kr vid årets slut, med fel tecken för kontotypen.",
+                     "Utred posten – ofta en dubbel betalning, en felaktigt bokad faktura eller en kreditnota som inte kvittats.")
+            if k[0] in "12" and abs(s) > 1 and re.search(r"\bobs\b|oklar|outred|utredning|felbok|okänd", namn(k), re.I):
+                lagg("BO09", None, f"Konto {k} ({namn(k)}) har saldo {kr(s)} kr vid årets slut.", "Utred och boka om posterna till rätt konto före bokslutet.")
+
+    # AB05 revisor / AB06 större företag / AB07 utdelning
+    if aktiekapital > 0 and balans > 1_500_000 and oms > 3_000_000:
+        lagg("AB05", None, f"Balansomslutning {kr0(balans)} kr och nettoomsättning {kr0(oms)} kr – båda över gränserna (1,5 mkr och 3 mkr).",
+             "Gällde det även förra året krävs revisor, även om bolagsordningen säger annat.")
+    elif aktiekapital > 0 and (balans > 1_500_000 or oms > 3_000_000) and lonesumma > 0:
+        over = f"balansomslutning {kr0(balans)} kr" if balans > 1_500_000 else f"nettoomsättning {kr0(oms)} kr"
+        lagg("AB05", None, f"Bolaget har {over}, över gränsen, och har anställda.",
+             "Har bolaget haft fler än tre anställda i medeltal både i år och förra året krävs revisor.", allvar=3)
+    if aktiekapital > 0 and balans > 40_000_000 and oms > 80_000_000:
+        lagg("AB06", None, f"Balansomslutning {kr0(balans)} kr och nettoomsättning {kr0(oms)} kr.",
+             "Två år i rad över gränserna gör bolaget till ett större företag: K2 får inte användas och fler krav gäller.")
+    utd = sum(-b for v in aktiva for k, b in v["rader"] if k == "2898" and b < 0)
+    fritt = -sum(b for k, b in bok["ib"].items() if "2090" <= k <= "2099")
+    if aktiekapital > 0 and bok["har_ib"] and utd > 0.5 and utd > fritt + 0.5:
+        lagg("AB07", None, f"Utdelning {kr0(utd)} kr men fritt eget kapital vid årets början var {kr0(fritt)} kr.",
+             "Utdelning får inte överstiga fritt eget kapital; olaglig utdelning ska betalas tillbaka.")
 
     # ---- Lager 2: avstämning mot handlingar som användaren fyllt i ----
     bok["_avstamning"] = []

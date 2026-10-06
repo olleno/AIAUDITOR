@@ -108,7 +108,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 '''
 
 CTA = ('<aside class="cta"><p class="hand">Hur står sig ditt bolag?</p><h2>Jämför din bokföring med {namn}</h2>'
-       '<p>Välj SIE-filen från ditt bokföringsprogram. AI Auditor räknar fram samma nyckeltal för ditt bolag, jämför med branschen och går igenom bokföringen med 31 kontroller. Gratis, och filen lämnar aldrig din dator.</p>'
+       '<p>Välj SIE-filen från ditt bokföringsprogram. AI Auditor räknar fram samma nyckeltal för ditt bolag, jämför med branschen och går igenom bokföringen med 47 kontroller. Gratis, och filen lämnar aldrig din dator.</p>'
        '<a class="knapp prim" href="/?sni={kod}#granska">Granska och jämför</a></aside>')
 
 def brodsmulor(led):
