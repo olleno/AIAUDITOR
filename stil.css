@@ -59,3 +59,10 @@ code{font-family:var(--f-mono);font-size:.9em}
 .fot a{color:var(--dim)}
 a:focus-visible{outline:3px solid var(--gron);outline-offset:2px}
 @media (max-width:700px){.lankar{columns:1}th[scope=row]{min-width:150px}}
+.punkter{padding-left:20px;max-width:46em}.punkter li{margin-bottom:10px}
+.byra h3{font-size:20px;margin:22px 0 6px}
+.formular{display:grid;gap:12px;max-width:34em;margin:14px 0}
+.formular label{display:grid;gap:4px;font-size:15px;font-weight:600}
+.formular input,.formular select,.formular textarea{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--linje);border-radius:3px;background:var(--bg);color:var(--text)}
+.formular input:focus,.formular select:focus,.formular textarea:focus{outline:3px solid var(--gron);outline-offset:1px}
+.formular button{justify-self:start;cursor:pointer;font:inherit;font-weight:700}

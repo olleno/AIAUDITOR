@@ -97,11 +97,11 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 </head>
 <body>
 <div class="sida">
-<header class="topp">{LOGGA}<nav aria-label="Huvudmeny"><a href="/#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a></nav></header>
+<header class="topp">{LOGGA}<nav aria-label="Huvudmeny"><a href="/#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a href="/byra/">För byråer</a></nav></header>
 <main>
 {kropp}
 </main>
-<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a></span></footer>
+<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/byra/">För byråer</a></span></footer>
 </div>
 </body>
 </html>
@@ -230,9 +230,13 @@ os.makedirs(UT_G, exist_ok=True)
 open(os.path.join(UT_G, "index.html"), "w", encoding="utf-8").write(
     sida("Så tar du ut en SIE-fil – guider för Fortnox, Bokio, Spiris med flera", "Steg-för-steg-guider för att exportera en SIE-fil (typ 4) från Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted och Briox.", "/guider/", kropp, [ldsmul]))
 
+# ---------- byråsidan ----------
+import byra_sida
+byra_sida.bygg(sida, brodsmulor, ROT)
+
 # ---------- sajtkarta ----------
 idag = date.today().isoformat()
-urls = ["/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
+urls = ["/", "/byra/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
 open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{idag}</lastmod></url>\n" for u in urls) + "</urlset>\n")
