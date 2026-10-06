@@ -1,0 +1,624 @@
+#FLAGGA 0
+#FORMAT PC8
+#SIETYP 4
+#PROGRAM "Testbank" 1.0
+#FNAMN "Exempelkonsulten AB"
+#ORGNR 556000-0000
+#RAR 0 20250101 20251231
+#KONTO 1220 "Inventarier och verktyg"
+#KONTO 1229 "Ackumulerade avskrivningar på inventarier"
+#KONTO 1240 "Bilar och andra transportmedel"
+#KONTO 1310 "Andelar i koncernföretag"
+#KONTO 1510 "Kundfordringar"
+#KONTO 1630 "Avräkning för skatter och avgifter (skattekonto)"
+#KONTO 1685 "Kortfristiga fordringar hos delägare eller närstående"
+#KONTO 1930 "Företagskonto"
+#KONTO 1940 "Övriga bankkonton"
+#KONTO 2081 "Aktiekapital"
+#KONTO 2091 "Balanserad vinst eller förlust"
+#KONTO 2099 "Årets resultat"
+#KONTO 2440 "Leverantörsskulder"
+#KONTO 2611 "Utgående moms på försäljning inom Sverige, 25 %"
+#KONTO 2614 "Utgående moms, omvänd betalningsskyldighet, 25 %"
+#KONTO 2641 "Debiterad ingående moms"
+#KONTO 2645 "Beräknad ingående moms på förvärv från utlandet"
+#KONTO 2650 "Redovisningskonto för moms"
+#KONTO 2710 "Personalskatt"
+#KONTO 2731 "Avräkning lagstadgade sociala avgifter"
+#KONTO 2920 "Upplupna semesterlöner"
+#KONTO 3001 "Försäljning inom Sverige, 25 % moms"
+#KONTO 5010 "Lokalhyra"
+#KONTO 5410 "Förbrukningsinventarier"
+#KONTO 5615 "Leasing av personbilar"
+#KONTO 6071 "Representation, avdragsgill"
+#KONTO 6072 "Representation, ej avdragsgill"
+#KONTO 6110 "Kontorsmateriel"
+#KONTO 6540 "IT-tjänster"
+#KONTO 6570 "Bankkostnader"
+#KONTO 6990 "Övriga externa kostnader"
+#KONTO 7210 "Löner till tjänstemän"
+#KONTO 7290 "Förändring av semesterlöneskuld"
+#KONTO 7510 "Arbetsgivaravgifter 31,42 %"
+#KONTO 7832 "Avskrivningar på inventarier och verktyg"
+#IB 0 1930 300000.00
+#IB 0 1220 36000.00
+#IB 0 1229 -7200.00
+#IB 0 2081 -50000.00
+#IB 0 2091 -278800.00
+#VER A 1 20250101 "Hyra kontor" 20250104
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 2 20250106 "Bankavgift" 20250109
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 3 20250115 "Faktura 1001 konsultuppdrag" 20250118
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 4 20250125 "Lön" 20250128
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 5 20250128 "Avskrivning inventarier" 20250131
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 6 20250201 "Hyra kontor" 20250204
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 7 20250206 "Bankavgift" 20250209
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 8 20250212 "Skatt och avgifter till skattekontot" 20250215
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 9 20250215 "Faktura 1002 konsultuppdrag" 20250218
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 10 20250225 "Lön" 20250228
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 11 20250228 "Avskrivning inventarier" 20250303
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 12 20250301 "Hyra kontor" 20250304
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 13 20250306 "Bankavgift" 20250309
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 14 20250310 "Köp server" 20250313
+{
+   #TRANS 1220 {} 24000.00
+   #TRANS 2641 {} 6000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 15 20250312 "Skatt och avgifter till skattekontot" 20250315
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 16 20250315 "Faktura 1003 konsultuppdrag" 20250318
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 17 20250325 "Lön" 20250328
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 18 20250328 "Avskrivning inventarier" 20250331
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 19 20250401 "Hyra kontor" 20250404
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 20 20250405 "Kundmiddag" 20250408
+{
+   #TRANS 6072 {} 2400.00
+   #TRANS 2641 {} 600.00
+   #TRANS 1930 {} -3000.00
+}
+#VER A 21 20250406 "Bankavgift" 20250409
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 22 20250412 "Skatt och avgifter till skattekontot" 20250415
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 23 20250415 "Faktura 1004 konsultuppdrag" 20250418
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 24 20250425 "Lön" 20250428
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 25 20250428 "Avskrivning inventarier" 20250501
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 26 20250428 "Avskrivning server" 20250501
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 27 20250501 "Hyra kontor" 20250504
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 28 20250506 "Bankavgift" 20250509
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 29 20250512 "Skatt och avgifter till skattekontot" 20250515
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 30 20250515 "Faktura 1005 konsultuppdrag" 20250518
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 31 20250525 "Lön" 20250528
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 32 20250528 "Avskrivning inventarier" 20250531
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 33 20250528 "Avskrivning server" 20250531
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 34 20250601 "Hyra kontor" 20250604
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 35 20250603 "Kontorsstolar" 20250606
+{
+   #TRANS 5410 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 36 20250604 "Kontorsstolar" 20250607
+{
+   #TRANS 5410 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 37 20250606 "Bankavgift" 20250609
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 38 20250612 "Skatt och avgifter till skattekontot" 20250615
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 39 20250615 "Faktura 1006 konsultuppdrag" 20250618
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 40 20250620 "IKEA köksbord" 20250623
+{
+   #TRANS 6110 {} 3000.00
+   #TRANS 2641 {} 750.00
+   #TRANS 1930 {} -3750.00
+}
+#VER A 41 20250625 "Lön" 20250628
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 42 20250628 "Avskrivning inventarier" 20250701
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 43 20250628 "Avskrivning server" 20250701
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 44 20250701 "Hyra kontor" 20250704
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 45 20250706 "Bankavgift" 20250709
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 46 20250712 "Skatt och avgifter till skattekontot" 20250715
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 47 20250715 "Faktura 1007 konsultuppdrag" 20250718
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 48 20250725 "Lön" 20250728
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 49 20250728 "Avskrivning inventarier" 20250731
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 50 20250728 "Avskrivning server" 20250731
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 51 20250801 "Hyra kontor" 20250804
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 52 20250806 "Bankavgift" 20250809
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 53 20250812 "Skatt och avgifter till skattekontot" 20250815
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 54 20250815 "Faktura 1008 konsultuppdrag" 20250818
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 55 20250820 "Molntjänst från EU-leverantör" 20250823
+{
+   #TRANS 6540 {} 4000.00
+   #TRANS 2645 {} 1000.00
+   #TRANS 2614 {} -1000.00
+   #TRANS 1930 {} -4000.00
+}
+#VER A 56 20250825 "Lön" 20250828
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 57 20250828 "Avskrivning inventarier" 20250831
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 58 20250828 "Avskrivning server" 20250831
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 59 20250901 "Hyra kontor" 20250904
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 60 20250901 "Leasing personbil" 20250904
+{
+   #TRANS 5615 {} 4000.00
+   #TRANS 2641 {} 1000.00
+   #TRANS 1930 {} -5000.00
+}
+#VER A 61 20250906 "Bankavgift" 20250909
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 62 20250912 "Skatt och avgifter till skattekontot" 20250915
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 63 20250915 "Faktura 1009 konsultuppdrag" 20250918
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 64 20250925 "Lön" 20250928
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 65 20250928 "Avskrivning inventarier" 20251001
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 66 20250928 "Avskrivning server" 20251001
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 67 20251001 "Hyra kontor" 20251004
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 68 20251006 "Bankavgift" 20251009
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 69 20251007 "Kundlunch" 20251010
+{
+   #TRANS 6071 {} 1000.00
+   #TRANS 2641 {} 120.00
+   #TRANS 1930 {} -1120.00
+}
+#VER A 70 20251012 "Skatt och avgifter till skattekontot" 20251015
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 71 20251015 "Faktura 1010 konsultuppdrag" 20251018
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 72 20251025 "Lön" 20251028
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 73 20251028 "Avskrivning inventarier" 20251031
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 74 20251028 "Avskrivning server" 20251031
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 75 20251101 "Hyra kontor" 20251104
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 76 20251103 "Kontorsmaterial" 20251106
+{
+   #TRANS 6110 {} 800.00
+   #TRANS 2641 {} 200.00
+   #TRANS 1930 {} -1000.00
+}
+#VER A 77 20251104 "Korrigering av felaktig kontorsmaterialverifikation" 20251107
+{
+   #TRANS 6110 {} -800.00
+   #TRANS 2641 {} -200.00
+   #TRANS 1930 {} 1000.00
+}
+#VER A 78 20251105 "Kontorsmaterial" 20251108
+{
+   #TRANS 6110 {} 800.00
+   #TRANS 2641 {} 200.00
+   #TRANS 1930 {} -1000.00
+}
+#VER A 79 20251106 "Bankavgift" 20251109
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 80 20251112 "Skatt och avgifter till skattekontot" 20251115
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 81 20251115 "Faktura 1011 konsultuppdrag" 20251118
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 82 20251120 "Faktura 1101 konsultuppdrag" 20251123
+{
+   #TRANS 1510 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 83 20251125 "Lön" 20251128
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 84 20251128 "Avskrivning inventarier" 20251201
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 85 20251128 "Avskrivning server" 20251201
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 86 20251201 "Hyra kontor" 20251204
+{
+   #TRANS 5010 {} 8000.00
+   #TRANS 2641 {} 2000.00
+   #TRANS 1930 {} -10000.00
+}
+#VER A 87 20251206 "Bankavgift" 20251209
+{
+   #TRANS 6570 {} 59.00
+   #TRANS 1930 {} -59.00
+}
+#VER A 88 20251212 "Skatt och avgifter till skattekontot" 20251215
+{
+   #TRANS 2710 {} 9000.00
+   #TRANS 2731 {} 9426.00
+   #TRANS 1930 {} -18426.00
+}
+#VER A 89 20251215 "Faktura 1012 konsultuppdrag" 20251218
+{
+   #TRANS 1930 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 90 20251215 "Faktura 1102 konsultuppdrag" 20251218
+{
+   #TRANS 1510 {} 62500.00
+   #TRANS 3001 {} -50000.00
+   #TRANS 2611 {} -12500.00
+}
+#VER A 91 20251225 "Lön" 20251228
+{
+   #TRANS 7210 {} 30000.00
+   #TRANS 7510 {} 9426.00
+   #TRANS 1930 {} -21000.00
+   #TRANS 2710 {} -9000.00
+   #TRANS 2731 {} -9426.00
+}
+#VER A 92 20251228 "Avskrivning inventarier" 20251231
+{
+   #TRANS 7832 {} 600.00
+   #TRANS 1229 {} -600.00
+}
+#VER A 93 20251228 "Avskrivning server" 20251231
+{
+   #TRANS 7832 {} 400.00
+   #TRANS 1229 {} -400.00
+}
+#VER A 94 20251231 "Semesterlöneskuld" 20260103
+{
+   #TRANS 7290 {} 5000.00
+   #TRANS 2920 {} -5000.00
+}
+#VER A 95 20251231 "Momsredovisning 2025" 20260103
+{
+   #TRANS 2641 {} -36670.00
+   #TRANS 2611 {} 175000.00
+   #TRANS 2645 {} -1000.00
+   #TRANS 2614 {} 1000.00
+   #TRANS 2650 {} -138330.00
+}
+#UB 0 1220 60000.00
+#UB 0 1229 -18000.00
+#UB 0 1510 125000.00
+#UB 0 1930 406736.00
+#UB 0 2081 -50000.00
+#UB 0 2091 -278800.00
+#UB 0 2611 0.00
+#UB 0 2614 0.00
+#UB 0 2641 0.00
+#UB 0 2645 0.00
+#UB 0 2650 -138330.00
+#UB 0 2710 -9000.00
+#UB 0 2731 -9426.00
+#UB 0 2920 -5000.00
