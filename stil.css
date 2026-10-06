@@ -19,9 +19,11 @@ h1{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:6px 0 14px}
 h2{font-size:clamp(24px,3vw,30px);line-height:1.15;margin:44px 0 12px}
 p{margin:0 0 12px}
 .topp{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:6px 26px}
-.topp nav{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
-.topp nav a{text-decoration:none;color:var(--sek)}
-.topp nav a:hover{color:var(--text);text-decoration:underline}
+.topp nav{display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center;font-size:15.5px}
+.topp nav a{color:var(--mork);font-weight:600;text-decoration:underline;text-decoration-color:var(--gron);text-decoration-thickness:2px;text-underline-offset:6px;padding:6px 0}
+.topp nav a:hover{color:var(--gron);text-decoration-thickness:3px}
+.topp nav a.byralank{color:var(--penna);border:1.5px solid var(--penna);border-radius:999px;padding:6px 14px;text-decoration:none}
+.topp nav a.byralank:hover{background:var(--penna);color:var(--papper)}
 .logolank{display:block;line-height:0}
 .logo{width:210px;max-width:60vw;height:auto}
 .logo .m{stroke:var(--logo-mork)}.logo .l{stroke:var(--logo-ljus)}.logo .g{stroke:var(--logo-gron)}.logo .gf{fill:var(--logo-gron)}.logo .t{fill:var(--logo-mork)}.logo .s{fill:var(--sek)}

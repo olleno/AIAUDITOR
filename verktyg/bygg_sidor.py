@@ -97,7 +97,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 </head>
 <body>
 <div class="sida">
-<header class="topp">{LOGGA}<nav aria-label="Huvudmeny"><a href="/#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a href="/byra/">För byråer</a></nav></header>
+<header class="topp">{LOGGA}<nav aria-label="Huvudmeny"><a href="/#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a class="byralank" href="/byra/">För byråer</a></nav></header>
 <main>
 {kropp}
 </main>

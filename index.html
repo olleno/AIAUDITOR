@@ -53,9 +53,11 @@ a{color:inherit}
 .etikett{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gron)}
 
 .topp{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:6px 30px}
-.topp nav{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
-.topp nav a{text-decoration:none;color:var(--sek)}
-.topp nav a:hover{color:var(--text);text-decoration:underline;text-underline-offset:4px}
+.topp nav{display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center;font-size:15.5px}
+.topp nav a{color:var(--mork);font-weight:600;text-decoration:underline;text-decoration-color:var(--gron);text-decoration-thickness:2px;text-underline-offset:6px;padding:6px 0}
+.topp nav a:hover{color:var(--gron);text-decoration-thickness:3px}
+.topp nav a.byralank{color:var(--penna);border:1.5px solid var(--penna);border-radius:999px;padding:6px 14px;text-decoration:none}
+.topp nav a.byralank:hover{background:var(--penna);color:var(--papper)}
 .logo{width:230px;max-width:62vw;height:auto}
 .logo .m{stroke:var(--logo-mork)}.logo .l{stroke:var(--logo-ljus)}.logo .g{stroke:var(--logo-gron)}.logo .gf{fill:var(--logo-gron)}.logo .t{fill:var(--logo-mork)}.logo .s{fill:var(--sek)}
 
@@ -195,7 +197,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       <text class="t" x="98" y="32" textLength="120" lengthAdjust="spacingAndGlyphs" font-family="Inter, system-ui, sans-serif" font-size="27" font-weight="800" letter-spacing="-0.5">AUDITOR</text>
       <text class="s" x="65" y="48" textLength="152" lengthAdjust="spacing" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500">GRANSKNING AV BOKFÖRING</text>
     </svg>
-    <nav aria-label="Huvudmeny"><a href="#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a href="#fragor">Frågor</a><a href="/byra/">För byråer</a></nav>
+    <nav aria-label="Huvudmeny"><a href="#granska">Granska</a><a href="/bransch/">Branscher</a><a href="/guider/">Guider</a><a href="#fragor">Frågor</a><a class="byralank" href="/byra/">För byråer</a></nav>
   </header>
 
   <section class="hero">
