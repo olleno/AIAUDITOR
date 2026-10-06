@@ -101,7 +101,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 <main>
 {kropp}
 </main>
-<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/byra/">För byråer</a></span></footer>
+<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/byra/">För byråer</a></span></footer>
 </div>
 </body>
 </html>
@@ -233,10 +233,12 @@ open(os.path.join(UT_G, "index.html"), "w", encoding="utf-8").write(
 # ---------- byråsidan ----------
 import byra_sida
 byra_sida.bygg(sida, brodsmulor, ROT)
+import kallor_sida
+kallor_sida.bygg(sida, brodsmulor, ROT)
 
 # ---------- sajtkarta ----------
 idag = date.today().isoformat()
-urls = ["/", "/byra/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
+urls = ["/", "/byra/", "/kallor/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
 open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{idag}</lastmod></url>\n" for u in urls) + "</urlset>\n")

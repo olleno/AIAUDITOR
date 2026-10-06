@@ -1,0 +1,447 @@
+{
+ "beskrivning": "Källor som AI Auditor och Kansliets bokförare bygger på. Granskas varje natt. 'lag' = riksdagens text, vi jämför vilken SFS lagen är ändrad till och med. 'sida' = hela sidans text jämförs.",
+ "kallor": [
+  {
+   "id": "bfl",
+   "namn": "Bokföringslagen (1999:1078)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1999-1078/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "BF01–BF12, BA01–BA03, BO02, BO04, BO06–BO09"
+  },
+  {
+   "id": "arl",
+   "namn": "Årsredovisningslagen (1995:1554)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1995-1554/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "BO01, BO05, BO06, AB06"
+  },
+  {
+   "id": "abl",
+   "namn": "Aktiebolagslagen (2005:551)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2005-551/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "AB01–AB07"
+  },
+  {
+   "id": "ml",
+   "namn": "Mervärdesskattelagen (2023:200)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2023-200/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO01–MO13, AV02; bokföraren: momssatser och K11–K13"
+  },
+  {
+   "id": "il",
+   "namn": "Inkomstskattelagen (1999:1229)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1999-1229/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "SK01–SK09, AV01–AV05, LO05; bokföraren: skattetips i månadsbrevet"
+  },
+  {
+   "id": "sfl",
+   "namn": "Skatteförfarandelagen (2011:1244)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2011-1244/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO07, MO08, MO11, MO12, SK04, SK05, LO01, LO04, BA04"
+  },
+  {
+   "id": "sal",
+   "namn": "Socialavgiftslagen (2000:980)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2000-980/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "LO02"
+  },
+  {
+   "id": "fskatt",
+   "namn": "Lagen om statlig fastighetsskatt (1984:1052)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1984-1052/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "FA01"
+  },
+  {
+   "id": "favgift",
+   "namn": "Lagen om kommunal fastighetsavgift (2007:1398)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2007-1398/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "FA01"
+  },
+  {
+   "id": "pvl",
+   "namn": "Penningtvättslagen (2017:630)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2017-630/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "bokföraren: kundkännedom"
+  },
+  {
+   "id": "bfn-nyheter",
+   "namn": "Bokföringsnämnden – nyheter",
+   "typ": "sida",
+   "url": "https://www.bfn.se/nyheter/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "BFNAR 2013:2, K2 (BFNAR 2016:10), K1, årsbokslut (BFNAR 2017:3)"
+  },
+  {
+   "id": "bfn-regler",
+   "namn": "Bokföringsnämnden – redovisningsregler",
+   "typ": "sida",
+   "url": "https://www.bfn.se/redovisningsregler/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "BF02, BF07, BO03, LO03, AV01, AV04"
+  },
+  {
+   "id": "skv-belopp-2026",
+   "namn": "Skatteverket – belopp och procent 2026",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/privat/skatter/beloppochprocent/2026/belopochprocent2026kortversion.4.1522bf3f19aea8075ba89.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "AV03 (prisbasbelopp), SK08, LO02; bokföraren: månadsbrevets skatteregler"
+  },
+  {
+   "id": "skv-ranta",
+   "namn": "Skatteverket – ränteutgifter (ränteavdragsbegränsning)",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/ranteutgifter",
+   "galler": [
+    "aiauditor"
+   ],
+   "regler": "SK06"
+  },
+  {
+   "id": "skv-pfond",
+   "namn": "Skatteverket – periodiseringsfond",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/aktiebolag/periodiseringsfond.4.4887341d16e1e2b8ddf30e.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "SK08; bokföraren: skattetips"
+  },
+  {
+   "id": "skv-avgifter",
+   "namn": "Skatteverket – arbetsgivaravgifter",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/arbetsgivare/arbetsgivaravgifterochskatteavdrag/arbetsgivaravgifter.4.233f91f71260075abe8800020817.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "LO02"
+  },
+  {
+   "id": "skv-fastighet",
+   "namn": "Skatteverket – fastighetsavgift och fastighetsskatt",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/privat/fastigheterochbostad/fastighetsavgiftochfastighetsskatt.4.69ef368911e1304a625800013531.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "FA01"
+  },
+  {
+   "id": "skv-momsfastighet",
+   "namn": "Skatteverket – moms vid fastighetsverksamhet",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/fastighetsverksamhet.4.58d555751259e4d66168000473.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO05, MO13"
+  },
+  {
+   "id": "skv-momsperiod",
+   "namn": "Skatteverket – när ska jag deklarera moms",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/moms/deklareramoms/narskajagdeklareramoms.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO07, MO08, MO11"
+  },
+  {
+   "id": "skv-representation",
+   "namn": "Skatteverket – representation",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/4.15532c7b1442f256baec84b.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO03, SK02, SK07"
+  },
+  {
+   "id": "skv-bilar",
+   "namn": "Skatteverket – bilar och moms",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/bilarochmoms.4.58d555751259e4d6616800010628.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "MO10"
+  },
+  {
+   "id": "skv-avdragslexikon",
+   "namn": "Skatteverket – avdragslexikon för företag",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foretag/skatterochavdrag/avdragforforetag/avdragslexikonforetag.4.3684199413c956649b550c8.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "SK01, SK07"
+  },
+  {
+   "id": "forsening",
+   "namn": "Förordning (1995:1633) om vissa årsredovisningsfrågor",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1995-1633/",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "BO05, BO06"
+  },
+  {
+   "id": "samfl",
+   "namn": "Lag (1973:1150) om förvaltning av samfälligheter",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1973-1150/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "samfällighetsföreningar: stämma, debitering, revision, förvaltningsberättelse"
+  },
+  {
+   "id": "anl",
+   "namn": "Anläggningslag (1973:1149)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1973-1149/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "gemensamhetsanläggningar, andelstal"
+  },
+  {
+   "id": "fbl",
+   "namn": "Fastighetsbildningslag (1970:988)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1970-988/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "samfälligheter, lantmäteriförrättningar"
+  },
+  {
+   "id": "efl",
+   "namn": "Lag (2018:672) om ekonomiska föreningar",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2018-672/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "ekonomiska föreningar: stämma, årsredovisning"
+  },
+  {
+   "id": "stl",
+   "namn": "Stiftelselag (1994:1220)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1994-1220/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "stiftelser: förvaltning, bokföring, tillsyn"
+  },
+  {
+   "id": "jb",
+   "namn": "Jordabalk (1970:994)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1970-994/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "arrende (8–11 kap): avtal, uppsägning, avgäld"
+  },
+  {
+   "id": "vattenv",
+   "namn": "Lag (1998:812) med särskilda bestämmelser om vattenverksamhet",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1998-812/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "dikningsföretag och markavvattningssamfälligheter"
+  },
+  {
+   "id": "fvo",
+   "namn": "Lag (1981:533) om fiskevårdsområden",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1981-533/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "fiskevårdsområdesföreningar"
+  },
+  {
+   "id": "jakt",
+   "namn": "Jaktlag (1987:259)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1987-259/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "jakt och jakträtt"
+  },
+  {
+   "id": "vvo",
+   "namn": "Lag (2000:592) om viltvårdsområden",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2000-592/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "viltvårdsområdesföreningar"
+  },
+  {
+   "id": "skogskonto",
+   "namn": "Lag (1954:142) om skogskonto m.m.",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1954-142/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "skogskonto i månadsbrevets skattetips"
+  },
+  {
+   "id": "ranta",
+   "namn": "Räntelag (1975:635)",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1975-635/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "dröjsmålsränta på obetalda avgifter och arrenden"
+  },
+  {
+   "id": "dataskydd",
+   "namn": "Lag (2018:218) med kompletterande bestämmelser till EU:s dataskyddsförordning",
+   "typ": "lag",
+   "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2018-218/",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "medlemsregister, personuppgifter"
+  },
+  {
+   "id": "skv-belopp-index",
+   "namn": "Skatteverket – belopp och procent, alla år (fångar nästa års siffror när de publiceras)",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/privat/skatter/beloppochprocent.4.18e1b10334ebe8bc80004109.html",
+   "galler": [
+    "aiauditor",
+    "kansliet"
+   ],
+   "regler": "AV03, SK08, LO02; bokföraren: månadsbrevets skatteregler"
+  },
+  {
+   "id": "skv-samfallighet",
+   "namn": "Skatteverket – så deklarerar du åt en samfällighet",
+   "typ": "sida",
+   "url": "https://skatteverket.se/foreningar/deklarera/sadeklarerarduatensamfallighet.4.70ac421612e2a997f85800044871.html",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "samfälligheters deklaration"
+  },
+  {
+   "id": "skv-moms-samf",
+   "namn": "Skatteverket – moms i en samfällighetsförening",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foreningar/driva/samfallighetsforening/momsiensamfallighetsforening.4.1657ce2817f5a993c3a7cf8.html",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "moms för samfälligheter"
+  },
+  {
+   "id": "skv-foreningar",
+   "namn": "Skatteverket – deklarera åt föreningar",
+   "typ": "sida",
+   "url": "https://www.skatteverket.se/foreningar/deklarera.4.3016b5d91791bf546791b62.html",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "föreningars deklaration"
+  },
+  {
+   "id": "lst-penningtvatt",
+   "namn": "Länsstyrelsen – förhindra penningtvätt (tillsyn över redovisningskonsulter)",
+   "typ": "sida",
+   "url": "https://www.lansstyrelsen.se/nationellt-innehall/samhalle/betalning-ekonomi-och-pengar/forhindra-penningtvatt-och-finansiering-av-terrorism.html",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "kundkännedom, registrering hos Länsstyrelsen"
+  },
+  {
+   "id": "scb-kpi",
+   "namn": "SCB – konsumentprisindex (KPI), månadstabellen (ändras varje månad)",
+   "typ": "sida",
+   "url": "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/PR/PR0101/PR0101A/KPItotM",
+   "galler": [
+    "kansliet"
+   ],
+   "regler": "KPI-uppräkning av arrenden och avgifter"
+  }
+ ]
+}
