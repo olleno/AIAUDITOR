@@ -104,6 +104,8 @@ input[type=text]{width:100%;font:inherit;font-size:16px;padding:11px 12px;border
 button:focus-visible,input:focus-visible,a:focus-visible,.slapp:focus-within{outline:3px solid var(--gron);outline-offset:2px}
 .status{margin-top:14px;font-size:15px;color:var(--sek);min-height:1.5em}
 .status.fel{color:var(--penna);font-weight:700}
+.tryggt{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;font-size:14px;font-weight:600;color:var(--gron);line-height:1.45}
+.tryggt svg{flex:none;margin-top:3px}
 .filnamn{font-family:var(--f-mono);font-size:13px;color:var(--text);margin-top:8px;word-break:break-all}
 .rapportram{margin-top:30px}
 .rapportram .huvud{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;margin-bottom:10px}
@@ -237,6 +239,9 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
           <span>eller klicka för att välja fil</span>
           <div class="filnamn" id="filnamn"></div>
         </label>
+        <p class="tryggt"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2M3 7h10v8H3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>Filen läses bara av din webbläsare. Den laddas inte upp till någon server, sparas inte och används inte för att träna någon AI.</span></p>
+        <p class="hjalp">Har du ingen SIE-fil till hands? <a href="#rapportrubrik" id="testlank">Testa med vår exempelfil</a>.</p>
       </div>
       <div>
         <label class="falt" for="sni">Bransch (valfritt)</label>
@@ -270,7 +275,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     </details>
     <div class="knappar">
       <button class="knapp prim" id="kor" type="button" disabled>Granska</button>
-      <button class="knapp sek" id="exempelknapp" type="button">Kör på exempelfilen</button>
+      <button class="knapp sek" id="exempelknapp" type="button">Testa med exempelfilen</button>
     </div>
     <p class="status" id="status" role="status" aria-live="polite"></p>
 
@@ -434,7 +439,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
 
   async function motor(){
     if (py) return py;
-    status("Laddar granskningsmotorn (cirka 12 MB första gången)…");
+    status("Laddar granskningsmotorn till din webbläsare (cirka 12 MB, bara första gången)…");
     var bas = new URL("pyodide/", location.href).href;
     py = await loadPyodide({ indexURL: bas, stdLibURL: bas + "stdlib.wasm" });
     py.FS.mkdirTree("/aia/data");
@@ -470,7 +475,8 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     korBtn.disabled = true; exBtn.disabled = true;
     try {
       const p = await motor();
-      status("Granskar…");
+      const vila = () => new Promise(r => setTimeout(r, 60));
+      status("Läser in bokföringen…"); await vila();
       p.FS.writeFile("/aia/fil.se", buf);
       try { p.FS.unlink("/aia/data/branschnyckeltal.json"); } catch(_){}
       if (kod){
@@ -479,6 +485,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       var hd = egen ? handlingar() : {h: {}, fel: []};
       if (hd.fel.length){ status("Kontrollera uppgifterna om " + hd.fel.join(", ") + ": datum och belopp behövs, och belopp skrivs som siffror.", true); korBtn.disabled = false; exBtn.disabled = false; return; }
       p.globals.set("SNI", kod); p.globals.set("HANDLINGAR", JSON.stringify(hd.h));
+      status("Kör kontrollerna mot bokföringslagen, momsen och skattereglerna" + (Object.keys(hd.h).length ? ", stämmer av mot dina handlingar" : "") + (kod ? " och jämför med branschen" : "") + "…"); await vila();
       const ut = await p.runPythonAsync(`
 import json
 from datetime import date
@@ -510,6 +517,7 @@ res`);
     granska(new Uint8Array(await valdFil.arrayBuffer()), sniKod(), true);
   });
   var exBtn = document.getElementById("exempelknapp");
+  document.getElementById("testlank").addEventListener("click", function(ev){ ev.preventDefault(); exBtn.click(); });
   exBtn.addEventListener("click", async function(){
     try {
       const buf = new Uint8Array(await (await fetch("exempel-sie.txt")).arrayBuffer());
