@@ -13,3 +13,4 @@
 - Guider: 7 guider under /guider/ för SIE-export (Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted, Briox). Menyvägar från leverantörernas hjälpsidor (källor på varje sida). PE Accounting/Kleer utelämnad – ingen offentlig instruktion hittades. Granskade av Gemini (inga invändningar) och GPT (invändningar avfärdade mot källorna).
 - Avstämning mot handlingar (lager 2): användaren fyller i bankens saldo, skattekontots saldo, momsdeklarationernas ruta 49 och årets resultat enligt årsredovisningen. Regler MO11, SK05, BA03, BO01 aktiverade. Körs i webbläsaren; inget skickas.
 - Startsidan läser ?sni= från branschsidorna och fyller i branschen.
+- Uppföljning: GitHubs DNS-kontroll godkänd efter omsparad domän; "Enforce HTTPS" påslagen (http skickas nu till https). Sajtkartan inskickad igen i Google Search Console efter branschsidorna (861 adresser). Startsidan och exempelgranskningen kontrollerade live.
