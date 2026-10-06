@@ -7,7 +7,7 @@ Användning:  python3 -I granskaren.py bokforing.se rapport.html [ÅÅÅÅ-MM-DD
 (datumet är "idag" – styr vad som räknas som avslutat år; standard är dagens datum)
 """
 import csv, html, os, re, shlex, sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date
 
 HÄR = os.path.dirname(os.path.abspath(__file__))
@@ -68,7 +68,13 @@ def las_sie(sokvag):
             i = f.index("}") + 1
             akt["rader"].append((f[1], float(f[i])))
         elif t in ("#RTRANS", "#BTRANS") and akt is not None:
-            akt["andrade"] += 1   # tillagd/borttagen rad – påverkar inte saldot (#RTRANS följs av en #TRANS)
+            # tillagd/borttagen rad – påverkar inte saldot (#RTRANS följs av en #TRANS).
+            # Har raden en signatur (vem som ändrade) är ändringen dokumenterad, som BFL kräver.
+            i = f.index("}") + 1
+            if len(f) > i + 4 and f[i + 4].strip():
+                akt["andrade_sign"] = akt.get("andrade_sign", 0) + 1
+            else:
+                akt["andrade"] += 1
     return bok
 
 # ---------- Hjälp ----------
@@ -82,7 +88,7 @@ LIVSLANGD_MAN = (12, 24, 36, 48, 60, 72, 84, 96, 120)
 
 def kr(x):  return f"{x:,.2f}".replace(",", " ")
 def kr0(x): return f"{x:,.0f}".replace(",", " ")
-def ref(v): return f"{v['serie']}{v['nr']}"
+def ref(v): return f"{v['serie']}{v['nr']}" if not str(v['serie'])[-1:].isdigit() else f"{v['serie']}:{v['nr']}"
 def ar_lon(k): return "7000" <= k <= "7299" and not k.endswith("90")
 def ar_fors(k): return k[:2] in ("30", "31")
 def ar_utg_moms(k): return k[:3] in ("261", "262", "263")
@@ -151,12 +157,17 @@ def granska(bok, idag=None, handlingar=None):
             lagg("BF07", v, f"{v['andrade']} rad(er) har lagts till eller tagits bort efter registreringen.",
                  "Kontrollera att ändringen är dokumenterad med datum och vem som gjorde den.")
 
+    # Många verifikationer med samma registreringsdag = troligen en flytt från ett annat program, inte sen bokföring.
+    per_dag = Counter(v["regdatum"] for v in bok["ver"] if v["regdatum"])
+    forsta = min(per_dag) if per_dag else None   # flytten sker när programmet börjar användas
+    flytt = {d for d, n in per_dag.items() if n >= 50 and n >= 0.2 * len(bok["ver"]) and (d - forsta).days <= 3}
     sena = sorted((v["regdatum"] - v["datum"]).days for v in bok["ver"]
-                  if v["regdatum"] and v["datum"] and (v["regdatum"] - v["datum"]).days > 60)
+                  if v["regdatum"] and v["datum"] and v["regdatum"] not in flytt and (v["regdatum"] - v["datum"]).days > 60)
     if sena:
         med = sena[len(sena) // 2]
+        notis = "".join(f" {per_dag[d]} verifikationer registrerades samma dag ({d}), troligen vid byte av bokföringsprogram, och räknas inte." for d in sorted(flytt))
         lagg("BF10", None, f"{len(sena)} av {len(bok['ver'])} verifikationer bokfördes mer än 60 dagar efter affärshändelsen "
-             f"(mitten {med} dagar, längst {sena[-1]} dagar).",
+             f"(mitten {med} dagar, längst {sena[-1]} dagar).{notis}",
              "Kontrollera att bokföringen sker i tid. Företag med omsättning högst 3 mkr får vänta till betalning; kontanta betalningar ska alltid bokföras senast nästa arbetsdag.")
 
     def norm(t): return re.sub(r"\(.*?\)|[^a-zåäö ]", "", t.lower()).strip()
@@ -185,7 +196,7 @@ def granska(bok, idag=None, handlingar=None):
                 lagg("MO10", v, f"Moms {kr(moms)} kr på leasing {kr(leasing)} kr motsvarar {moms / leasing * 100:.1f} %. Högst 12,5 % (halva momsen) får dras.",
                      "Dra av högst halva momsen; resten är kostnad.")
             continue
-        if moms <= 0: continue
+        if moms < 5: continue   # öresbelopp och avrundningar
         netto = sum(b for k, b in v["rader"] if k[0] in "4567" and b > 0 and k not in EJ_AVDRAG)
         if konton & EJ_AVDRAG and netto <= 0:
             lagg("MO03", v, f"Ingående moms {kr(moms)} kr dras på ej avdragsgill kostnad ({', '.join(sorted(konton & EJ_AVDRAG))}).",
@@ -199,10 +210,13 @@ def granska(bok, idag=None, handlingar=None):
             else:
                 lagg("MO02", v, f"Moms {kr(moms)} kr på {kr(netto)} kr motsvarar {kvot * 100:.1f} %, utanför alla svenska momssatser.", "Rätta momsbeloppet mot kvittot.")
 
+    def omforing(v):   # bara resultatkonton: flytt mellan konton, ingen affär
+        return all(k[0] in "345678" for k, _ in v["rader"])
     for v in aktiva:
-        if ar_korrigering(v): continue
+        if ar_korrigering(v) or omforing(v): continue
+        if any(k[:2] in ("17", "29") for k, _ in v["rader"]): continue   # periodisering: momsen redovisades vid faktureringen
         forsalj = -sum(b for k, b in v["rader"] if ar_fors(k))
-        utgrader = [(k, -b) for k, b in v["rader"] if ar_utg_moms(k) and k[3] in "1237"]
+        utgrader = [(k, -b) for k, b in v["rader"] if ar_utg_moms(k) and k[3] in "01237"]
         if forsalj > 0:
             if not utgrader:
                 if not any(k in MOMSFRIA_FORS for k, _ in v["rader"]):
@@ -217,7 +231,7 @@ def granska(bok, idag=None, handlingar=None):
         minsk = sum(b for k, b in v["rader"] if ar_fors(k) and b > 0)
         okn = sum(-b for k, b in v["rader"] if ar_fors(k) and b < 0)
         if minsk > 0 and okn == 0 and not any(ar_utg_moms(k) for k, _ in v["rader"]) \
-                and not any(k in MOMSFRIA_FORS for k, _ in v["rader"]):
+                and not any(k in MOMSFRIA_FORS or k[:2] in ("17", "29") for k, _ in v["rader"]):
             lagg("MO06", v, f"{kr(minsk)} kr bokas som minskad försäljning, men utgående moms rättas inte.",
                  "Om det är en kreditering ska även momsen krediteras. Om det är en kostnad ska den bokas på ett kostnadskonto.")
 
