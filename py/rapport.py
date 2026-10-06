@@ -198,7 +198,8 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
         cta = ('<div class="cta"><b>Vad gör jag nu?</b><br>Rätta själv med förslagen ovan, skicka sammanfattningen till din byrå – '
                'eller låt oss rätta det och sköta bokföringen framåt.<br>'
                '<a class="knapp" href="#" onclick="vy(\'byra\');return false">Visa sammanfattning till byrån</a>'
-               '<a class="knapp" href="mailto:kansliet@nordwikpartners.se?subject=Hj%C3%A4lp%20efter%20granskning">Låt Kansliet sköta det</a></div>')
+               '<a class="knapp" href="mailto:kansliet@nordwikpartners.se?subject=Hj%C3%A4lp%20efter%20granskning&amp;body=Hej!%20Jag%20har%20granskat%20bokf%C3%B6ringen%20i%20AI%20Auditor%20och%20vill%20ha%20hj%C3%A4lp%20att%20r%C3%A4tta%20och%20sk%C3%B6ta%20den%20fram%C3%A5t.">Låt Kansliet sköta det</a>'
+               '<br><span style="font-size:13px;opacity:.85">Eller mejla kansliet@nordwikpartners.se</span></div>')
 
     underlag = ai_underlag(bok, fynd)
     aisektion = ('<h2>Fördjupa med din egen AI</h2><div class="fynd">'
@@ -248,8 +249,6 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
         kropp = kropp.replace('<p class="dim">Kopiera texten till ett mejl, eller spara som PDF och bifoga.</p>',
                               '<button class="knapp" id="kopiera-byra" type="button">Kopiera texten</button> <span class="dim" id="kopierat"></span>')
         kropp = re.sub(r'onclick="vy\(\'(\w+)\'\)(;return false)?"', r'data-vy="\1"', kropp)
-        kropp = kropp.replace('<a class="knapp" href="mailto:kansliet@nordwikpartners.se?subject=Hj%C3%A4lp%20efter%20granskning">Låt Kansliet sköta det</a>',
-                              '<span class="knapp" style="background:transparent;border:1px solid #fff">Låt Kansliet sköta det: kansliet@nordwikpartners.se</span>')
         kropp = kropp.replace('href="#" data-vy', 'href="#rapport" data-vy')
         return g.STIL + EXTRA_STIL, kropp
     huvud = g.HUVUD.replace("TITEL", "AI Auditor – granskningsrapport").replace("</style>", EXTRA_STIL + "</style>").replace(g.LOGGA, "")
