@@ -91,8 +91,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 <meta property="og:url" content="{SAJT}{kanon}"><meta property="og:title" content="{e(titel)}"><meta property="og:description" content="{e(beskr)}">
 <meta property="og:image" content="{SAJT}/bilder/delning.jpg"><meta name="twitter:card" content="summary_large_image">
 {ldtxt}<script data-goatcounter="https://aiauditor.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500&family=Caveat:wght@600&family=Inter:wght@800&display=swap">
+<link rel="stylesheet" href="/typsnitt/typsnitt.css">
 <link rel="stylesheet" href="/stil.css">
 </head>
 <body>
@@ -101,7 +100,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 <main>
 {kropp}
 </main>
-<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/byra/">För byråer</a></span></footer>
+<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/byra/">För byråer</a></span></footer>
 </div>
 </body>
 </html>
@@ -235,10 +234,12 @@ import byra_sida
 byra_sida.bygg(sida, brodsmulor, ROT)
 import kallor_sida
 kallor_sida.bygg(sida, brodsmulor, ROT)
+import integritet_sida
+integritet_sida.bygg(sida, brodsmulor, ROT)
 
 # ---------- sajtkarta ----------
 idag = date.today().isoformat()
-urls = ["/", "/byra/", "/kallor/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
+urls = ["/", "/byra/", "/kallor/", "/integritet/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
 open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{idag}</lastmod></url>\n" for u in urls) + "</urlset>\n")

@@ -21,8 +21,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "AI Auditor", "url": "https://aiauditor.se/", "inLanguage": "sv", "applicationCategory": "FinanceApplication", "operatingSystem": "Webbläsare", "description": "Gratis granskning av bokföring i SIE-format mot bokföringslagen, momslagen och skattereglerna, med jämförelse mot SCB:s branschnyckeltal. Körs i webbläsaren.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "SEK"}, "publisher": {"@type": "Organization", "name": "Nordwik Partners", "email": "kansliet@nordwikpartners.se", "url": "https://nordwikpartners.se/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Sparar ni min fil?", "acceptedAnswer": {"@type": "Answer", "text": "Nej. Filen läses av din egen webbläsare och skickas inte till någon server. Du kan koppla från internet när sidan har laddat och ändå köra granskningen. Det enda som kan lämna datorn är AI-underlaget, och bara om du själv väljer att klistra in det i en AI-tjänst."}}, {"@type": "Question", "name": "Är det här en revision?", "acceptedAnswer": {"@type": "Answer", "text": "Nej. Det är en automatisk granskning som pekar ut fel och sådant som bör kontrolleras. Den ersätter inte revisor, och ansvaret för bokföringen ligger kvar hos dig eller styrelsen."}}, {"@type": "Question", "name": "Vad kostar det?", "acceptedAnswer": {"@type": "Answer", "text": "Granskningen av bokföringsfilen är gratis."}}, {"@type": "Question", "name": "Hur får jag fram en SIE-fil?", "acceptedAnswer": {"@type": "Answer", "text": "I de flesta bokföringsprogram finns den under Export eller Rapporter, ofta som \"SIE typ 4\". Välj det räkenskapsår du vill granska."}}, {"@type": "Question", "name": "Kan jag skicka rapporten till min byrå?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Välj \"Sammanfattning till min byrå\" i rapporten. Den är skriven som frågor, så att byrån kan förklara eller rätta."}}]}]</script>
 <script data-goatcounter="https://aiauditor.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@500&family=Caveat:wght@600&family=Inter:wght@800&display=swap">
+<link rel="stylesheet" href="/typsnitt/typsnitt.css">
 <style>
 /* Layout: ett skrivbord. Riktiga foton av pärmar och papper, ett huvudboksblad ovanpå, och granskningen som revisorns röda penna i marginalen. */
 :root{
@@ -242,7 +241,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
           <div class="filnamn" id="filnamn"></div>
         </label>
         <p class="tryggt"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2M3 7h10v8H3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-          <span>Filen läses bara av din webbläsare. Den laddas inte upp till någon server, sparas inte och används inte för att träna någon AI.</span></p>
+          <span>Filen läses bara av din webbläsare. Den laddas inte upp till någon server, sparas inte och används inte för att träna någon AI. <a href="/integritet/">Så fungerar det</a>.</span></p>
         <p class="hjalp">Har du ingen SIE-fil till hands? <a href="#rapportrubrik" id="testlank">Testa med vår exempelfil</a>.</p>
       </div>
       <div>
@@ -339,7 +338,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     </div>
   </section>
 
-  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/byra/">Är du en byrå?</a> · Foto: Unsplash och Pexels</span></footer>
+  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/byra/">Är du en byrå?</a> · Foto: Unsplash och Pexels</span></footer>
 </div>
 
 <script src="pyodide/pyodide.js"></script>
@@ -506,7 +505,7 @@ res`);
       if (d.fel){ status(d.fel, true); }
       else {
         visa(d.css, d.html, "Granskningsrapport för " + (d.namn || "ditt företag"), false);
-        status("Klart. " + d.antal + " anmärkningar. Filen har inte lämnat din dator.");
+        status("Klart. " + d.antal + (d.antal == 1 ? " anmärkning" : " anmärkningar") + ". Filen har inte lämnat din dator.");
         hand(egen ? "granskning-egen-fil" : "granskning-exempel"); if (egen && Object.keys(hd.h).length) hand("avstamning-" + Object.keys(hd.h).join("-"));
         document.querySelector(".rapportram").scrollIntoView({behavior:"smooth", block:"start"});
       }
