@@ -14,3 +14,7 @@
 - Avstämning mot handlingar (lager 2): användaren fyller i bankens saldo, skattekontots saldo, momsdeklarationernas ruta 49 och årets resultat enligt årsredovisningen. Regler MO11, SK05, BA03, BO01 aktiverade. Körs i webbläsaren; inget skickas.
 - Startsidan läser ?sni= från branschsidorna och fyller i branschen.
 - Uppföljning: GitHubs DNS-kontroll godkänd efter omsparad domän; "Enforce HTTPS" påslagen (http skickas nu till https). Sajtkartan inskickad igen i Google Search Console efter branschsidorna (861 adresser). Startsidan och exempelgranskningen kontrollerade live.
+
+## 2026-10-06 – Byråsidan och motorn efter 39 riktiga SIE-filer
+- /byra/: white label-erbjudande med intresseanmälan (mejl till kansliet@), granskad av Claude (invert), Gemini och GPT. Länkar i meny och sidfot.
+- Motorn rättad efter 39 Fortnox-filer: signerade ändringar räknas inte som fel, programbyte räknas inte som sen bokföring, moms under 5 kr hoppas över, omföringar och periodiseringar ger inte momsfel, konto 2610 räknas som utgående moms.
