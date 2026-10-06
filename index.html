@@ -361,6 +361,8 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     document.getElementById("markering").hidden = !exempel;
   }
   skugga.addEventListener("click", function(ev){
+    var o = ev.target.closest("[data-oppna]");
+    if (o){ ev.preventDefault(); var d = document.getElementById(o.getAttribute("data-oppna")); if (d){ d.open = true; d.scrollIntoView({behavior:"smooth", block:"start"}); var f = d.querySelector("input"); if (f) setTimeout(function(){ f.focus({preventScroll:true}); }, 400); } hand("oppna-avstamning"); return; }
     var t = ev.target.closest("[data-vy]");
     if (t){
       ev.preventDefault();

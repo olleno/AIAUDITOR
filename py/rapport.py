@@ -174,7 +174,7 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
     lista = lambda xs: (", ".join(xs[:-1]) + " och " + xs[-1]) if len(xs) > 1 else (xs[0] if xs else "")
     ejkoll = ('<div class="ruta"><strong>Det här har vi inte kontrollerat.</strong> Granskningen bygger på bokföringsfilen (SIE)'
               + (f' och de uppgifter du fyllt i om {lista(jamfort)}' if jamfort else '') + '. Kvitton, fakturor och avtal har inte setts. '
-              + (f'{lista(ej).capitalize()} har inte jämförts. ' if ej else '')
+              + (f'{lista(ej).capitalize()} har inte jämförts' + (' – <a href="#avstam" data-oppna="avstam">fyll i dem och granska igen</a>. ' if webb else '. ') if ej else '')
               + f'Därför kan fel finnas som inte syns här. {len(aktiva)} kontroller har körts.</div>')
     if avst:
         k2 = lambda x: g.kr(0.0 if abs(x) < 0.005 else x)
