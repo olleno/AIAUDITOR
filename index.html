@@ -254,6 +254,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
         <p class="tryggt"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2M3 7h10v8H3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
           <span>Filen läses bara av din webbläsare. Den laddas inte upp till någon server, sparas inte och används inte för att träna någon AI. <a href="/integritet/">Så fungerar det</a>.</span></p>
         <p class="hjalp">Har du ingen SIE-fil till hands? <a href="#rapportrubrik" id="testlank">Testa med vår exempelfil</a>.</p>
+        <p class="hjalp" id="fortnox-rad">Har du Fortnox? <a href="https://konto.aiauditor.se/fortnox/start" id="fortnox-lank">Hämta bokföringen direkt från Fortnox</a> i stället. Då passerar den vår server i Tyskland, görs om till en SIE-fil och raderas direkt – inget sparas och kopplingen stängs efteråt.</p>
       </div>
       <div>
         <label class="falt" for="sni">Bransch (valfritt)</label>
@@ -440,11 +441,23 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     valdFil = f; document.getElementById("filnamn").textContent = f.name + " · " + Math.round(f.size/1024) + " kB";
     korBtn.disabled = false; status("Klar att granska.");
   }
-  filInput.addEventListener("change", function(){ valjFil(filInput.files[0]); });
+  var franFortnox = false;
+  filInput.addEventListener("change", function(){ franFortnox = false; valjFil(filInput.files[0]); });
+  (function(){
+    var m = location.hash.match(/^#fortnox=([A-Za-z0-9_-]{20,64})$/); if (!m) return;
+    try { history.replaceState(null, "", location.pathname + location.search + "#granska"); } catch(e){}
+    var api = window.AIA_KONTO_API || "https://konto.aiauditor.se";
+    status("Hämtar bokföringen från Fortnox…");
+    fetch(api + "/fortnox/hamta/" + m[1]).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(d){
+      franFortnox = true; valjFil(new File([d.sie], d.namn || "Fortnox.se", {type: "text/plain"}));
+      status("Bokföringen är hämtad från Fortnox och raderad från vår server. Klicka Granska.");
+      hand("fortnox-hamtad"); document.getElementById("granska").scrollIntoView({block: "start"});
+    }).catch(function(){ status("Bokföringen från Fortnox kunde inte hämtas – länken gäller bara en gång i tio minuter. Börja om, eller ladda upp en SIE-fil.", true); });
+  })();
   var slapp = document.getElementById("slapp");
   ["dragenter","dragover"].forEach(function(n){ slapp.addEventListener(n, function(e){ e.preventDefault(); slapp.classList.add("over"); }); });
   ["dragleave","drop"].forEach(function(n){ slapp.addEventListener(n, function(e){ e.preventDefault(); slapp.classList.remove("over"); }); });
-  slapp.addEventListener("drop", function(e){ if (e.dataTransfer.files.length) valjFil(e.dataTransfer.files[0]); });
+  slapp.addEventListener("drop", function(e){ if (e.dataTransfer.files.length){ franFortnox = false; valjFil(e.dataTransfer.files[0]); } });
 
   function sniKod(){
     var v = (sniInput.value || "").trim(); if (!v) return "";
@@ -529,7 +542,7 @@ res`);
       if (d.fel){ status(d.fel, true); }
       else {
         visa(d.css, d.html, "Granskningsrapport för " + (d.namn || "ditt företag"), false);
-        status("Klart. " + d.antal + (d.antal == 1 ? " anmärkning" : " anmärkningar") + ". Filen har inte lämnat din dator.");
+        status("Klart. " + d.antal + (d.antal == 1 ? " anmärkning" : " anmärkningar") + (franFortnox && egen ? ". Bokföringen från Fortnox finns inte kvar hos oss." : ". Filen har inte lämnat din dator."));
         hand(egen ? "granskning-egen-fil" : "granskning-exempel"); if (egen && Object.keys(hd.h).length) hand("avstamning-" + Object.keys(hd.h).join("-"));
         var sr = document.getElementById("spara-ruta");
         if (egen && window.aiaKonto && d.sammanfattning){ window.aiaKonto.visaSparaRuta(sr, d.sammanfattning); } else { sr.hidden = true; }
