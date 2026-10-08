@@ -100,7 +100,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 <main>
 {kropp}
 </main>
-<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/byra/">För byråer</a></span></footer>
+<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/konto/">Mitt konto</a> · <a href="/byra/">För byråer</a></span></footer>
 </div>
 </body>
 </html>
@@ -236,6 +236,8 @@ import kallor_sida
 kallor_sida.bygg(sida, brodsmulor, ROT)
 import integritet_sida
 integritet_sida.bygg(sida, brodsmulor, ROT)
+import konto_sida
+konto_sida.bygg(sida, brodsmulor, ROT)
 
 # ---------- sajtkarta ----------
 idag = date.today().isoformat()

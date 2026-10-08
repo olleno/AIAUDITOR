@@ -180,6 +180,17 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
 @media (max-width:900px){.hero,.verktyg-grid,.tva,.steg,.kontrollyta{grid-template-columns:1fr}.kort4{grid-template-columns:1fr 1fr}.kontroller{columns:1}.blad{left:-8px;right:8px}.hero{gap:28px}}
 @media (max-width:520px){.kort4{grid-template-columns:1fr}.blad .r{grid-template-columns:38px 1fr auto}.blad .r span:nth-child(2){display:none}.verktyg{padding:18px}.anteckning{right:0}.topp nav{gap:14px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.spara-ruta{background:var(--papper,#FFFDF8);border-left:4px solid var(--gron,#4E7A45);padding:18px 22px;margin:18px 0;box-shadow:0 1px 2px rgba(40,30,10,.08)}
+.spara-ruta h3{margin:0 0 8px}.spara-ruta .hand{margin:0}
+.spara-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:10px 0}
+.spara-form label{display:grid;gap:4px;font-size:14px;font-weight:600;flex:1 1 240px}
+.spara-form input{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--linje,#D9D3C7);border-radius:3px;background:var(--bg,#F3F0E9);color:inherit}
+.liten{font-size:13px;color:var(--dim,#6E746F);margin-top:8px}
+.jmf{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0}
+.jmf>div{background:var(--bg,#F3F0E9);padding:10px 12px}.jmf ul{font-size:13px;padding-left:16px;margin:6px 0 0}
+.jmf-tal{font-family:var(--f-rubrik,Georgia,serif);font-size:30px;font-weight:600;margin:0;line-height:1}.jmf-tal.gron{color:var(--gron,#4E7A45)}.jmf-tal.rod{color:var(--penna,#B3261E)}
+.jmf-rubrik{font-size:14px;color:var(--sek,#4B524D);margin:6px 0}.jmf-nt{font-size:14px}
+@media (max-width:600px){.jmf{grid-template-columns:1fr}}
 </style>
 
 </head>
@@ -280,6 +291,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     </div>
     <p class="status" id="status" role="status" aria-live="polite"></p>
 
+    <div class="spara-ruta" id="spara-ruta" hidden></div>
     <div class="rapportram">
       <div class="huvud"><h3 id="rapportrubrik">Så här ser rapporten ut</h3><span class="markering" id="markering">Exempel, påhittat bolag</span></div>
       <div id="rapport"></div>
@@ -338,10 +350,11 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     </div>
   </section>
 
-  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/byra/">Är du en byrå?</a> · Foto: Unsplash och Pexels</span></footer>
+  <footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/konto/">Mitt konto</a> · <a href="/byra/">Är du en byrå?</a> · Foto: Unsplash och Pexels</span></footer>
 </div>
 
 <script src="pyodide/pyodide.js"></script>
+<script src="/konto.js" defer></script>
 <script>
 (function(){
   var KONTROLLER = {"Grundbokföring":["Verifikationen går inte jämnt ut","Lucka i verifikationsnumreringen","Samma verifikationsnummer används två gånger","Datum utanför räkenskapsåret","Konto finns inte i kontoplanen","Verifikation saknar beskrivning","Verifikation ändrad i efterhand","Möjlig dubbelbokning","Sen bokföring"],
@@ -368,6 +381,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
   var valdFil = null, py = null, sniLista = [];
 
 
+  window.aiaHand = function(n){ hand(n); };
   function hand(namn){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: namn, title: namn, event: true}); } catch(e){} }
   function status(t, fel){ statusEl.textContent = t; statusEl.classList.toggle("fel", !!fel); }
 
@@ -499,7 +513,17 @@ else:
     idag = date.today()
     fynd = g.granska(bok, idag, json.loads(HANDLINGAR) or None)
     css, html = r.bygg(bok, fynd, idag, SNI or None, webb=True)
-    res = json.dumps({'css': css, 'html': html, 'namn': bok['namn'], 'antal': len(fynd)})
+    import nyckeltal as n
+    from collections import OrderedDict
+    be = n.berakna(bok, idag); per = OrderedDict()
+    for f in fynd:
+        x = per.setdefault(f['regel'], {'regel': f['regel'], 'rubrik': f['rubrik'], 'allvar': f['allvar'], 'antal': 0}); x['antal'] += 1; x['allvar'] = min(x['allvar'], f['allvar'])
+    rar = bok['rar'] or (None, None)
+    sam = {'bolag': bok['namn'], 'orgnr': bok['orgnr'], 'fran': str(rar[0]) if rar[0] else None, 'till': str(rar[1]) if rar[1] else None,
+           'granskad': idag.isoformat(), 'verifikationer': len(bok['ver']),
+           'nyckeltal': {k: be['nt'].get(k) for k in ('soliditet', 'kassalikv', 'rorelsemarg', 'nettomarg', 'kundfordr', 'kassa')},
+           'belopp': {k: be['belopp'].get(k) for k in ('oms', 'arets', 'ek', 'tillg')}, 'fynd': list(per.values())}
+    res = json.dumps({'css': css, 'html': html, 'namn': bok['namn'], 'antal': len(fynd), 'sammanfattning': sam})
 res`);
       const d = JSON.parse(ut);
       if (d.fel){ status(d.fel, true); }
@@ -507,7 +531,9 @@ res`);
         visa(d.css, d.html, "Granskningsrapport för " + (d.namn || "ditt företag"), false);
         status("Klart. " + d.antal + (d.antal == 1 ? " anmärkning" : " anmärkningar") + ". Filen har inte lämnat din dator.");
         hand(egen ? "granskning-egen-fil" : "granskning-exempel"); if (egen && Object.keys(hd.h).length) hand("avstamning-" + Object.keys(hd.h).join("-"));
-        document.querySelector(".rapportram").scrollIntoView({behavior:"smooth", block:"start"});
+        var sr = document.getElementById("spara-ruta");
+        if (egen && window.aiaKonto && d.sammanfattning){ window.aiaKonto.visaSparaRuta(sr, d.sammanfattning); } else { sr.hidden = true; }
+        (egen ? sr : document.querySelector(".rapportram")).scrollIntoView({behavior:"smooth", block:"start"});
       }
     } catch(e){
       hand("granskning-fel"); status("Granskningen kunde inte köras: " + (e && e.message ? e.message.split("\n").slice(-2).join(" ") : e), true);
