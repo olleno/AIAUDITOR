@@ -5,7 +5,7 @@
    "id": "2026-10-kansliet-01",
    "kanal": "instagram",
    "konto": "kansliet",
-   "godkand": false,
+   "godkand": true,
    "publicera_efter": "2026-10-10T07:00:00+00:00",
    "bilder": [
     "https://aiauditor.se/media/2026-10-kansliet-01/sida-01.jpg",
@@ -20,7 +20,7 @@
    "kanal": "instagram",
    "konto": "kansliet",
    "typ": "reel",
-   "godkand": false,
+   "godkand": true,
    "publicera_efter": "2026-10-13T16:00:00+00:00",
    "video": "https://aiauditor.se/media/2026-10-kansliet-01/film.mp4",
    "text": "Pärmen, stämman, lappen och lagen. Fyra skäl att låta någon annan sköta föreningens pappersarbete.\n\nkansliet@nordwikpartners.se\n\n#samfällighet #förening #styrelse"
