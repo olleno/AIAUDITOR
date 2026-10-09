@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /media/
 Sitemap: https://aiauditor.se/sitemap.xml
