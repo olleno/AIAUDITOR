@@ -24,11 +24,22 @@ VARFOR = {
     "Bokslut": "Bokslutet ska stämma med bokföringen och lämnas in i tid.",
 }
 STATUS = {
-    "rod": ("#9B2C1F", "Rött", "Det finns fel som bör rättas", "Felen kan påverka skatt, moms eller styrelsens ansvar. Gå igenom dem innan nästa deklaration eller bokslut."),
-    "gul": ("#9A6A12", "Gult", "Några saker bör kontrolleras", "Inget tyder på allvarliga fel, men några poster bör kontrolleras och vid behov rättas före bokslutet."),
-    "gron": ("#4E7A45", "Grönt", "Inga anmärkningar i de kontroller vi gjort", "Det betyder inte att allt är rätt – se vad som inte har kontrollerats längre ner. Kör granskningen igen nästa kvartal."),
+    "rod": ("#9B2C1F", "Rött", "Några saker behöver rättas – och det går att fixa", "Sådant här är vanligt, och allt går att rätta med en rättelseverifikation. Ta det före nästa deklaration eller bokslut, så slipper du frågor i efterhand. Under varje punkt står hur du gör."),
+    "gul": ("#9A6A12", "Gult", "Det ser bra ut – några saker är värda en titt", "Inget tyder på allvarliga fel. Gå igenom punkterna nedan i lugn och ro före bokslutet; många har säkert en naturlig förklaring."),
+    "gron": ("#4E7A45", "Grönt", "Inga anmärkningar – snyggt", "Det betyder inte att allt är rätt – se vad som inte har kontrollerats längre ner. Kör granskningen igen inför nästa momsdeklaration."),
 }
-TAG = {1: ("Fel", "#9B2C1F"), 2: ("Kontrollera", "#9A6A12"), 3: ("Notering", "#6B726E")}
+TAG = {1: ("Behöver rättas", "#9B2C1F"), 2: ("Värt en titt", "#9A6A12"), 3: ("Notering", "#6B726E")}
+LUGN = {1: "Det här behöver rättas, men det är vanligt och går att fixa.",
+        2: "Kan mycket väl vara i sin ordning – men kontrollera det.",
+        3: "Bara för kännedom. Ingen åtgärd behövs om det stämmer."}
+RATTA = ("Leta upp verifikationen i ditt bokföringsprogram och välj att korrigera den. I Fortnox, Spiris, Bokio och de flesta andra program "
+         "skapas då en rättelseverifikation automatiskt, så att originalet finns kvar som lagen kräver.")
+RATTA_HELA = "Rätta med en ny verifikation (rättelse) daterad när du upptäckte felet. Ändra eller radera aldrig den gamla."
+RATTA_EXTRA = {
+    "Moms": " Är perioden redan deklarerad? Rätta då även momsdeklarationen för den perioden i Skatteverkets e-tjänst för moms.",
+    "Lön": " Påverkar det en arbetsgivardeklaration som redan lämnats in? Rätta den i Skatteverkets e-tjänst.",
+    "Bank och kassa": " Jämför med kontoutdraget för samma dag – skillnaden brukar vara en saknad eller dubbel bokning.",
+}
 BED = {"bra": ("Bättre än de flesta", "#4E7A45"), "svag": ("Sämre än de flesta", "#9B2C1F"),
        "normal": ("Som branschen", "#4A524D"), "neutral": ("", "#4A524D")}
 LAGE = ["under de flesta", "under mitten", "över mitten", "över de flesta"]
@@ -153,9 +164,11 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
         var = f'Verifikation {e(f["ver"])}, {e(f["datum"])}' if f["ver"] != "–" else "Hela bokföringen"
         if f["text"]: var += f' – ”{e(f["text"])}”'
         return (f'<div class="fynd"><span class="tag" style="background:{c}">{t}</span> <span class="dim">{e(f["omrade"])}</span>'
-                f'<h3>{e(f["rubrik"])}</h3><dl><dt>Var</dt><dd>{var}</dd><dt>Vad</dt><dd>{e(f["beskr"])}</dd>'
+                f'<h3>{e(f["rubrik"])}</h3><p class="dim" style="margin:-4px 0 8px">{LUGN[f["allvar"]]}</p><dl><dt>Var</dt><dd>{var}</dd><dt>Vad</dt><dd>{e(f["beskr"])}</dd>'
                 f'<dt>Varför det spelar roll</dt><dd>{e(VARFOR.get(f["omrade"], ""))} <span class="dim">Regel: {e(f["kalla"])}</span></dd>'
-                f'<dt>Förslag</dt><dd>{e(f["forslag"])}</dd></dl>'
+                f'<dt>Förslag</dt><dd>{e(f["forslag"])}</dd>'
+                + (f'<dt>Så rättar du</dt><dd>{e((RATTA if f["ver"] != "–" else RATTA_HELA) + RATTA_EXTRA.get(f["omrade"], ""))}</dd>' if f["allvar"] <= 2 and not (f["ver"] == "–" and f["omrade"] in ("Bokslut", "Aktiebolag")) else '')
+                + '</dl>'
                 + ('<label class="bock"><input type="checkbox"> Åtgärdat</label>' if bock else '') + '</div>')
 
     # --- nyckeltal ---
@@ -256,8 +269,8 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
             f'<div class="meta">Org.nr {e(bok["orgnr"])} · Räkenskapsår {rar} · Granskad {idag}</div>'
             + ansvar_kort +
             f'<div class="status" style="background:{farg}"><span style="opacity:.85;font-size:13px">Samlad bedömning: {ord_}</span><b>{rub}</b>{txt}</div>'
-            f'<div class="kort"><div class="k"><b>{len(bok["ver"])}</b>verifikationer</div><div class="k"><b style="color:#9B2C1F">{antal[1]}</b>fel</div>'
-            f'<div class="k"><b style="color:#9A6A12">{antal[2]}</b>att kontrollera</div><div class="k"><b style="color:#6B726E">{antal[3]}</b>noteringar</div></div>'
+            f'<div class="kort"><div class="k"><b>{len(bok["ver"])}</b>verifikationer</div><div class="k"><b style="color:#9B2C1F">{antal[1]}</b>att rätta</div>'
+            f'<div class="k"><b style="color:#9A6A12">{antal[2]}</b>värda en titt</div><div class="k"><b style="color:#6B726E">{antal[3]}</b>noteringar</div></div>'
             + uppmaning +
             '<div class="vyer"><button data-vy="sjalv" class="aktiv" onclick="vy(\'sjalv\')">Jag bokför själv</button>'
             '<button data-vy="byra" onclick="vy(\'byra\')">Sammanfattning till min byrå</button>'
