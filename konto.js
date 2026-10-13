@@ -10,7 +10,8 @@
   async function api(metod, vag, data){
     var t = hamta(NYCKEL), h = {"Content-Type": "application/json"};
     if (t) h.Authorization = "Bearer " + t;
-    var r = await fetch(API + vag, {method: metod, headers: h, body: data ? JSON.stringify(data) : undefined});
+    var r; try { r = await fetch(API + vag, {method: metod, headers: h, body: data ? JSON.stringify(data) : undefined}); }
+    catch(_){ throw new Error("Kontot går inte att nå just nu. Försök igen om en stund – granskningen fungerar som vanligt."); }
     var j = {}; try { j = await r.json(); } catch(_){}
     if (r.status === 401) satt(NYCKEL, null);
     if (!r.ok) throw new Error(j.fel || "Kontot svarar inte just nu.");
