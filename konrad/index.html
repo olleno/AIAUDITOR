@@ -47,6 +47,7 @@ section{padding-block:80px}
 .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:64px 72px}
 @media (max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding-block:40px 56px}}
 .cta-rad{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+.knapp.ljus{background:transparent;color:var(--accent)}
 .kort{display:grid;gap:12px}
 .kort article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
 .kort article.aktiv{background:var(--accentyta);border:1.5px solid var(--accent);box-shadow:0 10px 24px -14px color-mix(in srgb,var(--accent) 70%,transparent)}
@@ -57,56 +58,73 @@ section{padding-block:80px}
 .pil{font-size:13px;color:var(--accent);padding-left:20px;margin:-2px 0}
 .kortnot{font-size:12px;color:var(--dampad);text-align:right;margin:4px 0 0}
 
-/* Citat-band */
-.citat{background:var(--band)}
-.citat .ram{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
-.portratt{width:72px;height:72px;border-radius:8px;background:var(--mork);display:grid;place-items:center}
-.portratt svg{width:40px;height:40px}
-blockquote{margin:0;font-family:var(--rubrik);font-size:clamp(24px,3vw,32px);line-height:1.25;letter-spacing:-.02em;max-width:30em}
-.citat p{color:var(--text2);max-width:46em}
-
-/* Konrads släkt – mörkt band */
-.slakt{background:var(--mork);color:var(--morktext)}
-.slakt h2{color:#fff}
-.slakt .ingress{color:var(--morkdamp)}
-.slakten{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:40px;counter-reset:gen}
-.slakten article{border:1px solid var(--morklinje);border-radius:10px;padding:22px;position:relative;min-width:0}
-.slakten article.nu{border-color:var(--glod);background:color-mix(in srgb,var(--glod) 8%,transparent)}
-.slakten .ar{font:500 12px var(--mono);color:var(--glod);letter-spacing:.06em}
-.slakten b{display:block;color:#fff;font-family:var(--rubrik);font-weight:500;font-size:24px;letter-spacing:-.02em;margin:12px 0 8px}
-.slakten p{margin:0;font-size:14.5px;color:var(--morkdamp)}
-.slakten .arv{margin-top:14px;font-size:13px;color:var(--morktext);border-top:1px solid var(--morklinje);padding-top:12px}
-.slakten svg{height:34px;width:auto;display:block}
-.lasning{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:40px}
-.lasning span{border:1px solid var(--morklinje);border-radius:99px;padding:8px 14px;font-size:13.5px;color:var(--morktext);text-align:center}
-.slakt .not{margin-top:24px;color:var(--morkdamp);font-size:13px;font-style:italic}
-
-/* Vad du får */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
-.grid3 article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:22px;min-width:0}
-.grid3 p{margin:0;color:var(--text2);font-size:15px}
-.grid3 .ex{margin-top:14px;font-size:13px;color:var(--ockra)}
-
-/* Så funkar det */
-.steg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:40px;counter-reset:s}
+/* Så enkelt */
+.steg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:36px;counter-reset:s}
 .steg div{border-top:2px solid var(--accent);padding-top:16px;counter-increment:s}
 .steg div::before{content:"Steg " counter(s);font:500 12px var(--mono);color:var(--accent);letter-spacing:.06em;display:block;margin-bottom:8px}
 .steg p{margin:0;color:var(--text2)}
+.band{background:var(--band)}
+
+/* Priser */
+.pris{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:36px;align-items:stretch}
+.pris article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.pris article.fram{border:1.5px solid var(--accent);box-shadow:0 10px 24px -16px color-mix(in srgb,var(--accent) 70%,transparent)}
+.pris .namn{font:600 13px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra)}
+.pris .belopp{font-family:var(--rubrik);font-size:40px;letter-spacing:-.03em;line-height:1}
+.pris .belopp small{font:400 15px var(--brod);color:var(--dampad);letter-spacing:0}
+.pris .for{margin:0;color:var(--text2);font-size:14.5px}
+.pris ul{margin:8px 0 12px;padding:0;list-style:none;color:var(--text2);font-size:15px;display:grid;gap:6px}
+.pris li{padding-left:22px;position:relative}
+.pris li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:600}
+.pris li.plus{color:var(--text);font-weight:600}
+.pris li.plus::before{content:"+";color:var(--accent)}
+.pris .knapp{margin-top:auto;text-align:center}
+.spar{margin-top:16px;background:var(--accentyta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;color:var(--text)}
+.tabellbox{margin-top:36px;overflow-x:auto;border:1px solid var(--linje);border-radius:10px;background:var(--yta)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+caption{text-align:left;padding:16px 16px 8px;font:600 17px var(--brod)}
+th,td{padding:10px 14px;text-align:center;border-top:1px solid var(--linje)}
+thead th{font-weight:600;background:var(--band)}
+th:first-child,td:first-child{text-align:left}
+tbody th{font-weight:400;color:var(--text)}
+tr.grupp th{background:var(--band);font:600 12px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra);text-align:left}
+td.ja{color:var(--ok);font-weight:600}
+td.nej{color:var(--dampad)}
+
+/* Det här gör Konrad */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+.grid3 article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:22px;min-width:0}
+.grid3 p{margin:0;color:var(--text2);font-size:15px}
+.plan{display:inline-block;font:600 11px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accentyta);border-radius:99px;padding:3px 10px;margin-bottom:12px}
+
+/* Kopplingar */
+.kopp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px;margin-top:36px}
+.kopp>div{border-top:1px solid var(--linje);padding-top:14px;min-width:0}
+.kopp h3{font-size:15px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--linje);background:var(--yta);border-radius:99px;padding:5px 12px;font-size:14px;color:var(--text2)}
+.chips span .snart{margin-left:6px}
+.kopp .lt{font-size:13px;color:var(--dampad);margin:10px 0 0}
 
 /* Trygghet */
-.trygg{background:var(--band)}
-.trygg ul{list-style:none;padding:0;margin:36px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px 40px}
+.trygg ul{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 40px}
 .trygg li{padding:14px 0;border-bottom:1px solid var(--linje);display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px}
 .trygg li svg{width:18px;height:18px;margin-top:4px}
 .trygg li span{color:var(--text2);font-size:15px}
 .trygg li b{color:var(--text);display:block}
 
-/* Pris */
-.pris{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
-.pris article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:10px}
-.pris article.fram{border:1.5px solid var(--accent)}
-.pris .belopp{font-family:var(--rubrik);font-size:40px;letter-spacing:-.03em;line-height:1}
-.pris ul{margin:6px 0 0;padding-left:18px;color:var(--text2);font-size:15px}
+/* Konrads släkt – mörkt band */
+.slakt{background:var(--mork);color:var(--morktext)}
+.slakt h2{color:#fff}
+.slakt .ingress{color:var(--morkdamp)}
+.slakten{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.slakten article{border:1px solid var(--morklinje);border-radius:10px;padding:20px;min-width:0}
+.slakten article.nu{border-color:var(--glod);background:color-mix(in srgb,var(--glod) 8%,transparent)}
+.slakten .ar{font:500 12px var(--mono);color:var(--glod);letter-spacing:.06em}
+.slakten b{display:block;color:#fff;font-family:var(--rubrik);font-weight:500;font-size:23px;letter-spacing:-.02em;margin:10px 0 8px}
+.slakten p{margin:0;font-size:14.5px;color:var(--morkdamp)}
+.slakten .arv{margin-top:12px;font-size:13.5px;color:var(--morktext);border-top:1px solid var(--morklinje);padding-top:10px}
+.slakt .not{margin-top:22px;color:var(--morkdamp);font-size:13px;font-style:italic}
 
 /* FAQ */
 details{border-bottom:1px solid var(--linje);padding:18px 0}
@@ -121,15 +139,19 @@ details p{color:var(--text2);margin:10px 0 0;max-width:46em}
 .slut h2{color:var(--bg)}
 .slut p{color:color-mix(in srgb,var(--bg) 82%,transparent);font-size:18px;max-width:34em}
 .form{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;max-width:560px}
-.form input{flex:1 1 240px;font:inherit;padding:12px 14px;border-radius:6px;border:1px solid transparent;background:var(--bg);color:var(--text)}
+.form input{flex:1 1 240px;min-width:0;font:inherit;padding:12px 14px;border-radius:6px;border:1px solid transparent;background:var(--bg);color:var(--text)}
 .form button{font:600 15.5px var(--brod);padding:12px 20px;border-radius:6px;border:1px solid var(--bg);background:transparent;color:var(--bg);cursor:pointer}
 .tack{margin-top:14px;font-size:15px}
 footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px solid var(--linje)}
-footer .ram{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
-.snart{font:600 10.5px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--ockra);border:1px solid var(--ockra);border-radius:99px;padding:1px 7px;margin-left:8px;white-space:nowrap;vertical-align:2px}
+.snart{font:600 10.5px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--ockra);border:1px solid var(--ockra);border-radius:99px;padding:1px 7px;margin-left:6px;white-space:nowrap;vertical-align:2px}
 .dummy{background:var(--ockra);color:#fff;font:600 12px var(--brod);text-align:center;padding:6px 12px;letter-spacing:.04em}
 @media (prefers-reduced-motion:no-preference){.kort article.aktiv{animation:in .6s ease-out both}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
-.inlogg a{font-size:.9rem;color:var(--text2);text-decoration:none;margin-right:12px;white-space:nowrap}.inlogg a:hover{color:var(--text)}
+.inlogg a{font-size:.9rem;color:var(--text2);text-decoration:none;white-space:nowrap}.inlogg a:hover{color:var(--text)}
+@media (max-width:700px){
+  .meny{order:5;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;gap:18px;white-space:nowrap;padding-bottom:2px}
+  .topp .ram{gap:8px 14px}
+  .inlogg{margin-left:auto}
+}
 </style>
 </head>
 <body>
@@ -139,24 +161,22 @@ footer .ram{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betwe
 <header class="topp"><div class="ram">
   <a class="marke" href="#start"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="var(--accent)" stroke-width="1.6"/></svg>Konrad</a>
   <nav class="meny" aria-label="Huvudmeny">
-    <a href="#konrad">Möt Konrad</a><a href="#far">Det här får du</a><a href="#kopplingar">Kopplingar</a><a href="#sa">Så funkar det</a><a href="#pris">Pris</a><a href="#fragor">Frågor</a>
+    <a href="#sa">Så funkar det</a><a href="#pris">Priser</a><a href="#kopplingar">Kopplingar</a><a href="#konrad">Möt Konrad</a><a href="#fragor">Frågor</a>
   </nav>
   <span class="inlogg"><a href="logga-in/">Logga in</a></span>
   <a class="knapp liten" href="#genomgang">Gratis genomgång</a>
 </div></header>
 
 <main id="start">
-<!-- Hjälten -->
 <div class="ram hero">
   <div>
     <p class="ogon">Bokföring, moms och bokslut för småföretag</p>
-    <h1>Kamreren du alltid önskat att du haft.</h1>
-    <p class="ingress">Konrad sköter bokföringen, håller koll på varje frist och säger till när något berör dig. Du driver företaget. Konrad tar pappren.</p>
+    <h1>Bokföringen är gratis. Konrad håller koll på resten.</h1>
+    <p class="ingress">Konrad bokför, bevakar varje frist och säger till när något berör dig. Du väljer själv vad du vill ha mer av.</p>
     <div class="cta-rad">
       <a class="knapp" href="#genomgang">Gör en gratis genomgång</a>
-      <a class="lank" href="#konrad">Möt Konrad →</a>
+      <a class="knapp ljus" href="#pris">Se priser</a>
     </div>
-    <p class="liten-text" style="margin-top:18px">Bokföringen är gratis. Du betalar bara för det du väljer till.</p>
   </div>
   <div>
     <div class="kort" aria-label="Exempel på hur Konrad visar dagens läge">
@@ -169,140 +189,117 @@ footer .ram{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betwe
   </div>
 </div>
 
-<!-- Citat -->
-<section class="citat"><div class="ram">
-  <div class="portratt" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="4" y="18" width="32" height="14" rx="2" fill="none" stroke="#8DB2EA" stroke-width="1.6"/><rect x="9" y="8" width="22" height="10" fill="none" stroke="#8DB2EA" stroke-width="1.6"/><circle cx="12" cy="25" r="1.6" fill="#8DB2EA"/><circle cx="18" cy="25" r="1.6" fill="#8DB2EA"/><circle cx="24" cy="25" r="1.6" fill="#8DB2EA"/><circle cx="30" cy="25" r="1.6" fill="#8DB2EA"/></svg></div>
-  <div>
-    <blockquote>”Att ta betalt per timme vore som att ta betalt för att man är långsam.”</blockquote>
-    <p>Många byråer tar betalt per timme. Konrad säljer att det blir rätt och att det blir klart. Han bokför inte bara kvittot. Han ser vad det betyder för ditt företag och säger till i tid.</p>
-    <p class="liten-text"><b>Konrad</b>, AI-kamrer</p>
+<section class="band" id="sa"><div class="ram">
+  <p class="ogon">Så enkelt är det</p>
+  <h2>Tre steg till ordning.</h2>
+  <div class="steg">
+    <div><h3>Ladda upp din bokföring</h3><p>Exportera en SIE-fil från ditt program. Konrad läser den och visar direkt vad han hittar. Gratis.</p></div>
+    <div><h3>Koppla banken<span class="snart">vid lansering</span></h3><p>Sedan bokförs allt automatiskt. Kvitton fotar du eller mejlar in.</p></div>
+    <div><h3>Godkänn med BankID<span class="snart">vid lansering</span></h3><p>Moms och deklarationer visas med ”så här räknade vi”. Inget lämnas in utan ditt ja.</p></div>
   </div>
 </div></section>
 
-<!-- Möt Konrad -->
+<section id="pris"><div class="ram">
+  <p class="ogon">Priser</p>
+  <h2>Det här ingår, och det här kostar.</h2>
+  <p class="ingress" style="margin-bottom:0">Börja gratis. Lägg till mer när du behöver det. Säg upp när du vill.</p>
+  <div class="pris">
+    <article>
+      <span class="namn">Gratis</span><span class="belopp">0 kr</span>
+      <p class="for">Bokföringen, utan månadsavgift.</p>
+      <ul><li>Automatisk bokföring</li><li>Kvitton via foto och mejl<span class="snart">vid lansering</span></li><li>Bankkoppling<span class="snart">vid lansering</span></li><li>Fakturor och momsunderlag</li><li>Gratis genomgång av din SIE-fil</li></ul>
+      <a class="knapp ljus" href="#genomgang">Gör en gratis genomgång</a>
+    </article>
+    <article class="fram">
+      <span class="namn">Bevakning</span><span class="belopp">199 kr<small> /mån</small></span>
+      <p class="for">Allt i Gratis, plus att Konrad vakar åt dig.</p>
+      <ul><li>Frister och påminnelser</li><li>Skattekontovakt</li><li>Ringlista och avtalsbevakning</li><li>Pengarna 13 veckor framåt</li><li>Kassaflöde och nyckeltal</li><li>Kreditbudget till banken</li><li>Hjälp med myndighetsbrev</li><li>Påminnelser och inkasso<span class="snart">vid lansering</span></li></ul>
+      <a class="knapp" href="#genomgang">Börja gratis</a>
+    </article>
+    <article>
+      <span class="namn">Pro</span><span class="belopp">399 kr<small> /mån</small></span>
+      <p class="for">Allt i Bevakning, plus mer för dig som vill växa.</p>
+      <ul><li class="plus">Branschjämförelse</li><li class="plus">Kopplingar till affärssystem<span class="snart">vid lansering</span></li><li class="plus">Krypto och K4<span class="snart">vid lansering</span></li><li class="plus">Inloggning för din redovisningskonsult<span class="snart">vid lansering</span></li><li class="plus">Lån via partner<span class="snart">vid lansering</span></li></ul>
+      <a class="knapp ljus" href="#genomgang">Börja gratis</a>
+    </article>
+  </div>
+  <div class="pris" style="margin-top:16px;grid-template-columns:1fr">
+    <article>
+      <span class="namn">Årspaket · fast pris, offert</span>
+      <p class="for">Du får ett fast pris per år, och billigare med Bevakning eller Pro. Ingen timdebitering.</p>
+      <ul style="margin-bottom:0"><li>Bokslut och årsredovisning</li><li>Deklaration, inlämnad med ditt BankID<span class="snart">vid lansering</span></li><li>Granskat av redovisningskonsult<span class="snart">vid lansering</span></li></ul>
+    </article>
+  </div>
+  <p class="spar"><b>Sparar Konrad pengar åt dig på ett avtal?</b> Då tar vi 20 % av första årets besparing. Sparar han inget, betalar du inget.</p>
+  <div class="tabellbox" tabindex="0" role="region" aria-label="Jämförelsetabell, bläddra i sidled vid behov"><table><caption>Vad ingår i vilken nivå?</caption><thead><tr><th scope="col">Funktion</th><th scope="col">Gratis</th><th scope="col">Bevakning</th><th scope="col">Pro</th></tr></thead><tbody><tr class="grupp"><th colspan="4" scope="colgroup">Bokföring</th></tr><tr><th scope="row">Automatisk bokföring</th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kvitton via foto och mejl<span class="snart">vid lansering</span></th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Bankkoppling<span class="snart">vid lansering</span></th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Fakturor och momsunderlag</th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Gratis genomgång av din SIE-fil</th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr class="grupp"><th colspan="4" scope="colgroup">Bevakning</th></tr><tr><th scope="row">Frister och påminnelser</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Skattekontovakt</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Ringlista över kunder</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Avtalsbevakning</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Pengarna 13 veckor framåt</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kassaflöde och nyckeltal</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kreditbudget till banken</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Hjälp med myndighetsbrev</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Påminnelser och inkasso<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr class="grupp"><th colspan="4" scope="colgroup">Pro</th></tr><tr><th scope="row">Branschjämförelse</th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Kopplingar till affärssystem<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Krypto och K4-underlag<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Inloggning för din redovisningskonsult<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Lån via partner<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr></tbody></table></div>
+</div></section>
+
+<section class="band" id="far"><div class="ram">
+  <p class="ogon">Det här gör Konrad</p>
+  <h2>Du behöver inte läsa lagarna själv.</h2>
+  <div class="grid3">
+    <article><span class="plan">Gratis</span><h3>Bokföring på autopilot<span class="snart">vid lansering</span></h3><p>Fota kvittot eller vidarebefordra mejlet. Konrad bokför, matchar mot banken och frågar bara när något är oklart.</p></article>
+    <article><span class="plan">Bevakning</span><h3>Varje frist i tid, och skattekontot under kontroll</h3><p>Moms, arbetsgivardeklaration, deklaration och årsstämma. Du får en påminnelse innan något förfaller. Konrad varnar också innan skattekontot går minus.</p></article>
+    <article><span class="plan">Bevakning</span><h3>Kunder och avtal</h3><p>En kort ringlista varje dag: vem som tystnat och vem som betalar sent. Konrad hittar också avtal som kostar för mycket och säger till före förlängning.</p></article>
+    <article><span class="plan">Bevakning</span><h3>Pengarna framåt och klar för banken</h3><p>Saldot vecka för vecka, tretton veckor framåt. Budget, kassaflöde och nyckeltal som banken frågar efter, räknade två gånger.</p></article>
+    <article><span class="plan">Bevakning</span><h3>Brev, påminnelser och inkasso</h3><p>Fota brevet från en myndighet så får du veta vad det gäller och när du måste svara. Obetalda fakturor kan gå vidare till inkasso<span class="snart">vid lansering</span>, aldrig utan ditt BankID.</p></article>
+    <article><span class="plan">Pro</span><h3>Jämför, koppla och växa</h3><p>Se dig mot liknande företag. Koppla dina affärssystem<span class="snart">vid lansering</span>, få kryptoredovisning och K4-underlag<span class="snart">vid lansering</span> och ansök om lån via partner<span class="snart">vid lansering</span>.</p></article>
+  </div>
+</div></section>
+
+<section id="kopplingar"><div class="ram">
+  <p class="ogon">Kopplingar</p>
+  <h2>Fungerar med det du redan har.</h2>
+  <p class="ingress" style="margin-bottom:0">SIE-fil fungerar redan i dag. Resten kommer vid lansering. Namnen är program som kunder använder, inte partnerskap.</p>
+  <div class="kopp">
+    <div><h3>Bokföringsprogram</h3><div class="chips"><span>SIE-fil, vilket program som helst</span><span>Fortnox<span class="snart">vid lansering</span></span><span>Spiris<span class="snart">vid lansering</span></span><span>Bokio<span class="snart">vid lansering</span></span><span>Björn Lundén via SIE</span></div></div>
+    <div><h3>Bank<span class="snart">vid lansering</span></h3><div class="chips"><span>Bankkoppling med BankID</span></div></div>
+    <div><h3>Webbshop och betalningar<span class="snart">vid lansering</span></h3><div class="chips"><span>Shopify</span><span>WooCommerce</span><span>Stripe</span><span>Klarna</span><span>Zettle</span><span>Swish</span></div></div>
+    <div><h3>Lön och tid<span class="snart">vid lansering</span></h3><div class="chips"><span>Lönesystem</span><span>Tidrapportering</span></div></div>
+    <div><h3>Kassa och lager<span class="snart">vid lansering</span></h3><div class="chips"><span>Kassasystem</span><span>Lagersystem</span></div></div>
+    <div><h3>CRM och fakturering<span class="snart">vid lansering</span></h3><div class="chips"><span>Kundregister</span><span>Faktureringssystem</span></div></div>
+    <div><h3>Krypto<span class="snart">vid lansering</span></h3><div class="chips"><span>Binance</span><span>Coinbase</span><span>Kraken</span><span>Hårdvaruplånböcker via export</span></div><p class="lt">Ger underlag till K4 och kryptoredovisning.</p></div>
+    <div><h3>Myndigheter<span class="snart">vid lansering</span></h3><div class="chips"><span>Skatteverket</span><span>Bolagsverket</span><span>SCB</span></div></div>
+  </div>
+  <p class="liten-text" style="margin-top:20px">Kopplingar till affärssystem och krypto ingår i Pro. Konrad läser, och ändrar aldrig något i dina system.</p>
+</div></section>
+
+<section class="trygg band"><div class="ram">
+  <p class="ogon">AI-fart, mänsklig trygghet</p>
+  <h2>Konrad gör jobbet. Människor har sista ordet.</h2>
+  <ul>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Räknat två gånger</b>Varje siffra till en myndighet räknas på två sätt. Olika svar betyder stopp.</span></li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Riktig människa vid tveksamhet<span class="snart">vid lansering</span></b>Är Konrad osäker går ärendet till en redovisningskonsult. Du ser vad som är osäkert.</span></li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Inget utan ditt BankID<span class="snart">vid lansering</span></b>Inget lämnas till en myndighet innan du har sagt ja.</span></li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Dina uppgifter är dina</b>De stannar i EU, varje kund har egen krypteringsnyckel, och du kan ta med dig hela bokföringen med ett klick.</span></li>
+  </ul>
+</div></section>
+
 <section class="slakt" id="konrad"><div class="ram">
   <p class="ogon" style="color:var(--glod)">Möt Konrad</p>
   <h2>En släkt som alltid räknat.</h2>
   <p class="ingress">Konrad är en AI, men han kommer från en lång rad svenska kontorsmaskiner. Av var och en har han ärvt en regel.</p>
   <div class="slakten">
-    <article>
-      <svg viewBox="0 0 60 34" aria-hidden="true"><rect x="2" y="14" width="56" height="18" rx="3" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><rect x="12" y="2" width="36" height="12" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><path d="M8 22h44M8 27h44" stroke="#8DB2EA" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
-      <span class="ar">FARFAR · FACIT, ÅTVIDABERG</span>
-      <b>Skrivmaskinen</b>
-      <p>Knattrade fram fakturor och brev till skattmasen på kontor runt om i landet. Tryckte så hårt att det syntes på baksidan.</p>
-      <p class="arv">Skriv aldrig det du inte kan stå för.</p>
-    </article>
-    <article>
-      <svg viewBox="0 0 60 34" aria-hidden="true"><rect x="8" y="4" width="44" height="28" rx="4" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><circle cx="30" cy="18" r="8" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><path d="M30 10v-6M52 18h6" stroke="#8DB2EA" stroke-width="1.5"/></svg>
-      <span class="ar">FARMOR · RÄKNESNURRAN</span>
-      <b>Räknesnurran</b>
-      <p>Man vevade och hon räknade. Hon räknade aldrig fel.</p>
-      <p class="arv">Räkna allt två gånger, på två olika sätt.</p>
-    </article>
-    <article>
-      <svg viewBox="0 0 60 34" aria-hidden="true"><rect x="10" y="2" width="40" height="22" rx="2" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><rect x="4" y="26" width="52" height="6" rx="1.5" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><path d="M16 9h14M16 14h22M16 19h8" stroke="#8DB2EA" stroke-width="1.4"/></svg>
-      <span class="ar">PAPPA · ABC 80, 1978</span>
-      <b>Datorn</b>
-      <p>Den första i släkten som kunde minnas saker – nästan 16 kilobyte, och han var stolt över det.</p>
-      <p class="arv">Varje siffra ska gå att följa ner till kvittot.</p>
-    </article>
-    <article class="nu">
-      <svg viewBox="0 0 60 34" aria-hidden="true"><path d="M16 26a10 10 0 0 1 2-19.8A13 13 0 0 1 43 9a9 9 0 0 1 1 17z" fill="none" stroke="#8DB2EA" stroke-width="1.5"/><path d="M30 13v8M26 17h8" stroke="#8DB2EA" stroke-width="1.5"/></svg>
-      <span class="ar">KONRAD · I DAG</span>
-      <b>Kamreren</b>
-      <p>Bor i molnet, i datacenter i EU. Sover aldrig och tar inte betalt per timme.</p>
-      <p class="arv">Gissa aldrig. Fråga när du är osäker.</p>
-    </article>
-  </div>
-  <p class="ingress" style="margin-top:56px;margin-bottom:0">Konrad läser varje natt<span class="snart">vid lansering</span>. Han litar inte på sitt eget minne, utan hämtar belopp och datum direkt från källan och sparar var han läste dem.</p>
-  <div class="lasning" aria-label="Det Konrad läser">
-    <span>Riksdagen</span><span>Skatteverket</span><span>Bokföringsnämnden</span><span>Bolagsverket</span><span>SCB</span><span>Banken</span><span>Skattekontot</span><span>Din bokföring</span>
+    <article><span class="ar">FARFAR · FACIT</span><b>Skrivmaskinen</b><p>Knattrade fram fakturor och brev.</p><p class="arv">Skriv aldrig det du inte kan stå för.</p></article>
+    <article><span class="ar">FARMOR · RÄKNESNURRAN</span><b>Räknesnurran</b><p>Man vevade och hon räknade.</p><p class="arv">Räkna allt två gånger, på två sätt.</p></article>
+    <article><span class="ar">PAPPA · ABC 80</span><b>Datorn</b><p>Den första som kunde minnas saker.</p><p class="arv">Varje siffra ska gå att följa till kvittot.</p></article>
+    <article class="nu"><span class="ar">KONRAD · I DAG</span><b>Kamreren</b><p>Bor i molnet, i EU. Tar inte betalt per timme.</p><p class="arv">Gissa aldrig. Fråga när du är osäker.</p></article>
   </div>
   <p class="not">Konrad är en AI. Han är påhittad, men det han räknar ut är på riktigt.</p>
 </div></section>
 
-<!-- Det här får du -->
-<section id="far"><div class="ram">
-  <p class="ogon">Det här får du</p>
-  <h2>Du behöver inte läsa lagarna själv.<br>Konrad säger till när något berör dig.</h2>
-  <div class="grid3">
-    <article><h3>Bokföring på autopilot<span class="snart">vid lansering</span></h3><p>Fota kvittot eller vidarebefordra mejlet. Konrad bokför, matchar mot banken och frågar bara när något är oklart.</p><p class="ex">Bokföringen ingår utan kostnad.</p></article>
-    <article><h3>Varje frist i tid</h3><p>Moms, arbetsgivardeklaration, deklaration, årsredovisning och årsstämma. Du får en påminnelse innan något förfaller, inte dagen efter.</p><p class="ex">Datumen hämtas från Skatteverket, med källan sparad.</p></article>
-    <article><h3>Skattekontot under kontroll</h3><p>Konrad ser vad som dras och när, och varnar i god tid innan saldot går minus.</p><p class="ex">”Sätt in 3 142 kr före 12 oktober.”</p></article>
-    <article><h3>Kunderna du höll på att tappa</h3><p>Ur din egen försäljning: vem som har tystnat, vem som börjat betala sent och vem som växer. Varje dag en kort ringlista.</p><p class="ex">”Ring Bygg &amp; Måleri. Har inte köpt sedan juli.”</p></article>
-    <article><h3>Avtal som kostar för mycket</h3><p>Konrad hittar dina återkommande kostnader, jämför med marknaden och säger till innan avtalet förlängs av sig självt.</p><p class="ex">”Säg upp senast 1 december.”</p></article>
-    <article><h3>Pengarna framåt</h3><p>Saldot vecka för vecka, tretton veckor framåt. Konrad säger ärligt vad han inte vet än.</p><p class="ex">Ingen kristallkula. Bara det som går att belägga.</p></article>
-    <article><h3>Klar för banken</h3><p>Ska du låna eller leasa? Skriv in vad du tror om nästa år i några enkla rutor. Konrad gör budgeten, kassaflödet månad för månad och visar om pengarna räcker till lånet.</p><p class="ex">Ladda ner, eller ge banken en egen länk som du kan stänga när du vill.</p></article>
-    <article><h3>Kassaflöde och nyckeltal</h3><p>Var pengarna kom ifrån och vart de tog vägen, plus de tal banken frågar efter: räntetäckning, kassalikviditet och skuldsättning.</p><p class="ex">Räknat två gånger. Går det inte ihop stoppas det.</p></article>
-    <article><h3>Inkasso och påminnelser<span class="snart">vid lansering</span></h3><p>Konrad påminner efter en vecka och föreslår inkasso efter 30 dagar. Ett klick och ärendet går till ett auktoriserat inkassobolag. Inget skickas utan ditt BankID.</p><p class="ex">Dröjsmålsränta räknad enligt räntelagen.</p></article>
-    <article><h3>Lån och finansiering<span class="snart">vid lansering</span></h3><p>Ansök om företagslån direkt i Konrad, med budgeten redan ifylld. Ansökan går till låneföretag med tillstånd från Finansinspektionen.</p><p class="ex">Konrad lånar inte ut själv.</p></article>
-    <article><h3>Brev från myndigheter</h3><p>Fota brevet från Skatteverket, Bolagsverket eller Kronofogden. Konrad säger vad det är, vad det gäller och när du måste svara.</p><p class="ex">Kronofogden går alltid direkt till en människa.</p></article>
-    <article><h3>Du mot branschen</h3><p>Dina kostnader och din marginal jämförda med liknande företag, ur SCB:s statistik.</p><p class="ex">Visas bara när skillnaden är tydlig.</p></article>
-  </div>
-</div></section>
-
-<!-- Kopplingar, konsulter, app -->
-<section id="kopplingar" style="padding-top:0"><div class="ram">
-  <p class="ogon">Fungerar med det du redan har</p>
-  <h2>Kopplingar, konsulter och app</h2>
-  <div class="grid3">
-    <article><h3>Ditt bokföringsprogram<span class="snart">vid lansering</span></h3><p>Behåll Fortnox, Spiris eller Bokio. Du godkänner med din vanliga inloggning och Konrad läser, men ändrar aldrig något. Björn Lundén och alla andra program fungerar via en SIE-fil.</p></article>
-    <article><h3>Webbshop och betalningar<span class="snart">vid lansering</span></h3><p>Shopify, WooCommerce, Stripe, Klarna, Zettle och Swish stäms av mot banken automatiskt, så att försäljningen bokförs rätt.</p></article>
-    <article><h3>Bank och myndigheter<span class="snart">vid lansering</span></h3><p>Bankkoppling med BankID, skattekontot hos Skatteverket och uppgifter från Bolagsverket och SCB.</p></article>
-    <article><h3>Inloggning för din redovisningskonsult<span class="snart">vid lansering</span></h3><p>Har du en egen konsult får hen en egen inloggning med BankID. Hen ser bara dina bolag, och allt hen gör loggas.</p></article>
-    <article><h3>Konrad i mobilen<span class="snart">vid lansering</span></h3><p>Lägg Konrad på hemskärmen som en app. Fota kvitton, godkänn med BankID och få en påminnelse när något behöver göras.</p></article>
-  </div>
-</div></section>
-
-<!-- Så funkar det -->
-<section id="sa" style="padding-top:0"><div class="ram">
-  <p class="ogon">Så funkar det</p>
-  <h2>Tre steg till ordning.</h2>
-  <div class="steg">
-    <div><h3>Ladda upp din bokföring</h3><p>Exportera en SIE-fil från ditt nuvarande program. Konrad läser den och visar direkt vad han hittar. Gratis.</p></div>
-    <div><h3>Koppla banken<span class="snart">vid lansering</span></h3><p>Från och med nu bokförs allt automatiskt. Kvitton fotar du eller mejlar in.</p></div>
-    <div><h3>Godkänn med BankID<span class="snart">vid lansering</span></h3><p>Moms och deklarationer visas med ”så här räknade vi”. Inget lämnas in utan ditt ja.</p></div>
-  </div>
-</div></section>
-
-<!-- Trygghet -->
-<section class="trygg"><div class="ram">
-  <p class="ogon">AI-fart, mänsklig trygghet</p>
-  <h2>Konrad gör jobbet. Människor har sista ordet.</h2>
-  <ul>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Riktiga redovisningskonsulter<span class="snart">vid lansering</span></b>När Konrad är osäker går ärendet till en människa. Allt som är osäkert syns för dig.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Räknat två gånger</b>Varje siffra som går till Skatteverket räknas på två oberoende sätt. Olika svar betyder stopp.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Ny regel, ny kontroll</b>Ändras en lag eller ett datum stannar Konrad i den delen tills en människa har kontrollerat att han har rätt.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Dina uppgifter stannar i EU</b>Det har vi valt, lagen kräver det inte. Varje kund har sin egen krypteringsnyckel, och databasen spärrar varje kund från andras uppgifter.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Inget utan ditt BankID<span class="snart">vid lansering</span></b>Inget lämnas till någon myndighet innan du har sagt ja.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Ta med dig allt och gå</b>Hela bokföringen och arkivet med ett klick. Man ska stanna för att man vill, inte för att man måste.</span></li>
-  </ul>
-</div></section>
-
-<!-- Pris -->
-<section id="pris"><div class="ram">
-  <p class="ogon">Pris</p>
-  <h2>Bokföringen är gratis. Resten väljer du.</h2>
-  <div class="pris">
-    <article><span class="liten-text">Bokföring</span><span class="belopp">0 kr</span><p class="liten-text">Ingen månadsavgift.</p><ul><li>Automatisk bokföring och bankkoppling<span class="snart">vid lansering</span></li><li>Kvitton via foto och mejl<span class="snart">vid lansering</span></li><li>Fakturor och momsunderlag</li></ul></article>
-    <article class="fram"><span class="liten-text">Bevakning</span><span class="belopp">199 kr/mån</span><p class="liten-text">Säg upp när du vill. Pro med branschjämförelse och kopplingar: 399 kr/mån.</p><ul><li>Frister och påminnelser</li><li>Skattekontovakt</li><li>Ringlistan och avtalsbevakning</li><li>Pengarna 13 veckor framåt</li><li>Påminnelser och inkasso<span class="snart">vid lansering</span></li><li>Kreditbudget till banken</li></ul></article>
-    <article><span class="liten-text">Årspaket</span><span class="belopp">Fast pris</span><p class="liten-text">Per år, billigare med Bevakning eller Pro. Sparar Konrad pengar åt dig på ett avtal tar vi 20 % av första årets besparing, inget annars.</p><ul><li>Bokslut och årsredovisning</li><li>Deklaration, inlämnad med ditt BankID<span class="snart">vid lansering</span></li><li>Granskat av redovisningskonsult<span class="snart">vid lansering</span></li></ul></article>
-  </div>
-</div></section>
-
-<!-- Frågor -->
-<section id="fragor" style="padding-top:0"><div class="ram faq">
+<section id="fragor"><div class="ram faq">
   <p class="ogon">Frågor</p>
   <h2>Det folk brukar undra.</h2>
-  <details><summary>Jag har redan en redovisningsbyrå. Varför byta?</summary><p>Många byråer tar betalt per timme för att bokföra. Hos Konrad ingår bokföringen och lägger tiden på det som gör skillnad: frister, skattekontot, kunderna och avtalen. Vill du byta hjälper vi dig steg för steg, med uppsägning, export och fullmakter.</p></details>
-  <details><summary>Jag har Fortnox eller Visma. Måste jag lämna dem?</summary><p>Nej. Gratisgenomgången fungerar med en SIE-fil från vilket bokföringsprogram som helst. Bevakningen kan också läsa från ditt nuvarande program.</p></details>
-  <details><summary>Vad händer om Konrad gör fel?</summary><p>Det som är osäkert ska gå till en riktig redovisningskonsult, och allt som går till en myndighet är räknat två gånger och godkänt av dig med BankID. Varje beslut loggas, så det går alltid att se vem som gjorde vad och varför.</p></details>
-  <details><summary>Är Konrad en riktig person?</summary><p>Nej. Konrad är en AI, och han säger det alltid. Redovisningskonsulterna som ska granska hans arbete är riktiga människor.</p></details>
-  <details><summary>Var finns mina uppgifter?</summary><p>I datacenter inom EU. Varje kund har sin egen krypteringsnyckel, och ingen AI-fråga innehåller någonsin två kunders data.</p></details>
-  <details><summary>Ger Konrad skatteråd?</summary><p>Nej. Konrad visar fakta och frister, och allt han föreslår är förslag som du eller en konsult godkänner. Behöver du personlig rådgivning kopplar vi dig till en auktoriserad konsult.</p></details>
+  <details><summary>Vad är gratis och vad kostar?</summary><p>Bokföringen är gratis: bokföring, kvitton, bankkoppling, fakturor och momsunderlag, samt en gratis genomgång av din SIE-fil. Bevakning kostar 199 kr i månaden och Pro 399 kr. Årspaket med bokslut och deklaration får du till fast pris. Se tabellen under Priser.</p></details>
+  <details><summary>Hanterar Konrad krypto och K4?</summary><p>Det kommer vid lansering. Du exporterar dina affärer från börsen eller plånboken, och Konrad gör underlag till K4 och bokför kryptot. Det ingår i Pro. Du godkänner innan något lämnas in.</p></details>
+  <details><summary>Jag har redan en redovisningsbyrå. Varför byta?</summary><p>Många byråer tar betalt per timme för att bokföra. Hos Konrad ingår bokföringen, och tiden går till det som gör skillnad: frister, skattekontot, kunderna och avtalen. Vill du byta hjälper vi dig steg för steg.</p></details>
+  <details><summary>Jag har Fortnox eller Visma. Måste jag lämna dem?</summary><p>Nej. Gratisgenomgången fungerar med en SIE-fil från vilket program som helst. Bevakningen kan också läsa från ditt nuvarande program<span class="snart">vid lansering</span>.</p></details>
+  <details><summary>Vad händer om Konrad gör fel?</summary><p>Det som är osäkert ska gå till en redovisningskonsult, och allt till en myndighet är räknat två gånger och godkänt av dig med BankID. Varje beslut loggas.</p></details>
+  <details><summary>Är Konrad en riktig person?</summary><p>Nej. Konrad är en AI, och han säger det alltid. Redovisningskonsulterna som granskar hans arbete är riktiga människor.</p></details>
+  <details><summary>Ger Konrad skatteråd?</summary><p>Nej. Konrad visar fakta och frister. Allt han föreslår godkänner du eller en konsult. Behöver du personlig rådgivning kopplar vi dig till en auktoriserad konsult.</p></details>
 </div></section>
 
-<!-- Slut-CTA -->
 <section class="slut" id="genomgang"><div class="ram">
   <h2>Se vad Konrad hittar i din bokföring.</h2>
   <p>Ladda upp en SIE-fil och få svaret direkt: kunder att ringa, avtal som kostar för mycket och fristerna framåt. Gratis, och filen lämnar aldrig din dator.</p>
@@ -317,7 +314,6 @@ footer .ram{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betwe
 
 <footer><div class="ram">
   <span>Konrad är en AI. Arbetsnamn, utkast till säljsida.</span>
-  <span>kansliet@nordwikpartners.se</span>
 </div></footer>
 
 <script>
