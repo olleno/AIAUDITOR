@@ -68,3 +68,17 @@ a:focus-visible{outline:3px solid var(--gron);outline-offset:2px}
 .formular input,.formular select,.formular textarea{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--linje);border-radius:3px;background:var(--bg);color:var(--text)}
 .formular input:focus,.formular select:focus,.formular textarea:focus{outline:3px solid var(--gron);outline-offset:1px}
 .formular button{justify-self:start;cursor:pointer;font:inherit;font-weight:700}
+.spara-form{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:10px 0}
+.spara-form label{display:grid;gap:4px;font-size:14px;font-weight:600;flex:1 1 240px}
+.spara-form input{font:inherit;font-weight:400;padding:10px 12px;border:1.5px solid var(--linje);border-radius:3px;background:var(--bg);color:var(--text)}
+.jmf{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0}
+.jmf>div{background:var(--bg);padding:10px 12px}.jmf ul{font-size:13px;padding-left:16px;margin:6px 0 0}
+.jmf-tal{font-family:var(--f-rubrik);font-size:30px;font-weight:600;margin:0;line-height:1}.jmf-tal.gron{color:var(--gron)}.jmf-tal.rod{color:var(--penna)}
+.jmf-rubrik{font-size:14px;color:var(--sek);margin:6px 0}.jmf-nt{font-size:14px}
+.bolag{background:var(--papper);box-shadow:var(--skugga);padding:16px 20px;margin:22px 0}.bolag h2{margin:0 0 8px;font-size:22px}
+.post{border-top:1px solid var(--linje);padding:10px 0}.post:first-of-type{border-top:0}
+.rod{color:var(--penna)}.gul{color:#9A6B00}.fel{color:var(--penna)}
+.kryss{display:flex;gap:8px;align-items:center;margin:8px 0}
+.lank-knapp{background:none;border:0;color:var(--dim);text-decoration:underline;cursor:pointer;font:inherit;font-size:14px}
+.knapp{cursor:pointer;font:inherit;font-weight:700;background:transparent;color:var(--mork)}
+@media (max-width:600px){.jmf{grid-template-columns:1fr}}
