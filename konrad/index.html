@@ -4,330 +4,389 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Konrad – kamreren</title>
+<title>Konrad – bokföring för aktiebolag</title>
+<meta name="description" content="Bokföringen är gratis. Bokslut till fast pris. Välj själv hur mycket hjälp du vill ha, från bevakning av frister till möten med en auktoriserad redovisningskonsult.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
-/* Layout: lugn, ljus säljsida i Polaris anda – serif-rubriker, statuskort vid hjälten, ett mörkt band för Konrads släkt. Egen accent: bläckblått + ockra (färgbandet i en skrivmaskin). */
+/* Layout: vanlig, lugn tjänstesajt (prototypisk enligt Tuch 2012). Bläckblått i Nordea-familjen men inte deras #0000A0, ljust papper, gul överstrykning som enda accent. Inga toningar. */
 :root{
-  --bg:#F7F8FA; --band:#EEF1F5; --yta:#FFFFFF; --text:#28323F; --text2:#4C5866; --dampad:#6E7885; --linje:#DCE1E8;
-  --accent:#24497A; --accentyta:#E8EEF7; --ockra:#B4691A; --ok:#2F6B45;
-  --mork:#1B2433; --morktext:#DCE3EE; --morkdamp:#94A1B3; --morklinje:#334055; --glod:#8DB2EA;
-  --rubrik:"Newsreader",Georgia,"Times New Roman",serif; --brod:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --bg:#F5F6FA; --band:#ECEFF7; --yta:#FFFFFF; --text:#0F1545; --text2:#3D4563; --dampad:#555D78; --linje:#E0E4EE;
+  --bla:#1A2A9C; --blayta:#E3EAFB; --gul:#F4D35E; --ok:#1F7A4A; --okyta:#E3F1E8; --varn:#8A4F08; --varnyta:#FBEFD9;
+  --brod:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11161E;--band:#161C26;--yta:#1B2230;--text:#E3E8EF;--text2:#B6C0CD;--dampad:#8C97A6;--linje:#2C3546;--accent:#8DB2EA;--accentyta:#1F2B40;--ockra:#E3A15A;--ok:#7FC495;--mork:#0B0F15;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#11161E;--band:#161C26;--yta:#1B2230;--text:#E3E8EF;--text2:#B6C0CD;--dampad:#8C97A6;--linje:#2C3546;--accent:#8DB2EA;--accentyta:#1F2B40;--ockra:#E3A15A;--ok:#7FC495;--mork:#0B0F15;color-scheme:dark}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1122;--band:#121730;--yta:#151A2E;--text:#ECEEF6;--text2:#C3C8DA;--dampad:#A3A9C0;--linje:#262C44;
+  --bla:#9AAEF7;--blayta:#1E2750;--gul:#E8C547;--ok:#6CCB93;--okyta:#16291D;--varn:#E0A54E;--varnyta:#30240F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1122;--band:#121730;--yta:#151A2E;--text:#ECEEF6;--text2:#C3C8DA;--dampad:#A3A9C0;--linje:#262C44;
+  --bla:#9AAEF7;--blayta:#1E2750;--gul:#E8C547;--ok:#6CCB93;--okyta:#16291D;--varn:#E0A54E;--varnyta:#30240F;color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--brod);font-size:16px;line-height:1.6;margin:0}
-.ram{max-width:1120px;margin:0 auto;padding-inline:20px}
-a{color:var(--accent)}
-.topp{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--linje)}
-.topp .ram{display:flex;align-items:center;gap:12px 28px;flex-wrap:wrap;padding-block:12px}
-.marke{font:500 15px var(--brod);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin:0;text-decoration:none;color:var(--text)}
-.marke svg{width:14px;height:14px}
-.meny{display:flex;gap:22px;flex-wrap:wrap;flex:1;font-size:15px}
-.meny a{color:var(--text2);text-decoration:none}
-.meny a:hover{color:var(--text)}
-.knapp{font:600 15.5px var(--brod);padding:12px 20px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer;text-decoration:none;display:inline-block}
-.knapp.liten{padding:9px 16px;font-size:15px}
-.lank{font:500 16px var(--brod);color:var(--accent);text-decoration:none}
-a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2{font-family:var(--rubrik);font-weight:500;letter-spacing:-.04em;text-wrap:balance;margin:0}
-h1{font-size:clamp(40px,6.4vw,66px);line-height:1.02}
-h2{font-size:clamp(30px,4.2vw,44px);line-height:1.08}
-h3{font:600 17px var(--brod);margin:0 0 6px}
-.ogon{font:600 12px var(--brod);text-transform:uppercase;letter-spacing:.12em;color:var(--ockra);margin:0 0 14px}
-.ingress{font-size:19px;color:var(--text2);max-width:34em;margin:20px 0 28px}
-.liten-text{font-size:13.5px;color:var(--dampad)}
-section{padding-block:80px}
-@media (max-width:700px){section{padding-block:56px}}
-
-/* Hjälten */
-.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:64px 72px}
-@media (max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding-block:40px 56px}}
-.cta-rad{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
-.knapp.ljus{background:transparent;color:var(--accent)}
-.kort{display:grid;gap:12px}
-.kort article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-.kort article.aktiv{background:var(--accentyta);border:1.5px solid var(--accent);box-shadow:0 10px 24px -14px color-mix(in srgb,var(--accent) 70%,transparent)}
-.kort b{display:block;font-weight:600}
-.kort p{margin:2px 0 0;color:var(--text2);font-size:13.5px}
-.kort .st{font-size:13px;color:var(--ockra);white-space:nowrap}
-.kort .st.ok{color:var(--ok)}
-.pil{font-size:13px;color:var(--accent);padding-left:20px;margin:-2px 0}
-.kortnot{font-size:12px;color:var(--dampad);text-align:right;margin:4px 0 0}
-
-/* Så enkelt */
-.steg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:36px;counter-reset:s}
-.steg div{border-top:2px solid var(--accent);padding-top:16px;counter-increment:s}
-.steg div::before{content:"Steg " counter(s);font:500 12px var(--mono);color:var(--accent);letter-spacing:.06em;display:block;margin-bottom:8px}
-.steg p{margin:0;color:var(--text2)}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--brod)}
+a{color:var(--bla)}
+.ram{max-width:1100px;margin:0 auto;padding-inline:20px}
+.utkast{background:var(--varnyta);color:var(--varn);font-size:14px;padding-block:8px;text-align:center}
+.utkast .ram{padding-block:0}
+header{background:var(--yta);border-bottom:1px solid var(--linje);position:sticky;top:0;z-index:5}
+header .ram{display:flex;align-items:center;gap:20px;min-height:64px}
+.logga{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;color:var(--text);text-decoration:none}
+.logga i{width:30px;height:30px;border-radius:8px;background:var(--bla);color:#fff;display:grid;place-items:center;font-style:normal;font-size:16px}
+nav{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+nav a{color:var(--text2);text-decoration:none;font-weight:500;font-size:15px}
+nav a:hover{color:var(--bla)}
+.knapp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--bla);color:#fff;border:0;border-radius:10px;padding:13px 20px;font:600 16px var(--brod);text-decoration:none;cursor:pointer;min-height:48px}
+.knapp.ljus{background:var(--blayta);color:var(--bla)}
+.knapp:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gul);outline-offset:2px}
+@media (max-width:820px){nav{display:none}}
+section{padding-block:64px}
+[id]{scroll-margin-top:84px}
 .band{background:var(--band)}
-
+h1{font-size:clamp(34px,5vw,52px);line-height:1.1;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+h2{font-size:clamp(26px,3.4vw,34px);line-height:1.2;letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance}
+h3{font-size:19px;margin:0 0 6px}
+.ingress{font-size:19px;color:var(--text2);max-width:58ch;margin:0 0 26px}
+.liten{font-size:14px;color:var(--dampad)}
+.snart{display:inline-block;font:600 12px var(--mono);color:var(--varn);background:var(--varnyta);border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+mark{background:linear-gradient(transparent 55%,var(--gul) 55%);color:inherit;padding:0 2px}
+/* Hjälte */
+.hjalte{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:56px}
+@media (max-width:900px){.hjalte{grid-template-columns:minmax(0,1fr)}}
+.knappar{display:flex;gap:12px;flex-wrap:wrap}
+.belagg{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;font-size:15px;color:var(--text2)}
+.belagg span::before{content:"✓ ";color:var(--ok);font-weight:700}
+.foto{position:relative;border-radius:16px;overflow:hidden;background:var(--band);aspect-ratio:4/5;max-width:100%}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.byts{position:absolute;left:10px;top:10px;background:rgba(15,21,69,.86);color:#fff;font:600 12px var(--mono);padding:4px 8px;border-radius:6px}
+.kort-pa-foto{position:absolute;left:16px;right:16px;bottom:16px;background:var(--yta);border-radius:12px;padding:14px 16px;box-shadow:0 8px 24px rgba(15,21,69,.18)}
+.kort-pa-foto b{display:block}
+/* Människor */
+.folk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px}
+@media (max-width:860px){.folk{grid-template-columns:minmax(0,1fr)}}
+.person{background:var(--yta);border:1px solid var(--linje);border-radius:14px;overflow:hidden}
+.person .foto{aspect-ratio:1/1;border-radius:0}
+.person div.text{padding:18px}
+.person .roll{font-weight:600;color:var(--bla);font-size:14px}
+/* Steg */
+.steg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px;counter-reset:s}
+@media (max-width:860px){.steg{grid-template-columns:minmax(0,1fr)}}
+.steg>div{background:var(--yta);border:1px solid var(--linje);border-radius:14px;padding:22px}
+.steg>div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--blayta);color:var(--bla);font-weight:700;margin-bottom:10px}
 /* Priser */
-.pris{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:36px;align-items:stretch}
-.pris article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.pris article.fram{border:1.5px solid var(--accent);box-shadow:0 10px 24px -16px color-mix(in srgb,var(--accent) 70%,transparent)}
-.pris .namn{font:600 13px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra)}
-.pris .belopp{font-family:var(--rubrik);font-size:40px;letter-spacing:-.03em;line-height:1}
-.pris .belopp small{font:400 15px var(--brod);color:var(--dampad);letter-spacing:0}
-.pris .for{margin:0;color:var(--text2);font-size:14.5px}
-.pris ul{margin:8px 0 12px;padding:0;list-style:none;color:var(--text2);font-size:15px;display:grid;gap:6px}
-.pris li{padding-left:22px;position:relative}
-.pris li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:600}
-.pris li.plus{color:var(--text);font-weight:600}
-.pris li.plus::before{content:"+";color:var(--accent)}
-.pris .knapp{margin-top:auto;text-align:center}
-.spar{margin-top:16px;background:var(--accentyta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;color:var(--text)}
-.tabellbox{margin-top:36px;overflow-x:auto;border:1px solid var(--linje);border-radius:10px;background:var(--yta)}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
-caption{text-align:left;padding:16px 16px 8px;font:600 17px var(--brod)}
-th,td{padding:10px 14px;text-align:center;border-top:1px solid var(--linje)}
-thead th{font-weight:600;background:var(--band)}
-th:first-child,td:first-child{text-align:left}
-tbody th{font-weight:400;color:var(--text)}
-tr.grupp th{background:var(--band);font:600 12px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra);text-align:left}
-td.ja{color:var(--ok);font-weight:600}
-td.nej{color:var(--dampad)}
-
-/* Det här gör Konrad */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
-.grid3 article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:22px;min-width:0}
-.grid3 p{margin:0;color:var(--text2);font-size:15px}
-.plan{display:inline-block;font:600 11px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accentyta);border-radius:99px;padding:3px 10px;margin-bottom:12px}
-
-/* Kopplingar */
-.kopp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px;margin-top:36px}
-.kopp>div{border-top:1px solid var(--linje);padding-top:14px;min-width:0}
-.kopp h3{font-size:15px;margin-bottom:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{border:1px solid var(--linje);background:var(--yta);border-radius:99px;padding:5px 12px;font-size:14px;color:var(--text2)}
-.chips span .snart{margin-left:6px}
-.kopp .lt{font-size:13px;color:var(--dampad);margin:10px 0 0}
-
+.trappa{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:28px}
+@media (max-width:1000px){.trappa{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.trappa{grid-template-columns:minmax(0,1fr)}}
+.niva{background:var(--yta);border:1px solid var(--linje);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.niva .pris{font:600 28px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.niva .pris small{font:500 14px var(--brod);color:var(--dampad)}
+.niva ul{margin:4px 0 0;padding-left:18px;font-size:15px;color:var(--text2)}
+.niva .vem{font-size:14px;color:var(--dampad);margin:0}
+.niva.manniska{border-color:var(--bla)}
+.niva .tagg{font:600 12px var(--mono);color:var(--bla)}
+.arspaket{margin-top:20px;background:var(--yta);border:1px solid var(--linje);border-radius:14px;padding:22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}
+@media (max-width:640px){.arspaket{grid-template-columns:minmax(0,1fr)}}
+.tillval{margin-top:20px;background:var(--yta);border:1px solid var(--linje);border-radius:14px;padding:22px}
+.tillval table{width:100%;border-collapse:collapse;font-size:15px}
+.tillval td{padding:9px 0;border-bottom:1px solid var(--linje)}
+.tillval td:last-child{text-align:right;font-family:var(--mono);white-space:nowrap;padding-left:12px}
+.tillval tr:last-child td{border-bottom:0}
+/* Kalkylator */
+.kalk{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start;margin-top:28px}
+@media (max-width:900px){.kalk{grid-template-columns:minmax(0,1fr)}}
+.falt{display:grid;gap:12px}
+.rad{background:var(--yta);border:1px solid var(--linje);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+.rad label{font-weight:600}
+.rad .liten{display:block;font-weight:400}
+.rad input[type=number],.rad select{font:500 16px var(--mono);padding:10px;border:1px solid var(--linje);border-radius:8px;background:var(--bg);color:var(--text);width:96px}
+.rad select{width:auto;font-family:var(--brod)}
+.kryss{display:flex;gap:12px;align-items:flex-start;background:var(--yta);border:1px solid var(--linje);border-radius:12px;padding:12px 16px;cursor:pointer}
+.kryss input{width:20px;height:20px;margin-top:3px;accent-color:var(--bla)}
+.kryss .p{margin-left:auto;font-family:var(--mono);white-space:nowrap;font-size:14px}
+.kryss.av{opacity:.55}
+.kvitto{position:sticky;top:84px;background:var(--yta);border:1px solid var(--linje);border-radius:14px;padding:20px;font-variant-numeric:tabular-nums}
+.kvitto .r{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:4px 0}
+.kvitto .r span:last-child{font-family:var(--mono)}
+.kvitto .gratis{color:var(--ok);font-weight:600}
+.kvitto .sum{border-top:2px solid var(--text);margin-top:10px;padding-top:10px}
+.kvitto .stor{font:600 30px var(--mono);margin:4px 0}
+.kvitto .rub{font-size:12px;color:var(--dampad);text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
 /* Trygghet */
-.trygg ul{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 40px}
-.trygg li{padding:14px 0;border-bottom:1px solid var(--linje);display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px}
-.trygg li svg{width:18px;height:18px;margin-top:4px}
-.trygg li span{color:var(--text2);font-size:15px}
-.trygg li b{color:var(--text);display:block}
-
-/* Konrads släkt – mörkt band */
-.slakt{background:var(--mork);color:var(--morktext)}
-.slakt h2{color:#fff}
-.slakt .ingress{color:var(--morkdamp)}
-.slakten{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
-.slakten article{border:1px solid var(--morklinje);border-radius:10px;padding:20px;min-width:0}
-.slakten article.nu{border-color:var(--glod);background:color-mix(in srgb,var(--glod) 8%,transparent)}
-.slakten .ar{font:500 12px var(--mono);color:var(--glod);letter-spacing:.06em}
-.slakten b{display:block;color:#fff;font-family:var(--rubrik);font-weight:500;font-size:23px;letter-spacing:-.02em;margin:10px 0 8px}
-.slakten p{margin:0;font-size:14.5px;color:var(--morkdamp)}
-.slakten .arv{margin-top:12px;font-size:13.5px;color:var(--morktext);border-top:1px solid var(--morklinje);padding-top:10px}
-.slakt .not{margin-top:22px;color:var(--morkdamp);font-size:13px;font-style:italic}
-
-/* FAQ */
-details{border-bottom:1px solid var(--linje);padding:18px 0}
-summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::after{content:"+";color:var(--accent);font-weight:400;font-size:22px;line-height:1}
-details[open] summary::after{content:"–"}
-details p{color:var(--text2);margin:10px 0 0;max-width:46em}
-.faq{max-width:820px}
-
-/* Slut-CTA */
-.slut{background:var(--accent);color:var(--bg);text-align:left}
-.slut h2{color:var(--bg)}
-.slut p{color:color-mix(in srgb,var(--bg) 82%,transparent);font-size:18px;max-width:34em}
-.form{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;max-width:560px}
-.form input{flex:1 1 240px;min-width:0;font:inherit;padding:12px 14px;border-radius:6px;border:1px solid transparent;background:var(--bg);color:var(--text)}
-.form button{font:600 15.5px var(--brod);padding:12px 20px;border-radius:6px;border:1px solid var(--bg);background:transparent;color:var(--bg);cursor:pointer}
-.tack{margin-top:14px;font-size:15px}
-footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px solid var(--linje)}
-.snart{font:600 10.5px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--ockra);border:1px solid var(--ockra);border-radius:99px;padding:1px 7px;margin-left:6px;white-space:nowrap;vertical-align:2px}
-.dummy{background:var(--ockra);color:#fff;font:600 12px var(--brod);text-align:center;padding:6px 12px;letter-spacing:.04em}
-@media (prefers-reduced-motion:no-preference){.kort article.aktiv{animation:in .6s ease-out both}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
-.inlogg a{font-size:.9rem;color:var(--text2);text-decoration:none;white-space:nowrap}.inlogg a:hover{color:var(--text)}
-@media (max-width:700px){
-  .meny{order:5;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;gap:18px;white-space:nowrap;padding-bottom:2px}
-  .topp .ram{gap:8px 14px}
-  .inlogg{margin-left:auto}
-}
+.fyra{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:28px}
+@media (max-width:900px){.fyra{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.fyra{grid-template-columns:minmax(0,1fr)}}
+.fyra>div{border-top:3px solid var(--bla);padding-top:14px}
+.regler{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:24px}
+@media (max-width:900px){.regler{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.regler{grid-template-columns:minmax(0,1fr)}}
+.regler div{background:var(--yta);border:1px solid var(--linje);border-radius:12px;padding:16px;font-size:15px}
+.regler b{display:block;font-family:var(--mono);font-size:12px;color:var(--dampad);margin-bottom:6px}
+/* Frågor */
+details{background:var(--yta);border:1px solid var(--linje);border-radius:12px;padding:16px 18px;margin-top:10px}
+summary{font-weight:600;cursor:pointer}
+details p{margin:10px 0 0;color:var(--text2)}
+.slut{text-align:center}
+.slut .ingress{margin-inline:auto}
+.form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.form input{font:16px var(--brod);padding:12px 14px;border:1px solid var(--linje);border-radius:10px;min-width:0;width:280px;max-width:100%;background:var(--yta);color:var(--text)}
+footer{border-top:1px solid var(--linje);padding-block:28px;font-size:14px;color:var(--dampad)}
+footer .ram{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
+.platshallare{background:var(--varnyta);color:var(--varn);padding:0 4px;border-radius:4px}
 </style>
 </head>
 <body>
 
-<div class="dummy">Utkast till säljsida. Konrad är ett arbetsnamn och tjänsten är inte lanserad. Det som är märkt ”vid lansering” finns inte än.</div>
+<div class="utkast"><div class="ram">Utkast. Konrad är inte lanserat. Det som är märkt <b>vid lansering</b> finns inte än. Bildbanksbilderna byts ut mot riktiga foton före lansering.</div></div>
 
-<header class="topp"><div class="ram">
-  <a class="marke" href="#start"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 0v14M0 7h14" stroke="var(--accent)" stroke-width="1.6"/></svg>Konrad</a>
-  <nav class="meny" aria-label="Huvudmeny">
-    <a href="#sa">Så funkar det</a><a href="#pris">Priser</a><a href="#kopplingar">Kopplingar</a><a href="#konrad">Möt Konrad</a><a href="#fragor">Frågor</a>
+<header><div class="ram">
+  <a class="logga" href="#start"><i>K</i>Konrad</a>
+  <nav aria-label="Huvudmeny">
+    <a href="#sa">Så funkar det</a><a href="#pris">Priser</a><a href="#manniskorna">Människorna</a><a href="#fragor">Frågor</a><a href="logga-in/">Logga in</a>
   </nav>
-  <span class="inlogg"><a href="logga-in/">Logga in</a></span>
-  <a class="knapp liten" href="#genomgang">Gratis genomgång</a>
+  <a class="knapp" href="/">Granska gratis</a>
 </div></header>
 
 <main id="start">
-<div class="ram hero">
+<section class="ram hjalte">
   <div>
-    <p class="ogon">Bokföring, moms och bokslut för småföretag</p>
-    <h1>Bokföringen är gratis. Konrad håller koll på resten.</h1>
-    <p class="ingress">Konrad bokför, bevakar varje frist och säger till när något berör dig. Du väljer själv vad du vill ha mer av.</p>
-    <div class="cta-rad">
-      <a class="knapp" href="#genomgang">Gör en gratis genomgång</a>
-      <a class="knapp ljus" href="#pris">Se priser</a>
+    <h1>Bokföringen är gratis. Du väljer resten.</h1>
+    <p class="ingress">Konrad bokför ditt aktiebolag automatiskt. En auktoriserad redovisningskonsult ansvarar för ditt bokslut. Du ser hela priset innan du bestämmer dig, och du kan säga upp när du vill.</p>
+    <div class="knappar">
+      <a class="knapp" href="/">Granska din bokföring gratis</a>
+      <a class="knapp ljus" href="#kalkylator">Räkna ut ditt pris</a>
     </div>
-    <p class="liten-text" style="margin-top:14px">Vill du ha mer? <a href="#far">Läs om tilläggstjänsterna →</a> Inkasso, kreditbudget till banken, kopplingar och krypto.</p>
-  </div>
-  <div>
-    <div class="kort" aria-label="Exempel på hur Konrad visar dagens läge">
-      <article class="aktiv"><span><b>Momsdeklaration, kvartal 3</b><p>Räknad två gånger på två sätt. Samma svar.</p></span><span class="st ok">Klar att godkänna</span></article>
-      <p class="pil">↓ sista dag 12 november</p>
-      <article><span><b>Ring Bygg &amp; Måleri i Täby</b><p>Har inte köpt sedan i juli. Brukar handla varje månad.</p></span><span class="st">Ring i dag</span></article>
-      <article><span><b>Mobilabonnemanget förlängs</b><p>Säg upp senast 1 december. Billigare finns.</p></span><span class="st">19 dagar kvar</span></article>
+    <div class="belagg">
+      <span>Gratis granskning av SIE-filer fungerar redan i dag</span>
+      <span>Ingen bindningstid</span>
+      <span>Fast pris för bokslutet</span>
     </div>
-    <p class="kortnot">Exempel med påhittade företag</p>
   </div>
-</div>
+  <div class="foto">
+    <img src="https://images.unsplash.com/photo-1621905253185-95614217f357?w=900&q=80&auto=format&fit=crop" alt="En hantverkare med skyddshjälm som tittar i mobilen ute på ett jobb" loading="eager" width="900" height="1125">
+    <span class="byts">Bildbanksbild · byts ut</span>
+    <div class="kort-pa-foto">
+      <b>Momsen för juli–september är klar</b>
+      <span class="liten">Räknad två gånger på två sätt. Godkänn med BankID senast 12 november. (Exempel)</span>
+    </div>
+  </div>
+</section>
 
-<section class="band" id="sa"><div class="ram">
-  <p class="ogon">Så enkelt är det</p>
-  <h2>Tre steg till ordning.</h2>
+<section class="band" id="manniskorna"><div class="ram">
+  <h2>Människorna bakom Konrad</h2>
+  <p class="ingress">Konrad är vårt system. Det bokför, räknar och påminner. Människor kontrollerar, svarar på dina frågor och skriver under det som lämnas till myndigheterna.</p>
+  <div class="folk">
+    <div class="person">
+      <div class="foto"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80&auto=format&fit=crop&crop=faces" alt="Bildbanksbild som platshållare för vår auktoriserade redovisningskonsult" loading="lazy" width="700" height="700"><span class="byts">Bildbanksbild · byts ut</span></div>
+      <div class="text"><div class="roll">Auktoriserad redovisningskonsult</div><h3><span class="platshallare">[Namn presenteras före lansering]</span></h3><p class="liten">Ansvarar för ditt bokslut, din årsredovisning och K10. Har mötena med dig som valt Kamrer eller Ekonomichef.</p></div>
+    </div>
+    <div class="person">
+      <div class="foto"><img src="https://images.unsplash.com/photo-1600896997793-b8ed3459a17f?w=700&q=80&auto=format&fit=crop&crop=faces" alt="Bildbanksbild som platshållare för vår redovisningsassistent" loading="lazy" width="700" height="700"><span class="byts">Bildbanksbild · byts ut</span></div>
+      <div class="text"><div class="roll">Redovisningsassistent</div><h3><span class="platshallare">[Namn]</span></h3><p class="liten">Går igenom det Konrad bokfört varje månad för dig som valt granskad bokföring, och svarar när du hör av dig.</p></div>
+    </div>
+    <div class="person">
+      <div class="foto"><img src="https://images.unsplash.com/photo-1632165223069-93b8f8861ed0?w=700&q=80&auto=format&fit=crop&crop=faces" alt="Bildbanksbild som platshållare för grundaren" loading="lazy" width="700" height="700"><span class="byts">Bildbanksbild · byts ut</span></div>
+      <div class="text"><div class="roll">Grundare</div><h3><span class="platshallare">[Namn]</span></h3><p class="liten">Startade Konrad för att småföretagare ska slippa betala timpris för sådant en dator kan göra.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ram" id="sa">
+  <h2>Så funkar det</h2>
+  <p class="ingress">Tre steg. Det första fungerar redan i dag.</p>
   <div class="steg">
-    <div><h3>Ladda upp din bokföring</h3><p>Exportera en SIE-fil från ditt program. Konrad läser den och visar direkt vad han hittar. Gratis.</p></div>
-    <div><h3>Koppla banken<span class="snart">vid lansering</span></h3><p>Sedan bokförs allt automatiskt. Kvitton fotar du eller mejlar in.</p></div>
-    <div><h3>Godkänn med BankID<span class="snart">vid lansering</span></h3><p>Moms och deklarationer visas med ”så här räknade vi”. Inget lämnas in utan ditt ja.</p></div>
+    <div><h3>Granska din bokföring</h3><p class="liten">Exportera en SIE-fil från ditt bokföringsprogram. Konrad visar direkt vad han hittar: frister, skattekontot, kunder som betalar sent och avtal som kostar för mycket. Gratis, och filen lämnar aldrig din dator.</p></div>
+    <div><h3>Koppla banken <span class="snart">vid lansering</span></h3><p class="liten">Sedan bokförs allt automatiskt. Kvitton fotograferar du eller vidarebefordrar från mejlen.</p></div>
+    <div><h3>Godkänn med BankID <span class="snart">vid lansering</span></h3><p class="liten">Moms och deklarationer visas med en förklaring av hur vi räknat. Inget lämnas in utan ditt ja.</p></div>
+  </div>
+</section>
+
+<section class="band" id="pris"><div class="ram">
+  <h2>Priser</h2>
+  <p class="ingress">Börja gratis. Lägg till det du behöver. Alla priser är utan moms, och ingen nivå har bindningstid.</p>
+
+  <div class="trappa">
+    <div class="niva">
+      <h3>Gratis</h3><div class="pris">0 kr<small> /mån</small></div>
+      <p class="vem">För dig som vill ha ordning själv.</p>
+      <ul><li>Automatisk bokföring <span class="snart">vid lansering</span></li><li>Kvitton via foto och mejl</li><li>Bankkoppling</li><li>Fakturor och momsunderlag</li><li>Gratis granskning av SIE-fil</li></ul>
+      <p class="liten">Upp till 15 verifikationer per månad och ett bankkonto. Du lämnar själv in momsen.</p>
+    </div>
+    <div class="niva">
+      <h3>Bevakning</h3><div class="pris">199 kr<small> /mån</small></div>
+      <p class="vem">Allt i Gratis, plus att Konrad håller koll.</p>
+      <ul><li>Vi lämnar in momsen åt dig</li><li>Frister och påminnelser</li><li>Skattekontot bevakas</li><li>Kunder som tystnat eller betalar sent</li><li>Avtal före förlängning</li><li>Pengarna 13 veckor framåt</li><li>Fristgaranti</li></ul>
+      <p class="liten">Gratis de första 3 månaderna.</p>
+    </div>
+    <div class="niva">
+      <h3>Pro</h3><div class="pris">399 kr<small> /mån</small></div>
+      <p class="vem">Allt i Bevakning, plus mer för dig som växer.</p>
+      <ul><li>Jämförelse med din bransch</li><li>Underlag till banken</li><li>Kopplingar till affärssystem <span class="snart">vid lansering</span></li><li>Krypto och K4-underlag <span class="snart">vid lansering</span></li></ul>
+    </div>
+    <div class="niva manniska">
+      <span class="tagg">Med en människa</span>
+      <h3>Kamrer</h3><div class="pris">2 995 kr<small> /mån</small></div>
+      <p class="vem">Allt i Pro, plus en auktoriserad konsult.</p>
+      <ul><li>Granskad bokföring varje månad</li><li>Månadsbrev med kommentar</li><li>Budget och plan för lön och utdelning</li><li>Möte varje kvartal med din konsult</li></ul>
+    </div>
+    <div class="niva manniska">
+      <span class="tagg">Med en människa</span>
+      <h3>Ekonomichef</h3><div class="pris">4 995 kr<small> /mån</small></div>
+      <p class="vem">Allt i Kamrer, plus en ekonomiavdelning.</p>
+      <ul><li>Rullande prognos och scenarier</li><li>Styrelsepaket varje kvartal</li><li>Hjälp inför samtal med banken</li></ul>
+    </div>
+  </div>
+
+  <div class="arspaket">
+    <div>
+      <h3>Bokslut och årsredovisning: 5 995 kr per år</h3>
+      <p class="liten" style="margin:0">Bokslut, årsredovisning, inkomstdeklaration (INK2) och K10 för en ägare. Granskat av en auktoriserad redovisningskonsult <span class="snart">vid lansering</span>. Ett aktiebolag måste göra bokslut varje år. Du får köpa det av oss eller av någon annan.</p>
+    </div>
+    <a class="knapp ljus" href="villkor/">Läs villkoren</a>
+  </div>
+
+  <div class="tillval">
+    <h3>Tillval</h3>
+    <table>
+      <tr><td>Vi lämnar in momsen åt dig (ingår från Bevakning)</td><td>99 kr/mån</td></tr>
+      <tr><td>Fler verifikationer, per påbörjat 25-tal över 15 (ingår i Kamrer och Ekonomichef)</td><td>99 kr/mån</td></tr>
+      <tr><td>Extra bankkonto</td><td>49 kr/mån</td></tr>
+      <tr><td>Granskad bokföring av en människa varje månad (ingår i Kamrer och Ekonomichef)</td><td>295 kr/mån</td></tr>
+      <tr><td>Lön, per anställd</td><td>195 kr/mån</td></tr>
+      <tr><td>Din privata deklaration</td><td>1 495 kr/år</td></tr>
+      <tr><td>Holdingbolag: bokslut, årsredovisning och K10</td><td>3 995 kr/år</td></tr>
+      <tr><td>K10 för fler delägare, per delägare</td><td>495 kr/år</td></tr>
+      <tr><td>Vi flyttar allt från din gamla byrå</td><td>1 495 kr en gång</td></tr>
+      <tr><td>Sänker Konrad en kostnad i ett avtal: 20 % av första årets besparing. Sparar vi inget betalar du inget.</td><td>20 %</td></tr>
+    </table>
+    <p class="liten">Fristgarantin: har du gjort din del i tid och Konrad ändå lämnar in momsen eller arbetsgivardeklarationen för sent, betalar vi förseningsavgiften. Gäller från Bevakning. <a href="villkor/#fristgaranti">Exakta villkor</a>.</p>
+  </div>
+
+  <h2 id="kalkylator" style="margin-top:56px">Räkna ut ditt pris</h2>
+  <p class="ingress">Svara på några frågor, så ser du vad du betalar per månad och per år.</p>
+  <div class="kalk">
+    <form class="falt" id="f" novalidate>
+      <div class="rad"><label for="niva">Hur mycket hjälp vill du ha?<span class="liten">Du kan byta när du vill.</span></label>
+        <select id="niva"><option value="0">Gratis</option><option value="1" selected>Bevakning</option><option value="2">Pro</option><option value="3">Kamrer</option><option value="4">Ekonomichef</option></select></div>
+      <div class="rad"><label for="ver">Verifikationer per månad<span class="liten">Kvitton, fakturor och banktransaktioner.</span></label><input id="ver" type="number" min="0" max="500" value="22" inputmode="numeric"></div>
+      <div class="rad"><label for="bank">Bankkonton</label><input id="bank" type="number" min="1" max="10" value="1" inputmode="numeric"></div>
+      <div class="rad"><label for="anst">Anställda utöver dig</label><input id="anst" type="number" min="0" max="50" value="0" inputmode="numeric"></div>
+      <div class="rad"><label for="del">Delägare som tar utdelning</label><input id="del" type="number" min="1" max="10" value="1" inputmode="numeric"></div>
+      <label class="kryss"><input type="checkbox" id="bokslut" checked><span><b>Bokslut och årsredovisning</b><br><span class="liten">Obligatoriskt för aktiebolag. Du kan köpa det någon annanstans.</span></span><span class="p">5 995 kr/år</span></label>
+      <label class="kryss" id="r-moms"><input type="checkbox" id="moms" checked><span><b>Vi lämnar in momsen åt dig</b></span><span class="p" id="p-moms">99 kr/mån</span></label>
+      <label class="kryss" id="r-gransk"><input type="checkbox" id="gransk"><span><b>Granskad bokföring varje månad</b></span><span class="p" id="p-gransk">295 kr/mån</span></label>
+      <label class="kryss"><input type="checkbox" id="privat"><span><b>Din privata deklaration</b></span><span class="p">1 495 kr/år</span></label>
+      <label class="kryss"><input type="checkbox" id="holding"><span><b>Holdingbolag</b></span><span class="p">3 995 kr/år</span></label>
+      <label class="kryss"><input type="checkbox" id="byte"><span><b>Vi flyttar allt från din gamla byrå</b></span><span class="p">1 495 kr en gång</span></label>
+    </form>
+    <aside class="kvitto" aria-live="polite">
+      <div id="rader"></div>
+      <div class="sum">
+        <div class="r"><span>Per månad</span><span id="t-man"></span></div>
+        <div class="r"><span>Per år, med årsposterna</span><span id="t-ar"></span></div>
+        <div class="rub">Första året</div>
+        <div class="stor" id="t-forsta"></div>
+        <div class="liten" id="not"></div>
+      </div>
+      <label class="kryss" style="margin-top:12px;padding:8px 12px"><input type="checkbox" id="inkl"><span class="liten">Visa priser med moms (25 %)</span></label>
+    </aside>
   </div>
 </div></section>
 
-<section id="pris"><div class="ram">
-  <p class="ogon">Priser</p>
-  <h2>Det här ingår, och det här kostar.</h2>
-  <p class="liten-text" style="margin-top:8px"><b>Fungerar i dag:</b> gratis genomgång av din SIE-fil, med frister, skattekonto, ringlista, avtal, kassaflöde, kreditbudget och 13 veckor framåt. <b>Kommer vid lansering:</b> bankkoppling, kvitton, löpande automatisk bokföring, BankID, inkasso, lån, kopplingar och krypto. Anmäl dig i dag så får du förtur.</p>
-  <p class="ingress" style="margin-bottom:0">Börja gratis. Lägg till mer när du behöver det. Säg upp när du vill.</p>
-  <div class="pris">
-    <article>
-      <span class="namn">Gratis</span><span class="belopp">0 kr</span>
-      <p class="for">Bokföringen, utan månadsavgift.</p>
-      <ul><li>Automatisk bokföring<span class="snart">vid lansering</span></li><li>Kvitton via foto och mejl<span class="snart">vid lansering</span></li><li>Bankkoppling<span class="snart">vid lansering</span></li><li>Fakturor och momsunderlag</li><li>Gratis genomgång av din SIE-fil</li></ul>
-      <a class="knapp ljus" href="#genomgang">Gör en gratis genomgång</a>
-    </article>
-    <article class="fram">
-      <span class="namn">Bevakning</span><span class="belopp">199 kr<small> /mån</small></span>
-      <p class="for">Allt i Gratis, plus att Konrad vakar åt dig.</p>
-      <ul><li>Frister och påminnelser</li><li>Skattekontovakt</li><li>Ringlista och avtalsbevakning</li><li>Pengarna 13 veckor framåt</li><li>Kassaflöde och nyckeltal</li><li>Kreditbudget till banken</li><li>Hjälp med myndighetsbrev</li><li>Påminnelser och inkasso<span class="snart">vid lansering</span></li></ul>
-      <a class="knapp" href="#genomgang">Börja gratis</a>
-    </article>
-    <article>
-      <span class="namn">Pro</span><span class="belopp">399 kr<small> /mån</small></span>
-      <p class="for">Allt i Bevakning, plus mer för dig som vill växa.</p>
-      <ul><li class="plus">Branschjämförelse</li><li class="plus">Kopplingar till affärssystem<span class="snart">vid lansering</span></li><li class="plus">Underlag till K4 för krypto<span class="snart">vid lansering</span></li><li class="plus">Inloggning för din redovisningskonsult<span class="snart">vid lansering</span></li><li class="plus">Lån via partner<span class="snart">vid lansering</span></li></ul>
-      <a class="knapp ljus" href="#genomgang">Börja gratis</a>
-    </article>
+<section class="ram">
+  <h2>Så ser vi till att det blir rätt</h2>
+  <div class="fyra">
+    <div><h3>Räknat två gånger</h3><p class="liten">Varje siffra till en myndighet räknas på två olika sätt. Blir svaren olika stoppar vi och tittar själva.</p></div>
+    <div><h3>En människa vid tvekan <span class="snart">vid lansering</span></h3><p class="liten">Är Konrad osäker går ärendet till en redovisningskonsult. Du ser vad som var osäkert och vem som avgjorde.</p></div>
+    <div><h3>Inget utan ditt BankID <span class="snart">vid lansering</span></h3><p class="liten">Ingenting lämnas till Skatteverket eller Bolagsverket innan du har sagt ja.</p></div>
+    <div><h3>Dina uppgifter är dina</h3><p class="liten">De stannar i EU. Du kan ta med dig hela bokföringen med ett klick, när som helst och utan kostnad.</p></div>
   </div>
-  <div class="pris" style="margin-top:16px;grid-template-columns:1fr">
-    <article>
-      <span class="namn">Årspaket · fast pris per år, sätts före lansering</span>
-      <p class="for">Du får ett fast pris per år, och billigare med Bevakning eller Pro. Ingen timdebitering.</p>
-      <ul style="margin-bottom:0"><li>Bokslut och årsredovisning</li><li>Deklaration, inlämnad med ditt BankID<span class="snart">vid lansering</span></li><li>Granskat av redovisningskonsult<span class="snart">vid lansering</span></li></ul>
-    </article>
+  <h3 style="margin-top:44px">Varför heter han Konrad?</h3>
+  <p class="liten" style="max-width:62ch">Efter en lång rad svenska kontorsmaskiner. Av var och en har vi tagit en regel som vi arbetar efter.</p>
+  <div class="regler">
+    <div><b>FACIT · SKRIVMASKINEN</b>Skriv aldrig det du inte kan stå för.</div>
+    <div><b>RÄKNESNURRAN</b>Räkna allt två gånger, på två sätt.</div>
+    <div><b>ABC 80 · DATORN</b>Varje siffra ska gå att följa till kvittot.</div>
+    <div><b>KONRAD · I DAG</b>Gissa aldrig. Fråga när du är osäker.</div>
   </div>
-  <p class="spar"><b>Fristgaranti:</b> har du gjort din del i tid och Konrad ändå lämnar in för sent, betalar vi förseningsavgiften. Gäller Bevakning och Pro. <a href="villkor/#fristgaranti">Exakta villkor</a>.</p>
-  <p class="spar"><b>Sparar Konrad pengar åt dig på ett avtal?</b> Då tar vi 20 % av första årets besparing. Sparar han inget, betalar du inget.</p>
-  <div class="tabellbox" tabindex="0" role="region" aria-label="Jämförelsetabell, bläddra i sidled vid behov"><table><caption>Vad ingår i vilken nivå? Rader märkta ”vid lansering” finns inte än. Utöver månadspriset: 20 % av första årets besparing, bara om Konrad faktiskt sänkt en kostnad.</caption><thead><tr><th scope="col">Funktion</th><th scope="col">Gratis</th><th scope="col">Bevakning</th><th scope="col">Pro</th></tr></thead><tbody><tr class="grupp"><th colspan="4" scope="colgroup">Bokföring</th></tr><tr><th scope="row">Automatisk bokföring<span class="snart">vid lansering</span></th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kvitton via foto och mejl<span class="snart">vid lansering</span></th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Bankkoppling<span class="snart">vid lansering</span></th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Fakturor och momsunderlag</th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Gratis genomgång av din SIE-fil</th><td class="ja">✓</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr class="grupp"><th colspan="4" scope="colgroup">Bevakning</th></tr><tr><th scope="row">Frister och påminnelser</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Skattekontovakt</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Ringlista över kunder</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Avtalsbevakning</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Pengarna 13 veckor framåt</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kassaflöde och nyckeltal</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Kreditbudget till banken</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Hjälp med myndighetsbrev</th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr><th scope="row">Påminnelser och inkasso<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="ja">✓</td><td class="ja">✓</td></tr><tr class="grupp"><th colspan="4" scope="colgroup">Pro</th></tr><tr><th scope="row">Branschjämförelse</th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Kopplingar till affärssystem<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Krypto och K4-underlag<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Inloggning för din redovisningskonsult<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr><tr><th scope="row">Lån via partner<span class="snart">vid lansering</span></th><td class="nej">–</td><td class="nej">–</td><td class="ja">✓</td></tr></tbody></table></div>
+</section>
+
+<section class="band" id="kopplingar"><div class="ram">
+  <h2>Fungerar med det du redan har</h2>
+  <p class="ingress">SIE-filer från alla bokföringsprogram fungerar redan i dag. Resten kommer vid lansering. Namnen är program som våra kunder använder, inte samarbetspartner.</p>
+  <p class="liten"><b>Bokföring:</b> Fortnox, Spiris, Bokio, Björn Lundén (via SIE) · <b>Bank:</b> bankkoppling med BankID · <b>Betalningar:</b> Shopify, WooCommerce, Stripe, Klarna, Zettle, Swish · <b>Krypto:</b> Binance, Coinbase, Kraken · <b>Myndigheter:</b> Skatteverket, Bolagsverket <span class="snart">vid lansering</span></p>
 </div></section>
 
-<section class="band" id="far"><div class="ram">
-  <p class="ogon">Det här gör Konrad</p>
-  <h2>Du behöver inte läsa lagarna själv.</h2>
-  <div class="grid3">
-    <article><span class="plan">Gratis</span><h3>Bokföring på autopilot<span class="snart">vid lansering</span></h3><p>Fota kvittot eller vidarebefordra mejlet. Konrad bokför, matchar mot banken och frågar bara när något är oklart.</p></article>
-    <article><span class="plan">Bevakning</span><h3>Varje frist i tid, och skattekontot under kontroll</h3><p>Moms, arbetsgivardeklaration, deklaration och årsstämma. Du får en påminnelse innan något förfaller. Konrad varnar också innan skattekontot går minus.</p></article>
-    <article><span class="plan">Bevakning</span><h3>Kunder och avtal</h3><p>En kort ringlista varje dag: vem som tystnat och vem som betalar sent. Konrad hittar också avtal som kostar för mycket och säger till före förlängning.</p></article>
-    <article><span class="plan">Bevakning</span><h3>Pengarna framåt och klar för banken</h3><p>Saldot vecka för vecka, tretton veckor framåt. Budget, kassaflöde och nyckeltal som banken frågar efter, räknade två gånger.</p></article>
-    <article><span class="plan">Bevakning</span><h3>Brev, påminnelser och inkasso</h3><p>Fota brevet från en myndighet så får du veta vad det gäller och när du måste svara. Obetalda fakturor kan gå vidare till inkasso<span class="snart">vid lansering</span>, aldrig utan ditt BankID.</p></article>
-    <article><span class="plan">Pro</span><h3>Jämför, koppla och växa</h3><p>Se dig mot liknande företag. Koppla dina affärssystem<span class="snart">vid lansering</span>, få kryptoredovisning och K4-underlag<span class="snart">vid lansering</span> och ansök om lån via partner<span class="snart">vid lansering</span>.</p></article>
-  </div>
-</div></section>
+<section class="ram" id="fragor">
+  <h2>Frågor</h2>
+  <details><summary>Vad är gratis och vad kostar?</summary><p>Den löpande bokföringen är gratis för aktiebolag med upp till 15 verifikationer i månaden och ett bankkonto. Bokslut och årsredovisning kostar 5 995 kr per år. Vill du ha mer hjälp väljer du Bevakning (199 kr), Pro (399 kr), Kamrer (2 995 kr) eller Ekonomichef (4 995 kr) per månad. Alla tillval står i prislistan, och kalkylatorn visar ditt totalpris.</p></details>
+  <details><summary>Vad är skillnaden mellan Pro och Kamrer?</summary><p>Upp till Pro sköter Konrad allt automatiskt. Från Kamrer har du en auktoriserad redovisningskonsult som går igenom din bokföring varje månad, skriver ett månadsbrev och träffar dig varje kvartal.</p></details>
+  <details><summary>Jag har redan en redovisningsbyrå. Varför byta?</summary><p>Många byråer tar timpris för att bokföra. Hos oss ingår bokföringen, och du betalar bara för det du väljer till. Vill du byta flyttar vi allt från din gamla byrå.</p></details>
+  <details><summary>Är Konrad en riktig person?</summary><p>Nej. Konrad är vårt system, och det säger vi alltid. Redovisningskonsulterna som granskar och skriver under är riktiga människor med namn.</p></details>
+  <details><summary>Vad händer om något blir fel?</summary><p>Missar vi en frist trots att du gjort din del betalar vi förseningsavgiften. Bokslutet granskas av en auktoriserad redovisningskonsult med ansvarsförsäkring. Du är alltid ansvarig för bolagets bokföring enligt bokföringslagen. <a href="villkor/">Läs villkoren</a>.</p></details>
+  <details><summary>Ger ni skatteråd?</summary><p>I Kamrer och Ekonomichef planerar din konsult lön och utdelning med dig. I de andra nivåerna visar Konrad fakta och frister, men ger inga personliga råd.</p></details>
+</section>
 
-<section id="kopplingar"><div class="ram">
-  <p class="ogon">Kopplingar</p>
-  <h2>Fungerar med det du redan har.</h2>
-  <p class="ingress" style="margin-bottom:0">SIE-fil fungerar redan i dag. Resten kommer vid lansering. Namnen är program som kunder använder, inte partnerskap.</p>
-  <div class="kopp">
-    <div><h3>Bokföringsprogram</h3><div class="chips"><span>SIE-fil, vilket program som helst</span><span>Fortnox<span class="snart">vid lansering</span></span><span>Spiris<span class="snart">vid lansering</span></span><span>Bokio<span class="snart">vid lansering</span></span><span>Björn Lundén via SIE</span></div></div>
-    <div><h3>Bank<span class="snart">vid lansering</span></h3><div class="chips"><span>Bankkoppling med BankID</span></div></div>
-    <div><h3>Webbshop och betalningar<span class="snart">vid lansering</span></h3><div class="chips"><span>Shopify</span><span>WooCommerce</span><span>Stripe</span><span>Klarna</span><span>Zettle</span><span>Swish</span></div></div>
-    <div><h3>Lön och tid<span class="snart">vid lansering</span></h3><div class="chips"><span>Lönesystem</span><span>Tidrapportering</span></div></div>
-    <div><h3>Kassa och lager<span class="snart">vid lansering</span></h3><div class="chips"><span>Kassasystem</span><span>Lagersystem</span></div></div>
-    <div><h3>CRM och fakturering<span class="snart">vid lansering</span></h3><div class="chips"><span>Kundregister</span><span>Faktureringssystem</span></div></div>
-    <div><h3>Krypto<span class="snart">vid lansering</span></h3><div class="chips"><span>Binance</span><span>Coinbase</span><span>Kraken</span><span>Hårdvaruplånböcker via export</span></div><p class="lt">Ger underlag till K4 och kryptoredovisning.</p></div>
-    <div><h3>Myndigheter<span class="snart">vid lansering</span></h3><div class="chips"><span>Skatteverket</span><span>Bolagsverket</span><span>SCB</span></div></div>
-  </div>
-  <p class="liten-text" style="margin-top:20px">Kopplingar till affärssystem och krypto ingår i Pro. Konrad läser, och ändrar aldrig något i dina system.</p>
-</div></section>
-
-<section class="trygg band"><div class="ram">
-  <p class="ogon">AI-fart, mänsklig trygghet</p>
-  <h2>Konrad gör jobbet. Människor har sista ordet.</h2>
-  <ul>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Räknat två gånger</b>Varje siffra till en myndighet räknas på två sätt. Olika svar betyder stopp.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Riktig människa vid tveksamhet<span class="snart">vid lansering</span></b>Är Konrad osäker går ärendet till en redovisningskonsult. Du ser vad som är osäkert.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Inget utan ditt BankID<span class="snart">vid lansering</span></b>Inget lämnas till en myndighet innan du har sagt ja.</span></li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="var(--accent)" stroke-width="2"/></svg><span><b>Dina uppgifter är dina</b>De stannar i EU, varje kund har egen krypteringsnyckel, och du kan ta med dig hela bokföringen med ett klick.</span></li>
-  </ul>
-</div></section>
-
-<section class="slakt" id="konrad"><div class="ram">
-  <p class="ogon" style="color:var(--glod)">Möt Konrad</p>
-  <h2>En släkt som alltid räknat.</h2>
-  <p class="ingress">Konrad är en AI, men han kommer från en lång rad svenska kontorsmaskiner. Av var och en har han ärvt en regel.</p>
-  <div class="slakten">
-    <article><span class="ar">FARFAR · FACIT</span><b>Skrivmaskinen</b><p>Knattrade fram fakturor och brev.</p><p class="arv">Skriv aldrig det du inte kan stå för.</p></article>
-    <article><span class="ar">FARMOR · RÄKNESNURRAN</span><b>Räknesnurran</b><p>Man vevade och hon räknade.</p><p class="arv">Räkna allt två gånger, på två sätt.</p></article>
-    <article><span class="ar">PAPPA · ABC 80</span><b>Datorn</b><p>Den första som kunde minnas saker.</p><p class="arv">Varje siffra ska gå att följa till kvittot.</p></article>
-    <article class="nu"><span class="ar">KONRAD · I DAG</span><b>Kamreren</b><p>Bor i molnet, i EU. Tar inte betalt per timme.</p><p class="arv">Gissa aldrig. Fråga när du är osäker.</p></article>
-  </div>
-  <p class="not">Konrad är en AI. Han är påhittad, men det han räknar ut är på riktigt.</p>
-</div></section>
-
-<section id="fragor"><div class="ram faq">
-  <p class="ogon">Frågor</p>
-  <h2>Det folk brukar undra.</h2>
-  <details><summary>Vad är gratis och vad kostar?</summary><p>Den löpande bokföringen är gratis: bokföring, kvitton, bankkoppling, fakturor och momsunderlag, samt en gratis genomgång av din SIE-fil. Bevakning kostar 199 kr i månaden och Pro 399 kr. Årspaket med bokslut och deklaration får du till fast pris. Se tabellen under Priser.</p></details>
-  <details><summary>Hanterar Konrad krypto och K4?</summary><p>Det kommer vid lansering. Du exporterar dina affärer från börsen eller plånboken, och Konrad gör underlag till K4 och bokför kryptot. Det ingår i Pro. Du godkänner innan något lämnas in.</p></details>
-  <details><summary>Jag har redan en redovisningsbyrå. Varför byta?</summary><p>Många byråer tar betalt per timme för att bokföra. Hos Konrad ingår bokföringen, och tiden går till det som gör skillnad: frister, skattekontot, kunderna och avtalen. Vill du byta hjälper vi dig steg för steg.</p></details>
-  <details><summary>Jag har Fortnox eller Visma. Måste jag lämna dem?</summary><p>Nej. Gratisgenomgången fungerar med en SIE-fil från vilket program som helst. Bevakningen kan också läsa från ditt nuvarande program<span class="snart">vid lansering</span>.</p></details>
-  <details><summary>Vad händer om Konrad gör fel?</summary><p>Det som är osäkert ska gå till en redovisningskonsult, och allt till en myndighet är räknat två gånger och godkänt av dig med BankID. Varje beslut loggas.</p></details>
-  <details><summary>Vad händer om Konrad missar en frist?</summary><p>Då betalar vi förseningsavgiften, så länge du har lämnat underlaget och godkänt i tid. Bokslut och deklaration i årspaketet granskas och skrivs under av en auktoriserad redovisningskonsult. <a href="villkor/">Läs de exakta villkoren</a>.</p></details>
-  <details><summary>Är Konrad en riktig person?</summary><p>Nej. Konrad är en AI, och han säger det alltid. Redovisningskonsulterna som granskar hans arbete är riktiga människor.</p></details>
-  <details><summary>Ger Konrad skatteråd?</summary><p>Nej. Konrad visar fakta och frister. Allt han föreslår godkänner du eller en konsult. Behöver du personlig rådgivning kopplar vi dig till en auktoriserad konsult.</p></details>
-</div></section>
-
-<section class="slut" id="genomgang"><div class="ram">
-  <h2>Se vad Konrad hittar i din bokföring.</h2>
-  <p>Ladda upp en SIE-fil och få svaret direkt: kunder att ringa, avtal som kostar för mycket och fristerna framåt. Gratis, och filen lämnar aldrig din dator.</p>
+<section class="band slut" id="genomgang"><div class="ram">
+  <h2>Se vad Konrad hittar i din bokföring</h2>
+  <p class="ingress">Granska din SIE-fil gratis redan i dag. Filen lämnar aldrig din dator.</p>
+  <a class="knapp" href="/">Granska din bokföring gratis</a>
+  <p class="liten" style="margin-top:28px">Vill du veta när Konrad öppnar?</p>
   <form class="form" id="vantelista" novalidate>
-    <label for="epost" class="liten-text" style="position:absolute;left:-9999px">E-post</label>
+    <label for="epost" style="position:absolute;left:-9999px">E-post</label>
     <input id="epost" type="email" placeholder="din@epost.se" autocomplete="email" required>
-    <button type="submit">Ställ mig i kön</button>
+    <button class="knapp ljus" type="submit">Säg till mig</button>
   </form>
-  <p class="tack" id="tack" hidden>Tack. Du hör av oss när Konrad öppnar. (Utkast – inget har skickats.)</p>
+  <p class="liten" id="tack" hidden>Tack. Utkast: inget har skickats.</p>
 </div></section>
 </main>
 
 <footer><div class="ram">
-  <span>Konrad är en AI. Arbetsnamn, utkast till säljsida.</span>
+  <span><span class="platshallare">[Bolagsnamn] · org.nr [ ] · [adress] · F-skatt</span>. Fylls i före lansering.</span>
+  <span><a href="villkor/">Villkor</a> · <a href="logga-in/">Logga in</a> · Foton: Unsplash (platshållare)</span>
 </div></footer>
 
 <script>
-document.getElementById("vantelista").addEventListener("submit", e => {
-  e.preventDefault();
-  const f = document.getElementById("epost");
-  if (!f.value.includes("@")) { f.setAttribute("aria-invalid","true"); f.placeholder = "Skriv en e-postadress"; f.focus(); return; }
-  document.getElementById("tack").hidden = false;
-});
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('sv-SE')+' kr';
+const NIVA=['Gratis','Bevakning','Pro','Kamrer','Ekonomichef'], NPRIS=[0,199,399,2995,4995];
+function tal(id,min,max){let v=parseInt($(id).value,10);if(isNaN(v))v=min;return Math.min(max,Math.max(min,v));}
+function rakna(){
+  const n=+$('niva').value, ver=tal('ver',0,500), bank=tal('bank',1,10), anst=tal('anst',0,50), del=tal('del',1,10);
+  const m=$('inkl').checked?1.25:1;
+  // Moms ingår från Bevakning, granskning och volym ingår från Kamrer
+  const momsIngar=n>=1, granskIngar=n>=3, volymIngar=n>=3;
+  [['moms',momsIngar],['gransk',granskIngar]].forEach(([id,ing])=>{$(id).disabled=ing;$('r-'+id).classList.toggle('av',ing);$('p-'+id).textContent=ing?'ingår':(id==='moms'?'99 kr/mån':'295 kr/mån');});
+  const man=[[ 'Löpande bokföring',0 ]];
+  if(n)man.push([NIVA[n],NPRIS[n]]);
+  const blk=volymIngar?0:Math.ceil(Math.max(0,ver-15)/25); if(blk)man.push([`Fler verifikationer (${blk} × 25)`,blk*99]);
+  if(bank>1)man.push([`Extra bankkonton (${bank-1})`,(bank-1)*49]);
+  if(anst)man.push([`Lön (${anst} anställda)`,anst*195]);
+  if(!momsIngar&&$('moms').checked)man.push(['Momsen inlämnad åt dig',99]);
+  if(!granskIngar&&$('gransk').checked)man.push(['Granskad bokföring',295]);
+  const ar=[];
+  if($('bokslut').checked)ar.push(['Bokslut och årsredovisning',5995]);
+  if(del>1)ar.push([`K10 för fler delägare (${del-1})`,(del-1)*495]);
+  if($('privat').checked)ar.push(['Din privata deklaration',1495]);
+  if($('holding').checked)ar.push(['Holdingbolag',3995]);
+  const eng=$('byte').checked?[['Flytt från gammal byrå',1495]]:[];
+  const sum=a=>a.reduce((s,x)=>s+x[1],0);
+  const tMan=sum(man), prov=n===1?3*199:0, tAr=tMan*12+sum(ar), tForsta=tAr+sum(eng)-prov;
+  const rad=(t,v,s)=>`<div class="r"><span>${t}</span><span${v===0?' class="gratis"':''}>${v===0?'0 kr':fmt(v*m)+s}</span></div>`;
+  let h=man.map(x=>rad(x[0],x[1],'/mån')).join('');
+  if(ar.length)h+='<div class="rub">Varje år</div>'+ar.map(x=>rad(x[0],x[1],'/år')).join('');
+  if(eng.length)h+='<div class="rub">En gång</div>'+eng.map(x=>rad(x[0],x[1],'')).join('');
+  $('rader').innerHTML=h;
+  $('t-man').textContent=fmt(tMan*m)+'/mån'; $('t-ar').textContent=fmt(tAr*m);
+  $('t-forsta').textContent=fmt(tForsta*m);
+  const not=[];
+  if(prov)not.push(`Bevakning är gratis de första 3 månaderna (${fmt(prov*m)} avdraget).`);
+  if(!$('bokslut').checked)not.push('Utan vårt bokslutspaket behöver du köpa bokslutet någon annanstans.');
+  if(n===0&&ver>15)not.push('Gratisnivån omfattar 15 verifikationer i månaden. Resten kostar 99 kr per påbörjat 25-tal.');
+  not.push(m>1?'Priser med moms.':'Priser utan moms.');
+  $('not').textContent=not.join(' ');
+}
+$('f').addEventListener('input',rakna);$('f').addEventListener('change',rakna);$('inkl').addEventListener('change',rakna);
+$('f').addEventListener('submit',e=>e.preventDefault());
+rakna();
+$('vantelista').addEventListener('submit',e=>{e.preventDefault();const f=$('epost');if(!f.value.includes('@')){f.setAttribute('aria-invalid','true');f.placeholder='Skriv en e-postadress';f.focus();return;}$('tack').hidden=false;});
 </script>
-
 </body>
 </html>
