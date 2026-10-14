@@ -24,3 +24,9 @@
 - Källor kontrollerade av fyra separata genomgångar mot riksdagen.se, Skatteverket, BFN och Srf; granskat av Claude (motsats), Gemini och GPT. Utfall i olleno/granskning/logg.
 - Regelbevakningen körs varje natt 02:47 på Kansliets server (Hetzner) för 23 källor och mejlar Olle vid ändring. Gäller både AI Auditor och Kansliets bokförare.
 - Sajten ligger kvar på GitHub Pages: ingen kunddata passerar den, gratis och driftsäker.
+
+## 2026-10-14 – Konrad: ihopslagen pristrappa och människorna bakom
+- /konrad/ omgjord: pristrappa Gratis 0 / Bevakning 199 (gratis 3 mån) / Pro 399 / Kamrer 2 995 / Ekonomichef 4 995 kr/mån, bokslut 5 995 kr/år, tillvalslista, 20 % av besparing. Kalkylator med totalpris (månad, år, första året).
+- Färg bläckblå #1A2A9C (nära Nordea, inte deras #0000A0); grönt valdes bort (för nära Fortnox). Klarspråk, inga AI-säljord.
+- "Människorna bakom Konrad": bildbanksbilder från Unsplash (hotlänkade), tydligt märkta "Bildbanksbild · byts ut"; namn och bolagsuppgifter är platshållare tills riktiga finns.
+- Villkor: fristgarantin gäller Bevakning–Ekonomichef. Fortfarande noindex. Underlag: Dropbox /Claude/AI-redovisningsbyrå.
