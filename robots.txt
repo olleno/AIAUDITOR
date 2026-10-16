@@ -1,5 +1,86 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Applebot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: CCBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /media/
+Disallow: /redaktionen/
+
 User-agent: *
 Allow: /
 Disallow: /media/
-Sitemap: https://aiauditor.se/sitemap.xml
 Disallow: /redaktionen/
+
+Sitemap: https://aiauditor.se/sitemap.xml

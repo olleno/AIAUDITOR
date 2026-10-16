@@ -1,0 +1,32 @@
+# AI Auditor
+
+> Gratis granskning av bokföringen i webbläsaren. Användaren väljer sin SIE-fil (typ 4) från Fortnox, Visma, Bokio eller annat bokföringsprogram, och AI Auditor kör 47 kontroller mot bokföringslagen, momslagen och skattereglerna samt jämför bolagets nyckeltal med SCB:s branschstatistik.
+
+AI Auditor drivs av Kansliet at Nordwik Partners (bifirma till Foodbergs Stockholm AB, org.nr 559518-4457). Kontakt: kansliet@nordwikpartners.se.
+
+Granskningen körs helt i användarens webbläsare: SIE-filen skickas ingenstans och sparas inte. Besök räknas anonymt, utan kakor. Varje kontroll bygger på en lag, ett allmänt råd från Bokföringsnämnden eller Skatteverkets vägledning; de 23 källorna kontrolleras varje natt, och kontrollerna gås igenom för hand innan något ändras. Branschnyckeltalen kommer från SCB, Företagens ekonomi (tabell BNTT01), år 2024, och visas obearbetade. Sajten har inga annonslänkar.
+
+## Viktigaste sidor
+- [Granska bokföringen (verktyget)](https://aiauditor.se/): välj SIE-filen och få granskningen direkt, med avstämning mot bank, skattekonto, momsdeklaration och årsredovisning
+- [Källor](https://aiauditor.se/kallor/): de lagar och myndighetssidor som kontrollerna bygger på, med vilka kontroller som hör till vilken källa
+- [Integritet](https://aiauditor.se/integritet/): vem som står bakom och vad som händer med uppgifterna
+- [För redovisningsbyråer](https://aiauditor.se/byra/): granskningen i byråns eget namn, med planerat pris per månad
+
+## Guider: så tar du ut en SIE-fil
+- [Alla guider](https://aiauditor.se/guider/): översikt
+- [Fortnox](https://aiauditor.se/guider/sie-fil-fortnox/)
+- [Spiris](https://aiauditor.se/guider/sie-fil-spiris/)
+- [Visma Administration](https://aiauditor.se/guider/sie-fil-visma-administration/)
+- [Bokio](https://aiauditor.se/guider/sie-fil-bokio/)
+- [Björn Lundén](https://aiauditor.se/guider/sie-fil-bjorn-lunden/)
+- [Accounted](https://aiauditor.se/guider/sie-fil-accounted/)
+- [Briox](https://aiauditor.se/guider/sie-fil-briox/)
+
+## Branscher
+- [Nyckeltal per bransch](https://aiauditor.se/bransch/): soliditet, rörelsemarginal, kassalikviditet med mera för 851 branscher (SNI), från SCB 2024. Varje bransch har en egen sida under /bransch/.
+
+## Maskinläsbar data
+- [Sajtkarta](https://aiauditor.se/sitemap.xml): alla publicerade sidor, inklusive samtliga branschsidor
+
+## Optional
+- [Exempel på SIE-fil](https://aiauditor.se/exempel-sie.txt): exempelfilen som används i exempelgranskningen
