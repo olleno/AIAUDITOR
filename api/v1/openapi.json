@@ -1,0 +1,304 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "AI Auditor – öppen data",
+  "version": "1.0.0",
+  "description": "Statiska, bara läsande JSON-filer. Ingen inloggning, inga personuppgifter, inga anrop som ändrar något. Själva bokföringsgranskningen körs bara i användarens webbläsare och har inget API.",
+  "contact": {
+   "name": "Kansliet at Nordwik Partners",
+   "email": "kansliet@nordwikpartners.se"
+  }
+ },
+ "servers": [
+  {
+   "url": "https://aiauditor.se/api/v1"
+  }
+ ],
+ "paths": {
+  "/branscher.json": {
+   "get": {
+    "summary": "Branschnyckeltal (kvartiler) från SCB för alla branscher som har en sida på aiauditor.se",
+    "operationId": "branscher",
+    "responses": {
+     "200": {
+      "description": "Branschnyckeltal (kvartiler) från SCB för alla branscher som har en sida på aiauditor.se",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Branscher"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/kontroller.json": {
+   "get": {
+    "summary": "Alla aktiva kontroller med lagrum",
+    "operationId": "kontroller",
+    "responses": {
+     "200": {
+      "description": "Alla aktiva kontroller med lagrum",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Kontroller"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/kallor.json": {
+   "get": {
+    "summary": "Lagar och myndighetssidor som kontrollerna bygger på",
+    "operationId": "kallor",
+    "responses": {
+     "200": {
+      "description": "Lagar och myndighetssidor som kontrollerna bygger på",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Kallor"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Branscher": {
+    "type": "object",
+    "required": [
+     "kalla",
+     "hamtad",
+     "ar",
+     "antal",
+     "branscher"
+    ],
+    "properties": {
+     "kalla": {
+      "type": "string"
+     },
+     "kalla_url": {
+      "type": "string"
+     },
+     "licens": {
+      "type": "string"
+     },
+     "hamtad": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+     },
+     "ar": {
+      "type": "integer"
+     },
+     "antal": {
+      "type": "integer"
+     },
+     "branscher": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "sni",
+        "namn",
+        "url",
+        "nyckeltal",
+        "kalla",
+        "hamtad"
+       ],
+       "properties": {
+        "sni": {
+         "type": "string"
+        },
+        "namn": {
+         "type": "string"
+        },
+        "url": {
+         "type": "string"
+        },
+        "antal_foretag": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "ar": {
+         "type": "integer"
+        },
+        "kalla": {
+         "type": "string"
+        },
+        "hamtad": {
+         "type": "string",
+         "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "nyckeltal": {
+         "type": "object",
+         "additionalProperties": {
+          "type": "object",
+          "required": [
+           "namn",
+           "enhet",
+           "median"
+          ],
+          "properties": {
+           "namn": {
+            "type": "string"
+           },
+           "enhet": {
+            "type": "string"
+           },
+           "undre_kvartil": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "median": {
+            "type": [
+             "number",
+             "null"
+            ]
+           },
+           "ovre_kvartil": {
+            "type": [
+             "number",
+             "null"
+            ]
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "Kontroller": {
+    "type": "object",
+    "required": [
+     "antal",
+     "senast_kontrollerad",
+     "kontroller"
+    ],
+    "properties": {
+     "antal": {
+      "type": "integer"
+     },
+     "senast_kontrollerad": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+     },
+     "kontroller": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "omrade",
+        "regel",
+        "kontroll",
+        "del",
+        "kalla",
+        "senast_kontrollerad"
+       ],
+       "properties": {
+        "id": {
+         "type": "string"
+        },
+        "omrade": {
+         "type": "string"
+        },
+        "regel": {
+         "type": "string"
+        },
+        "kontroll": {
+         "type": "string"
+        },
+        "del": {
+         "type": "string",
+         "enum": [
+          "SIE-filen",
+          "avstämning mot handlingar"
+         ]
+        },
+        "kalla": {
+         "type": "string"
+        },
+        "senast_kontrollerad": {
+         "type": "string",
+         "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "url": {
+         "type": "string"
+        }
+       }
+      }
+     }
+    }
+   },
+   "Kallor": {
+    "type": "object",
+    "required": [
+     "antal",
+     "uppdaterad",
+     "kallor"
+    ],
+    "properties": {
+     "antal": {
+      "type": "integer"
+     },
+     "uppdaterad": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+     },
+     "kallor": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "id",
+        "namn",
+        "typ",
+        "url",
+        "kontroller",
+        "uppdaterad"
+       ],
+       "properties": {
+        "id": {
+         "type": "string"
+        },
+        "namn": {
+         "type": "string"
+        },
+        "typ": {
+         "type": "string"
+        },
+        "url": {
+         "type": "string"
+        },
+        "kontroller": {
+         "type": "string"
+        },
+        "bevakas": {
+         "type": "string"
+        },
+        "uppdaterad": {
+         "type": "string",
+         "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

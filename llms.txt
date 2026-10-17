@@ -8,6 +8,7 @@ Granskningen körs helt i användarens webbläsare: SIE-filen skickas ingenstans
 
 ## Viktigaste sidor
 - [Granska bokföringen (verktyget)](https://aiauditor.se/): välj SIE-filen och få granskningen direkt, med avstämning mot bank, skattekonto, momsdeklaration och årsredovisning
+- [Kontrollerna](https://aiauditor.se/kontroller/): vad AI Auditor kontrollerar – alla 51 aktiva kontroller (47 på SIE-filen, 4 avstämningar) med lagrum
 - [Källor](https://aiauditor.se/kallor/): de lagar och myndighetssidor som kontrollerna bygger på, med vilka kontroller som hör till vilken källa
 - [Integritet](https://aiauditor.se/integritet/): vem som står bakom och vad som händer med uppgifterna
 - [För redovisningsbyråer](https://aiauditor.se/byra/): granskningen i byråns eget namn, med planerat pris per månad
@@ -25,8 +26,20 @@ Granskningen körs helt i användarens webbläsare: SIE-filen skickas ingenstans
 ## Branscher
 - [Nyckeltal per bransch](https://aiauditor.se/bransch/): soliditet, rörelsemarginal, kassalikviditet med mera för 851 branscher (SNI), från SCB 2024. Varje bransch har en egen sida under /bransch/.
 
-## Maskinläsbar data
+## Uppdatering
+- Branschnyckeltalen: SCB:s årsstatistik (BNTT01, år 2024), hämtad 2026-10-06. Uppdateras när SCB publicerar nästa år.
+- Kontrollerna och källorna: lagtexterna och myndighetssidorna bevakas varje natt; kontrollerna ändras för hand efter genomgång. Regelkatalogen senast kontrollerad 2026-10-06.
+- Guiderna: menyvägarna senast kontrollerade 2026-10-08 mot leverantörernas hjälpsidor.
+
+## Maskinläsbar data (öppen, bara läsande, inga personuppgifter)
+- [OpenAPI-beskrivning](https://aiauditor.se/api/v1/openapi.json): beskriver flödena nedan
+- [Branschnyckeltal som JSON](https://aiauditor.se/api/v1/branscher.json): alla 851 branscher med kvartiler, källa och hämtningsdatum per post
+- [Kontrollerna som JSON](https://aiauditor.se/api/v1/kontroller.json): alla aktiva kontroller med lagrum och kontrolldatum
+- [Källorna som JSON](https://aiauditor.se/api/v1/kallor.json): lagar och myndighetssidor som kontrollerna bygger på
+- [Fullständig text](https://aiauditor.se/llms-full.txt): alla kontroller, källor och SIE-guider i en fil
 - [Sajtkarta](https://aiauditor.se/sitemap.xml): alla publicerade sidor, inklusive samtliga branschsidor
+
+Själva granskningen av en SIE-fil har inget API: den körs bara i användarens webbläsare, så att bokföringen aldrig lämnar datorn.
 
 ## Optional
 - [Exempel på SIE-fil](https://aiauditor.se/exempel-sie.txt): exempelfilen som används i exempelgranskningen

@@ -1,0 +1,343 @@
+{
+ "beskrivning": "Frågebank: frågor som AI Auditors målgrupp (småföretagare som bokför själva, föreningskassörer, redovisningsbyråer) ställer till en AI-tjänst, och vilken sida på aiauditor.se som borde vara svaret. Saknas datan finns ingen sida (status 'saknar data').",
+ "skapad": "2026-10-17",
+ "avsikter": {
+  "information": "vill veta något",
+  "handling": "vill göra något",
+  "jämförelse": "jämför alternativ eller priser"
+ },
+ "antal": 46,
+ "antal_med_svarssida": 38,
+ "fragor": [
+  {
+   "id": 1,
+   "fraga": "Hur exporterar jag en SIE-fil från Fortnox?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-fortnox/",
+   "status": "svarar"
+  },
+  {
+   "id": 2,
+   "fraga": "Hur tar jag ut en SIE-fil från Visma eEkonomi (Spiris)?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-spiris/",
+   "status": "svarar"
+  },
+  {
+   "id": 3,
+   "fraga": "Hur exporterar jag SIE från Visma Administration?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-visma-administration/",
+   "status": "svarar"
+  },
+  {
+   "id": 4,
+   "fraga": "Hur exporterar jag bokföringen från Bokio som SIE-fil?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-bokio/",
+   "status": "svarar"
+  },
+  {
+   "id": 5,
+   "fraga": "Hur tar jag ut en SIE-fil från Björn Lundén?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-bjorn-lunden/",
+   "status": "svarar"
+  },
+  {
+   "id": 6,
+   "fraga": "Hur exporterar jag SIE-fil från Accounted?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-accounted/",
+   "status": "svarar"
+  },
+  {
+   "id": 7,
+   "fraga": "Hur exporterar jag SIE-fil från Briox?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-briox/",
+   "status": "svarar"
+  },
+  {
+   "id": 8,
+   "fraga": "Vad är en SIE-fil och vilken typ behöver jag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/guider/",
+   "status": "svarar"
+  },
+  {
+   "id": 9,
+   "fraga": "Vad är skillnaden mellan SIE4 och SIE1–SIE3?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/guider/sie-fil-fortnox/",
+   "status": "svarar"
+  },
+  {
+   "id": 10,
+   "fraga": "Kan jag granska min bokföring gratis på nätet?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/",
+   "status": "svarar"
+  },
+  {
+   "id": 11,
+   "fraga": "Hur kontrollerar jag att bokföringen är rätt innan bokslutet?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/",
+   "status": "svarar"
+  },
+  {
+   "id": 12,
+   "fraga": "Vad kontrolleras när man granskar en bokföring?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 13,
+   "fraga": "Hur hittar jag fel i momsen i bokföringen?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 14,
+   "fraga": "Får det finnas luckor i verifikationsnumreringen?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 15,
+   "fraga": "När måste ett aktiebolag upprätta en kontrollbalansräkning?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 16,
+   "fraga": "Måste mitt aktiebolag ha revisor?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 17,
+   "fraga": "Hur mycket moms får man dra av på en personbil eller leasingbil?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 18,
+   "fraga": "Hur hög omsättning får man ha för att använda kontantmetoden?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 19,
+   "fraga": "Hur snabbt måste kontanta betalningar bokföras?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kontroller/",
+   "status": "svarar"
+  },
+  {
+   "id": 20,
+   "fraga": "Vilka lagar och regler gäller för bokföring i Sverige?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/kallor/",
+   "status": "svarar"
+  },
+  {
+   "id": 21,
+   "fraga": "Skickas min bokföring till en server när jag använder AI Auditor?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/integritet/",
+   "status": "svarar"
+  },
+  {
+   "id": 22,
+   "fraga": "Används min bokföring för att träna AI?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/integritet/",
+   "status": "svarar"
+  },
+  {
+   "id": 23,
+   "fraga": "Behövs ett personuppgiftsbiträdesavtal för att granska bokföringen i AI Auditor?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/integritet/",
+   "status": "svarar"
+  },
+  {
+   "id": 24,
+   "fraga": "Finns det granskning av kunders bokföring i redovisningsbyråns eget namn (white label)?",
+   "avsikt": "jämförelse",
+   "svarssida": "https://aiauditor.se/byra/",
+   "status": "svarar"
+  },
+  {
+   "id": 25,
+   "fraga": "Vad är normal soliditet för svenska företag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/",
+   "status": "svarar"
+  },
+  {
+   "id": 26,
+   "fraga": "Hur jämför jag mitt företags nyckeltal med branschen?",
+   "avsikt": "handling",
+   "svarssida": "https://aiauditor.se/bransch/",
+   "status": "svarar"
+  },
+  {
+   "id": 27,
+   "fraga": "Vad är normal soliditet för ett byggföretag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/41-2-entreprenorer-for-bostadshus-och-andra-byggnader/",
+   "status": "svarar"
+  },
+  {
+   "id": 28,
+   "fraga": "Vilken rörelsemarginal har restauranger i Sverige?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/56-1-restauranger/",
+   "status": "svarar"
+  },
+  {
+   "id": 29,
+   "fraga": "Hur många restaurangföretag finns i SCB:s branschstatistik?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/56-1-restauranger/",
+   "status": "svarar"
+  },
+  {
+   "id": 30,
+   "fraga": "Vad är en normal vinstmarginal för en frisörsalong?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/96-021-frisorsalonger/",
+   "status": "svarar"
+  },
+  {
+   "id": 31,
+   "fraga": "Vilken soliditet har IT-konsultbolag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/62-02-datakonsulter/",
+   "status": "svarar"
+  },
+  {
+   "id": 32,
+   "fraga": "Vad är en rimlig rörelsemarginal för en redovisningsbyrå?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/69-201-redovisnings-och-bokforingsbyraer/",
+   "status": "svarar"
+  },
+  {
+   "id": 33,
+   "fraga": "Hur lönsamma är taxiföretag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/49-32-taxiforetag/",
+   "status": "svarar"
+  },
+  {
+   "id": 34,
+   "fraga": "Vilken kassalikviditet har åkerier?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/49-41-akerier/",
+   "status": "svarar"
+  },
+  {
+   "id": 35,
+   "fraga": "Vad är normal bruttovinstmarginal för e-handel?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/47-91-postorderhandel-och-detaljhandel-pa-internet/",
+   "status": "svarar"
+  },
+  {
+   "id": 36,
+   "fraga": "Hur stor del av omsättningen går till personal i ett städföretag?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/81-21-stadforetag/",
+   "status": "svarar"
+  },
+  {
+   "id": 37,
+   "fraga": "Vilken rörelsemarginal har elinstallationsfirmor?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/43-21-elinstallationsfirmor/",
+   "status": "svarar"
+  },
+  {
+   "id": 38,
+   "fraga": "Hur lönsamma är tandläkarmottagningar?",
+   "avsikt": "information",
+   "svarssida": "https://aiauditor.se/bransch/86-23-tandlakarmottagningar/",
+   "status": "svarar"
+  },
+  {
+   "id": 39,
+   "fraga": "Hur exporterar jag en SIE-fil från PE Accounting?",
+   "avsikt": "handling",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Ingen offentlig instruktion från leverantören hittades (se LOGG 2026-10-06). Ingen sida förrän en källa finns."
+  },
+  {
+   "id": 40,
+   "fraga": "Vad kostar en redovisningskonsult per timme?",
+   "avsikt": "jämförelse",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Sajten har inga prisuppgifter om byråer."
+  },
+  {
+   "id": 41,
+   "fraga": "Vad kostar en revision för ett litet aktiebolag?",
+   "avsikt": "jämförelse",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Sajten har inga prisuppgifter om revision."
+  },
+  {
+   "id": 42,
+   "fraga": "Vilket bokföringsprogram är billigast för enskild firma?",
+   "avsikt": "jämförelse",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "AI Auditor jämför inte bokföringsprogram."
+  },
+  {
+   "id": 43,
+   "fraga": "Hur länge måste bokföringen sparas?",
+   "avsikt": "information",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Arkiveringskontrollen (BF11) är bara planerad och visas inte. Ingen sida förrän den är aktiv."
+  },
+  {
+   "id": 44,
+   "fraga": "När ska momsdeklarationen lämnas?",
+   "avsikt": "information",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Sajten har inga deklarationsdatum i sin data."
+  },
+  {
+   "id": 45,
+   "fraga": "Hur gör jag ett bokslut själv?",
+   "avsikt": "handling",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Ingen guide eller data för bokslut finns på sajten."
+  },
+  {
+   "id": 46,
+   "fraga": "Vad kostar AI-bokföring med Konrad?",
+   "avsikt": "jämförelse",
+   "svarssida": null,
+   "status": "saknar data",
+   "kommentar": "Konrad (/konrad/) är ännu inte öppen för sökmotorer (noindex) och har platshållare för namn och bolagsuppgifter. Pekas inte ut förrän Olle släpper sidan."
+  }
+ ]
+}

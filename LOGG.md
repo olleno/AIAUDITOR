@@ -30,3 +30,15 @@
 - Färg bläckblå #1A2A9C (nära Nordea, inte deras #0000A0); grönt valdes bort (för nära Fortnox). Klarspråk, inga AI-säljord.
 - "Människorna bakom Konrad": bildbanksbilder från Unsplash (hotlänkade), tydligt märkta "Bildbanksbild · byts ut"; namn och bolagsuppgifter är platshållare tills riktiga finns.
 - Villkor: fristgarantin gäller Bevakning–Ekonomichef. Fortfarande noindex. Underlag: Dropbox /Claude/AI-redovisningsbyrå.
+
+## 2026-10-17 – AI-sökpaketet
+- JSON-LD: Organization (Kansliet at Nordwik Partners, Foodbergs Stockholm AB, 559518-4457) + WebSite på alla sidor, inklusive startsidan; Dataset med nedladdningslänk på branschsidorna och branschöversikten. Ingen SearchAction (sajten har ingen sökfunktion). Inga betyg.
+- Nytt i verktyg/: aiauditor_fakta.py (gemensamma namn, bolagsuppgifter och datum), aiauditor_api.py (öppna JSON-flöden), kontroller_sida.py.
+- Ny sida /kontroller/: alla 51 aktiva kontroller med lagrum, direkt ur py/regelkatalog.csv.
+- Öppen data (bara läsande, inga personuppgifter): /api/v1/branscher.json, /kontroller.json, /kallor.json och /api/v1/openapi.json. /llms-full.txt med alla kontroller, källor och guider. llms.txt utökad med uppdateringstakt och flödena.
+- Svar först: branschsidorna har källa och hämtningsdatum direkt under svaret och rubriker som frågor; branschöversikten inleds med näringslivets median. Guidernas "Senast kontrollerad" är nu ett fast datum (2026-10-08) i stället för byggdatum.
+- Datum på alla indexerade sidor. Fabrikskollen: från 869 till 13 fel, alla kända undantag (Konrad, konto och /conrad/ är medvetet noindex; e-postfälten på /konrad/ och /byra/).
+- data/ai-fragor.json (46 frågor, 38 med svarssida) och data/ai-synlighet.json (mätprotokoll).
+- Tester: tester/aiauditor_test_ai_sok.py. Bygg och testa: `python3 verktyg/bygg_sidor.py && python3 -m unittest discover -s tester -p 'aiauditor_test_*.py'`.
+- /conrad/ är en omdirigering till /konrad/ (noindex, kanonisk /konrad/). Konrad hålls utanför llms.txt och flödena tills den släpps.
+- Inte publicerat.

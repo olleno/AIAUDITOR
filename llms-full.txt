@@ -1,0 +1,190 @@
+# AI Auditor – fullständig text för AI-tjänster
+
+> Gratis granskning av bokföring i SIE-format mot bokföringslagen, momslagen och skattereglerna, med jämförelse mot SCB:s branschnyckeltal. Körs i webbläsaren.
+
+AI Auditor drivs av Kansliet at Nordwik Partners (bifirma till Foodbergs Stockholm AB, org.nr 559518-4457). Kontakt: kansliet@nordwikpartners.se.
+Granskningen körs helt i användarens webbläsare: SIE-filen skickas ingenstans och sparas inte. Sajten har inga annonslänkar.
+
+Kortversion: https://aiauditor.se/llms.txt. Öppen data: https://aiauditor.se/api/v1/openapi.json
+
+## Kontrollerna (51 st, senast kontrollerade mot lagtexterna 2026-10-06)
+
+### Grundbokföring
+
+- BF01 Verifikationen går inte jämnt ut: Summan av debet och kredit per verifikation ska vara noll. Bygger på: Bokföringslagen (1999:1078) 5 kap 1 § (löpande bokföring).
+- BF02 Lucka i verifikationsnumreringen: Nummer saknas mellan lägsta och högsta i en serie. Bygger på: BFNAR 2013:2 Bokföring (obruten nummerserie per verifikationsserie).
+- BF03 Samma verifikationsnummer används två gånger: Dubbletter av nummer inom samma serie. Bygger på: Bokföringslagen 5 kap 7 § (verifikationsnummer eller annan identifieringsuppgift).
+- BF04 Datum utanför räkenskapsåret: Verifikationsdatum före eller efter räkenskapsåret. Bygger på: Bokföringslagen 3 kap (räkenskapsår) och 5 kap 1 §.
+- BF05 Konto finns inte i kontoplanen: Konto i verifikation saknas i filens kontoplan. Bygger på: BFNAR 2013:2 Bokföring (kontoplan), Bokföringslagen 5 kap 1 § (systematisk ordning).
+- BF06 Verifikation saknar beskrivning: Tom verifikationstext. Bygger på: Bokföringslagen 5 kap 7 § (verifikationens innehåll – vad affärshändelsen avser).
+- BF07 Verifikation ändrad i efterhand: Rader markerade som tillagda eller borttagna (#RTRANS/#BTRANS) – kontrollera att ändringen dokumenterats. Bygger på: Bokföringslagen 5 kap 5 § (rättelse).
+- BF08 Möjlig dubbelbokning: Samma text, belopp och kostnadskonto inom 14 dagar (belopp från 10 kr, utom motbokade). Bygger på: Bokföringslagen 5 kap 6 § (en verifikation per affärshändelse).
+- BF10 Sen bokföring: Registreringsdatum mer än 60 dagar efter verifikationsdatum (om registreringsdatum finns i filen). Företag med omsättning högst 3 mkr får vänta med bokföringen till betalning.. Bygger på: Bokföringslagen 5 kap 2 § (tidpunkt för bokföring).
+- BF12 Kontant betalning bokförd för sent: Kassaposter (1910) registrerade mer än tre dagar efter betalningen. Bygger på: Bokföringslagen 5 kap 2 § (kontanta in- och utbetalningar senast påföljande arbetsdag), BFNAR 2013:2 punkt 3.1.
+
+### Moms
+
+- MO01 Ingående moms motsvarar ingen enskild momssats: Moms/nettokostnad avviker från 25, 12 och 6 % men ligger mellan 6 och 25 % (kan vara blandat kvitto). Bygger på: Mervärdesskattelagen (2023:200).
+- MO02 Orimligt momsbelopp: Moms/nettokostnad under 6 % eller över 25 %. Bygger på: Mervärdesskattelagen (2023:200).
+- MO03 Momsavdrag på kostnad som inte är avdragsgill: Ingående moms i verifikation med bara ej avdragsgilla kostnadskonton (6072, 6992, 7632). Bygger på: Mervärdesskattelagen (2023:200) avdragsrätt, Inkomstskattelagen 16 kap 2 § (representation).
+- MO04 Utgående moms stämmer inte med försäljningen: Utgående moms per momskonto räknas om till underlag och jämförs med försäljningskontona. Bygger på: Mervärdesskattelagen (2023:200).
+- MO05 Försäljning utan utgående moms: Försäljning på 30xx/31xx utan utgående moms och utan momsfritt konto. Bygger på: Mervärdesskattelagen (2023:200).
+- MO06 Försäljningen minskas utan att momsen minskas: Debet på försäljningskonto utan motsvarande debet på utgående moms. Bygger på: Mervärdesskattelagen (2023:200) (kreditering).
+- MO07 Fjolårets moms inte redovisad: Ingående saldon på momskonton 261x–264x som inte förs bort under året. Bygger på: Skatteförfarandelagen (2011:1244) 26 kap (skattedeklaration).
+- MO08 Årets moms inte redovisad vid årets slut: Utgående saldon på momskonton 261x–264x för avslutat räkenskapsår. Bygger på: Skatteförfarandelagen (2011:1244) 26 kap.
+- MO09 Omvänd skattskyldighet går inte jämnt ut: Utgående moms omvänd (2614/2624/2634) ska motsvaras av beräknad ingående moms (2645/2647) i samma verifikation. Bygger på: Mervärdesskattelagen (2023:200) (omvänd skattskyldighet).
+- MO10 För högt momsavdrag på personbil: Moms på köp av personbil (1240) eller mer än 50 % av momsen på leasing (5615). Bygger på: Mervärdesskattelagen (2023:200) (personbil: inget avdrag vid köp, 50 % vid leasing).
+- MO11 Momsdeklaration stämmer inte med bokföringen (avstämning mot handlingar): Ruta 49 i inlämnad momsdeklaration jämförs med momskontona 2610–2649 för perioden, utan momsredovisningsverifikationer. Bygger på: Skatteförfarandelagen (2011:1244) 26 kap.
+- MO13 Blandad verksamhet – momsavdraget ska fördelas: Både momsfri och momspliktig försäljning under året samtidigt som ingående moms dras av. Bygger på: Mervärdesskattelagen (2023:200) 13 kap 29 § (avdrag bara för den del som hör till verksamhet med avdragsrätt,  annars fördelning efter skälig grund).
+
+### Skatt
+
+- SK01 Möjlig privat kostnad: Sökord i verifikationstext (Systembolaget, IKEA, Netflix m.fl.) på kostnadskonto. Bygger på: Inkomstskattelagen (1999:1229) 9 kap 2 § (levnadskostnader ej avdragsgilla).
+- SK05 Skattekontot stämmer inte med bokföringen (avstämning mot handlingar): Skattekontots saldo enligt Skatteverket jämförs med konto 1630 på samma datum (uppgift som användaren fyller i). Bygger på: Skatteförfarandelagen 61 kap (skattekonto).
+- SK06 Ränteavdraget kan vara begränsat: Negativt räntenetto (ränteutgifter 84xx utom skattekontoränta minus ränteintäkter 83xx) över 5 000 000 kr. Bygger på: Inkomstskattelagen 24 kap 24 § (negativt räntenetto: högst 30 % av skattemässigt EBITDA,  förenklingsregel 5 000 000 kr per intressegemenskap), Skatteverket Ränteutgifter (uppdaterad 2026-07-16).
+- SK07 Ej avdragsgilla kostnader att återföra i deklarationen: Summa per konto av kostnader som inte är avdragsgilla och ska läggas tillbaka i inkomstdeklarationen. Bygger på: Skatteverket avdragslexikon: kostnadsränta på skattekontot, förseningsavgifter, skattetillägg och böter är inte avdragsgilla,  BAS-kontonas "ej avdragsgill".
+- SK08 Periodiseringsfond som ska återföras, och schablonintäkt: Periodiseringsfonder per avsättningsår och deras ingående saldo. Bygger på: Inkomstskattelagen 30 kap (återföring senast sjätte beskattningsåret efter avsättningen,  schablonintäkt 30 kap 6 a §), Skatteverket belopp och procent: statslåneräntan 1,96 % (beskattningsår 2025), 2,55 % (2026).
+- SK09 Bolagsskatt saknas trots vinst: Bokslutet är bokat, resultatet före skatt är positivt men ingen skatt (89xx) är bokförd. Bygger på: Inkomstskattelagen 65 kap (bolagsskatt 20,6 %), BFNAR 2016:10 (K2) skatt på årets resultat.
+
+### Lön
+
+- LO01 Lön utan skatteavdrag: Lönekonto 70xx–72xx (utom förändring semesterlöneskuld) utan personalskatt 2710 i samma verifikation. Bygger på: Skatteförfarandelagen 10 kap (skatteavdrag).
+- LO02 Arbetsgivaravgift avviker: Arbetsgivaravgift/lön avviker från 31,42 % (full avgift) och 10,21 % (äldre). Kontrollera om annan nedsättning gäller, t.ex. för unga.. Bygger på: Socialavgiftslagen (2000:980): 31,42 %, 10,21 % för födda 1938–1958, 20,81 % för unga (födda 2003–2007) på lön upp till 25 000 kr/mån 1 apr 2026–30 sep 2027.
+- LO03 Semesterlöneskuld saknas vid bokslut: Löner bokförda under avslutat år men inget saldo på 2920. Bygger på: BFNAR 2016:10 (K2) – skulder vid balansdagen.
+
+### Avskrivningar
+
+- AV01 Avskrivningar saknas: Inventarier finns men inga avskrivningar (78xx) bokförda under året. Bygger på: Inkomstskattelagen 18 kap, BFNAR 2016:10 (K2) avskrivning.
+- AV02 Avskrivning räknad på belopp inklusive avdragen moms: Månadsavskrivning × vanlig livslängd stämmer med bruttobeloppet men inte med nettobeloppet. Bygger på: BFNAR 2016:10 (K2) anskaffningsvärde, Mervärdesskattelagen.
+- AV03 Kostnadsförd inventarie över halvt prisbasbelopp: Rad på 5400–5419 större än halvt prisbasbelopp (2026: 29 600 kr). Bygger på: Inkomstskattelagen 18 kap 4 § (inventarier av mindre värde).
+- AV04 Byggnader utan avskrivning: Byggnader (1110–1118) i balansräkningen men ingen avskrivning under ett avslutat år. Bygger på: Inkomstskattelagen 19 kap (värdeminskningsavdrag på byggnader), BFNAR 2016:10 (K2) – materiella anläggningstillgångar skrivs av systematiskt.
+- AV05 Avskrivning på mark: Avskrivning bokförd mot markkonto (1130–1139). Bygger på: Inkomstskattelagen 19 kap och BFNAR 2016:10 (K2) – mark skrivs inte av.
+
+### Bank och kassa
+
+- BA01 Negativt saldo på kassa eller bank: Löpande saldo på 19xx blir negativt. Bygger på: Bokföringslagen 5 kap 1 §.
+- BA02 Bankkonto med saldo som inte används: Bankkonto med ingående saldo utan transaktioner medan ett annat bankkonto används. Bygger på: Bokföringslagen 5 kap 1 §.
+- BA03 Banksaldot stämmer inte med kontoutdraget (avstämning mot handlingar): Bankens saldo enligt kontoutdraget jämförs med 19xx på samma datum (uppgift som användaren fyller i). Bygger på: Bokföringslagen 5 kap 1 §.
+
+### Aktiebolag
+
+- AB01 Eget kapital under halva aktiekapitalet: Eget kapital inklusive årets resultat jämförs med halva registrerade aktiekapitalet. Bygger på: Aktiebolagslagen (2005:551) 25 kap 13 § (kontrollbalansräkning).
+- AB02 Fordran på aktieägare eller närstående: Saldo på fordringskonto för delägare eller närstående (t.ex. 1685). Bygger på: Aktiebolagslagen 21 kap (förbjudna lån).
+- AB03 Fjolårets resultat inte disponerat: Ingående saldo på 2099 Årets resultat ligger kvar i nytt år. Bygger på: Aktiebolagslagen 7 kap 11 § (årsstämmans beslut om vinst eller förlust).
+- AB05 Revisor kan krävas: Balansomslutning över 1,5 mkr och nettoomsättning över 3 mkr under året. Bygger på: Aktiebolagslagen 9 kap 1 § (revisor krävs om mer än ett av: fler än 3 anställda, balansomslutning över 1,5 mkr, nettoomsättning över 3 mkr – vart och ett av de två senaste räkenskapsåren,  gränserna oförändrade sedan 2010).
+- AB06 K2 får kanske inte användas (större företag): Balansomslutning över 40 mkr och nettoomsättning över 80 mkr. Bygger på: Årsredovisningslagen 1 kap 3 § (större företag: mer än ett av 50 anställda, 40 mkr balansomslutning, 80 mkr nettoomsättning två år i rad), BFNAR 2016:10 (K2 bara för mindre företag).
+- AB07 Utdelning större än fritt eget kapital: Beslutad utdelning (2898) jämförd med fritt eget kapital vid årets början. Bygger på: Aktiebolagslagen 17 kap 3 § (beloppsspärren och försiktighetsregeln) och 18 kap.
+
+### Bokslut
+
+- BO01 Bokslutet stämmer inte med bokföringen (avstämning mot handlingar): Årets resultat enligt årsredovisningen jämförs med resultatkontona 3000–8999 (utom 8999). Bygger på: Årsredovisningslagen (1995:1554), BFNAR 2016:10 (K2).
+- BO06 Bokslutet är inte bokfört: Mer än sex månader efter räkenskapsårets slut finns inget årets resultat bokfört (8999) trots att resultatet inte är noll. Bygger på: Bokföringslagen 6 kap (årsbokslut/årsredovisning), Årsredovisningslagen 8 kap 3 och 6 §§ (inlämning,  förseningsavgift om handlingarna inte kommit in inom sju månader – 7 500 kr för privat aktiebolag, räkenskapsår som börjar efter 31 dec 2024, SFS 2024:1115).
+- BO07 Kontantmetoden används trots för hög omsättning: Nettoomsättning över 3 000 000 kr men inga kundfordringar eller leverantörsskulder bokförda. Bygger på: Bokföringslagen 5 kap 2 § tredje stycket (kontantmetoden bara om nettoomsättningen normalt är högst 3 miljoner kr).
+- BO08 Balanskonto med orimligt tecken vid årets slut: Kundfordringar med kreditsaldo, leverantörsskulder eller personalskatt med debetsaldo vid räkenskapsårets slut. Bygger på: Bokföringslagen 5 kap 1 §, rimlighetsbedömning av tillgångar och skulder enligt god redovisningssed (Srf/FAR:s standard för redovisningsuppdrag, Reko/Rex – tolkning).
+- BO09 Oklara poster kvar vid årets slut: Konto som enligt sitt namn är till för oklara eller outredda poster har saldo vid räkenskapsårets slut. Bygger på: Bokföringslagen 5 kap 1 § och 6 kap (bokslutet ska bygga på utredda poster), god redovisningssed (Reko/Rex – tolkning).
+
+### Fastighet
+
+- FA01 Fastighetsskatt eller fastighetsavgift saknas: Byggnader eller mark (11xx) i balansräkningen men ingen kostnad för fastighetsskatt/fastighetsavgift under ett avslutat år. Bygger på: Lagen (1984:1052) om statlig fastighetsskatt och lagen (2007:1398) om kommunal fastighetsavgift (ägaren vid årets ingång betalar), Skatteverket 2026: lokaler 1,0 %, bostadslägenhet 0,3 % högst 1 784 kr.
+
+## Källor (23 st, bevakas varje natt, förteckningen uppdaterad 2026-10-06)
+
+- Bokföringslagen (1999:1078) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1999-1078/): kontroller BF01–BF12, BA01–BA03, BO02, BO04, BO06–BO09
+- Årsredovisningslagen (1995:1554) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1995-1554/): kontroller BO01, BO05, BO06, AB06
+- Aktiebolagslagen (2005:551) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2005-551/): kontroller AB01–AB07
+- Mervärdesskattelagen (2023:200) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2023-200/): kontroller MO01–MO13, AV02; bokföraren: momssatser och K11–K13
+- Inkomstskattelagen (1999:1229) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1999-1229/): kontroller SK01–SK09, AV01–AV05, LO05; bokföraren: skattetips i månadsbrevet
+- Skatteförfarandelagen (2011:1244) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2011-1244/): kontroller MO07, MO08, MO11, MO12, SK04, SK05, LO01, LO04, BA04
+- Socialavgiftslagen (2000:980) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2000-980/): kontroller LO02
+- Lagen om statlig fastighetsskatt (1984:1052) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1984-1052/): kontroller FA01
+- Lagen om kommunal fastighetsavgift (2007:1398) (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-2007-1398/): kontroller FA01
+- Bokföringsnämnden – nyheter (https://www.bfn.se/nyheter/): kontroller BFNAR 2013:2, K2 (BFNAR 2016:10), K1, årsbokslut (BFNAR 2017:3)
+- Bokföringsnämnden – redovisningsregler (https://www.bfn.se/redovisningsregler/): kontroller BF02, BF07, BO03, LO03, AV01, AV04
+- Skatteverket – belopp och procent 2026 (https://www.skatteverket.se/privat/skatter/beloppochprocent/2026/belopochprocent2026kortversion.4.1522bf3f19aea8075ba89.html): kontroller AV03 (prisbasbelopp), SK08, LO02; bokföraren: månadsbrevets skatteregler
+- Skatteverket – ränteutgifter (ränteavdragsbegränsning) (https://www.skatteverket.se/ranteutgifter): kontroller SK06
+- Skatteverket – periodiseringsfond (https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/aktiebolag/periodiseringsfond.4.4887341d16e1e2b8ddf30e.html): kontroller SK08; bokföraren: skattetips
+- Skatteverket – arbetsgivaravgifter (https://www.skatteverket.se/foretag/arbetsgivare/arbetsgivaravgifterochskatteavdrag/arbetsgivaravgifter.4.233f91f71260075abe8800020817.html): kontroller LO02
+- Skatteverket – fastighetsavgift och fastighetsskatt (https://www.skatteverket.se/privat/fastigheterochbostad/fastighetsavgiftochfastighetsskatt.4.69ef368911e1304a625800013531.html): kontroller FA01
+- Skatteverket – moms vid fastighetsverksamhet (https://www.skatteverket.se/foretag/moms/sarskildamomsregler/fastighetsverksamhet.4.58d555751259e4d66168000473.html): kontroller MO05, MO13
+- Skatteverket – när ska jag deklarera moms (https://www.skatteverket.se/foretag/moms/deklareramoms/narskajagdeklareramoms.html): kontroller MO07, MO08, MO11
+- Skatteverket – representation (https://www.skatteverket.se/4.15532c7b1442f256baec84b.html): kontroller MO03, SK02, SK07
+- Skatteverket – bilar och moms (https://www.skatteverket.se/foretag/moms/sarskildamomsregler/bilarochmoms.4.58d555751259e4d6616800010628.html): kontroller MO10
+- Skatteverket – avdragslexikon för företag (https://www.skatteverket.se/foretag/skatterochavdrag/avdragforforetag/avdragslexikonforetag.4.3684199413c956649b550c8.html): kontroller SK01, SK07
+- Förordning (1995:1633) om vissa årsredovisningsfrågor (https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/_sfs-1995-1633/): kontroller BO05, BO06
+- Skatteverket – belopp och procent, alla år (fångar nästa års siffror när de publiceras) (https://www.skatteverket.se/privat/skatter/beloppochprocent.4.18e1b10334ebe8bc80004109.html): kontroller AV03, SK08, LO02; bokföraren: månadsbrevets skatteregler
+
+## Så tar du ut en SIE-fil (menyvägarna kontrollerade 2026-10-08)
+
+### Fortnox (https://aiauditor.se/guider/sie-fil-fortnox/)
+
+1. Öppna Fortnox Bokföring för rätt bolag.
+2. Klicka högst upp i programmet, på bolagsnamnet eller räkenskapsåret, och välj Export.
+3. Välj filtypen SIE4 – Transaktioner.
+4. Ange datumintervall: räkenskapsårets första och sista dag.
+5. Välj om alla konton, kostnadsställen och projekt ska följa med, och bocka i de verifikationsserier som ska ingå. Ta med alla.
+6. Klicka på Exportera och spara filen.
+Källa: Fortnox: Exportera SIE-fil (https://support.fortnox.se/produkthjalp/bokforing/exportera-sie-fil)
+Källa: Fortnox: Exportera SIE-fil i Fortnox Bokföring (https://support.fortnox.se/supportplay/bokforing/exportera-sie-fil-i-fortnox-bokforing)
+
+### Spiris Bokföring & Fakturering (f.d. Visma eEkonomi) (https://aiauditor.se/guider/sie-fil-spiris/)
+
+1. Gå till Inställningar – Import och export.
+2. Välj SIE – import och export av bokföringsdata.
+3. Välj att göra en ny export.
+4. Välj det räkenskapsår du vill granska.
+5. Klicka på exportera och spara filen.
+Källa: Visma eEkonomi: Exportera bokföringsdata (SIE) (https://help.visma.net/se_en/eaccounting/content/online-help/settings-import-export-accounting-data-export.htm)
+Källa: Spiris: Byt från Visma-program (menynamn för SIE) (https://www.spiris.se/support/kom-igang/dataflytt/byt-fran-visma-progam)
+Källa: Spiris: Visma Spcs blir Spiris (https://www.spiris.se/support/visma-spcs-blir-spiris)
+
+### Visma Administration och Visma Bokföring (https://aiauditor.se/guider/sie-fil-visma-administration/)
+
+1. Öppna rätt företag och se till att rätt räkenskapsår är valt.
+2. Välj Arkiv – Export – SIE.
+3. Välj SIE 4, som innehåller alla verifikationer för bokföringsåret.
+4. Klicka OK. Programmet föreslår mappen SIE och företagsnamnet som filnamn. Svara ja om programmet frågar om mappen ska skapas.
+5. Klicka Spara och sedan OK när exporten är klar.
+Källa: Spiris: Export SIE, Visma Administration 500 (https://support.spiris.se/visma-administration-500/content/online-help/export-sie.htm)
+Källa: Spiris: Export SIE, Visma Administration 1000 (https://support.spiris.se/visma-administration-1000/content/online-help/export-sie.htm)
+Källa: Spiris: Export av SIE, Visma Bokföring (https://support.spiris.se/visma-bokforing/content/visma-bokforing/bokforing/export-av-sie.htm)
+
+### Bokio (https://aiauditor.se/guider/sie-fil-bokio/)
+
+1. Gå till Inställningar → Exportera data.
+2. Leta upp det räkenskapsår du vill granska.
+3. Klicka på de tre prickarna (…) bredvid räkenskapsåret.
+4. Välj SIE 4 och spara filen.
+Källa: Bokio: Hur exporterar jag SIE-filer? (https://www.bokio.se/hjalp/bokforing/import-och-export/hur-exporterar-jag-sie-filer/)
+
+### Björn Lundén (BL Administration) (https://aiauditor.se/guider/sie-fil-bjorn-lunden/)
+
+1. Välj Arkiv – Export – SIE (bokföring).
+2. Välj SIE-4 – Årssaldon och transaktioner.
+3. Välj Räkenskapsår. Du exporterar ett år åt gången.
+4. Kontrollera mapp och filnamn längst ned. Standardmappen är C:\SIE och filnamnet föreslås automatiskt.
+5. Klicka på Exportera.
+Källa: Björn Lundén: Export (https://support.bjornlunden.se/guide/export)
+
+### Accounted (https://aiauditor.se/guider/sie-fil-accounted/)
+
+1. Gå till Bokföring.
+2. Välj Importera/Exportera och fliken Exportera.
+3. Klicka på SIE 4.
+4. Välj räkenskapsår.
+5. Klicka Ladda ner SIE.
+Källa: Accounted: SIE4-export och import steg för steg (https://www.accounted.se/blogg/sie4-export-och-import-steg-for-steg)
+
+### Briox (https://aiauditor.se/guider/sie-fil-briox/)
+
+1. Gå till Exporter – Exportera SIE-fil i vänstermenyn.
+2. Kontrollera att SIE4 är vald. Den är förvald.
+3. Ange datumintervall: räkenskapsårets första och sista dag.
+4. Välj om alla konton, kostnadsställen och projekt ska ingå, och markera alla verifikationsserier.
+5. Klicka på Exportera längst ned.
+Källa: Briox: Exportera SIE-fil (https://support.briox.se/hc/sv/articles/21136921826972-Exportera-SIE-fil)
+
+## Branschnyckeltal
+
+851 branscher (SNI 2007) med soliditet, kassalikviditet, rörelsemarginal, nettomarginal med mera, som undre kvartil, median och övre kvartil.
+Källa: SCB, Företagens ekonomi (tabell BNTT01), år 2024, hämtad 2026-10-06, licens CC0. Visas obearbetade.
+Alla siffror: https://aiauditor.se/api/v1/branscher.json. En sida per bransch under https://aiauditor.se/bransch/.

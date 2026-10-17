@@ -1,5 +1,6 @@
 """Sidan /integritet/: vem som står bakom AI Auditor och vad som händer med uppgifterna."""
 import os
+import aiauditor_fakta as F
 
 KROPP = '''<article class="byra"><p class="etikett">Integritet och trygghet</p>
 <h1>Din bokföring lämnar aldrig din dator</h1>
@@ -35,4 +36,4 @@ def bygg(sida, brodsmulor, rot):
     os.makedirs(os.path.join(rot, "integritet"), exist_ok=True)
     open(os.path.join(rot, "integritet", "index.html"), "w", encoding="utf-8").write(
         sida("Integritet – din bokföring lämnar aldrig din dator", "AI Auditor granskar SIE-filen i din webbläsare. Inget skickas, inget sparas, inga kakor. Vem som står bakom och vad som händer med uppgifterna.",
-             "/integritet/", smul + KROPP, [ldsmul]))
+             "/integritet/", smul + KROPP, [ldsmul], datum=f"Uppdaterad {F.INTEGRITET_UPPDATERAD}."))

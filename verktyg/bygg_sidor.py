@@ -5,6 +5,7 @@ siffror som sin huvudbransch, får ingen egen sida.
 """
 import html, json, os, re, shutil, unicodedata
 from datetime import date
+import aiauditor_fakta as F
 
 ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCB = json.load(open(os.path.join(ROT, "verktyg", "branschnyckeltal.json"), encoding="utf-8"))
@@ -76,8 +77,12 @@ LOGGA = ('<a href="/" class="logolank" aria-label="AI Auditor, startsidan"><svg 
  '<text class="t" x="98" y="32" textLength="120" lengthAdjust="spacingAndGlyphs" font-family="Inter, system-ui, sans-serif" font-size="27" font-weight="800">AUDITOR</text>'
  '<text class="s" x="65" y="48" textLength="152" lengthAdjust="spacing" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500">GRANSKNING AV BOKFÖRING</text></svg></a>')
 
-def sida(titel, beskr, kanon, kropp, ld=None):
-    ldtxt = "".join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in (ld or []))
+def sida(titel, beskr, kanon, kropp, ld=None, datum=None):
+    """datum = när innehållet senast ändrades/kontrollerades (aldrig byggdatum). Skrivs sist i artikeln."""
+    ldtxt = "".join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in [F.org_ld()] + (ld or []))
+    if datum and "</article>" in kropp:
+        i = kropp.rindex("</article>")
+        kropp = kropp[:i] + f'<p class="not">{datum}</p>' + kropp[i:]
     return f'''<!doctype html>
 <html lang="sv">
 <head>
@@ -100,7 +105,7 @@ def sida(titel, beskr, kanon, kropp, ld=None):
 <main>
 {kropp}
 </main>
-<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/konto/">Mitt konto</a> · <a href="/byra/">För byråer</a></span></footer>
+<footer class="fot"><span>Kansliet at Nordwik Partners · kansliet@nordwikpartners.se</span><span><a href="/bransch/">Nyckeltal per bransch</a> · <a href="/guider/">Ta ut en SIE-fil</a> · <a href="/kontroller/">Kontrollerna</a> · <a href="/kallor/">Källor</a> · <a href="/integritet/">Integritet</a> · <a href="/konto/">Mitt konto</a> · <a href="/byra/">För byråer</a></span></footer>
 </div>
 </body>
 </html>
@@ -166,17 +171,20 @@ for k, s in sidor.items():
     kropp = (smul +
         f'<article><p class="etikett">Nyckeltal per bransch · SNI {k}</p><h1>Nyckeltal för {e(namn.lower())}</h1>'
         f'<p class="ingress">{e(intro)} Siffrorna bygger på {n:,} företag och avser år {AR}.</p>'.replace(f"{n:,}", f"{n:,}".replace(",", " ")) +
-        f'<h2>Så ser branschen ut</h2><div class="tabell"><table><thead><tr><th>Nyckeltal</th><th>Undre kvartil</th><th>Median</th><th>Övre kvartil</th><th>Näringslivet, median</th></tr></thead><tbody>{rader}</tbody></table></div>'
+        f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}. Hämtad från SCB {F.SCB_HAMTAD}.</p>'
+        f'<h2>Vilka nyckeltal har {e(namn.lower())}?</h2><div class="tabell"><table><thead><tr><th>Nyckeltal</th><th>Undre kvartil</th><th>Median</th><th>Övre kvartil</th><th>Näringslivet, median</th></tr></thead><tbody>{rader}</tbody></table></div>'
         '<p class="not">Medianen är värdet för företaget i mitten. Hälften av företagen ligger mellan undre och övre kvartil. Kvartilerna anges som SCB redovisar dem. "Näringslivet" är hela bolagssektorn utom fastighetsförvaltning.</p>'
         + CTA.format(namn=e(namn.lower()), kod=k) +
-        (f'<h2>Efter företagets storlek</h2><p>Mediantal per storleksklass, efter antal anställda.</p><div class="tabell"><table><thead><tr><th>Storlek</th><th>Företag</th><th>Soliditet</th><th>Rörelsemarginal</th><th>Kassalikviditet</th><th>Personalkostnader / omsättning</th><th></th></tr></thead><tbody>{strad}</tbody></table></div>' if strad else '')
+        (f'<h2>Skiljer sig nyckeltalen mellan små och stora företag?</h2><p>Mediantal per storleksklass, efter antal anställda.</p><div class="tabell"><table><thead><tr><th>Storlek</th><th>Företag</th><th>Soliditet</th><th>Rörelsemarginal</th><th>Kassalikviditet</th><th>Personalkostnader / omsättning</th><th></th></tr></thead><tbody>{strad}</tbody></table></div>' if strad else '')
         + (f'<h2>Underbranscher</h2><ul class="lankar">{under}</ul>' if under else '')
         + (f'<h2>Närliggande branscher</h2><ul class="lankar">{syskonhtml}</ul>' if syskonhtml else '')
-        + f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}. Branschindelning enligt SNI 2007.</p></article>')
+        + f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}. Branschindelning enligt SNI 2007. Hämtad från SCB {F.SCB_HAMTAD}. <a href="/api/v1/branscher.json">Siffrorna som JSON</a>.</p></article>')
     ld = [ldsmul, {"@context": "https://schema.org", "@type": "Dataset", "name": f"Nyckeltal för {namn.lower()} {AR}",
            "description": f"Branschnyckeltal (kvartiler) för SNI {k} {namn}, {AR}, från SCB:s Företagens ekonomi.",
            "creator": {"@type": "Organization", "name": "Statistiska centralbyrån (SCB)", "url": "https://www.scb.se"},
            "license": "https://creativecommons.org/publicdomain/zero/1.0/", "temporalCoverage": str(AR), "inLanguage": "sv",
+           "isAccessibleForFree": True, "publisher": {"@id": F.SAJT + "/#organisation"},
+           "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{SAJT}/api/v1/branscher.json"},
            "url": f"{SAJT}/bransch/{s}/"}]
     titel = f"Nyckeltal för {namn.lower()} {AR} – soliditet, marginaler, likviditet"
     beskr = (f"{namn}: {intro} Jämför ditt bolag gratis med branschen.")[:300]
@@ -192,12 +200,21 @@ for k in [x for x in sidor if "." not in x] + sorted({x.split(".")[0] for x in s
     grupper += (f'<section class="grupp"><h2><span class="kod">{k}</span> {huvud}</h2>'
                 + (f'<ul class="lankar">' + "".join(f'<li><a href="/bransch/{sidor[x]}/">{e(SCB["sni"][x])}</a> <span class="kod">{x}</span></li>' for x in lista) + '</ul>' if lista else '') + '</section>')
 smul, ldsmul = brodsmulor([("Start", "/"), ("Branscher", None)])
+nlord = [f"{kort} {tal(nl[kod][1], kod)}" for kod, kort in (("00000340", "soliditet"), ("0000032G", "rörelsemarginal"), ("00000343", "kassalikviditet")) if nl.get(kod) and nl[kod][1] is not None]
+nlord = ", ".join(nlord[:-1]) + " och " + nlord[-1]
 kropp = (smul + f'<article><p class="etikett">Nyckeltal per bransch</p><h1>Hur går det för branschen?</h1>'
-         f'<p class="ingress">Soliditet, marginaler, likviditet och betalningstider för {len(sidor)} branscher, från SCB:s statistik över företagens ekonomi år {AR}. Välj en bransch, eller <a href="/#granska">jämför ditt eget bolag direkt</a>.</p>'
-         + grupper + f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}.</p></article>')
+         f'<p class="ingress">Medianföretaget i det svenska näringslivet hade år {AR} {nlord} (hela bolagssektorn utom fastighetsförvaltning). '
+         f'Här finns samma nyckeltal – soliditet, marginaler, likviditet och betalningstider – för {len(sidor)} branscher, från SCB:s statistik över företagens ekonomi. Välj en bransch, eller <a href="/#granska">jämför ditt eget bolag direkt</a>.</p>'
+         f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}. Hämtad från SCB {F.SCB_HAMTAD}.</p>'
+         + grupper + f'<p class="kalla">Källa: SCB, Företagens ekonomi (tabell BNTT01), år {AR}. Hämtad från SCB {F.SCB_HAMTAD}. Alla siffror finns också som <a href="/api/v1/branscher.json">JSON-fil</a>.</p></article>')
 os.makedirs(UT_B, exist_ok=True)
 open(os.path.join(UT_B, "index.html"), "w", encoding="utf-8").write(
-    sida(f"Nyckeltal per bransch {AR} – soliditet och marginaler för {len(sidor)} branscher", f"Branschnyckeltal från SCB för {len(sidor)} branscher: soliditet, rörelsemarginal, kassalikviditet med mera. Jämför ditt bolag gratis.", "/bransch/", kropp, [ldsmul]))
+    sida(f"Nyckeltal per bransch {AR} – soliditet och marginaler för {len(sidor)} branscher", f"Branschnyckeltal från SCB för {len(sidor)} branscher: soliditet, rörelsemarginal, kassalikviditet med mera. Jämför ditt bolag gratis.", "/bransch/", kropp, [ldsmul, {"@context": "https://schema.org", "@type": "Dataset",
+        "name": f"Branschnyckeltal {AR} för {len(sidor)} branscher", "description": f"Soliditet, marginaler, likviditet med mera (kvartiler) för {len(sidor)} branscher enligt SNI 2007, från SCB:s Företagens ekonomi (BNTT01), år {AR}.",
+        "creator": {"@type": "Organization", "name": "Statistiska centralbyrån (SCB)", "url": "https://www.scb.se"},
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/", "temporalCoverage": str(AR), "inLanguage": "sv", "isAccessibleForFree": True,
+        "publisher": {"@id": F.SAJT + "/#organisation"}, "url": f"{SAJT}/bransch/",
+        "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{SAJT}/api/v1/branscher.json"}}]))
 
 # ---------- programguider ----------
 from guider_data import GUIDER
@@ -215,7 +232,7 @@ for g in GUIDER:
              + (f'<h2>Bra att veta</h2><ul>{extra}</ul>' if extra else '')
              + CTA.format(namn="branschen", kod="").replace("?sni=#granska", "#granska").replace("Jämför din bokföring med branschen", "Granska filen du just tog ut").replace("Hur står sig ditt bolag?", "Nästa steg").replace("Granska och jämför", "Granska bokföringen")
              + f'<h2>Källor</h2><p>Menyvägen kommer från leverantörens egen hjälp. Program uppdateras ibland, så namnen kan skilja sig något.</p><ul>{kallor}</ul>'
-             f'<p class="not">Senast kontrollerad {date.today().isoformat()}.</p></article>')
+             f'<p class="not">Senast kontrollerad {F.GUIDER_KONTROLLERAD}.</p></article>')
     os.makedirs(os.path.join(UT_G, g["slug"]), exist_ok=True)
     open(os.path.join(UT_G, g["slug"], "index.html"), "w", encoding="utf-8").write(
         sida(f"Exportera SIE-fil från {g['namn']} – steg för steg", f"Så exporterar du en SIE-fil (typ 4) från {g['namn']}: menyvägen steg för steg, och hur du sedan granskar bokföringen gratis.", f"/guider/{g['slug']}/", kropp, [ldsmul, howto]))
@@ -227,7 +244,7 @@ kropp = (smul + '<article><p class="etikett">Guider</p><h1>Så tar du ut en SIE-
          '<h2>Står inte ditt program med?</h2><p>Leta efter <strong>Export</strong>, <strong>Import och export</strong> eller <strong>SIE</strong> i menyerna, ofta under Arkiv, Inställningar eller Bokföring. Välj SIE typ 4 och hela räkenskapsåret. Filen slutar oftast på <code>.se</code>.</p></article>')
 os.makedirs(UT_G, exist_ok=True)
 open(os.path.join(UT_G, "index.html"), "w", encoding="utf-8").write(
-    sida("Så tar du ut en SIE-fil – guider för Fortnox, Bokio, Spiris med flera", "Steg-för-steg-guider för att exportera en SIE-fil (typ 4) från Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted och Briox.", "/guider/", kropp, [ldsmul]))
+    sida("Så tar du ut en SIE-fil – guider för Fortnox, Bokio, Spiris med flera", "Steg-för-steg-guider för att exportera en SIE-fil (typ 4) från Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted och Briox.", "/guider/", kropp, [ldsmul], datum=f"Menyvägarna senast kontrollerade {F.GUIDER_KONTROLLERAD}."))
 
 # ---------- byråsidan ----------
 import byra_sida
@@ -238,10 +255,16 @@ import integritet_sida
 integritet_sida.bygg(sida, brodsmulor, ROT)
 import konto_sida
 konto_sida.bygg(sida, brodsmulor, ROT)
+import kontroller_sida
+kontroller_sida.bygg(sida, brodsmulor, ROT)
+
+# ---------- maskinläsbar data och llms-full.txt ----------
+import aiauditor_api
+aiauditor_api.bygg(ROT, SCB, sidor, VISA, ENHET, GUIDER)
 
 # ---------- sajtkarta ----------
 idag = date.today().isoformat()
-urls = ["/", "/byra/", "/kallor/", "/integritet/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
+urls = ["/", "/byra/", "/kontroller/", "/kallor/", "/integritet/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
 open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{idag}</lastmod></url>\n" for u in urls) + "</urlset>\n")

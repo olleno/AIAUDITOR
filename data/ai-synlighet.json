@@ -1,0 +1,36 @@
+{
+ "beskrivning": "Mätprotokoll för AI-synlighet för aiauditor.se. Manuellt tills vidare; kan automatiseras senare via officiella API:er.",
+ "sajt": "https://aiauditor.se",
+ "namn": "AI Auditor",
+ "avsandare": "Kansliet at Nordwik Partners",
+ "fragebank": "data/ai-fragor.json",
+ "frekvens": "månadsvis, första vardagen i månaden",
+ "tjanster": [
+  "ChatGPT",
+  "Gemini",
+  "Claude",
+  "Perplexity",
+  "Copilot"
+ ],
+ "sa_gar_det_till": [
+  "Ställ samma frågor ur frågebanken (alla med status 'svarar', plus 'saknar data'-frågorna som kontroll) till varje tjänst.",
+  "Använd bara tjänsternas officiella gränssnitt eller API:er. Ingen automatisk skrapning av tjänsternas webbsidor.",
+  "Ny konversation per fråga, utloggat läge eller tomt minne, svensk språkinställning. Skriv frågan exakt som i frågebanken.",
+  "Klassa varje svar: 'ej nämnd', 'nämnd', 'topp 3' eller 'nr 1'. 'Nämnd' = aiauditor.se eller AI Auditor syns i svaret eller källistan.",
+  "Notera om svaret länkar till rätt svarssida, och om något i svaret är fel om sajten (rättas i så fall på sajten, i llms.txt eller i JSON-LD)."
+ ],
+ "klassning": [
+  "ej nämnd",
+  "nämnd",
+  "topp 3",
+  "nr 1"
+ ],
+ "nyckeltal": {
+  "andel_ai_svar_dar_sajten_nams": "antal svar klassade nämnd/topp 3/nr 1 delat med antal ställda frågor, per tjänst och totalt",
+  "besok_fran_ai_tjanster": "besök med hänvisning från chatgpt.com, perplexity.ai, gemini.google.com, claude.ai, copilot.microsoft.com och bing.com/chat, ur GoatCounter (aiauditor.goatcounter.com)",
+  "ai_botarnas_crawl": "går inte att mäta i dag: sajten ligger på GitHub Pages, som inte lämnar ut serverloggar",
+  "andel_indexerade_sidor": "indexerade sidor enligt Google Search Console och Bing Webmaster Tools delat med antal adresser i sitemap.xml",
+  "klick_vidare_affiliate": "ej tillämpligt: sajten har inga annons- eller affiliatelänkar"
+ },
+ "resultat": []
+}
