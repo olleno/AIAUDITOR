@@ -9,6 +9,7 @@ HÄR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HÄR)
 import granskaren as g
 import nyckeltal as n
+import konrad_andel as ka
 
 e = html.escape
 kr0 = lambda x: f"{x:,.0f}".replace(",", " ")
@@ -146,7 +147,12 @@ def _pos(r):
 def _tal(v, enhet):
     return (f"{v:,.1f}".replace(",", " ").replace(".", ",") + (" %" if enhet == "%" else " ggr"))
 
-def bygg(bok, fynd, idag, sni=None, webb=False):
+VARIANTER = (None, "gratis", "byra")
+
+def bygg(bok, fynd, idag, sni=None, webb=False, variant=None):
+    """variant="gratis" = aiauditor.se (visar Konrad). "byra" eller None = ingen Konrad, aldrig (Olles beslut 20 okt 2026)."""
+    if variant not in VARIANTER:
+        raise ValueError(f"okänd variant: {variant!r}")
     berak = n.berakna(bok, idag)
     jmf = n.jamfor(berak, sni) if sni else None
     rad = n.rad(berak, jmf)
@@ -243,9 +249,12 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
                  '<p class="dim" style="margin-top:8px">Underlaget innehåller bolagets verifikationer med texter och belopp. Det skickas bara till den AI-tjänst du själv väljer, '
                  'och hanteras enligt den tjänstens villkor. AI:ns svar är förslag att kontrollera, inte fastställda fel.</p></div>')
 
+    # --- Konrad: bara gratisversionen ---
+    konrad = ka.html(ka.berakna(bok, fynd), e) if variant == "gratis" else ""
+
     # --- vyer ---
     sjalv = ('<div id="sjalv" class="vy aktiv"><h2>Att åtgärda</h2>' +
-             ("".join(kort(f, True) for f in fynd) or '<p>Inga anmärkningar.</p>') + avsektion + nyck + radhtml + aisektion + cta + '</div>')
+             ("".join(kort(f, True) for f in fynd) or '<p>Inga anmärkningar.</p>') + avsektion + nyck + radhtml + aisektion + cta + konrad + '</div>')
     fragor = "".join(f'<li><strong>{("Ver " + e(f["ver"]) + " (" + e(f["datum"]) + ")") if f["ver"] != "–" else "Allmänt"}:</strong> '
                      f'{e(f["beskr"])} Kan ni titta på om det stämmer och om något behöver rättas?</li>'
                      for f in fynd if f["allvar"] <= 2)
@@ -283,9 +292,12 @@ def bygg(bok, fynd, idag, sni=None, webb=False):
                               '<button class="knapp" id="kopiera-byra" type="button">Kopiera texten</button> <span class="dim" id="kopierat"></span>')
         kropp = re.sub(r'onclick="vy\(\'(\w+)\'\)(;return false)?"', r'data-vy="\1"', kropp)
         kropp = kropp.replace('href="#" data-vy', 'href="#rapport" data-vy')
-        return g.STIL + EXTRA_STIL, kropp
-    huvud = g.HUVUD.replace("TITEL", "AI Auditor – granskningsrapport").replace("</style>", EXTRA_STIL + "</style>").replace(g.LOGGA, "")
-    return huvud + kropp + SKRIPT + "</div></body></html>"
+        return g.STIL + EXTRA_STIL + (ka.STIL if konrad else ""), kropp
+    huvud = g.HUVUD.replace("TITEL", "AI Auditor – granskningsrapport").replace("</style>", EXTRA_STIL + (ka.STIL if konrad else "") + "</style>").replace(g.LOGGA, "")
+    skript = SKRIPT
+    if konrad:
+        skript += ("<script>" + ka.SKRIPT_JS + "document.addEventListener('input',function(ev){if(ev.target.closest('#konrad-andel'))konradRakna(document);});</script>")
+    return huvud + kropp + skript + "</div></body></html>"
 
 def norm_sni(s):
     s = "".join(c for c in (s or "") if c.isdigit())

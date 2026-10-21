@@ -1,0 +1,133 @@
+#FLAGGA 0
+#FORMAT PC8
+#SIETYP 4
+#PROGRAM "Testbank" 1.0
+#FNAMN "Testbageriet AB"
+#ORGNR 556999-0001
+#RAR 0 20250101 20251231
+#KONTO 1220 "Inventarier"
+#KONTO 1229 "Ack avskr"
+#KONTO 1685 "Fordran delägare"
+#KONTO 1930 "Företagskonto"
+#KONTO 2611 "Utg moms 25"
+#KONTO 2631 "Utg moms 6"
+#KONTO 2641 "Ing moms"
+#KONTO 2710 "Personalskatt"
+#KONTO 2820 "Skulder anställda"
+#KONTO 3001 "Försäljning 25"
+#KONTO 3002 "Försäljning 6"
+#KONTO 4010 "Inköp material"
+#KONTO 5010 "Lokalhyra"
+#KONTO 6110 "Kontorsmateriel"
+#KONTO 7010 "Löner kollektiv"
+#VER A 1 20250110 "Mjölleverantör AB" 20250110
+{
+   #TRANS 4010 {} 8000.00
+   #TRANS 2641 {} 960.00
+   #TRANS 1930 {} -8960.00
+}
+#VER A 2 20250210 "Mjölleverantör AB" 20250210
+{
+   #TRANS 4010 {} 8000.00
+   #TRANS 2641 {} 960.00
+   #TRANS 1930 {} -8960.00
+}
+#VER A 3 20250310 "Mjölleverantör AB" 20250310
+{
+   #TRANS 4010 {} 8000.00
+   #TRANS 2641 {} 960.00
+   #TRANS 1930 {} -8960.00
+}
+#VER A 4 20250115 "Betalning" 20250115
+{
+   #TRANS 6110 {} 400.00
+   #TRANS 2641 {} 100.00
+   #TRANS 1930 {} -500.00
+}
+#VER A 5 20250215 "Betalning" 20250215
+{
+   #TRANS 6110 {} 400.00
+   #TRANS 2641 {} 100.00
+   #TRANS 1930 {} -500.00
+}
+#VER A 6 20250315 "Kontorsvaror" 20250315
+{
+   #TRANS 6110 {} 400.00
+   #TRANS 2641 {} 100.00
+   #TRANS 1930 {} -500.00
+}
+#VER A 7 20250120 "Bokförsäljning" 20250120
+{
+   #TRANS 1930 {} 10600.00
+   #TRANS 3002 {} -10000.00
+   #TRANS 2631 {} -600.00
+}
+#VER A 8 20250220 "Bokförsäljning" 20250220
+{
+   #TRANS 1930 {} 10600.00
+   #TRANS 3002 {} -10000.00
+   #TRANS 2631 {} -600.00
+}
+#VER A 9 20250320 "Bokförsäljning" 20250320
+{
+   #TRANS 1930 {} 10600.00
+   #TRANS 3002 {} -10000.00
+   #TRANS 2631 {} -600.00
+}
+#VER A 10 20250401 "Kassaförsäljning blandat" 20250401
+{
+   #TRANS 1930 {} 1318.00
+   #TRANS 3001 {} -800.00
+   #TRANS 3002 {} -300.00
+   #TRANS 2611 {} -200.00
+   #TRANS 2631 {} -18.00
+}
+#VER A 11 20250402 "Hyra lokal" 20250402
+{
+   #TRANS 5010 {} 20000.00
+   #TRANS 2641 {} 4000.00
+   #TRANS 1930 {} -24000.00
+}
+#VER A 12 20250403 "Ägaruttag" 20250403
+{
+   #TRANS 1685 {} 5000.00
+   #TRANS 1930 {} -5000.00
+}
+#VER A 13 20250404 "Inköp maskin" 20250404
+{
+   #TRANS 1220 {} 25000.00
+   #TRANS 1930 {} -25000.00
+}
+#VER A 14 20250405 "Inköp ugn" 20250405
+{
+   #TRANS 1220 {} 20000.01
+   #TRANS 2641 {} 5000.00
+   #TRANS 1930 {} -25000.01
+}
+#VER A 15 20250406 "Kreditnota mjöl" 20250406
+{
+   #TRANS 1930 {} 1120.00
+   #TRANS 4010 {} -1000.00
+   #TRANS 2641 {} -120.00
+}
+#VER A 16 20250407 "Tom verifikation" 20250407
+{
+}
+#VER B 1 20250131 "Lön januari" 20250131
+{
+   #TRANS 7010 {} 10000.00
+   #TRANS 2710 {} -3000.00
+   #TRANS 2820 {} -7000.00
+}
+#VER B 2 20250228 "Lön februari" 20250228
+{
+   #TRANS 7010 {} 10000.00
+   #TRANS 2710 {} -3000.00
+   #TRANS 2820 {} -7000.00
+}
+#VER B 3 20250331 "Lön mars" 20250331
+{
+   #TRANS 7010 {} 10000.00
+   #TRANS 2710 {} -3000.00
+   #TRANS 2820 {} -7000.00
+}

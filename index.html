@@ -420,6 +420,14 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
       } catch(e){ markera(brev, info); }
     }
   });
+  // Konrad: räkna om tidsbesparingen när kunden ändrar minuter eller timpris (samma formel som py/konrad_andel.py tid()).
+  function konradRakna(rot){var s=rot.getElementById?rot.getElementById('konrad-andel'):null;if(!s)return;
+var a=Number(s.getAttribute('data-auto'))||0,mi=rot.getElementById('konrad-min'),tp=rot.getElementById('konrad-timpris');
+var m=Number(String(mi.value).replace(',','.'));if(!isFinite(m)||m<0)m=0;var p=Number(String(tp.value).replace(/\s/g,'').replace(',','.'));
+var h=a*m/60,f=function(x,d){return x.toLocaleString('sv-SE',{minimumFractionDigits:d,maximumFractionDigits:d});};
+rot.getElementById('konrad-uttryck').innerHTML=a+' verifikationer × '+f(m,m%1?1:0)+' minuter ÷ 60 = <b id="konrad-timmar">'+f(h,1)+' timmar</b> under perioden i filen.';
+rot.getElementById('konrad-kronor').textContent=(isFinite(p)&&p>0)?(a+' verifikationer × '+f(m,m%1?1:0)+' minuter ÷ 60 × '+f(p,0)+' kr = '+f(Math.round(h*p),0)+' kr (uppskattning)'):'Fyll i ditt eget timpris för att se vad tiden är värd.';}
+  skugga.addEventListener("input", function(ev){ if (ev.target.closest("#konrad-andel")) konradRakna(skugga); });
   function markera(el, info){
     try { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch(e){}
     info.textContent = "Texten är markerad. Kopiera med Cmd+C eller Ctrl+C.";
@@ -473,7 +481,7 @@ details p{margin-top:8px;color:var(--sek);max-width:46em}
     var bas = new URL("pyodide/", location.href).href;
     py = await loadPyodide({ indexURL: bas, stdLibURL: bas + "stdlib.wasm" });
     py.FS.mkdirTree("/aia/data");
-    for (const f of ["granskaren.py","nyckeltal.py","rapport.py","avstamning.py","regelkatalog.csv"]){
+    for (const f of ["granskaren.py","nyckeltal.py","rapport.py","avstamning.py","konrad_andel.py","regelkatalog.csv"]){
       const t = await (await fetch("py/" + f)).text(); py.FS.writeFile("/aia/" + f, t);
     }
     await py.runPythonAsync("import sys; sys.path.insert(0, '/aia')");
@@ -526,7 +534,7 @@ if not bok['ver']:
 else:
     idag = date.today()
     fynd = g.granska(bok, idag, json.loads(HANDLINGAR) or None)
-    css, html = r.bygg(bok, fynd, idag, SNI or None, webb=True)
+    css, html = r.bygg(bok, fynd, idag, SNI or None, webb=True, variant="gratis")
     import nyckeltal as n
     from collections import OrderedDict
     be = n.berakna(bok, idag); per = OrderedDict()

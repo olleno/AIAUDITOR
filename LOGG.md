@@ -42,3 +42,11 @@
 - Tester: tester/aiauditor_test_ai_sok.py. Bygg och testa: `python3 verktyg/bygg_sidor.py && python3 -m unittest discover -s tester -p 'aiauditor_test_*.py'`.
 - /conrad/ är en omdirigering till /konrad/ (noindex, kanonisk /konrad/). Konrad hålls utanför llms.txt och flödena tills den släpps.
 - Inte publicerat.
+
+## 2026-10-21 – Så mycket hade Konrad bokfört själv (gren testa-konrad, ej publicerat)
+- Nytt avsnitt i granskningsrapporten, bara i gratisversionen (`rapport.bygg(..., variant="gratis")`). Byråversionen och standardläget nämner aldrig Konrad (Olles beslut 20 okt); tester garanterar det.
+- py/konrad_andel.py: fasta regler i webbläsaren. Till människa: över 25 000 kr (Konrads gräns), fynd i granskningen, moms som inte stämmer med 25/12/6 %, representation, anläggningstillgång, ägare/närstående, bokslut/periodisering/momsredovisning/skatt, omvänd moms, rättelse/kreditnota, konto som används högst två gånger, inget känt mönster. Automatiskt: inget av det, och återkommande (samma text och konton minst 3 gånger) eller bankrad med tydlig text.
+- Tidsbesparing med synlig uträkning; minuter (5, antagande med Exsitec som källa) och timpris (kundens eget) går att ändra. Märkt "uppskattning, inget löfte", med AI-upplysning och länken "Läs om Konrad" (flytta-knappen med samtycke byggs senare).
+- Månadsnamn i texten räknas bort vid jämförelsen ("Lön januari" = "Lön februari").
+- Exempelfilen: 58 av 95 automatiskt (61 %), 4,8 timmar med 5 minuter. Kontrollräknat för hand av en separat genomgång. Tester: tester/aiauditor_test_konrad_andel.py med två påhittade filer i tester/data/.
+- Publiceras när Konrad lanseras (Publiceringslistan B11).
