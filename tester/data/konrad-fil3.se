@@ -1,0 +1,107 @@
+#FLAGGA 0
+#FORMAT PC8
+#SIETYP 4
+#PROGRAM "Testbank" 1.0
+#FNAMN "Hyresgästen Prov AB"
+#ORGNR 559999-0003
+#RAR 0 20250101 20251231
+#KONTO 1510 "Kundfordringar"
+#KONTO 1930 "Företagskonto"
+#KONTO 2611 "Utg moms 25"
+#KONTO 2641 "Ing moms"
+#KONTO 2710 "Personalskatt"
+#KONTO 2731 "Avräkning sociala avgifter"
+#KONTO 3041 "Försäljning tjänst 25"
+#KONTO 5010 "Lokalhyra"
+#KONTO 5020 "El för lokal"
+#KONTO 6550 "Konsultarvoden"
+#KONTO 7210 "Löner tjänstemän"
+#KONTO 7510 "Arbetsgivaravgifter"
+#VER A 1 20250125 "Lön" 20250125
+{
+   #TRANS 7210 {} 45000.00
+   #TRANS 7510 {} 14139.00
+   #TRANS 1930 {} -31500.00
+   #TRANS 2710 {} -13500.00
+   #TRANS 2731 {} -14139.00
+}
+#VER A 2 20250225 "Lön" 20250225
+{
+   #TRANS 7210 {} 45000.00
+   #TRANS 7510 {} 14139.00
+   #TRANS 1930 {} -31500.00
+   #TRANS 2710 {} -13500.00
+   #TRANS 2731 {} -14139.00
+}
+#VER A 3 20250325 "Lön" 20250325
+{
+   #TRANS 7210 {} 45000.00
+   #TRANS 7510 {} 14139.00
+   #TRANS 1930 {} -31500.00
+   #TRANS 2710 {} -13500.00
+   #TRANS 2731 {} -14139.00
+}
+#VER A 4 20250101 "Hyra Fastighets AB" 20250101
+{
+   #TRANS 5010 {} 30000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 5 20250201 "Hyra Fastighets AB" 20250201
+{
+   #TRANS 5010 {} 30000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 6 20250301 "Hyra Fastighets AB" 20250301
+{
+   #TRANS 5010 {} 30000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 7 20250401 "Hyra Fastighets AB" 20250401
+{
+   #TRANS 5010 {} 30000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 8 20250501 "Hyra Fastighets AB" 20250501
+{
+   #TRANS 5020 {} 30000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 9 20250210 "Kundfaktura 501 Bygg AB" 20250210
+{
+   #TRANS 1510 {} 80000.00
+   #TRANS 3041 {} -64000.00
+   #TRANS 2611 {} -16000.00
+}
+#VER A 10 20250310 "Inbetalning faktura 501 Bygg AB" 20250310
+{
+   #TRANS 1930 {} 80000.00
+   #TRANS 1510 {} -80000.00
+}
+#VER A 11 20250315 "Inbetalning faktura 999 Okänd AB" 20250315
+{
+   #TRANS 1930 {} 40000.00
+   #TRANS 1510 {} -40000.00
+}
+#VER A 12 20250320 "Konsultbyrå Nord" 20250320
+{
+   #TRANS 6550 {} 24000.00
+   #TRANS 2641 {} 6000.00
+   #TRANS 1930 {} -30000.00
+}
+#VER A 13 20250405 "Kundfaktura 502 Liten AB" 20250405
+{
+   #TRANS 1510 {} 5000.00
+   #TRANS 3041 {} -4000.00
+   #TRANS 2611 {} -1000.00
+}
+#VER A 14 20250505 "Kundfaktura 503 Liten AB" 20250505
+{
+   #TRANS 1510 {} 5000.00
+   #TRANS 3041 {} -4000.00
+   #TRANS 2611 {} -1000.00
+}
+#VER A 15 20250605 "Inbetalning faktura 502 Liten AB" 20250605
+{
+   #TRANS 1930 {} 5000.00
+   #TRANS 1510 {} -5000.00
+}

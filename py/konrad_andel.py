@@ -11,7 +11,18 @@ Verifikationens belopp = summan av raderna i debet (positiva belopp).
 Kontonummer läses som heltal (de fyra första siffrorna).
 
 Skäl att gå till en människa (en verifikation kan ha flera):
-  STORT       belopp över 25 000 kr (Konrads gräns för automatisk bokföring).
+  STORT       belopp över 25 000 kr (Konrads gräns för automatisk bokföring) – men bara för NYA och OVANLIGA poster
+              (Olles beslut 21 okt 2026). Gränsen gäller INTE (verifikationen får då undantaget i "undantag"):
+                LON         lön: minst en rad på 7000–7399 (löner) och minst en på 2710–2739 (personalskatt eller
+                            arbetsgivaravgifter), och alla rader på 7000–7699, 2710–2739 eller 1900–1999.
+                KUNDBET     kundbetalning som matchar en egen faktura: alla rader på 1510 (kredit) eller 1900–1999, och
+                            en annan verifikation med samma datum eller tidigare har 1510 i debet på exakt samma belopp
+                            (kundfordran). Varje kundfordran matchar högst en betalning. (I en SIE-fil syns inte OCR eller
+                            referens – Konrad kräver dem i drift; här räcker kundfordran med samma belopp.)
+                ATERKOMMANDE samma text och samma kontouppsättning (som ATERKOMMER nedan) finns i minst 2 verifikationer
+                            TIDIGARE i filen (datum, sedan ordningen i filen). I filen syns inte vem som godkänt något;
+                            de två första gångerna räknas som de som en människa har godkänt.
+              De andra skälen gäller som vanligt för de här verifikationerna.
   REPR        någon rad på 6070–6079 (representation).
   INVEST      någon rad i debet på 1000–1299 (köp av anläggningstillgång).
   AGARE       någon rad på 1680–1689 eller 2890–2899 (ägare eller närstående).
@@ -33,7 +44,8 @@ Skäl att gå till en människa (en verifikation kan ha flera):
   SALLAN      något konto används i högst 2 verifikationer i filen. Avräkningskonton
               räknas inte: 1500–1599, 1630, 1900–1999, 2400–2499, 2600–2699, 2700–2799.
   FYND        granskningen har ett fynd på just den verifikationen (oavsett allvar).
-  MONSTER     inget av skälen ovan, men verifikationen passar inget känt mönster (se nedan).
+  MONSTER     inget av skälen ovan, men verifikationen passar inget känt mönster (se nedan). Ett undantag från
+              25 000-gränsen (LON, KUNDBET, ATERKOMMANDE) räknas också som ett känt mönster.
 
 Kända mönster (minst ett krävs för "automatiskt"):
   ATERKOMMER  samma text och samma kontouppsättning förekommer i minst 3 verifikationer i filen.
@@ -52,6 +64,7 @@ Standardvärdet 5 minuter är ett antagande: Exsitec räknar med 5 minuter per f
 räkneexempel (exsitec.se/artiklar/ga-fran-55-till-80-automatisk-hantering, hämtad 2026-10-21).
 """
 import math, re
+from datetime import date
 from decimal import Decimal, ROUND_HALF_UP
 from collections import Counter
 
@@ -61,7 +74,7 @@ KALLA_MINUTER = ("Antagande. Exsitec räknar med 5 minuter per faktura i sitt r�
                  "(exsitec.se/artiklar/ga-fran-55-till-80-automatisk-hantering, hämtad 2026-10-21).")
 
 SKAL = {  # ordning = visningsordning vid lika antal
-    "STORT": "Belopp över 25 000 kr (Konrads gräns)",
+    "STORT": "Ny eller ovanlig post över 25 000 kr (Konrads gräns)",
     "FYND": "Granskningen har en anmärkning på verifikationen",
     "MOMS": "Momsen stämmer inte med 25, 12 eller 6 %",
     "REPR": "Representation",
@@ -78,6 +91,11 @@ ALLMANNA = {"betalning", "inbetalning", "utbetalning", "överföring", "insättn
 AVRAKNING = ((1500, 1599), (1630, 1630), (1900, 1999), (2400, 2499), (2600, 2699), (2700, 2799))
 MOMS_UTG = ((2610, 2613, 0.25), (2620, 2623, 0.12), (2630, 2633, 0.06))
 SATSER = (0.25, 0.12, 0.06)
+UNDANTAG = {  # Olles beslut 21 okt 2026: 25 000-gränsen gäller bara nya och ovanliga poster
+    "LON": "Lön",
+    "KUNDBET": "Kundbetalning mot en egen faktura",
+    "ATERKOMMANDE": "Återkommande post som en människa redan godkänt två gånger",
+}
 
 
 def _nr(konto):
@@ -133,12 +151,40 @@ def berakna(bok, fynd=()):
     monster = Counter((normtext(v["text"]), frozenset(k for k, _ in rader[id(v)])) for v in ver)
     flaggade = {f["ver"] for f in fynd if f.get("ver") not in (None, "", "–")}
 
+    # Olles beslut 21 okt 2026: 25 000-gränsen gäller bara nya och ovanliga poster.
+    ordnade = sorted(range(len(ver)), key=lambda i: (ver[i]["datum"] or date.min, i))
+    tidigare, sett = {}, Counter()
+    for i in ordnade:
+        nyckel = (normtext(ver[i]["text"]), frozenset(k for k, _ in rader[id(ver[i])]))
+        tidigare[id(ver[i])] = sett[nyckel]
+        sett[nyckel] += 1
+    kundfordringar = [(ver[i]["datum"] or date.min, i, round(b, 2)) for i in ordnade
+                      for k, b in rader[id(ver[i])] if k == 1510 and b > 0]
+    anvanda = set()
+
+    def undantag(v, r):
+        if (any(_i(k, (7000, 7399)) for k, _ in r) and any(_i(k, (2710, 2739)) for k, _ in r)
+                and all(_i(k, (7000, 7699), (2710, 2739), (1900, 1999)) for k, _ in r)):
+            return "LON"
+        betalt = round(-sum(b for k, b in r if k == 1510), 2)
+        if (betalt > 0 and all(k == 1510 or _i(k, (1900, 1999)) for k, _ in r)
+                and all(b < 0 for k, b in r if k == 1510)):
+            for d, i, b in kundfordringar:
+                if ver[i] is not v and (d, i) not in anvanda and b == betalt and d <= (v["datum"] or date.min):
+                    anvanda.add((d, i))
+                    return "KUNDBET"
+        if tidigare[id(v)] >= 2:
+            return "ATERKOMMANDE"
+        return None
+
     resultat = []
-    for v in ver:
+    for nr in ordnade:
+        v = ver[nr]
         r = rader[id(v)]
         skal = []
         belopp = sum(b for _, b in r if b > 0)
-        if belopp > GRANS + 0.005: skal.append("STORT")
+        und = undantag(v, r) if belopp > GRANS + 0.005 else None
+        if belopp > GRANS + 0.005 and not und: skal.append("STORT")
         if _ref(v) in flaggade: skal.append("FYND")
         if _moms_ok(r) is False: skal.append("MOMS")
         if any(_i(k, (6070, 6079)) for k, _ in r): skal.append("REPR")
@@ -151,9 +197,11 @@ def berakna(bok, fynd=()):
         nt = normtext(v["text"])
         aterkommer = monster[(nt, frozenset(k for k, _ in r))] >= 3
         bank = any(_i(k, (1900, 1999)) for k, _ in r) and nt != "" and nt not in ALLMANNA
-        if not skal and not (aterkommer or bank): skal.append("MONSTER")
+        if not skal and not (aterkommer or bank or und): skal.append("MONSTER")  # ett undantag är också ett känt mönster
         resultat.append({"ver": _ref(v), "belopp": round(belopp, 2), "auto": not skal, "skal": skal,
-                         "monster": [m for m, j in (("ATERKOMMER", aterkommer), ("BANK", bank)) if j]})
+                         "monster": [m for m, j in (("ATERKOMMER", aterkommer), ("BANK", bank)) if j],
+                         "undantag": und, "_i": nr})
+    resultat.sort(key=lambda x: x.pop("_i"))
 
     totalt = len(resultat)
     auto = sum(1 for x in resultat if x["auto"])
@@ -164,6 +212,7 @@ def berakna(bok, fynd=()):
     return {"totalt": totalt, "auto": auto, "manniska": totalt - auto,
             "andel_auto": (auto / totalt) if totalt else 0.0,
             "skal": [{"id": s, "text": SKAL[s], "antal": n, "exempel": exempel[s]} for s, n in skal_lista],
+            "undantag": {u: sum(1 for x in resultat if x["undantag"] == u) for u in UNDANTAG},
             "verifikationer": resultat}
 
 
@@ -212,9 +261,11 @@ def html(res, e):
         '<details class="regler"><summary>Så räknar vi (reglerna)</summary>'
         '<p><b>Automatiskt</b> räknas en verifikation som inte har något av skälen ovan och som antingen återkommer '
         '(samma text och samma konton minst 3 gånger i filen) eller är en bankrad med tydlig text.</p>'
-        '<p><b>Till en människa</b> går allt över 25 000 kr (Konrads gräns), representation, köp av inventarier, ägare och närstående, '
+        '<p><b>Till en människa</b> går nya och ovanliga poster över 25 000 kr (Konrads gräns), representation, köp av inventarier, ägare och närstående, '
         'bokslut, periodiseringar, momsredovisning och skatt, omvänd moms, moms som inte stämmer med 25, 12 eller 6 % av beloppet, '
         'rättelser och kreditnotor, konton som används högst två gånger på året och allt som granskningen ovan har anmärkt på.</p>'
+        '<p><b>Gränsen på 25 000 kr gäller inte</b> lön, kundbetalningar som motsvarar en kundfordran i filen och poster som '
+        'återkommer med samma text och konton när en människa redan har godkänt dem två gånger (de två första gångerna i filen).</p>'
         '<p>Reglerna är fasta och desamma för alla. Ingen AI har läst din fil.</p></details>'
         '<h3>Uppskattad tidsbesparing</h3>'
         '<div class="kalkyl">'
@@ -225,8 +276,8 @@ def html(res, e):
         '<p class="uttryck" id="konrad-kronor">Fyll i ditt eget timpris för att se vad tiden är värd.</p>'
         f'<p class="dim">{e(KALLA_MINUTER)} Ändra till det som stämmer för dig. Tiden för de verifikationer som går till en människa räknas inte som sparad, '
         'och du behöver fortfarande lämna kvitton och svara på frågor. Det här är en uppskattning, inget löfte.</p>'
-        '<p class="ai-upplysning"><b>Om AI:</b> Konrad är en AI-tjänst. Konrad konterar med hjälp av AI, och allt över 25 000 kr eller på ett konto '
-        'som inte använts förut går till en redovisningskonsult, alltså en människa. Uträkningen här är gjord med fasta regler i din webbläsare, '
+        '<p class="ai-upplysning"><b>Om AI:</b> Konrad är en AI-tjänst. Konrad konterar med hjälp av AI, och nya eller ovanliga poster över 25 000 kr '
+        'och poster på ett konto som inte använts förut går till en redovisningskonsult, alltså en människa. Uträkningen här är gjord med fasta regler i din webbläsare, '
         'och din fil har inte lämnat datorn.</p>'
         '<a class="knapp konradknapp" href="/konrad/">Läs om Konrad</a>'
         '<p class="dim" style="margin-top:6px">Konrad drivs av ett annat bolag än AI Auditor, med samma ägare.</p>'

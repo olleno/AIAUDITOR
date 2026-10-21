@@ -33,19 +33,26 @@ class Exempelfilen(unittest.TestCase):
         cls.res = ka.berakna(cls.bok, cls.fynd)
 
     def test_antal(self):
-        self.assertEqual((self.res["totalt"], self.res["auto"], self.res["manniska"]), (95, 58, 37))
-        self.assertAlmostEqual(self.res["andel_auto"], 58 / 95)
+        # Olles beslut 21 okt 2026: 25 000-gränsen bara för nya och ovanliga poster (före: 58 av 95).
+        self.assertEqual((self.res["totalt"], self.res["auto"], self.res["manniska"]), (95, 80, 15))
+        self.assertAlmostEqual(self.res["andel_auto"], 80 / 95)
+        self.assertEqual(self.res["undantag"], {"LON": 12, "KUNDBET": 0, "ATERKOMMANDE": 10})
 
     def test_vilka_till_manniska(self):
         manniska = [x["ver"] for x in self.res["verifikationer"] if not x["auto"]]
-        lon_och_fakturor = {f"A{i}" for i in (3, 4, 9, 10, 16, 17, 23, 24, 30, 31, 39, 41, 47, 48, 54, 56, 63, 64,
-                                               71, 72, 81, 82, 83, 89, 90, 91)}
+        # Lönerna går automatiskt (LON), fakturaserien från tredje gången (ATERKOMMANDE). Kvar: de två första fakturorna
+        # och fakturorna på 1510 (ny kontouppsättning, bara två gånger).
+        fakturor = {"A3", "A9", "A82", "A90"}
         ovriga = {"A14", "A20", "A35", "A36", "A40", "A55", "A60", "A69", "A77", "A94", "A95"}
-        self.assertEqual(set(manniska), lon_och_fakturor | ovriga)
+        self.assertEqual(set(manniska), fakturor | ovriga)
+        f = {x["ver"]: x["undantag"] for x in self.res["verifikationer"]}
+        self.assertTrue(all(f[f"A{i}"] == "LON" for i in (4, 10, 17, 24, 31, 41, 48, 56, 64, 72, 83, 91)))
+        self.assertTrue(all(f[f"A{i}"] == "ATERKOMMANDE" for i in (16, 23, 30, 39, 47, 54, 63, 71, 81, 89)))
+        self.assertIsNone(f["A3"]); self.assertIsNone(f["A9"])
 
     def test_skal(self):
         self.assertEqual([(s["id"], s["antal"]) for s in self.res["skal"]],
-                         [("STORT", 28), ("SALLAN", 8), ("FYND", 4), ("REPR", 2), ("BOKSLUT", 2), ("SARMOMS", 2),
+                         [("SALLAN", 8), ("STORT", 6), ("FYND", 4), ("REPR", 2), ("BOKSLUT", 2), ("SARMOMS", 2),
                           ("INVEST", 1), ("RATTELSE", 1)])
         f = facit(self.res)
         self.assertEqual(f["A14"], (False, ["STORT", "INVEST", "SALLAN"]))
@@ -58,8 +65,8 @@ class Exempelfilen(unittest.TestCase):
         self.assertEqual(f["A5"], (True, []))  # avskrivning: återkommande utan bank
 
     def test_tid(self):
-        t = ka.tid(58)
-        self.assertAlmostEqual(t["timmar"], 58 * 5 / 60)
+        t = ka.tid(80)
+        self.assertAlmostEqual(t["timmar"], 80 * 5 / 60)
         self.assertIsNone(t["kronor"])
         self.assertEqual(ka.tid(58, 5, 600)["kronor"], 2900)
         self.assertEqual(ka.tid(58, 7.5, 450)["kronor"], 3263)  # 7,25 h × 450 = 3 262,5 → avrundas uppåt som i JS
@@ -84,14 +91,35 @@ class PahittadeFiler(unittest.TestCase):
 
     def test_fil2(self):
         res = ka.berakna(g.las_sie(str(DATA / "konrad-fil2.se")), FIL2_FYND)
-        self.assertEqual((res["totalt"], res["auto"], res["manniska"]), (17, 8, 9))
+        self.assertEqual((res["totalt"], res["auto"], res["manniska"]), (17, 9, 8))
         self.assertEqual(facit(res), {
             "1:1": (True, []), "1:2": (True, []), "1:3": (False, ["FYND"]),
             "1:4": (False, ["SALLAN"]), "1:5": (False, ["REPR", "SALLAN"]), "1:6": (False, ["STORT"]),
-            "1:7": (True, []), "1:8": (False, ["MOMS"]), "1:9": (False, ["STORT"]),
+            "1:7": (True, []), "1:8": (False, ["MOMS"]), "1:9": (True, []),
             "1:10": (True, []), "1:11": (True, []), "1:12": (False, ["BOKSLUT", "SALLAN"]),
             "1:13": (False, ["SARMOMS", "SALLAN"]), "1:14": (True, []), "1:15": (True, []), "1:16": (True, []),
             "1:17": (False, ["RATTELSE"])})
+        # 1:9 "Inbetalning" 30 000 kr mot kundfordran 1:6: matchad kundbetalning (Olles beslut 21 okt 2026)
+        self.assertEqual(next(x for x in res["verifikationer"] if x["ver"] == "1:9")["undantag"], "KUNDBET")
+
+    def test_fil3_olles_beslut_21_okt(self):
+        """Olles fall: lön 45 000 → automatiskt; matchad kundbetalning 80 000 → automatiskt; ny leverantör 30 000 →
+        människa; återkommande hyra 30 000 efter 2 godkända → automatiskt; återkommande men nytt konto → människa."""
+        res = ka.berakna(g.las_sie(str(DATA / "konrad-fil3.se")), [])
+        self.assertEqual((res["totalt"], res["auto"], res["manniska"]), (15, 7, 8))
+        self.assertEqual(facit(res), {
+            "A1": (True, []), "A2": (True, []), "A3": (True, []),                         # lön 45 000 (59 139 med avgifter)
+            "A4": (False, ["STORT"]), "A5": (False, ["STORT"]),                           # hyran gång 1 och 2
+            "A6": (True, []), "A7": (True, []),                                           # hyran gång 3 och 4
+            "A8": (False, ["STORT", "SALLAN"]),                                           # samma motpart, nytt konto
+            "A9": (False, ["STORT"]),                                                     # kundfakturan 80 000
+            "A10": (True, []),                                                            # betalningen matchar A9
+            "A11": (False, ["STORT"]),                                                    # betalning utan kundfordran
+            "A12": (False, ["STORT", "SALLAN"]),                                          # ny leverantör 30 000
+            "A13": (False, ["MONSTER"]), "A14": (False, ["MONSTER"]), "A15": (True, [])})
+        und = {x["ver"]: x["undantag"] for x in res["verifikationer"]}
+        self.assertEqual([und[v] for v in ("A1", "A6", "A7", "A10", "A4", "A8", "A11", "A12")],
+                         ["LON", "ATERKOMMANDE", "ATERKOMMANDE", "KUNDBET", None, None, None, None])
 
     def test_gransen_ar_over_25000(self):
         f = facit(ka.berakna(g.las_sie(str(DATA / "konrad-fil1.se")), FIL1_FYND))
@@ -101,7 +129,7 @@ class PahittadeFiler(unittest.TestCase):
 
 class BaraGratisversionen(unittest.TestCase):
     """Olles beslut 20 okt 2026: gratisversionen visar Konrad, byråversionen ALDRIG."""
-    FILER = [ROT / "exempel-sie.txt", DATA / "konrad-fil1.se", DATA / "konrad-fil2.se"]
+    FILER = [ROT / "exempel-sie.txt", DATA / "konrad-fil1.se", DATA / "konrad-fil2.se", DATA / "konrad-fil3.se"]
 
     def bygg(self, sokvag, variant, webb):
         bok = g.las_sie(str(sokvag))
@@ -159,8 +187,8 @@ class Startsidan(unittest.TestCase):
             finally:
                 n.SCB_FIL = gammal
         self.assertEqual((css, html), (d["css"], d["html"]))
-        self.assertIn("58 av 95", html)
-        self.assertIn("4,8 timmar", html)
+        self.assertIn("80 av 95", html)
+        self.assertIn("6,7 timmar", html)
 
     @unittest.skipUnless(shutil.which("node"), "node saknas")
     def test_js_formeln_ger_samma_svar(self):

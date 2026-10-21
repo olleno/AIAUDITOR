@@ -50,3 +50,8 @@
 - Månadsnamn i texten räknas bort vid jämförelsen ("Lön januari" = "Lön februari").
 - Exempelfilen: 58 av 95 automatiskt (61 %), 4,8 timmar med 5 minuter. Kontrollräknat för hand av en separat genomgång. Tester: tester/aiauditor_test_konrad_andel.py med två påhittade filer i tester/data/.
 - Publiceras när Konrad lanseras (Publiceringslistan B11).
+
+## 2026-10-21 – 25 000-gränsen bara för nya och ovanliga poster (gren testa-konrad, ej publicerat)
+- Olles beslut 21 okt 2026: Konrads gräns på 25 000 kr gäller bara nya och ovanliga poster. I py/konrad_andel.py räknas inte som "över gränsen": lön (7000–7399 + 2710–2739, bara lönekonton och bank), återkommande poster (samma text och konton minst två gånger tidigare i filen – de två första gångerna räknas som de en människa godkänt) och kundbetalningar på 1510 mot bank när en kundfordran med samma belopp finns i filen (OCR syns inte i SIE). Ett undantag räknas också som känt mönster.
+- Exempelfilen: 80 av 95 automatiskt (84 %, före 58 av 95), 6,7 timmar med 5 minuter. 12 löner och 10 återkommande fakturor fick undantag; STORT kvar på 6. Kontrollräknat för hand av en separat genomgång utan att köra koden – samma svar i alla fyra filerna.
+- Ny testfil tester/data/konrad-fil3.se med Olles fall (lön 45 000, matchad kundbetalning 80 000, ny leverantör 30 000, hyra 30 000 efter två godkända, samma motpart med nytt konto). 38 tester gröna.
