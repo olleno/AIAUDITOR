@@ -1,0 +1,9 @@
+{
+  "_om": "Sajten ligger i repots rot (GitHub Pages). Konrad och kontosidan är medvetet noindex och inte i sitemap.xml; inloggning (Konrad) och intresseanmälan (/byra/) använder e-postfält.",
+  "public_dir": ".",
+  "noindex": {"tillat_om_ej_i_sitemap": true},
+  "epost": [
+    {"sokvag": "konrad/", "monster": "type=\"email\"", "motivering": "Inloggning till Konrad (dold, ej släppt)"},
+    {"sokvag": "byra/", "monster": "type=\"email\"", "motivering": "Intresseanmälan öppnar e-postprogrammet"}
+  ]
+}

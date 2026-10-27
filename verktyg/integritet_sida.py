@@ -36,4 +36,4 @@ def bygg(sida, brodsmulor, rot):
     os.makedirs(os.path.join(rot, "integritet"), exist_ok=True)
     open(os.path.join(rot, "integritet", "index.html"), "w", encoding="utf-8").write(
         sida("Integritet – din bokföring lämnar aldrig din dator", "AI Auditor granskar SIE-filen i din webbläsare. Inget skickas, inget sparas, inga kakor. Vem som står bakom och vad som händer med uppgifterna.",
-             "/integritet/", smul + KROPP, [ldsmul], datum=f"Uppdaterad {F.INTEGRITET_UPPDATERAD}."))
+             "/integritet/", smul + KROPP, [ldsmul], publicerad=F.git_datum("verktyg/integritet_sida.py"), andrad=F.INTEGRITET_UPPDATERAD))

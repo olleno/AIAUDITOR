@@ -77,8 +77,24 @@ LOGGA = ('<a href="/" class="logolank" aria-label="AI Auditor, startsidan"><svg 
  '<text class="t" x="98" y="32" textLength="120" lengthAdjust="spacingAndGlyphs" font-family="Inter, system-ui, sans-serif" font-size="27" font-weight="800">AUDITOR</text>'
  '<text class="s" x="65" y="48" textLength="152" lengthAdjust="spacing" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500">GRANSKNING AV BOKFÖRING</text></svg></a>')
 
-def sida(titel, beskr, kanon, kropp, ld=None, datum=None):
-    """datum = när innehållet senast ändrades/kontrollerades (aldrig byggdatum). Skrivs sist i artikeln."""
+DATUM_PER_URL = {}  # kanonisk adress -> dateModified, används för lastmod i sajtkartan
+
+
+def sida(titel, beskr, kanon, kropp, ld=None, datum=None, publicerad=None, andrad=None, typ="WebPage"):
+    """datum = när innehållet senast ändrades/kontrollerades (aldrig byggdatum). Skrivs sist i artikeln.
+    publicerad/andrad (ÅÅÅÅ-MM-DD, från datafil eller git, aldrig byggdatum) ger synlig rad under rubriken
+    samt datePublished/dateModified i JSON-LD (typ = Article eller WebPage)."""
+    if publicerad:
+        andrad = max(andrad or publicerad, publicerad)
+        DATUM_PER_URL[kanon] = andrad
+        ld = (ld or []) + [{"@context": "https://schema.org", "@type": typ, "@id": f"{SAJT}{kanon}#sida", "url": f"{SAJT}{kanon}",
+              ("headline" if typ == "Article" else "name"): titel, "description": beskr, "inLanguage": "sv",
+              "datePublished": publicerad, "dateModified": andrad, "isPartOf": {"@id": F.SAJT + "/#webbplats"},
+              **({"author": {"@id": F.SAJT + "/#organisation"}} if typ == "Article" else {}),
+              "publisher": {"@id": F.SAJT + "/#organisation"}}]
+        rad = f'<p class="not datum">Publicerad <time datetime="{publicerad}">{publicerad}</time> · Uppdaterad <time datetime="{andrad}">{andrad}</time></p>'
+        kropp = kropp.replace("</h1>", "</h1>" + rad, 1)
+        datum = None
     ldtxt = "".join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>\n' for x in [F.org_ld()] + (ld or []))
     if datum and "</article>" in kropp:
         i = kropp.rindex("</article>")
@@ -130,6 +146,7 @@ for k in sidor:
     f = sida_for(foralder(k)) if foralder(k) else None
     barn.setdefault(f, []).append(k)
 
+SCB_PUBL = F.git_datum("verktyg/branschnyckeltal.json")
 for k, s in sidor.items():
     namn = SCB["sni"][k]
     tot = SCB["data"][k]["TOT"]
@@ -189,7 +206,7 @@ for k, s in sidor.items():
     titel = f"Nyckeltal för {namn.lower()} {AR} – soliditet, marginaler, likviditet"
     beskr = (f"{namn}: {intro} Jämför ditt bolag gratis med branschen.")[:300]
     os.makedirs(os.path.join(UT_B, s), exist_ok=True)
-    open(os.path.join(UT_B, s, "index.html"), "w", encoding="utf-8").write(sida(titel, beskr, f"/bransch/{s}/", kropp, ld))
+    open(os.path.join(UT_B, s, "index.html"), "w", encoding="utf-8").write(sida(titel, beskr, f"/bransch/{s}/", kropp, ld, publicerad=SCB_PUBL, andrad=F.SCB_HAMTAD))
 
 # översikt
 grupper = ""
@@ -214,11 +231,12 @@ open(os.path.join(UT_B, "index.html"), "w", encoding="utf-8").write(
         "creator": {"@type": "Organization", "name": "Statistiska centralbyrån (SCB)", "url": "https://www.scb.se"},
         "license": "https://creativecommons.org/publicdomain/zero/1.0/", "temporalCoverage": str(AR), "inLanguage": "sv", "isAccessibleForFree": True,
         "publisher": {"@id": F.SAJT + "/#organisation"}, "url": f"{SAJT}/bransch/",
-        "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{SAJT}/api/v1/branscher.json"}}]))
+        "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{SAJT}/api/v1/branscher.json"}}], publicerad=SCB_PUBL, andrad=F.SCB_HAMTAD))
 
 # ---------- programguider ----------
 from guider_data import GUIDER
 UT_G = os.path.join(ROT, "guider")
+GUIDER_PUBL = F.git_datum("verktyg/guider_data.py")
 if os.path.isdir(UT_G): shutil.rmtree(UT_G)
 for g in GUIDER:
     smul, ldsmul = brodsmulor([("Start", "/"), ("Guider", "/guider/"), (g["namn"], None)])
@@ -235,7 +253,7 @@ for g in GUIDER:
              f'<p class="not">Senast kontrollerad {F.GUIDER_KONTROLLERAD}.</p></article>')
     os.makedirs(os.path.join(UT_G, g["slug"]), exist_ok=True)
     open(os.path.join(UT_G, g["slug"], "index.html"), "w", encoding="utf-8").write(
-        sida(f"Exportera SIE-fil från {g['namn']} – steg för steg", f"Så exporterar du en SIE-fil (typ 4) från {g['namn']}: menyvägen steg för steg, och hur du sedan granskar bokföringen gratis.", f"/guider/{g['slug']}/", kropp, [ldsmul, howto]))
+        sida(f"Exportera SIE-fil från {g['namn']} – steg för steg", f"Så exporterar du en SIE-fil (typ 4) från {g['namn']}: menyvägen steg för steg, och hur du sedan granskar bokföringen gratis.", f"/guider/{g['slug']}/", kropp, [ldsmul, howto], publicerad=GUIDER_PUBL, andrad=F.GUIDER_KONTROLLERAD, typ="Article"))
 smul, ldsmul = brodsmulor([("Start", "/"), ("Guider", None)])
 lista = "".join(f'<li><a href="/guider/{g["slug"]}/">Exportera SIE-fil från {e(g["namn"])}</a></li>' for g in GUIDER)
 kropp = (smul + '<article><p class="etikett">Guider</p><h1>Så tar du ut en SIE-fil</h1>'
@@ -244,7 +262,7 @@ kropp = (smul + '<article><p class="etikett">Guider</p><h1>Så tar du ut en SIE-
          '<h2>Står inte ditt program med?</h2><p>Leta efter <strong>Export</strong>, <strong>Import och export</strong> eller <strong>SIE</strong> i menyerna, ofta under Arkiv, Inställningar eller Bokföring. Välj SIE typ 4 och hela räkenskapsåret. Filen slutar oftast på <code>.se</code>.</p></article>')
 os.makedirs(UT_G, exist_ok=True)
 open(os.path.join(UT_G, "index.html"), "w", encoding="utf-8").write(
-    sida("Så tar du ut en SIE-fil – guider för Fortnox, Bokio, Spiris med flera", "Steg-för-steg-guider för att exportera en SIE-fil (typ 4) från Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted och Briox.", "/guider/", kropp, [ldsmul], datum=f"Menyvägarna senast kontrollerade {F.GUIDER_KONTROLLERAD}."))
+    sida("Så tar du ut en SIE-fil – guider för Fortnox, Bokio, Spiris med flera", "Steg-för-steg-guider för att exportera en SIE-fil (typ 4) från Fortnox, Spiris, Visma Administration, Bokio, Björn Lundén, Accounted och Briox.", "/guider/", kropp, [ldsmul], publicerad=GUIDER_PUBL, andrad=F.GUIDER_KONTROLLERAD))
 
 # ---------- byråsidan ----------
 import byra_sida
@@ -267,5 +285,5 @@ idag = date.today().isoformat()
 urls = ["/", "/byra/", "/kontroller/", "/kallor/", "/integritet/", "/bransch/", "/guider/"] + [f"/guider/{g['slug']}/" for g in GUIDER] + [f"/bransch/{s}/" for s in sidor.values()]
 open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{idag}</lastmod></url>\n" for u in urls) + "</urlset>\n")
+    + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{DATUM_PER_URL.get(u) or F.git_datum('index.html', False)}</lastmod></url>\n" for u in urls) + "</urlset>\n")
 print(f"{len(sidor)} branschsidor, {len(GUIDER)} guider, {len(urls)} adresser i sajtkartan")

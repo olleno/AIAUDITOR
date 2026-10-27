@@ -16,4 +16,4 @@ def bygg(sida, brodsmulor, rot):
              '<h2>Det som inte bevakas automatiskt</h2><p>Srf konsulternas och FAR:s standard för redovisningsuppdrag (Rex) är inte öppen för alla. Kontroller som bygger på den är märkta som tolkning av god redovisningssed.</p></article>')
     os.makedirs(os.path.join(rot, "kallor"), exist_ok=True)
     open(os.path.join(rot, "kallor", "index.html"), "w", encoding="utf-8").write(
-        sida("Källor – lagar och regler bakom AI Auditor", f"De {len(k)} lagar och myndighetssidor som AI Auditors kontroller bygger på, kontrollerade varje natt.", "/kallor/", kropp, [ldsmul], datum=f"Förteckningen uppdaterad {F.KALLOR_UPPDATERAD}. Källorna kontrolleras varje natt."))
+        sida("Källor – lagar och regler bakom AI Auditor", f"De {len(k)} lagar och myndighetssidor som AI Auditors kontroller bygger på, kontrollerade varje natt.", "/kallor/", kropp, [ldsmul], publicerad=F.git_datum("verktyg/kallor_sida.py"), andrad=F.KALLOR_UPPDATERAD))

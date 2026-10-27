@@ -69,4 +69,4 @@ def bygg(sida, brodsmulor, rot):
     open(os.path.join(ut, "index.html"), "w", encoding="utf-8").write(
         sida("AI Auditor för redovisningsbyråer – granskning i er byrås namn",
              "Låt era kunder granska bokföringen med er logga och kontaktuppgift. Översikt över alla kunder i rött, gult och grönt. Från 490 kr i månaden.",
-             "/byra/", smul + KROPP, [ldsmul, faq], datum=f"Uppdaterad {F.BYRA_UPPDATERAD}."))
+             "/byra/", smul + KROPP, [ldsmul, faq], publicerad=F.git_datum("verktyg/byra_sida.py"), andrad=F.BYRA_UPPDATERAD))

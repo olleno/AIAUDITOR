@@ -19,7 +19,7 @@ UTESLUTS = ("media/", "redaktionen/", "pyodide/", "typsnitt/", ".git/")
 AI_BOTAR = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
             "PerplexityBot", "Google-Extended", "Bingbot", "Applebot-Extended"]
 TYPER = {"Organization", "WebSite", "WebApplication", "Offer", "FAQPage", "Question", "Answer", "BreadcrumbList", "ListItem",
-         "Dataset", "DataDownload", "HowTo", "HowToStep"}
+         "Dataset", "DataDownload", "HowTo", "HowToStep", "Article", "WebPage"}
 FORBJUDNA = re.compile(r"\b(bäst i test|testvinnare|vårt val|mest populär\w*|populärast\w*|topprankad\w*|nummer ett|#1 i sverige|"
                        r"mest klickad\w*|officiell vinnare|bästa\b|bäst\b|vi rekommenderar)", re.I)
 DATUM = re.compile(r"(Uppdaterad|uppdaterad|kontrollerad\w*|Kontrollerad\w*|hämtad|Hämtad)[^<]{0,40}\d{4}-\d{2}-\d{2}|20\d\d-\d\d-\d\d")
@@ -221,6 +221,22 @@ class Fabriksregler(unittest.TestCase):
     def test_datum_pa_indexerade_sidor(self):
         for rel, h in indexerade():
             self.assertRegex(text(h), DATUM, f"{rel}: saknar datum")
+
+    def test_dateModified_och_datePublished_i_jsonld_och_synligt(self):
+        """Varje indexerad sida har Article/WebPage med datePublished och dateModified (sanna datum, inte i framtiden),
+        och samma datum står synligt som 'Publicerad … · Uppdaterad …'."""
+        import datetime
+        idag = datetime.date.today().isoformat()
+        for rel, h in indexerade():
+            if rel == "index.html": continue  # startsidan är handskriven (WebApplication)
+            sidnod = [n for b in ld(h) for n in noder(b) if n["@type"] in ("Article", "WebPage")]
+            self.assertEqual(len(sidnod), 1, f"{rel}: ska ha exakt en Article/WebPage")
+            n = sidnod[0]
+            for k in ("datePublished", "dateModified"):
+                self.assertRegex(n.get(k, ""), r"^\d{4}-\d{2}-\d{2}$", f"{rel}: saknar {k}")
+            self.assertLessEqual(n["datePublished"], n["dateModified"], rel)
+            self.assertLessEqual(n["dateModified"], idag, rel)
+            self.assertIn(f"Publicerad {n['datePublished']} · Uppdaterad {n['dateModified']}", text(h), f"{rel}: datumen syns inte")
 
     def test_noindex_bara_dar_det_ska(self):
         for rel, h in sidor():
