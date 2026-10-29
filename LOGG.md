@@ -53,3 +53,4 @@
 - Ändrat jämfört med konrad-sajt (hårda regler): "Automatisk bokföring" i prislistan -> "Bokföring där Konrad frågar när han är osäker"; samma sak i villkorens punkt om gratisnivån och i jämförelsekalkylatorns text; prisraden om procent av första årets besparing (gamla modellen) borttagen; länkar till guider som inte flyttats (AI-förordningen, kvitton, byta byrå m.fl.) borttagna. Inga priser ändrade.
 - Fortfarande noindex, utanför sajtkarta, llms.txt och flöden. Tester: tester/aiauditor_test_konrad.py.
 - Backning: `git revert <commit>` (commit-id står i git log: "Konrad: en sajt på aiauditor.se/konrad/").
+- Rättelse samma kväll: tillvalet "20 % av första årets besparing" (avgiftsvakten) är kvar i den beslutade prislistan och återinfört på /konrad/.

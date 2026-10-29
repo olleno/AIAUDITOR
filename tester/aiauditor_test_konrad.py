@@ -11,7 +11,7 @@ from pathlib import Path
 ROT = Path(__file__).resolve().parent.parent
 KONRAD = ROT / "konrad"
 DATA = ROT / "konrad-kalla" / "data"
-FORBJUDNA = ["bokför automatiskt", "allt automatiskt", "20 % av första årets besparing", "automatisk bokföring",
+FORBJUDNA = ["bokför automatiskt", "allt automatiskt", "automatisk bokföring",
              "automatisk löpande bokföring", "bokför allt själv"]
 MAN = re.compile(r"(populärast|mest populär|vanligaste valet|bäst i test|testvinnare)", re.I)
 
@@ -56,7 +56,7 @@ class KonradTest(unittest.TestCase):
             self.assertIsNone(MAN.search(t), rel)
         for p in list((ROT / "konrad-kalla").rglob("*.*")) + list((KONRAD / "js").glob("*.js")):
             t = p.read_text(encoding="utf-8").lower()
-            for f in ("bokför automatiskt", "allt automatiskt", "20 % av första årets besparing"):
+            for f in ("bokför automatiskt", "allt automatiskt"):
                 self.assertNotIn(f, t, f"{p}: {f}")
 
     def test_priserna_pa_sidan_ar_datafilens(self):
@@ -80,9 +80,8 @@ class KonradTest(unittest.TestCase):
         K, P = json.loads(kalla.read_text(encoding="utf-8")), j("konrad-priser")
         self.assertEqual([(n["id"], n["pris"]) for n in K["nivaer"]], [(n["id"], n["pris"]) for n in P["nivaer"]])
         self.assertEqual(K["bokslut"]["pris_ar"], P["bokslut"]["pris_ar"])
-        # enda skillnaden i tillvalen: raden om 20 % av besparingen (gamla prismodellen) är borttagen
-        kp = {t["text"]: t["pris"] for t in K["tillval"] if "20 % av första årets besparing" not in t["text"]}
-        self.assertEqual(kp, {t["text"]: t["pris"] for t in P["tillval"]})
+        # tillvalen (avgiftsvaktens 20 % av besparingen ingår – beslutad prislista)
+        self.assertEqual([t["pris"] for t in K["tillval"]], [t["pris"] for t in P["tillval"]])
 
     def test_rakneformeln_ger_datafilens_priser(self):
         P = j("konrad-priser")
