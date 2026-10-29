@@ -42,3 +42,6 @@
 - Tester: tester/aiauditor_test_ai_sok.py. Bygg och testa: `python3 verktyg/bygg_sidor.py && python3 -m unittest discover -s tester -p 'aiauditor_test_*.py'`.
 - /conrad/ är en omdirigering till /konrad/ (noindex, kanonisk /konrad/). Konrad hålls utanför llms.txt och flödena tills den släpps.
 - Inte publicerat.
+
+## 2026-10-29 – Konrad-sidan: inga löften om automatisk bokföring
+- /konrad/: "bokför automatiskt" och "allt automatiskt" ersatta med att Konrad bokför det han är säker på och frågar om resten (mätningen på riktiga böcker 29 okt). Backning: `git revert 4bdfabc`.
