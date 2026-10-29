@@ -1,0 +1,584 @@
+{
+ "skv-312-2027": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Ändrade regler för delägare i fåmansföretag inför inkomstdeklarationen 2027",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html",
+  "datum": "2026-10-20"
+ },
+ "mazars-312-beslut": {
+  "kort": "Forvis Mazars",
+  "namn": "Forvis Mazars: Riksdagen har beslutat de nya 3:12-reglerna (beslut 26 november 2025)",
+  "url": "https://www.forvismazars.com/se/sv/insikter/nyhetsbrev-artiklar/artiklar-fraan-forvis-mazars-nyhetsbrev/riksdagen-har-beslutat-de-nya-3-12-reglerna",
+  "datum": "2026-10-20"
+ },
+ "bfl-4-1": {
+  "kort": "BFL 4 kap. 1 §",
+  "namn": "Bokföringslagen (1999:1078) 4 kap. 1 §: företaget ansvarar för bokföring och arkivering",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-5-2": {
+  "kort": "BFL 5 kap. 2 §",
+  "namn": "Bokföringslagen (1999:1078) 5 kap. 2 §: när affärshändelser ska bokföras",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-5-6": {
+  "kort": "BFL 5 kap. 6–7 §§",
+  "namn": "Bokföringslagen (1999:1078) 5 kap. 6–7 §§: verifikationer och vad de ska innehålla",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-7-1": {
+  "kort": "BFL 7 kap. 1 §",
+  "namn": "Bokföringslagen (1999:1078) 7 kap. 1 §, lydelse enligt SFS 2024:342: bevara i det format och med det innehåll handlingen hade när den kom in",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-7-2": {
+  "kort": "BFL 7 kap. 2 §",
+  "namn": "Bokföringslagen (1999:1078) 7 kap. 2 §: bevarandetid och förvaring i Sverige",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-7-3a": {
+  "kort": "BFL 7 kap. 3 a §",
+  "namn": "Bokföringslagen (1999:1078) 7 kap. 3 a §: elektronisk förvaring i ett annat EU-land efter anmälan till Skatteverket",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "bfl-7-6": {
+  "kort": "BFL 7 kap. 6 §",
+  "namn": "Bokföringslagen (1999:1078) 7 kap. 6 §, lydelse enligt SFS 2024:342 (i kraft 1 juli 2024): när original får förstöras efter överföring",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/",
+  "datum": "2026-10-20"
+ },
+ "sfs-2024-342": {
+  "kort": "SFS 2024:342",
+  "namn": "SFS 2024:342, Lag om ändring i bokföringslagen (i kraft 1 juli 2024)",
+  "url": "https://svenskforfattningssamling.se/sites/default/files/sfs/2024-05/SFS2024-342.pdf",
+  "datum": "2026-10-20"
+ },
+ "bfn-vl-bokforing": {
+  "kort": "BFN",
+  "namn": "Bokföringsnämnden: Vägledning Bokföring (BFNAR 2013:2), uppdaterad 2024-09-16, kap. 5, 7 och 8",
+  "url": "https://bfn.se/wp-content/uploads/vl13-2-bokforing.pdf",
+  "datum": "2026-10-20"
+ },
+ "skv-bokforing": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Bokföring – vad kräver lagen?",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/bokforingochbokslut/bokforingvadkraverlagen.4.18e1b10334ebe8bc80005195.html",
+  "datum": "2026-10-20"
+ },
+ "skv-ombud": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Utse ombud för ett företag",
+  "url": "https://skatteverket.se/foretag/drivaforetag/ombudforettforetag/utseombudforettforetag.4.5a85666214dbad743ff1158c.html",
+  "datum": "2026-10-20"
+ },
+ "skv-vara-ombud": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Vara ombud för ett företag",
+  "url": "https://skatteverket.se/foretag/drivaforetag/ombudforettforetag/varaombudforettforetag.4.5a85666214dbad743ff115ba.html",
+  "datum": "2026-10-20"
+ },
+ "bolagsverket-ombud-ar": {
+  "kort": "Bolagsverket",
+  "namn": "Bolagsverket: Ombud som vill skicka in årsredovisningen digitalt (sidan kunde inte läsas automatiskt, uppgiften kontrolleras)",
+  "url": "https://bolagsverket.se/sjalvservice/etjanster/lamnainarsredovisningendigitalt/ombudgillarattskickainarsredovisningendigitalt.1675.html",
+  "datum": "2026-10-20"
+ },
+ "sie-format": {
+  "kort": "SIE-Gruppen",
+  "namn": "SIE-Gruppen: SIE-formatet (filtyper 1–4)",
+  "url": "https://sie.se/format/",
+  "datum": "2026-10-20"
+ },
+ "srf-villkor": {
+  "kort": "Srf konsulterna",
+  "namn": "Srf konsulterna: Allmänna villkor, version 3.2 (2015-02-23), punkt 1, 13 och 14 (kontrolleras om nyare version finns)",
+  "url": "https://temp.srfkonsult.se/app/uploads/2016/02/allmanna-villkor-srf-3-2.pdf",
+  "datum": "2026-10-20"
+ },
+ "skv-belopp-2026": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Belopp och procent 2026 (förseningsavgifter)",
+  "url": "https://www.skatteverket.se/foretag/skatterochavdrag/beloppochprocent/2026.106.1522bf3f19aea8075ba3294.html",
+  "datum": "2026-10-20"
+ },
+ "sfl-48": {
+  "kort": "SFL 48 kap.",
+  "namn": "Skatteförfarandelagen (2011:1244) 48 kap. 5–7 §§: förseningsavgift",
+  "url": "https://data.riksdagen.se/dokument/sfs-2011-1244.text",
+  "datum": "2026-10-20"
+ },
+ "arl-8-6": {
+  "kort": "ÅRL 8 kap. 6 §",
+  "namn": "Årsredovisningslagen (1995:1554) 8 kap. 3, 6 och 6 a §§: inlämning och förseningsavgift (belopp enligt SFS 2024:1115)",
+  "url": "https://data.riksdagen.se/dokument/sfs-1995-1554.text",
+  "datum": "2026-10-20"
+ },
+ "arl-2-7": {
+  "kort": "ÅRL 2 kap. 7 §",
+  "namn": "Årsredovisningslagen (1995:1554) 2 kap. 7 §: årsredovisningen skrivs under av styrelsen och vd",
+  "url": "https://data.riksdagen.se/dokument/sfs-1995-1554.text",
+  "datum": "2026-10-20"
+ },
+ "abl-9-1": {
+  "kort": "ABL 9 kap. 1 §",
+  "namn": "Aktiebolagslagen (2005:551) 9 kap. 1 §: när ett privat aktiebolag måste ha revisor",
+  "url": "https://data.riksdagen.se/dokument/sfs-2005-551.text",
+  "datum": "2026-10-20"
+ },
+ "abl-7-10": {
+  "kort": "ABL 7 kap. 10 §",
+  "namn": "Aktiebolagslagen (2005:551) 7 kap. 10 §: årsstämma inom sex månader",
+  "url": "https://data.riksdagen.se/dokument/sfs-2005-551.text",
+  "datum": "2026-10-20"
+ },
+ "pvl": {
+  "kort": "Penningtvättslagen",
+  "namn": "Lag (2017:630) om åtgärder mot penningtvätt och finansiering av terrorism, 1 kap. 2 § p. 19 (bokföringstjänster) och 2–3 kap. (kundkännedom)",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-2017630-om-atgarder-mot-penningtvatt-och_sfs-2017-630/",
+  "datum": "2026-10-20"
+ },
+ "p-studac": {
+  "kort": "studac.se",
+  "namn": "Studac: startsida och prissida",
+  "url": "https://www.studac.se/priser/",
+  "datum": "2026-10-20"
+ },
+ "p-kameral": {
+  "kort": "kameral.se",
+  "namn": "Kameral: priser",
+  "url": "https://www.kameral.se/priser",
+  "datum": "2026-10-20"
+ },
+ "p-bokio": {
+  "kort": "bokio.se",
+  "namn": "Bokio: priser",
+  "url": "https://www.bokio.se/priser/",
+  "datum": "2026-10-20"
+ },
+ "p-fortnox": {
+  "kort": "fortnox.se",
+  "namn": "Fortnox: prislista",
+  "url": "https://www.fortnox.se/prislista",
+  "datum": "2026-10-20"
+ },
+ "p-spiris": {
+  "kort": "spiris.se",
+  "namn": "Spiris: priser",
+  "url": "https://www.spiris.se/priser",
+  "datum": "2026-10-20"
+ },
+ "p-accounted": {
+  "kort": "accounted.se",
+  "namn": "Accounted: priser",
+  "url": "https://www.accounted.se/priser",
+  "datum": "2026-10-20"
+ },
+ "p-kleer": {
+  "kort": "kleer.se",
+  "namn": "Kleer: priser",
+  "url": "https://www.kleer.se/priser",
+  "datum": "2026-10-20"
+ },
+ "p-holdy": {
+  "kort": "holdy.se",
+  "namn": "Holdy: pris",
+  "url": "https://www.holdy.se/",
+  "datum": "2026-10-20"
+ },
+ "p-crespo": {
+  "kort": "crespopartners.se",
+  "namn": "Crespo & Partners: tjänster och Flowledger",
+  "url": "https://crespopartners.se/services",
+  "datum": "2026-10-20"
+ },
+ "p-bronn": {
+  "kort": "bronnhq.com",
+  "namn": "Bronn: pricing",
+  "url": "https://bronnhq.com/pricing",
+  "datum": "2026-10-20"
+ },
+ "p-wint": {
+  "kort": "wint.se",
+  "namn": "Wint: priser (sidan blockerade automatisk läsning 2026-10-20)",
+  "url": "https://www.wint.se/priser",
+  "datum": "2026-10-20"
+ },
+ "p-srf-enkat": {
+  "kort": "srfkonsult.se",
+  "namn": "Srf konsulterna: pris- och löneenkäten (bara för medlemmar)",
+  "url": "https://www.srfkonsult.se/medlemskap/medlemsformaner/pris--och-loneenkaten",
+  "datum": "2026-10-20"
+ },
+ "google-limited-use": {
+  "kort": "Google",
+  "namn": "Google API Services User Data Policy, avsnitten Limited Use och Secure Data Handling",
+  "url": "https://developers.google.com/terms/api-services-user-data-policy",
+  "datum": "2026-10-20"
+ },
+ "gdpr-28": {
+  "kort": "GDPR art. 28",
+  "namn": "Dataskyddsförordningen (EU) 2016/679 artikel 28: personuppgiftsbiträde",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32016R0679",
+  "datum": "2026-10-20"
+ },
+ "aia-3": {
+  "kort": "AI-förordningen art. 3",
+  "namn": "Förordning (EU) 2024/1689 (AI-förordningen) artikel 3: definitioner av leverantör (3.3), tillhandahållare (3.4) och deepfake (3.60)",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-4": {
+  "kort": "AI-förordningen art. 4",
+  "namn": "Förordning (EU) 2024/1689 artikel 4: AI-kunnighet (ändrad genom förordning (EU) 2026/1744)",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-5": {
+  "kort": "AI-förordningen art. 5",
+  "namn": "Förordning (EU) 2024/1689 artikel 5: förbjudna AI-metoder",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-6": {
+  "kort": "AI-förordningen art. 6",
+  "namn": "Förordning (EU) 2024/1689 artikel 6: när ett AI-system är högrisk, med undantagen i 6.3",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-26": {
+  "kort": "AI-förordningen art. 26",
+  "namn": "Förordning (EU) 2024/1689 artikel 26: skyldigheter för tillhandahållare av högrisksystem",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-50": {
+  "kort": "AI-förordningen art. 50",
+  "namn": "Förordning (EU) 2024/1689 artikel 50: transparens när människor möter AI",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-113": {
+  "kort": "AI-förordningen art. 113",
+  "namn": "Förordning (EU) 2024/1689 artikel 113: när reglerna börjar gälla",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-bilaga3": {
+  "kort": "AI-förordningen bilaga III",
+  "namn": "Förordning (EU) 2024/1689 bilaga III: högrisksystem, punkt 4 (anställning) och 5 b (kreditvärdighet)",
+  "url": "https://eur-lex.europa.eu/legal-content/SV/TXT/?uri=CELEX:32024R1689",
+  "datum": "2026-10-21"
+ },
+ "aia-omnibus": {
+  "kort": "Förordning (EU) 2026/1744",
+  "namn": "Förordning (EU) 2026/1744 om förenkling av AI-förordningen (förenklingspaketet, \"digital omnibus\"), antagen 8 juli 2026, publicerad i EU:s officiella tidning 24 juli 2026",
+  "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/swe",
+  "datum": "2026-10-26"
+ },
+ "kom-ai-act": {
+  "kort": "EU-kommissionen",
+  "namn": "EU-kommissionen: AI Act, regelverket och tidplanen (sidan uppdaterad 19 oktober 2026)",
+  "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+  "datum": "2026-10-21"
+ },
+ "kom-ai-kunnighet": {
+  "kort": "EU-kommissionen, AI literacy Q&A",
+  "namn": "EU-kommissionen: AI Literacy – Questions & Answers (sidan uppdaterad 20 oktober 2026)",
+  "url": "https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers",
+  "datum": "2026-10-21"
+ },
+ "sou-2025-101": {
+  "kort": "SOU 2025:101",
+  "namn": "SOU 2025:101 Anpassningar till AI-förordningen (Finansdepartementet, oktober 2025)",
+  "url": "https://www.regeringen.se/rattsliga-dokument/statens-offentliga-utredningar/2025/10/sou-2025101/",
+  "datum": "2026-10-21"
+ },
+ "skv-292-2026": {
+  "kort": "Skatteverket SKV 292",
+  "namn": "Skatteverket: Skatteregler för delägare i fåmansföretag, SKV 292 utgåva 34 (inkomstår 2025, deklarationen 2026, utgiven januari 2026)",
+  "url": "https://skatteverket.se/download/18.1522bf3f19aea8075ba4f3e/1768831040199/skatteregler-for-delagare-i-famansforetag-skv292-utgava34.pdf",
+  "datum": "2026-10-21"
+ },
+ "skv-ombilda-ab": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Ombilda enskild näringsverksamhet till aktiebolag",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/andraochombilda/ombildaenskildnaringsverksamhettillaktiebolag.4.70ac421612e2a997f85800085368.html",
+  "datum": "2026-10-21"
+ },
+ "skv-andra-ombilda": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Ändra och ombilda företag",
+  "url": "https://skatteverket.se/foretag/drivaforetag/andraochombilda.4.70ac421612e2a997f85800085260.html",
+  "datum": "2026-10-21"
+ },
+ "verksamt-ef-ab": {
+  "kort": "Verksamt.se",
+  "namn": "Verksamt.se (Bolagsverket, Skatteverket och Tillväxtverket): Från enskild näringsverksamhet till aktiebolag",
+  "url": "https://verksamt.se/starta-foretag/valj-foretagsform/byta-foretagsform/enskild-naringsverksamhet-till-aktiebolag",
+  "datum": "2026-10-21"
+ },
+ "verksamt-ab": {
+  "kort": "Verksamt.se",
+  "namn": "Verksamt.se (Bolagsverket, Skatteverket och Tillväxtverket): Aktiebolag – aktiekapital, registreringsavgift och F-skatt",
+  "url": "https://verksamt.se/starta-foretag/valj-foretagsform/aktiebolag",
+  "datum": "2026-10-21"
+ },
+ "abl-1-5": {
+  "kort": "ABL 1 kap. 5 §",
+  "namn": "Aktiebolagslagen (2005:551) 1 kap. 5 §: aktiekapital minst 25 000 kronor",
+  "url": "https://data.riksdagen.se/dokument/sfs-2005-551.text",
+  "datum": "2026-10-21"
+ },
+ "il-24-32": {
+  "kort": "IL 24 kap. 32–33 §§",
+  "namn": "Inkomstskattelagen (1999:1229) 24 kap. 32–33 §§: vad som är en näringsbetingad andel (ändrad t.o.m. SFS 2026:1393)",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "il-24-35": {
+  "kort": "IL 24 kap. 35 §",
+  "namn": "Inkomstskattelagen (1999:1229) 24 kap. 35 §: utdelning på näringsbetingad andel tas inte upp",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "il-25a-5": {
+  "kort": "IL 25 a kap. 5 och 9 §§",
+  "namn": "Inkomstskattelagen (1999:1229) 25 a kap. 5 §: kapitalvinst på näringsbetingad andel tas inte upp, utom enligt 9 § (skalbolag)",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "il-30-11": {
+  "kort": "IL 30 kap. 9 och 11 §§",
+  "namn": "Inkomstskattelagen (1999:1229) 30 kap. 9 och 11 §§: återföring när en enskild näringsidkare upphör, och periodiseringsfond från enskild näringsverksamhet till aktiebolag",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "il-34-20": {
+  "kort": "IL 34 kap. 20 §",
+  "namn": "Inkomstskattelagen (1999:1229) 34 kap. 20 §: expansionsfond vid överlåtelse till aktiebolag",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "skv-fskatt": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: F-skatt och FA-skatt",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/startaochregistrera/fochfaskatt.4.58d555751259e4d661680006355.html",
+  "datum": "2026-10-21"
+ },
+ "skv-skatteavdrag-30": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Skatteavdrag med 30 procent",
+  "url": "https://www.skatteverket.se/foretag/arbetsgivare/arbetsgivaravgifterochskatteavdrag/skatteavdrag/skatteavdragmed30procent.4.5c1163881590be297b511bc9.html",
+  "datum": "2026-10-21"
+ },
+ "skv-prelskatt-ftg": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Preliminärskatt för företag och föreningar",
+  "url": "https://www.skatteverket.se/foretag/skatterochavdrag/skattekontobetalaochfatillbaka/preliminarskattforforetagochforeningar.4.233f91f71260075abe8800010616.html",
+  "datum": "2026-10-21"
+ },
+ "kivra-kvitton-igang": {
+  "kort": "Kivra",
+  "namn": "Kivra hjälp: Hur kommer jag igång med digitala kvitton?",
+  "url": "https://faq.kivra.se/hc/sv/articles/23815635837085-Hur-kommer-jag-ig%C3%A5ng-med-digitala-kvitton",
+  "datum": "2026-10-21"
+ },
+ "kivra-skicka-vidare": {
+  "kort": "Kivra",
+  "namn": "Kivra hjälp: Hur laddar jag ner, skriver ut eller vidarebefordrar deklarationen från Kivra?",
+  "url": "https://faq.kivra.se/hc/sv/articles/24998916741661-Hur-laddar-jag-ner-skriver-ut-eller-vidarebefordrar-deklarationen-fr%C3%A5n-Kivra",
+  "datum": "2026-10-21"
+ },
+ "kivra-foretag-bokforing": {
+  "kort": "Kivra",
+  "namn": "Kivra hjälp: Kan jag koppla ihop min Företagsbrevlåda med mitt bokföringssystem?",
+  "url": "https://faq.kivra.se/hc/sv/articles/22961400508317-Kan-jag-koppla-ihop-min-F%C3%B6retagsbrevl%C3%A5da-med-mitt-bokf%C3%B6ringssystem",
+  "datum": "2026-10-21"
+ },
+ "skv-momssatser": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Momssats på varor och tjänster",
+  "url": "https://www.skatteverket.se/foretag/moms/saljavarorochtjanster/momssatspavarorochtjanster.4.58d555751259e4d66168000409.html",
+  "datum": "2026-10-21"
+ },
+ "skv-aktiebolag": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Aktiebolag (”Bolagsskatten är 20,6 procent”)",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/aktiebolag.4.5c13cb6b1198121ee8580002546.html",
+  "datum": "2026-10-21"
+ },
+ "skv-faktura-avdrag": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Momslagens regler om fakturering (fakturan och rätten till avdrag för ingående moms)",
+  "url": "https://www.skatteverket.se/foretag/moms/saljavarorochtjanster/momslagensregleromfakturering.4.58d555751259e4d66168000403.html",
+  "datum": "2026-10-21"
+ },
+ "scb-bntt01": {
+  "kort": "SCB, BNTT01",
+  "namn": "SCB, Företagens ekonomi: Nyckeltal för icke-finansiella företag efter näringsgren (SNI 2007) och storleksklass, tabell BNTT01, år 2024. Hämtad av AI Auditor 2026-10-06",
+  "url": "https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__NV__NV0109__NV0109L/BNTT01/",
+  "datum": "2026-10-21"
+ },
+ "skv-omvand-bygg": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Omvänd betalningsskyldighet inom byggsektorn",
+  "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/byggverksamhet/omvandbetalningsskyldighetinombyggsektorn.4.47eb30f51122b1aaad28000545.html",
+  "datum": "2026-10-21"
+ },
+ "skv-omvand-bygg-tjanster": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Tjänster där du ska använda omvänd betalningsskyldighet",
+  "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/byggverksamhet/omvandbetalningsskyldighetinombyggsektorn/tjansterdarduskaanvandaomvandbetalningsskyldighet.4.19b9f599116a9e8ef36800022231.html",
+  "datum": "2026-10-21"
+ },
+ "skv-omvand-bygg-faktura": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Avdragsrätt, fakturering och redovisning vid omvänd betalningsskyldighet inom byggsektorn",
+  "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/byggverksamhet/omvandbetalningsskyldighetinombyggsektorn/avdragsrattfaktureringochredovisning.4.19b9f599116a9e8ef36800022270.html",
+  "datum": "2026-10-21"
+ },
+ "skv-rot-foretag": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Så fungerar rotavdraget för företag",
+  "url": "https://www.skatteverket.se/foretag/skatterochavdrag/rotochrut/safungerarrotavdraget.4.2ef18e6a125660db8b080002709.html",
+  "datum": "2026-10-21"
+ },
+ "skv-rot-privat": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Så fungerar rotavdraget",
+  "url": "https://www.skatteverket.se/privat/fastigheterochbostad/rotarbeteochrutarbete/safungerarrotavdraget.4.5947400c11f47f7f9dd80004014.html",
+  "datum": "2026-10-21"
+ },
+ "skv-personalliggare": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Så fungerar personalliggare",
+  "url": "https://www.skatteverket.se/foretag/arbetsgivare/personalliggare/safungerarpersonalliggare.4.3810a01c150939e893f224b.html",
+  "datum": "2026-10-21"
+ },
+ "skv-personalliggare-bygg": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Personalliggare, byggbranschen",
+  "url": "https://www.skatteverket.se/foretag/arbetsgivare/personalliggare/personalliggarebyggbranschen.4.7be5268414bea0646949797.html",
+  "datum": "2026-10-21"
+ },
+ "skv-livsmedelsmoms": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Livsmedelsmomsen sänks till 6 procent (nyhet 2026)",
+  "url": "https://www.skatteverket.se/omoss/pressochmedia/nyheter/2026/nyheter/livsmedelsmomsensankstill6procent.5.70685bee19c85dd5dd0a3f.html",
+  "datum": "2026-10-21"
+ },
+ "skv-kassaregister-undantag": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Vissa verksamheter är undantagna från kravet på kassaregister",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/kassaregister/undantagfrankravpakassaregister.4.6efe6285127ab4f1d2580005105.html",
+  "datum": "2026-10-21"
+ },
+ "skv-dricks": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Tänk på att redovisa dricks om inte arbetsgivaren gjort det (nyhet 2024)",
+  "url": "https://www.skatteverket.se/omoss/pressochmedia/nyheter/2024/nyheter/tankpaattredovisadricksomintearbetsgivarengjortdet.5.13948c0e18e810bfa0c272a.html",
+  "datum": "2026-10-21"
+ },
+ "skv-hyrstol": {
+  "kort": "Skatteverket, Momshandledning avsnitt 22",
+  "namn": "Skatteverket: Handledning för mervärdesskatt, avsnitt 22 Rörelsearrende, franchising m.m. (äldre utgåva)",
+  "url": "https://www.skatteverket.se/download/18.18e1b10334ebe8bc8000113575/1708608237445/mhl_kap22.pdf",
+  "datum": "2026-10-21"
+ },
+ "skv-frivillig-beskattning": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Uthyrning av fastighet och frivillig beskattning",
+  "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/fastighetsverksamhet/uthyrningavfastighetochfrivilligbeskattning.4.18e1b10334ebe8bc80005741.html",
+  "datum": "2026-10-21"
+ },
+ "skv-oss-troskel": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Tröskelvärde vid försäljning till icke beskattningsbara personer i andra EU-länder",
+  "url": "https://www.skatteverket.se/foretag/moms/sarskildamomsregler/handelmedandralander/troskelvardevidforsaljningtillickebeskattningsbarapersoneriandraeulander.4.18e1b10334ebe8bc80005545.html",
+  "datum": "2026-10-21"
+ },
+ "skv-oss-ansok": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Ansök om att redovisa distansförsäljning i One Stop Shop (OSS)",
+  "url": "https://www.skatteverket.se/foretag/moms/deklareramoms/ansokomattredovisadistansforsaljningionestopshoposs.4.5b35a6251761e691420b58e.html",
+  "datum": "2026-10-21"
+ },
+ "skv-varulager": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Varulager",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/enskildnaringsverksamhet/varulager.4.361dc8c15312eff6fd2b8bc.html",
+  "datum": "2026-10-21"
+ },
+ "il-17-3": {
+  "kort": "IL 17 kap. 3–4 §§",
+  "namn": "Inkomstskattelagen (1999:1229) 17 kap. 3–4 §§",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "il-18-4": {
+  "kort": "IL 18 kap. 4 §",
+  "namn": "Inkomstskattelagen (1999:1229) 18 kap. 4 §",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/inkomstskattelag-19991229_sfs-1999-1229/",
+  "datum": "2026-10-21"
+ },
+ "skv-vardeminskning": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Avdrag för värdeminskning",
+  "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/enskildnaringsverksamhet/avdragforvardeminskning.4.361dc8c15312eff6fd32110.html",
+  "datum": "2026-10-21"
+ },
+ "skv-influencer": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Influencers och reklamsamarbeten",
+  "url": "https://www.skatteverket.se/privat/skatter/arbeteochinkomst/inkomster/influencersochreklamsamarbeten.4.41f1c61d16193087d7f125bd.html",
+  "datum": "2026-10-21"
+ },
+ "skv-influencer-ftg": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Ersättning och utbetalning till influencers",
+  "url": "https://www.skatteverket.se/foretag/arbetsgivare/lonochersattning/ersattningochutbetalningtillinfluencers.4.309a41aa1672ad0c8378166.html",
+  "datum": "2026-10-21"
+ },
+ "skv-tjanster-eu": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Sälja tjänster till andra EU-länder",
+  "url": "https://www.skatteverket.se/foretag/moms/saljavarorochtjanster/forsaljningtillandraeulander/saljatjanstertillandraeulander.4.76a43be412206334b89800010696.html",
+  "datum": "2026-10-21"
+ },
+ "skv-tjanster-utanfor-eu": {
+  "kort": "Skatteverket",
+  "namn": "Skatteverket: Sälja tjänster till länder utanför EU",
+  "url": "https://www.skatteverket.se/foretag/moms/saljavarorochtjanster/forsaljningtilllanderutanforeu/saljatjanstertilllanderutanforeu.4.361dc8c15312eff6fd3726e.html",
+  "datum": "2026-10-21"
+ },
+ "di-fortnox-access": {
+  "kort": "Dagens industri",
+  "namn": "Dagens industri 27 oktober 2026, sid. 20: Fortsatt storm mot Fortnox nya tilläggstjänst (Pontus Herin)",
+  "url": "https://www.di.se/",
+  "datum": "2026-10-27"
+ },
+ "avtalslagen-1": {
+  "kort": "Avtalslagen 1 §",
+  "namn": "Lag (1915:218) om avtal och andra rättshandlingar på förmögenhetsrättens område, 1 §: anbud och svar binder den som lämnat dem",
+  "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-191520-om-avtal-och-andra_sfs-1915-218/",
+  "datum": "2026-10-27"
+ },
+ "konsumentverket-bestrida": {
+  "kort": "Konsumentverket",
+  "namn": "Konsumentverket: How to dispute an incorrect invoice (guide för konsumenter, tillsammans med ECC Sweden)",
+  "url": "https://www.konsumentverket.se/en/process/how-to-dispute-an-incorrect-invoice/",
+  "datum": "2026-10-27"
+ },
+ "kronofogden-krav": {
+  "kort": "Kronofogden",
+  "namn": "Kronofogden: Du har fått ett krav (föreläggande)",
+  "url": "https://kronofogden.se/nagon-har-krav-mot-dig/du-har-fatt-ett-krav-forelaggande",
+  "datum": "2026-10-27"
+ }
+}

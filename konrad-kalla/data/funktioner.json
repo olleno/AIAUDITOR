@@ -1,0 +1,25 @@
+{
+  "_kalla": "Funktioner byggda i motorn ~/verket/bokforing-plattform (LAGET.md 27-29 okt 2026, release v0.5.4 på servern i testläge). Ingen kund använder dem än, därför står alla som 'vid lansering'. Inga nivåer tilldelade: det är Olles beslut. Inga träffsäkerhetstal.",
+  "funktioner": [
+    {"id": "morgonbrev", "namn": "Morgonbrev", "status": "vid lansering", "motor": "plattform/morgonbrevet.py",
+     "text": "Ett kort brev när något har hänt: frister, nya avgifter, ringlistan och hur länge pengarna räcker, varje rad med källa. Du väljer varje morgon, varje vecka, en gång i månaden eller av. Hänt inget får du inget brev."},
+    {"id": "ringlista", "namn": "Dagens ringlista", "status": "vid lansering", "motor": "plattform/ringlista.py",
+     "text": "Kunder som slutat köpa, köper mindre eller betalar senare, med det som kostar mest att missa först. Varje rad visar fakturorna den bygger på."},
+    {"id": "avgiftsvakt", "namn": "Avgiftsvakten", "status": "vid lansering", "motor": "plattform/avgiftsvakten.py",
+     "text": "Konrad frågar när en ny avgift dyker upp: 'Ny avgift: 199 kr/mån. Har du beställt den?' Svarar du nej får du ett utkast till bestridande."},
+    {"id": "budget", "namn": "Budget mot utfall", "status": "vid lansering", "motor": "plattform/budget.py",
+     "text": "Du sätter budgeten per månad med ett tryck, utifrån förra årets utfall eller din kreditbudget. Konrad visar avvikelser per månad och hittills i år, och tar upp stora avvikelser i brevet."},
+    {"id": "kreditbudget", "namn": "Kreditbudget", "status": "vid lansering", "motor": "plattform/kreditbudget.py",
+     "text": "Du fyller i det du tror, Konrad gör budgeten banken vill se: tre år resultat och första året månad för månad. Konrad visar talen, inte om banken säger ja."},
+    {"id": "lasratt", "namn": "Läsrätt för din revisor", "status": "vid lansering", "motor": "plattform/revisor.py",
+     "text": "Du bjuder in revisorn med ett slutdatum du väljer. Revisorn kan bara läsa, bara före slutdatum, och du ser vad som öppnats. Du kan avsluta när du vill. Revisorn kan välja ett eget läsbrev."},
+    {"id": "roller", "namn": "Flera mottagare med roller", "status": "vid lansering", "motor": "plattform/webb_personer.py",
+     "text": "Du bjuder in vd, ekonomi och sälj. Var och en får sitt eget brev med bara det som rör rollen, och väljer själv hur ofta."},
+    {"id": "fraga", "namn": "Fråga Konrad", "status": "vid lansering", "motor": "plattform/kundfraga.py",
+     "text": "Skriv en fråga på vanlig svenska. Svaret visar var det kommer ifrån: räknat ur din bokföring, ur Skatteverkets eller lagens text, eller ur kunskapsbanken. Kan Konrad inte svara säkert går frågan till en människa."},
+    {"id": "kunskapsbank", "namn": "Kunskapsbanken", "status": "vid lansering", "motor": "plattform/kunskapsbank.py",
+     "text": "Korta utdrag ur Skatteverkets sidor och lagtexten, med länk och hämtdatum, som reglerna bakom svaren om moms, avgifter och frister."},
+    {"id": "kundfakturor", "namn": "Vem är skyldig oss", "status": "vid lansering", "motor": "plattform/agarfragor.py",
+     "text": "Obetalda kundfakturor med kund, belopp, förfallodag och hur många dagar efter."}
+  ]
+}

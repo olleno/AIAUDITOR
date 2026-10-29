@@ -45,3 +45,11 @@
 
 ## 2026-10-29 – Konrad-sidan: inga löften om automatisk bokföring
 - /konrad/: "bokför automatiskt" och "allt automatiskt" ersatta med att Konrad bokför det han är säker på och frågar om resten (mätningen på riktiga böcker 29 okt). Backning: `git revert 4bdfabc`.
+
+## 2026-10-29 – Konrad: EN sajt på aiauditor.se/konrad/ (Olles beslut 29 okt)
+- /konrad/ ersatt med det nya innehållet från ~/verket/konrad-sajt (rubriken "Bokföringen är gratis. Du betalar när vi gör jobbet åt dig.", nivåerna och priserna ur data, prisberäknaren, frågorna), i aiauditors mapp. Ny sektion "Det här ingår" (10 funktioner ur funktioner.json, alla märkta "vid lansering"); "Nya avgifter du kanske inte har beställt" märkt "vid lansering".
+- Uppdaterat/nytt under /konrad/: villkor/, logga-in/ (inga länkar till appen, märkt "vid lansering"), trygghet/, 312-kalkylator-2026/, vad-kostar-din-bokforing/. Räknarnas JS i konrad/js/, stil i konrad/konrad.css.
+- Byggs av verktyg/bygg_konrad.py (anropas av bygg_sidor.py) ur konrad-kalla/ (fragment + data). Alla länkar pekar på /konrad/...; "Granska din bokföring gratis" går till /.
+- Ändrat jämfört med konrad-sajt (hårda regler): "Automatisk bokföring" i prislistan -> "Bokföring där Konrad frågar när han är osäker"; samma sak i villkorens punkt om gratisnivån och i jämförelsekalkylatorns text; prisraden om procent av första årets besparing (gamla modellen) borttagen; länkar till guider som inte flyttats (AI-förordningen, kvitton, byta byrå m.fl.) borttagna. Inga priser ändrade.
+- Fortfarande noindex, utanför sajtkarta, llms.txt och flöden. Tester: tester/aiauditor_test_konrad.py.
+- Backning: `git revert <commit>` (commit-id står i git log: "Konrad: en sajt på aiauditor.se/konrad/").

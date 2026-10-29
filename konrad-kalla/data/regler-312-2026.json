@@ -1,0 +1,26 @@
+{
+  "_om": "3:12-reglerna för inkomstår 2026 (utdelning 2026, K10 i deklarationen 2027). Nya regler från 1 jan 2026, beslutade av riksdagen 26 nov 2025. Allt nedan kontrollerat 2026-10-20.",
+  "kontrollerad": "2026-10-20",
+  "inkomstar": 2026,
+  "ibb_aret_fore": 80600,
+  "grundbelopp_antal_ibb": 4,
+  "loneavdrag_antal_ibb": 8,
+  "lonebaserat_andel": 0.5,
+  "lonebaserat_tak_ganger_egen_lon": 50,
+  "rantefri_del_omkostnadsbelopp": 100000,
+  "statslanerante_30_nov_aret_fore": 0.0255,
+  "ranta_paslag": 0.09,
+  "skatt_inom_gransbelopp": 0.20,
+  "sparat_rakas_upp": false,
+  "kallor": [
+    {"text": "Skatteverket: Ändrade regler för delägare i fåmansföretag inför inkomstdeklarationen 2027", "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html", "datum": "2026-10-20",
+     "galler": "grundbelopp 4 IBB = 322 400 kr, lönebaserat utrymme 50 % av andelen av löneunderlaget över 8 IBB (644 800 kr), tak 50 gånger egen eller närståendes kontanta ersättning, ränta bara på omkostnadsbelopp över 100 000 kr (statslåneräntan + 9 procentenheter, statslåneräntan 2,55 %), sparat utrymme räknas inte upp, 2/3 av utdelningen beskattas med 30 % (20 % effektivt), krav på ägande vid årets ingång"},
+    {"text": "Forvis Mazars: Riksdagen har beslutat de nya 3:12-reglerna (beslut 26 nov 2025)", "url": "https://www.forvismazars.com/se/sv/insikter/nyhetsbrev-artiklar/artiklar-fraan-forvis-mazars-nyhetsbrev/riksdagen-har-beslutat-de-nya-3-12-reglerna", "datum": "2026-10-20",
+     "galler": "att reglerna är beslutade och gäller från 1 januari 2026"}
+  ],
+  "oklart": [
+    "Hur utdelning över gränsbeloppet beskattas som tjänst (och taket för det) räknar kalkylatorn inte på. Kontrolleras mot Skatteverket.",
+    "Vilket år den egna lönen avser för taket 50 gånger egen lön. Kalkylatorn använder samma år som löneunderlaget (året före inkomståret). Kontrolleras.",
+    "Ägarbyten under året, flera fåmansföretag (högst ett grundbelopp per person totalt), dotterbolag, makar och andelsbyten räknar kalkylatorn inte på."
+  ]
+}

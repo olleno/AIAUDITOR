@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>3:12-kalkylator 2026: gränsbelopp, utdelning och K10 enligt de nya reglerna</title>
+<meta name="description" content="Räkna ut ditt gränsbelopp och skatten på utdelning för inkomstår 2026 enligt de nya 3:12-reglerna: grundbelopp 322 400 kr, lönebaserat utrymme, ränta och sparat utrymme. Med källa och datum, och utan gissningar.">
+<meta name="theme-color" content="#1A2A9C">
+<link rel="stylesheet" href="/konrad/konrad.css">
+</head>
+<body>
+<a class="skip" href="#innehall">Hoppa till innehållet</a>
+<div class="utkast"><div class="ram">Utkast. Konrad är inte lanserat. Det som är märkt <b>vid lansering</b> finns inte än. Bilderna är bildbanksbilder och byts ut mot riktiga foton före lansering.</div></div>
+<header><div class="ram">
+  <a class="logga" href="/konrad/"><i aria-hidden="true">K</i>Konrad</a>
+  <nav aria-label="Huvudmeny"><a href="/konrad/#kvitton">Kvitton</a><a href="/konrad/#pris">Priser</a><a href="/konrad/#ingar">Det här ingår</a><a href="/konrad/312-kalkylator-2026/">3:12-kalkylator</a><a href="/konrad/trygghet/">Trygghet</a><a href="/konrad/villkor/">Villkor</a><a href="/konrad/logga-in/">Logga in</a></nav>
+  <a class="knapp" href="/">Granska gratis</a>
+</div></header>
+<nav class="smulor ram" aria-label="Du är här"><ol><li><a href="/konrad/">Konrad</a></li><li aria-current="page">3:12-kalkylator 2026</li></ol></nav>
+<main id="innehall">
+<article class="ram artikel" style="max-width:1000px">
+<h1>3:12-kalkylator 2026</h1>
+<p class="byline">Regler för inkomstår 2026, kontrollerade 2026-10-29 mot Skatteverket <span class="kalla">[<a href="https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html" rel="noopener">Skatteverket</a>, kontrollerad 2026-10-20]</span>. Uppdaterad 2026-10-29.</p>
+
+<div class="kortsvar"><b>Kort svar</b>Från inkomstår 2026 finns en enda regel för gränsbeloppet. Det består av ett grundbelopp på 322 400 kr per bolag (fyra inkomstbasbelopp à 80 600 kr), fördelat efter din ägarandel, plus ett lönebaserat utrymme på 50 procent av din andel av löneunderlaget över 644 800 kr, plus ränta på omkostnadsbeloppet över 100 000 kr, plus sparat utrymme. Utdelning inom gränsbeloppet beskattas med 20 procent <span class="kalla">[<a href="https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html" rel="noopener">Skatteverket</a>, kontrollerad 2026-10-20]</span>. Reglerna beslutades av riksdagen 26 november 2025 <span class="kalla">[<a href="https://www.forvismazars.com/se/sv/insikter/nyhetsbrev-artiklar/artiklar-fraan-forvis-mazars-nyhetsbrev/riksdagen-har-beslutat-de-nya-3-12-reglerna" rel="noopener">Forvis Mazars</a>, kontrollerad 2026-10-20]</span>. Du redovisar dem i K10 i deklarationen 2027.</div>
+
+<h2>Räkna ut ditt gränsbelopp</h2>
+<noscript><p class="varning">Kalkylatorn behöver JavaScript. Reglerna och ett uträknat exempel står under kalkylatorn, så du kan räkna för hand.</p></noscript>
+<div class="kalk">
+  <form class="falt" id="tolv" novalidate>
+    <label class="kryss"><input type="checkbox" id="agde" checked><span><b>Jag ägde aktierna vid ingången av 2026</b><br><span class="liten">Krävs för att få ett gränsbelopp för 2026.</span></span></label>
+    <div class="rad"><label for="andel">Din ägarandel i procent</label><input id="andel" type="number" min="0" max="100" value="100" inputmode="decimal"></div>
+    <div class="rad"><label for="lu">Bolagets kontanta löner 2025<span class="liten">Löneunderlaget: kontant lön till alla anställda, även dig, i bolaget och dess dotterbolag under 2025. Inte förmåner.</span></label><input id="lu" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="egen">Din egen kontanta lön från bolaget 2025<span class="liten">Eller en närståendes, om den är högre. Styr taket för det lönebaserade utrymmet.</span></label><input id="egen" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="omk">Ditt omkostnadsbelopp för aktierna<span class="liten">Ofta vad du betalade för aktierna, till exempel 25 000 kr.</span></label><input id="omk" type="number" min="0" step="1000" value="25000" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="sparat">Sparat utdelningsutrymme från tidigare år<span class="liten">Står i din senaste K10.</span></label><input id="sparat" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="utd">Utdelning du vill ta 2026</label><input id="utd" type="number" min="0" step="1000" value="200000" inputmode="numeric" style="width:140px"></div>
+  </form>
+  <aside aria-live="polite">
+    <div class="hjaltekort"><div>Så mycket kan du ta ut med 20 % skatt 2026</div><div class="stor" id="u-grans">–</div><div class="liten" style="color:#fff" id="u-text">Fyll i uppgifterna.</div></div>
+    <div class="resultat" id="u-rader" style="margin-top:12px"></div>
+    <div id="u-not"></div>
+  </aside>
+</div>
+
+<h2>Hur räknas gränsbeloppet för 2026?</h2>
+<table>
+<thead><tr><th scope="col">Del</th><th scope="col">Regel 2026</th></tr></thead>
+<tbody>
+<tr><td>Grundbelopp</td><td>4 inkomstbasbelopp för året före (4 × 80 600 = 322 400 kr) per bolag, fördelat på andelarna. Äger du andelar i flera fåmansföretag får du högst ett grundbelopp totalt.</td></tr>
+<tr><td>Lönebaserat utrymme</td><td>50 % av den del av din andel av löneunderlaget som överstiger 8 inkomstbasbelopp (644 800 kr). Högst 50 gånger din egen eller en närståendes kontanta ersättning från bolaget.</td></tr>
+<tr><td>Ränta på omkostnadsbeloppet</td><td>Bara på den del som överstiger 100 000 kr. Räntan är statslåneräntan året före plus 9 procentenheter: 2,55 % + 9 % = 11,55 %.</td></tr>
+<tr><td>Sparat utdelningsutrymme</td><td>Förs vidare, men räknas inte längre upp med ränta.</td></tr>
+<tr><td>Skatt inom gränsbeloppet</td><td>2/3 av utdelningen tas upp i inkomstslaget kapital och beskattas med 30 %, alltså 20 % av hela utdelningen.</td></tr>
+<tr><td>Löneuttagskravet</td><td>Borttaget. Kravet på att äga minst 4 % för att få lönebaserat utrymme är också borttaget.</td></tr>
+</tbody>
+</table>
+<p class="liten">Källa för hela tabellen: <span class="kalla">[<a href="https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html" rel="noopener">Skatteverket</a>, kontrollerad 2026-10-20]</span></p>
+
+<h2>Ett uträknat exempel</h2>
+<p>Skatteverkets eget exempel <span class="kalla">[<a href="https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html" rel="noopener">Skatteverket</a>, kontrollerad 2026-10-20]</span>: Valter äger alla aktier. Bolagets löneunderlag är 1 000 000 kr, han har ingen ränta på omkostnadsbeloppet och 750 000 kr i sparat utrymme.</p>
+<table>
+<tbody>
+<tr><td>Grundbelopp</td><td>322 400 kr</td></tr>
+<tr><td>Lönebaserat utrymme: (1 000 000 − 644 800) × 0,5</td><td>177 600 kr</td></tr>
+<tr><td>Ränta på omkostnadsbeloppet</td><td>0 kr</td></tr>
+<tr><td>Sparat utdelningsutrymme</td><td>750 000 kr</td></tr>
+<tr><td><b>Gränsbelopp</b></td><td><b>1 250 000 kr</b></td></tr>
+<tr><td>Skatt på 100 000 kr i utdelning: 100 000 × 2/3 × 30 %</td><td>20 000 kr</td></tr>
+</tbody>
+</table>
+
+<h2>Hur hänger lön, gränsbelopp, utdelning och K10 ihop?</h2>
+<ol>
+<li><b>Lön 2025</b> bygger löneunderlaget för 2026. Lön betalad under 2026 räknas först för gränsbeloppet 2027.</li>
+<li><b>Gränsbeloppet 2026</b> räknas fram enligt tabellen ovan.</li>
+<li><b>Utdelning 2026</b> upp till gränsbeloppet beskattas med 20 %. Det som går över beskattas som lön, alltså med din vanliga inkomstskatt.</li>
+<li><b>K10</b> lämnas med deklarationen 2027. Där redovisar du gränsbeloppet, utdelningen och vad som sparas till nästa år.</li>
+</ol>
+
+<h2>Vad räknar kalkylatorn inte på?</h2>
+<ul>
+<li>Skatten på utdelning över gränsbeloppet. Den beskattas som inkomst av tjänst, och hur mycket beror på din övriga inkomst och kommun. <span class="kontrolleras">Taket för hur mycket som beskattas i tjänst kontrolleras mot Skatteverket.</span></li>
+<li>Vilket år den egna lönen avser för taket ”50 gånger”. Kalkylatorn använder 2025, samma år som löneunderlaget. <span class="kontrolleras">Kontrolleras.</span></li>
+<li>Ägarbyten under året, flera fåmansföretag, dotterbolag, makar och andelsbyten.</li>
+<li>Bolagets möjlighet att dela ut: det måste finnas fritt eget kapital, och utdelningen beslutas på bolagsstämman.</li>
+<li>Skatten på själva lönen och arbetsgivaravgifterna.</li>
+</ul>
+
+<h2>Vanliga frågor</h2>
+<details class="fraga"><summary>Hur stort är grundbeloppet 2026?</summary><p>322 400 kr per bolag, det vill säga fyra inkomstbasbelopp à 80 600 kr. Det fördelas efter ägarandel, och en person kan få högst ett grundbelopp totalt även om hen äger flera fåmansföretag.</p></details>
+<details class="fraga"><summary>Finns löneuttagskravet kvar 2026?</summary><p>Nej. Löneuttagskravet är borttaget från inkomstår 2026. Det lönebaserade utrymmet kan dock inte bli större än 50 gånger din egen eller en närståendes kontanta ersättning från bolaget.</p></details>
+<details class="fraga"><summary>Räknas sparat utdelningsutrymme upp med ränta?</summary><p>Nej, inte längre. Enligt de nya reglerna förs det sparade utrymmet vidare utan uppräkning.</p></details>
+<details class="fraga"><summary>När lämnar jag K10 med de nya reglerna första gången?</summary><p>I deklarationen 2027, för inkomstår 2026.</p></details>
+
+<section class="kallor" aria-labelledby="kallor-rub"><h2 id="kallor-rub">Källor</h2><ol><li><a href="https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html" rel="noopener">Skatteverket: Ändrade regler för delägare i fåmansföretag inför inkomstdeklarationen 2027</a>. Kontrollerad 2026-10-20.</li><li><a href="https://www.forvismazars.com/se/sv/insikter/nyhetsbrev-artiklar/artiklar-fraan-forvis-mazars-nyhetsbrev/riksdagen-har-beslutat-de-nya-3-12-reglerna" rel="noopener">Forvis Mazars: Riksdagen har beslutat de nya 3:12-reglerna (beslut 26 november 2025)</a>. Kontrollerad 2026-10-20.</li></ol></section><div class="nasta">
+  <h2>Vill du att någon räknar åt dig?</h2>
+  <p>K10 för en ägare ingår i Konrads bokslutspaket, 5 995 kr per år exkl. moms. I Kamrer planerar en auktoriserad redovisningskonsult lön och utdelning med dig.</p>
+  <a class="knapp" href="/konrad/#pris">Se priserna</a>
+</div>
+</article>
+<script type="application/json" id="data-regler-312-2026">{"_om": "3:12-reglerna för inkomstår 2026 (utdelning 2026, K10 i deklarationen 2027). Nya regler från 1 jan 2026, beslutade av riksdagen 26 nov 2025. Allt nedan kontrollerat 2026-10-20.", "kontrollerad": "2026-10-20", "inkomstar": 2026, "ibb_aret_fore": 80600, "grundbelopp_antal_ibb": 4, "loneavdrag_antal_ibb": 8, "lonebaserat_andel": 0.5, "lonebaserat_tak_ganger_egen_lon": 50, "rantefri_del_omkostnadsbelopp": 100000, "statslanerante_30_nov_aret_fore": 0.0255, "ranta_paslag": 0.09, "skatt_inom_gransbelopp": 0.2, "sparat_rakas_upp": false, "kallor": [{"text": "Skatteverket: Ändrade regler för delägare i fåmansföretag inför inkomstdeklarationen 2027", "url": "https://www.skatteverket.se/foretag/drivaforetag/foretagsformer/famansforetag/andradereglerinforinkomstdeklarationen2027.4.4a54dc8b19aa6175a152359.html", "datum": "2026-10-20", "galler": "grundbelopp 4 IBB = 322 400 kr, lönebaserat utrymme 50 % av andelen av löneunderlaget över 8 IBB (644 800 kr), tak 50 gånger egen eller närståendes kontanta ersättning, ränta bara på omkostnadsbelopp över 100 000 kr (statslåneräntan + 9 procentenheter, statslåneräntan 2,55 %), sparat utrymme räknas inte upp, 2/3 av utdelningen beskattas med 30 % (20 % effektivt), krav på ägande vid årets ingång"}, {"text": "Forvis Mazars: Riksdagen har beslutat de nya 3:12-reglerna (beslut 26 nov 2025)", "url": "https://www.forvismazars.com/se/sv/insikter/nyhetsbrev-artiklar/artiklar-fraan-forvis-mazars-nyhetsbrev/riksdagen-har-beslutat-de-nya-3-12-reglerna", "datum": "2026-10-20", "galler": "att reglerna är beslutade och gäller från 1 januari 2026"}], "oklart": ["Hur utdelning över gränsbeloppet beskattas som tjänst (och taket för det) räknar kalkylatorn inte på. Kontrolleras mot Skatteverket.", "Vilket år den egna lönen avser för taket 50 gånger egen lön. Kalkylatorn använder samma år som löneunderlaget (året före inkomståret). Kontrolleras.", "Ägarbyten under året, flera fåmansföretag (högst ett grundbelopp per person totalt), dotterbolag, makar och andelsbyten räknar kalkylatorn inte på."]}</script>
+<script src="/konrad/js/kalkyl.js" defer></script>
+<script src="/konrad/js/tolv.js" defer></script>
+
+</main>
+<footer><div class="ram">
+  <span>Konrad Redovisning AB (arbetsnamn) · org.nr <span class="platshallare">[fylls i]</span> · <span class="platshallare">[adress]</span> · F-skatt. Fylls i före lansering.</span>
+  <span><a href="/konrad/312-kalkylator-2026/">3:12-kalkylator</a> · <a href="/konrad/trygghet/">Så kan du lita på Konrad</a> · <a href="/konrad/villkor/">Villkor</a> · <a href="/konrad/logga-in/">Logga in</a> · <a href="/">AI Auditor</a> · Uppdaterad 2026-10-29</span>
+</div></footer>
+</body>
+</html>

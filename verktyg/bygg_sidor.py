@@ -287,3 +287,7 @@ open(os.path.join(ROT, "sitemap.xml"), "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     + "".join(f"<url><loc>{SAJT}{u}</loc><lastmod>{DATUM_PER_URL.get(u) or F.git_datum('index.html', False)}</lastmod></url>\n" for u in urls) + "</urlset>\n")
 print(f"{len(sidor)} branschsidor, {len(GUIDER)} guider, {len(urls)} adresser i sajtkartan")
+
+# Konrad (konrad/) byggs ur konrad-kalla/ – en sajt, noindex tills Olle släpper den
+import runpy
+runpy.run_path(os.path.join(os.path.dirname(os.path.abspath(__file__)), "bygg_konrad.py"))

@@ -1,158 +1,54 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Villkor – Konrad</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&display=swap">
-<style>
-/* Layout: lugn, ljus säljsida i Polaris anda – serif-rubriker, statuskort vid hjälten, ett mörkt band för Konrads släkt. Egen accent: bläckblått + ockra (färgbandet i en skrivmaskin). */
-:root{
-  --bg:#F7F8FA; --band:#EEF1F5; --yta:#FFFFFF; --text:#28323F; --text2:#4C5866; --dampad:#6E7885; --linje:#DCE1E8;
-  --accent:#1A2A9C; --accentyta:#E3EAFB; --ockra:#B4691A; --ok:#2F6B45;
-  --mork:#1B2433; --morktext:#DCE3EE; --morkdamp:#94A1B3; --morklinje:#334055; --glod:#8DB2EA;
-  --rubrik:"Newsreader",Georgia,"Times New Roman",serif; --brod:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11161E;--band:#161C26;--yta:#1B2230;--text:#E3E8EF;--text2:#B6C0CD;--dampad:#8C97A6;--linje:#2C3546;--accent:#8DB2EA;--accentyta:#1F2B40;--ockra:#E3A15A;--ok:#7FC495;--mork:#0B0F15;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#11161E;--band:#161C26;--yta:#1B2230;--text:#E3E8EF;--text2:#B6C0CD;--dampad:#8C97A6;--linje:#2C3546;--accent:#8DB2EA;--accentyta:#1F2B40;--ockra:#E3A15A;--ok:#7FC495;--mork:#0B0F15;color-scheme:dark}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--brod);font-size:16px;line-height:1.6;margin:0}
-.ram{max-width:1120px;margin:0 auto;padding-inline:20px}
-a{color:var(--accent)}
-.topp{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--linje)}
-.topp .ram{display:flex;align-items:center;gap:12px 28px;flex-wrap:wrap;padding-block:12px}
-.marke{font:500 15px var(--brod);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin:0;text-decoration:none;color:var(--text)}
-.marke svg{width:14px;height:14px}
-.meny{display:flex;gap:22px;flex-wrap:wrap;flex:1;font-size:15px}
-.meny a{color:var(--text2);text-decoration:none}
-.meny a:hover{color:var(--text)}
-.knapp{font:600 15.5px var(--brod);padding:12px 20px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer;text-decoration:none;display:inline-block}
-.knapp.liten{padding:9px 16px;font-size:15px}
-.lank{font:500 16px var(--brod);color:var(--accent);text-decoration:none}
-a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-h1,h2{font-family:var(--rubrik);font-weight:500;letter-spacing:-.04em;text-wrap:balance;margin:0}
-h1{font-size:clamp(40px,6.4vw,66px);line-height:1.02}
-h2{font-size:clamp(30px,4.2vw,44px);line-height:1.08}
-h3{font:600 17px var(--brod);margin:0 0 6px}
-.ogon{font:600 12px var(--brod);text-transform:uppercase;letter-spacing:.12em;color:var(--ockra);margin:0 0 14px}
-.ingress{font-size:19px;color:var(--text2);max-width:34em;margin:20px 0 28px}
-.liten-text{font-size:13.5px;color:var(--dampad)}
-section{padding-block:80px}
-@media (max-width:700px){section{padding-block:56px}}
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Villkor: uppsägning, gratisnivån, fristgaranti och slutgranskning – Konrad</title>
+<meta name="description" content="Konrads villkor i klartext: ingen bindningstid, vad gratisnivån omfattar, vad som händer med bokföringen när du slutar, fristgarantin och slutgranskningen av bokslutet.">
+<meta name="theme-color" content="#1A2A9C">
+<link rel="stylesheet" href="/konrad/konrad.css">
+</head>
+<body>
+<a class="skip" href="#innehall">Hoppa till innehållet</a>
+<div class="utkast"><div class="ram">Utkast. Konrad är inte lanserat. Det som är märkt <b>vid lansering</b> finns inte än. Bilderna är bildbanksbilder och byts ut mot riktiga foton före lansering.</div></div>
+<header><div class="ram">
+  <a class="logga" href="/konrad/"><i aria-hidden="true">K</i>Konrad</a>
+  <nav aria-label="Huvudmeny"><a href="/konrad/#kvitton">Kvitton</a><a href="/konrad/#pris">Priser</a><a href="/konrad/#ingar">Det här ingår</a><a href="/konrad/312-kalkylator-2026/">3:12-kalkylator</a><a href="/konrad/trygghet/">Trygghet</a><a href="/konrad/villkor/">Villkor</a><a href="/konrad/logga-in/">Logga in</a></nav>
+  <a class="knapp" href="/">Granska gratis</a>
+</div></header>
+<nav class="smulor ram" aria-label="Du är här"><ol><li><a href="/konrad/">Konrad</a></li><li aria-current="page">Villkor</li></ol></nav>
+<main id="innehall">
+<div class="ram artikel">
+<p class="status">Utkast. Villkoren ska granskas av jurist före lansering. Konrad är ett arbetsnamn. Uppdaterad 2026-10-29.</p>
+<h1>Villkor</h1>
+<div class="kortsvar"><b>Kort sagt</b>Ingen bindningstid. Du kan ta med dig hela bokföringen när du vill. Har du gjort din del i tid och Konrad ändå lämnar in för sent, betalar vi förseningsavgiften.</div>
 
-/* Hjälten */
-.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:64px 72px}
-@media (max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding-block:40px 56px}}
-.cta-rad{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
-.knapp.ljus{background:transparent;color:var(--accent)}
-.kort{display:grid;gap:12px}
-.kort article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-.kort article.aktiv{background:var(--accentyta);border:1.5px solid var(--accent);box-shadow:0 10px 24px -14px color-mix(in srgb,var(--accent) 70%,transparent)}
-.kort b{display:block;font-weight:600}
-.kort p{margin:2px 0 0;color:var(--text2);font-size:13.5px}
-.kort .st{font-size:13px;color:var(--ockra);white-space:nowrap}
-.kort .st.ok{color:var(--ok)}
-.pil{font-size:13px;color:var(--accent);padding-left:20px;margin:-2px 0}
-.kortnot{font-size:12px;color:var(--dampad);text-align:right;margin:4px 0 0}
+<h2 id="uppsagning">Uppsägning och bindningstid</h2>
+<ul>
+<li>Ingen nivå har bindningstid.</li>
+<li>Ändras ett pris får du veta det minst 60 dagar innan det börjar gälla. Vill du inte fortsätta kan du säga upp tjänsten innan dess och ta med dig hela bokföringen utan kostnad.</li>
+<li><span class="kontrolleras">Beslutas före lansering:</span> exakt när en uppsägning börjar gälla, och hur bokslutspaketet hanteras om du slutar mitt i ett räkenskapsår.</li>
+<li>Bevakning är gratis de första 3 månaderna. Därefter fortsätter den bara om du själv väljer det. Ingen automatisk debitering.</li>
+</ul>
 
-/* Så enkelt */
-.steg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:36px;counter-reset:s}
-.steg div{border-top:2px solid var(--accent);padding-top:16px;counter-increment:s}
-.steg div::before{content:"Steg " counter(s);font:500 12px var(--mono);color:var(--accent);letter-spacing:.06em;display:block;margin-bottom:8px}
-.steg p{margin:0;color:var(--text2)}
-.band{background:var(--band)}
+<h2 id="gratis">Vad gratisnivån omfattar</h2>
+<ul>
+<li>Löpande bokföring där Konrad bokför det han är säker på och frågar om resten, för ett aktiebolag med upp till 15 verifikationer per månad och ett bankkonto.</li>
+<li>Inga anställda. Lön finns som tillval.</li>
+<li>Du lämnar själv in momsen. Inlämning åt dig finns som tillval eller ingår från Bevakning.</li>
+<li>Bokslut och årsredovisning ingår inte. Det kostar 5 995 kr per år hos oss, eller så köper du det av någon annan.</li>
+</ul>
 
-/* Priser */
-.pris{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:36px;align-items:stretch}
-.pris article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.pris article.fram{border:1.5px solid var(--accent);box-shadow:0 10px 24px -16px color-mix(in srgb,var(--accent) 70%,transparent)}
-.pris .namn{font:600 13px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra)}
-.pris .belopp{font-family:var(--rubrik);font-size:40px;letter-spacing:-.03em;line-height:1}
-.pris .belopp small{font:400 15px var(--brod);color:var(--dampad);letter-spacing:0}
-.pris .for{margin:0;color:var(--text2);font-size:14.5px}
-.pris ul{margin:8px 0 12px;padding:0;list-style:none;color:var(--text2);font-size:15px;display:grid;gap:6px}
-.pris li{padding-left:22px;position:relative}
-.pris li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:600}
-.pris li.plus{color:var(--text);font-weight:600}
-.pris li.plus::before{content:"+";color:var(--accent)}
-.pris .knapp{margin-top:auto;text-align:center}
-.spar{margin-top:16px;background:var(--accentyta);border:1px solid var(--linje);border-radius:10px;padding:16px 20px;color:var(--text)}
-.tabellbox{margin-top:36px;overflow-x:auto;border:1px solid var(--linje);border-radius:10px;background:var(--yta)}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
-caption{text-align:left;padding:16px 16px 8px;font:600 17px var(--brod)}
-th,td{padding:10px 14px;text-align:center;border-top:1px solid var(--linje)}
-thead th{font-weight:600;background:var(--band)}
-th:first-child,td:first-child{text-align:left}
-tbody th{font-weight:400;color:var(--text)}
-tr.grupp th{background:var(--band);font:600 12px var(--brod);text-transform:uppercase;letter-spacing:.1em;color:var(--ockra);text-align:left}
-td.ja{color:var(--ok);font-weight:600}
-td.nej{color:var(--dampad)}
-
-/* Det här gör Konrad */
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
-.grid3 article{background:var(--yta);border:1px solid var(--linje);border-radius:10px;padding:22px;min-width:0}
-.grid3 p{margin:0;color:var(--text2);font-size:15px}
-.plan{display:inline-block;font:600 11px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accentyta);border-radius:99px;padding:3px 10px;margin-bottom:12px}
-
-/* Kopplingar */
-.kopp{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px;margin-top:36px}
-.kopp>div{border-top:1px solid var(--linje);padding-top:14px;min-width:0}
-.kopp h3{font-size:15px;margin-bottom:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{border:1px solid var(--linje);background:var(--yta);border-radius:99px;padding:5px 12px;font-size:14px;color:var(--text2)}
-.chips span .snart{margin-left:6px}
-.kopp .lt{font-size:13px;color:var(--dampad);margin:10px 0 0}
-
-/* Trygghet */
-.trygg ul{list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 40px}
-.trygg li{padding:14px 0;border-bottom:1px solid var(--linje);display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px}
-.trygg li svg{width:18px;height:18px;margin-top:4px}
-.trygg li span{color:var(--text2);font-size:15px}
-.trygg li b{color:var(--text);display:block}
-
-/* Konrads släkt – mörkt band */
-.slakt{background:var(--mork);color:var(--morktext)}
-.slakt h2{color:#fff}
-.slakt .ingress{color:var(--morkdamp)}
-.slakten{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
-.slakten article{border:1px solid var(--morklinje);border-radius:10px;padding:20px;min-width:0}
-.slakten article.nu{border-color:var(--glod);background:color-mix(in srgb,var(--glod) 8%,transparent)}
-.slakten .ar{font:500 12px var(--mono);color:var(--glod);letter-spacing:.06em}
-.slakten b{display:block;color:#fff;font-family:var(--rubrik);font-weight:500;font-size:23px;letter-spacing:-.02em;margin:10px 0 8px}
-.slakten p{margin:0;font-size:14.5px;color:var(--morkdamp)}
-.slakten .arv{margin-top:12px;font-size:13.5px;color:var(--morktext);border-top:1px solid var(--morklinje);padding-top:10px}
-.slakt .not{margin-top:22px;color:var(--morkdamp);font-size:13px;font-style:italic}
-
-/* FAQ */
-details{border-bottom:1px solid var(--linje);padding:18px 0}
-summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
-summary::after{content:"+";color:var(--accent);font-weight:400;font-size:22px;line-height:1}
-details[open] summary::after{content:"–"}
-details p{color:var(--text2);margin:10px 0 0;max-width:46em}
-.faq{max-width:820px}
-
-/* Slut-CTA */
-.slut{background:var(--accent);color:var(--bg);text-align:left}
-.slut h2{color:var(--bg)}
-.slut p{color:color-mix(in srgb,var(--bg) 82%,transparent);font-size:18px;max-width:34em}
-.form{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;max-width:560px}
-.form input{flex:1 1 240px;min-width:0;font:inherit;padding:12px 14px;border-radius:6px;border:1px solid transparent;background:var(--bg);color:var(--text)}
-.form button{font:600 15.5px var(--brod);padding:12px 20px;border-radius:6px;border:1px solid var(--bg);background:transparent;color:var(--bg);cursor:pointer}
-.tack{margin-top:14px;font-size:15px}
-footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px solid var(--linje)}
-.snart{font:600 10.5px var(--brod);letter-spacing:.06em;text-transform:uppercase;color:var(--ockra);border:1px solid var(--ockra);border-radius:99px;padding:1px 7px;margin-left:6px;white-space:nowrap;vertical-align:2px}
-.dummy{background:var(--ockra);color:#fff;font:600 12px var(--brod);text-align:center;padding:6px 12px;letter-spacing:.04em}
-@media (prefers-reduced-motion:no-preference){.kort article.aktiv{animation:in .6s ease-out both}@keyframes in{from{transform:translateY(6px)}to{transform:none}}}
-.inlogg a{font-size:.9rem;color:var(--text2);text-decoration:none;white-space:nowrap}.inlogg a:hover{color:var(--text)}
-@media (max-width:700px){
-  .meny{order:5;flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;gap:18px;white-space:nowrap;padding-bottom:2px}
-  .topp .ram{gap:8px 14px}
-  .inlogg{margin-left:auto}
-}
-</style><style>.v{max-width:760px;padding-top:40px;padding-bottom:64px}.v h2{margin-top:40px}.v li{margin:6px 0}.ruta{background:var(--yta);border:1px solid #dfe3ea;border-radius:12px;padding:18px 22px;margin:16px 0}</style></head>
-<body><main><section><div class="ram v">
-<p><a href="../">← Tillbaka till Konrad</a></p>
-<p class="liten-text">Utkast. Villkoren ska granskas av jurist före lansering. Konrad är ett arbetsnamn.</p>
-<h1>Fristgaranti och slutgranskning</h1>
+<h2 id="din-bokforing">Vad som händer med din bokföring när du slutar</h2>
+<ul>
+<li>Bokföringen är din. Du kan ladda ner allt som SIE-fil och pdf, när som helst och utan kostnad, även efter att du har sagt upp tjänsten <span class="kontrolleras">hur länge efter uppsägningen beslutas före lansering</span>.</li>
+<li>Kvitton och andra underlag sparas i det format de kom in, så som bokföringslagen kräver <span class="kalla">[<a href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/" rel="noopener">BFL 7 kap. 1 §</a>, kontrollerad 2026-10-20]</span>. Ditt bolag är ansvarigt för att räkenskapsinformationen bevaras, och det ansvaret går inte att avtala bort <span class="kalla">[<a href="https://bfn.se/wp-content/uploads/vl13-2-bokforing.pdf" rel="noopener">BFN</a>, kontrollerad 2026-10-20]</span>. Därför lämnar vi alltid ut allt.</li>
+<li>Byter du till en annan byrå hjälper vi den nya byrån med SIE-filen.</li>
+</ul>
 
 <h2 id="fristgaranti">Fristgaranti <span class="snart">vid lansering</span></h2>
-<div class="ruta"><b>Kort sagt:</b> Har du gjort din del i tid och Konrad ändå lämnar in för sent, betalar vi förseningsavgiften.</div>
+<div class="kortsvar"><b>Kort sagt:</b> Har du gjort din del i tid och Konrad ändå lämnar in för sent, betalar vi förseningsavgiften.</div>
 <h3>Vad garantin gäller</h3>
 <ul>
 <li>Momsdeklaration och arbetsgivardeklaration som Konrad lämnar in åt dig genom tjänsten.</li>
@@ -168,7 +64,7 @@ footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px
 </ul>
 <h3>Vad vi betalar</h3>
 <ul>
-<li><b>Förseningsavgiften</b> som Skatteverket tar ut för den sena deklarationen: i dag 625 kr per deklaration (48 kap. skatteförfarandelagen).</li>
+<li><b>Förseningsavgiften</b> som Skatteverket tar ut för den sena deklarationen: 625 kr per deklaration för inkomstår 2026 <span class="kalla">[<a href="https://www.skatteverket.se/foretag/skatterochavdrag/beloppochprocent/2026.106.1522bf3f19aea8075ba3294.html" rel="noopener">Skatteverket</a>, kontrollerad 2026-10-20]</span> <span class="kalla">[<a href="https://data.riksdagen.se/dokument/sfs-2011-1244.text" rel="noopener">SFL 48 kap.</a>, kontrollerad 2026-10-20]</span>.</li>
 <li><b>Kostnadsräntan</b> som Skatteverket tar ut för den tid förseningen varade, om förseningen beror på oss.</li>
 </ul>
 <h3>Vad vi inte betalar</h3>
@@ -180,7 +76,7 @@ footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px
 <li>Annan skada, till exempel förlorad tid eller utebliven vinst.</li>
 </ul>
 <h3>Tak</h3>
-<p>Vi betalar högst det du har betalat till oss för tjänsten de senaste 12 månaderna, och högst 5 000 kr per kalenderår.</p>
+<p>Vi betalar högst det du har betalat till oss för tjänsten de senaste 12 månaderna, och högst 7 500 kr per kalenderår.</p>
 <h3>Så får du ersättning</h3>
 <ul>
 <li>Skicka Skatteverkets beslut om förseningsavgift till oss inom <b>30 dagar</b> från beslutsdatum.</li>
@@ -189,14 +85,23 @@ footer{padding-block:28px 40px;color:var(--dampad);font-size:13px;border-top:1px
 </ul>
 
 <h2 id="slutgranskning">Slutgranskning <span class="snart">vid lansering</span></h2>
-<div class="ruta"><b>Kort sagt:</b> Konrad gör jobbet. En auktoriserad redovisningskonsult granskar och skriver under det som lämnas till myndigheter i årspaketet.</div>
+<div class="kortsvar"><b>Kort sagt:</b> Konrad gör jobbet. En auktoriserad redovisningskonsult granskar och skriver under det som lämnas till myndigheter i årspaketet.</div>
 <ul>
 <li><b>Vad som granskas:</b> bokslut, årsredovisning och inkomstdeklaration i årspaketet, innan du godkänner dem.</li>
 <li><b>Vem som granskar:</b> en auktoriserad redovisningskonsult med ansvarsförsäkring. Konsultens namn står på granskningen.</li>
+<li><b>Vem som skriver under:</b> årsredovisningen skrivs alltid under av bolagets styrelse och vd, inte av konsulten <span class="kalla">[<a href="https://data.riksdagen.se/dokument/sfs-1995-1554.text" rel="noopener">ÅRL 2 kap. 7 §</a>, kontrollerad 2026-10-20]</span>.</li>
 <li><b>Vad granskningen är:</b> en kontroll av att bokslutet följer bokföringslagen och de regler som gäller för ditt bolag, och att siffrorna går att följa ner till verifikaten.</li>
 <li><b>Vad granskningen inte är:</b> revision. Har ditt bolag revisionsplikt behöver du fortfarande en revisor.</li>
 <li><b>Ditt ansvar:</b> du är alltid ansvarig för ditt bolags bokföring enligt bokföringslagen. Granskningen gör inte att ansvaret flyttas.</li>
 <li><b>Om något ändå blir fel:</b> beror felet på granskningen ersätts du ur konsultens ansvarsförsäkring enligt dess villkor.</li>
 </ul>
-<p class="liten-text">Källa för förseningsavgiften: skatteförfarandelagen (2011:1244) 48 kap., riksdagen.se. Beloppen kontrolleras automatiskt mot källan och sidan uppdateras om de ändras.</p>
-</div></section></main><footer><p>Uppdaterad 2026-10-14</p></footer></body></html>
+
+<section class="kallor" aria-labelledby="kallor-rub"><h2 id="kallor-rub">Källor</h2><ol><li><a href="https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/bokforingslag-19991078_sfs-1999-1078/" rel="noopener">Bokföringslagen (1999:1078) 7 kap. 1 §, lydelse enligt SFS 2024:342: bevara i det format och med det innehåll handlingen hade när den kom in</a>. Kontrollerad 2026-10-20.</li><li><a href="https://bfn.se/wp-content/uploads/vl13-2-bokforing.pdf" rel="noopener">Bokföringsnämnden: Vägledning Bokföring (BFNAR 2013:2), uppdaterad 2024-09-16, kap. 5, 7 och 8</a>. Kontrollerad 2026-10-20.</li><li><a href="https://www.skatteverket.se/foretag/skatterochavdrag/beloppochprocent/2026.106.1522bf3f19aea8075ba3294.html" rel="noopener">Skatteverket: Belopp och procent 2026 (förseningsavgifter)</a>. Kontrollerad 2026-10-20.</li><li><a href="https://data.riksdagen.se/dokument/sfs-2011-1244.text" rel="noopener">Skatteförfarandelagen (2011:1244) 48 kap. 5–7 §§: förseningsavgift</a>. Kontrollerad 2026-10-20.</li><li><a href="https://data.riksdagen.se/dokument/sfs-1995-1554.text" rel="noopener">Årsredovisningslagen (1995:1554) 2 kap. 7 §: årsredovisningen skrivs under av styrelsen och vd</a>. Kontrollerad 2026-10-20.</li></ol></section></div>
+
+</main>
+<footer><div class="ram">
+  <span>Konrad Redovisning AB (arbetsnamn) · org.nr <span class="platshallare">[fylls i]</span> · <span class="platshallare">[adress]</span> · F-skatt. Fylls i före lansering.</span>
+  <span><a href="/konrad/312-kalkylator-2026/">3:12-kalkylator</a> · <a href="/konrad/trygghet/">Så kan du lita på Konrad</a> · <a href="/konrad/villkor/">Villkor</a> · <a href="/konrad/logga-in/">Logga in</a> · <a href="/">AI Auditor</a> · Uppdaterad 2026-10-29</span>
+</div></footer>
+</body>
+</html>

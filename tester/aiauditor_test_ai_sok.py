@@ -14,7 +14,8 @@ import aiauditor_fakta as F  # noqa: E402
 
 FABRIK = Path.home() / "verket" / "fabrik"
 # Sidor som medvetet inte indexeras: Konrad (ej släppt), kontosidan och omdirigeringen /conrad/ -> /konrad/.
-NOINDEX = {"konrad/index.html", "konrad/villkor/index.html", "konrad/logga-in/index.html", "konto/index.html", "conrad/index.html"}
+NOINDEX = {"konto/index.html", "conrad/index.html"} | {p.relative_to(Path(__file__).resolve().parent.parent).as_posix()
+                                                         for p in (Path(__file__).resolve().parent.parent / "konrad").rglob("index.html")}
 UTESLUTS = ("media/", "redaktionen/", "pyodide/", "typsnitt/", ".git/")
 AI_BOTAR = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot",
             "PerplexityBot", "Google-Extended", "Bingbot", "Applebot-Extended"]

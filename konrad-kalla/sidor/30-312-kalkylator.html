@@ -1,0 +1,88 @@
+<!--meta
+{"sokvag": "312-kalkylator-2026/", "titel": "3:12-kalkylator 2026: gränsbelopp, utdelning och K10 enligt de nya reglerna", "rubrik": "3:12-kalkylator 2026", "smula": "3:12-kalkylator 2026", "typ": "verktyg", "foralder": "guider/",
+ "beskrivning": "Räkna ut ditt gränsbelopp och skatten på utdelning för inkomstår 2026 enligt de nya 3:12-reglerna: grundbelopp 322 400 kr, lönebaserat utrymme, ränta och sparat utrymme. Med källa och datum, och utan gissningar."}
+-->
+<article class="ram artikel" style="max-width:1000px">
+<h1>3:12-kalkylator 2026</h1>
+<p class="byline">Regler för inkomstår 2026, kontrollerade {{UPPDATERAD}} mot Skatteverket {{k:skv-312-2027}}. Uppdaterad {{UPPDATERAD}}.</p>
+
+<div class="kortsvar"><b>Kort svar</b>Från inkomstår 2026 finns en enda regel för gränsbeloppet. Det består av ett grundbelopp på 322 400 kr per bolag (fyra inkomstbasbelopp à 80 600 kr), fördelat efter din ägarandel, plus ett lönebaserat utrymme på 50 procent av din andel av löneunderlaget över 644 800 kr, plus ränta på omkostnadsbeloppet över 100 000 kr, plus sparat utrymme. Utdelning inom gränsbeloppet beskattas med 20 procent {{k:skv-312-2027}}. Reglerna beslutades av riksdagen 26 november 2025 {{k:mazars-312-beslut}}. Du redovisar dem i K10 i deklarationen 2027.</div>
+
+<h2>Räkna ut ditt gränsbelopp</h2>
+<noscript><p class="varning">Kalkylatorn behöver JavaScript. Reglerna och ett uträknat exempel står under kalkylatorn, så du kan räkna för hand.</p></noscript>
+<div class="kalk">
+  <form class="falt" id="tolv" novalidate>
+    <label class="kryss"><input type="checkbox" id="agde" checked><span><b>Jag ägde aktierna vid ingången av 2026</b><br><span class="liten">Krävs för att få ett gränsbelopp för 2026.</span></span></label>
+    <div class="rad"><label for="andel">Din ägarandel i procent</label><input id="andel" type="number" min="0" max="100" value="100" inputmode="decimal"></div>
+    <div class="rad"><label for="lu">Bolagets kontanta löner 2025<span class="liten">Löneunderlaget: kontant lön till alla anställda, även dig, i bolaget och dess dotterbolag under 2025. Inte förmåner.</span></label><input id="lu" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="egen">Din egen kontanta lön från bolaget 2025<span class="liten">Eller en närståendes, om den är högre. Styr taket för det lönebaserade utrymmet.</span></label><input id="egen" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="omk">Ditt omkostnadsbelopp för aktierna<span class="liten">Ofta vad du betalade för aktierna, till exempel 25 000 kr.</span></label><input id="omk" type="number" min="0" step="1000" value="25000" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="sparat">Sparat utdelningsutrymme från tidigare år<span class="liten">Står i din senaste K10.</span></label><input id="sparat" type="number" min="0" step="1000" value="0" inputmode="numeric" style="width:140px"></div>
+    <div class="rad"><label for="utd">Utdelning du vill ta 2026</label><input id="utd" type="number" min="0" step="1000" value="200000" inputmode="numeric" style="width:140px"></div>
+  </form>
+  <aside aria-live="polite">
+    <div class="hjaltekort"><div>Så mycket kan du ta ut med 20 % skatt 2026</div><div class="stor" id="u-grans">–</div><div class="liten" style="color:#fff" id="u-text">Fyll i uppgifterna.</div></div>
+    <div class="resultat" id="u-rader" style="margin-top:12px"></div>
+    <div id="u-not"></div>
+  </aside>
+</div>
+
+<h2>Hur räknas gränsbeloppet för 2026?</h2>
+<table>
+<thead><tr><th scope="col">Del</th><th scope="col">Regel 2026</th></tr></thead>
+<tbody>
+<tr><td>Grundbelopp</td><td>4 inkomstbasbelopp för året före (4 × 80 600 = 322 400 kr) per bolag, fördelat på andelarna. Äger du andelar i flera fåmansföretag får du högst ett grundbelopp totalt.</td></tr>
+<tr><td>Lönebaserat utrymme</td><td>50 % av den del av din andel av löneunderlaget som överstiger 8 inkomstbasbelopp (644 800 kr). Högst 50 gånger din egen eller en närståendes kontanta ersättning från bolaget.</td></tr>
+<tr><td>Ränta på omkostnadsbeloppet</td><td>Bara på den del som överstiger 100 000 kr. Räntan är statslåneräntan året före plus 9 procentenheter: 2,55 % + 9 % = 11,55 %.</td></tr>
+<tr><td>Sparat utdelningsutrymme</td><td>Förs vidare, men räknas inte längre upp med ränta.</td></tr>
+<tr><td>Skatt inom gränsbeloppet</td><td>2/3 av utdelningen tas upp i inkomstslaget kapital och beskattas med 30 %, alltså 20 % av hela utdelningen.</td></tr>
+<tr><td>Löneuttagskravet</td><td>Borttaget. Kravet på att äga minst 4 % för att få lönebaserat utrymme är också borttaget.</td></tr>
+</tbody>
+</table>
+<p class="liten">Källa för hela tabellen: {{k:skv-312-2027}}</p>
+
+<h2>Ett uträknat exempel</h2>
+<p>Skatteverkets eget exempel {{k:skv-312-2027}}: Valter äger alla aktier. Bolagets löneunderlag är 1 000 000 kr, han har ingen ränta på omkostnadsbeloppet och 750 000 kr i sparat utrymme.</p>
+<table>
+<tbody>
+<tr><td>Grundbelopp</td><td>322 400 kr</td></tr>
+<tr><td>Lönebaserat utrymme: (1 000 000 − 644 800) × 0,5</td><td>177 600 kr</td></tr>
+<tr><td>Ränta på omkostnadsbeloppet</td><td>0 kr</td></tr>
+<tr><td>Sparat utdelningsutrymme</td><td>750 000 kr</td></tr>
+<tr><td><b>Gränsbelopp</b></td><td><b>1 250 000 kr</b></td></tr>
+<tr><td>Skatt på 100 000 kr i utdelning: 100 000 × 2/3 × 30 %</td><td>20 000 kr</td></tr>
+</tbody>
+</table>
+
+<h2>Hur hänger lön, gränsbelopp, utdelning och K10 ihop?</h2>
+<ol>
+<li><b>Lön 2025</b> bygger löneunderlaget för 2026. Lön betalad under 2026 räknas först för gränsbeloppet 2027.</li>
+<li><b>Gränsbeloppet 2026</b> räknas fram enligt tabellen ovan.</li>
+<li><b>Utdelning 2026</b> upp till gränsbeloppet beskattas med 20 %. Det som går över beskattas som lön, alltså med din vanliga inkomstskatt.</li>
+<li><b>K10</b> lämnas med deklarationen 2027. Där redovisar du gränsbeloppet, utdelningen och vad som sparas till nästa år.</li>
+</ol>
+
+<h2>Vad räknar kalkylatorn inte på?</h2>
+<ul>
+<li>Skatten på utdelning över gränsbeloppet. Den beskattas som inkomst av tjänst, och hur mycket beror på din övriga inkomst och kommun. <span class="kontrolleras">Taket för hur mycket som beskattas i tjänst kontrolleras mot Skatteverket.</span></li>
+<li>Vilket år den egna lönen avser för taket ”50 gånger”. Kalkylatorn använder 2025, samma år som löneunderlaget. <span class="kontrolleras">Kontrolleras.</span></li>
+<li>Ägarbyten under året, flera fåmansföretag, dotterbolag, makar och andelsbyten.</li>
+<li>Bolagets möjlighet att dela ut: det måste finnas fritt eget kapital, och utdelningen beslutas på bolagsstämman.</li>
+<li>Skatten på själva lönen och arbetsgivaravgifterna.</li>
+</ul>
+
+<h2>Vanliga frågor</h2>
+<details class="fraga"><summary>Hur stort är grundbeloppet 2026?</summary><p>322 400 kr per bolag, det vill säga fyra inkomstbasbelopp à 80 600 kr. Det fördelas efter ägarandel, och en person kan få högst ett grundbelopp totalt även om hen äger flera fåmansföretag.</p></details>
+<details class="fraga"><summary>Finns löneuttagskravet kvar 2026?</summary><p>Nej. Löneuttagskravet är borttaget från inkomstår 2026. Det lönebaserade utrymmet kan dock inte bli större än 50 gånger din egen eller en närståendes kontanta ersättning från bolaget.</p></details>
+<details class="fraga"><summary>Räknas sparat utdelningsutrymme upp med ränta?</summary><p>Nej, inte längre. Enligt de nya reglerna förs det sparade utrymmet vidare utan uppräkning.</p></details>
+<details class="fraga"><summary>När lämnar jag K10 med de nya reglerna första gången?</summary><p>I deklarationen 2027, för inkomstår 2026.</p></details>
+
+<div class="nasta">
+  <h2>Vill du att någon räknar åt dig?</h2>
+  <p>K10 för en ägare ingår i Konrads bokslutspaket, 5 995 kr per år exkl. moms. I Kamrer planerar en auktoriserad redovisningskonsult lön och utdelning med dig.</p>
+  <a class="knapp" href="/#pris">Se priserna</a>
+</div>
+</article>
+{{DATA:regler-312-2026}}
+<script src="/js/kalkyl.js" defer></script>
+<script src="/js/tolv.js" defer></script>

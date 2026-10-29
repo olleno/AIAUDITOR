@@ -1,0 +1,124 @@
+{
+  "_kalla": "Olles beslut 14 okt 2026 (Faktaunderlag.md, avsnitt Beslut) och prislistan på AIAUDITOR/konrad. Alla priser utan moms. Ditt AI-register 49 kr/mån: Olles beslut 21 okt 2026 (chatten för agentövervakning).",
+  "nivaer": [
+    {
+      "id": "gratis",
+      "namn": "Gratis",
+      "pris": 0,
+      "vem": "För dig som vill ha ordning själv.",
+      "ingar": [
+        "Bokföring där Konrad frågar när han är osäker",
+        "Kvitton via foto och din egen kvittoadress",
+        "Bankkoppling",
+        "Fakturor och momsunderlag",
+        "Gratis granskning av SIE-fil"
+      ],
+      "not": "Upp till 15 verifikationer per månad och ett bankkonto. Du lämnar själv in momsen."
+    },
+    {
+      "id": "bevakning",
+      "namn": "Bevakning",
+      "pris": 199,
+      "vem": "Allt i Gratis, plus att Konrad håller koll.",
+      "ingar": [
+        "Konrad hämtar kvittona ur din mejl",
+        "Vi lämnar in momsen åt dig",
+        "Frister och påminnelser",
+        "Skattekontot bevakas",
+        "Kunder som tystnat eller betalar sent",
+        "Avtal före förlängning",
+        "Pengarna 13 veckor framåt",
+        "Fristgaranti"
+      ],
+      "not": "Gratis de första 3 månaderna."
+    },
+    {
+      "id": "pro",
+      "namn": "Pro",
+      "pris": 399,
+      "vem": "Allt i Bevakning, plus mer för dig som växer.",
+      "ingar": [
+        "Jämförelse med din bransch",
+        "Underlag till banken",
+        "Kopplingar till affärssystem",
+        "Krypto och K4-underlag"
+      ],
+      "not": ""
+    },
+    {
+      "id": "kamrer",
+      "namn": "Kamrer",
+      "pris": 2995,
+      "manniska": true,
+      "vem": "Allt i Pro, plus en auktoriserad redovisningskonsult.",
+      "ingar": [
+        "Granskad bokföring varje månad",
+        "Månadsbrev med kommentar",
+        "Budget och plan för lön och utdelning",
+        "Möte varje kvartal med din konsult"
+      ],
+      "not": ""
+    },
+    {
+      "id": "ekonomichef",
+      "namn": "Ekonomichef",
+      "pris": 4995,
+      "manniska": true,
+      "vem": "Allt i Kamrer, plus en ekonomiavdelning.",
+      "ingar": [
+        "Rullande prognos och scenarier",
+        "Styrelsepaket varje kvartal",
+        "Hjälp inför samtal med banken"
+      ],
+      "not": ""
+    }
+  ],
+  "bokslut": {
+    "namn": "Bokslut och årsredovisning",
+    "pris_ar": 5995,
+    "ingar": "Bokslut, årsredovisning, inkomstdeklaration (INK2) och K10 för en ägare."
+  },
+  "tillval": [
+    {
+      "text": "Vi lämnar in momsen åt dig (ingår från Bevakning)",
+      "pris": "99 kr/mån"
+    },
+    {
+      "text": "Fler verifikationer, per påbörjat 25-tal över 15 (ingår i Kamrer och Ekonomichef)",
+      "pris": "99 kr/mån"
+    },
+    {
+      "text": "Extra bankkonto",
+      "pris": "49 kr/mån"
+    },
+    {
+      "text": "Granskad bokföring av en människa varje månad (ingår i Kamrer och Ekonomichef)",
+      "pris": "295 kr/mån"
+    },
+    {
+      "text": "Lön, per anställd",
+      "pris": "195 kr/mån"
+    },
+    {
+      "text": "Din privata deklaration",
+      "pris": "1 495 kr/år"
+    },
+    {
+      "text": "Holdingbolag: bokslut, årsredovisning och K10",
+      "pris": "3 995 kr/år"
+    },
+    {
+      "text": "K10 för fler delägare, per delägare",
+      "pris": "495 kr/år"
+    },
+    {
+      "text": "Vi flyttar allt från din gamla byrå",
+      "pris": "1 495 kr en gång"
+    },
+    {
+      "text": "Ditt AI-register: Konrad hittar vilka AI-tjänster bolaget använder i fakturorna och ger underlag för AI-förordningen (ingår i Kamrer och Ekonomichef)",
+      "pris": "49 kr/mån"
+    }
+  ],
+  "_andring_aiauditor": "Kopia av ~/verket/konrad-sajt/data/konrad-priser.json 2026-10-29. Två ändringar: 'Automatisk bokföring' -> 'Bokföring där Konrad frågar när han är osäker' (inga automatlöften) och tillvalsraden om procent av första årets besparing borttagen (gamla prismodellen; testas som förbjuden fras). Alla priser oförändrade. Länken till /ai-forordningen/ på tillvalet Ditt AI-register är borttagen (guiden är inte flyttad än)."
+}
