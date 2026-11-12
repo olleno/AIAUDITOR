@@ -132,7 +132,8 @@ class KonradTest(unittest.TestCase):
         h = sidor()["konrad/index.html"]
         self.assertGreaterEqual(h.count('<a class="knapp" href="/">'), 1)
         self.assertIn('<a class="knapp" href="/">Granska din bokföring gratis</a>', h)
-        self.assertIn("Bokföringen är gratis. Du betalar när vi gör jobbet åt dig.", h)
+        # Rubriken står i två rader (h1 + underrad) sedan Konrad OS, nov 2026 – samma mening i den synliga texten.
+        self.assertIn("Bokföringen är gratis. Du betalar när vi gör jobbet åt dig.", text(h))
 
     def test_logga_in_utan_riktig_inloggning(self):
         h = sidor()["konrad/logga-in/index.html"]

@@ -1,5 +1,13 @@
 # AI Auditor – logg
 
+## 2026-11-12 – Konrad OS: startsidan i typesafe.ai-stil (gren konrad-typesafe, INTE publicerad)
+- Olles beställning 12 nov: typesafe.ai som förebild. Jätterubrik över ett rastrerat moln, gamla kontorsfönster (Facit, räknesnurran, ABC 80, klocka) på ett blått skrivbord, "0 kr för bokföringen / 5 995 kr för bokslutet", kapplöpningen "Söndagskvällen mot Konrad" och släktträdet som fönster.
+- Mörkt band efter Solitas grepp: "Konrad drivs av teknik, data och över 100 års mänsklig insikt i redovisning och i att driva företag." Teknik nämner lagarna (BFL, ÅRL, momslagen, IL, ABL), BFN och Skatteverket – alla finns i plattformens bibliotek. "Över 100 år" är märkt "när hela teamet är på plats" (i dag Olles 35 år).
+- Allt som inte finns är märkt "vid lansering" eller "påhittat exempel". Inga externa typsnitt eller bibliotek. JS i konrad/js/os.js, stil sist i konrad/konrad.css.
+- Hjältebilden och belägget "Inga kvitton att jaga" borttagna ur toppen (kvittojakten finns inte än). Testet för rubriken läser nu den synliga texten, eftersom rubriken står på två rader.
+- Tester: 37 gröna. Kontrollerat i webbläsaren, dator och mobil (ingen sidledsrullning).
+- Publicering: slå ihop grenen i main och pusha (då går den ut på aiauditor.se/konrad). Backning: git revert.
+
 ## 2026-10-06
 - Sajten publicerad på https://aiauditor.se via GitHub Pages (repo olleno/AIAUDITOR, gren main, rot). Domän hos Loopia.
 - DNS hos Loopia: aiauditor.se → GitHubs fyra adresser (185.199.108–111.153), www → CNAME olleno.github.io. Parkeringsposterna för www borttagna. Jokerposten (*) pekar fortfarande på Loopias parkering.
