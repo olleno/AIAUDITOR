@@ -1,6 +1,6 @@
 <!--meta
 {"sokvag": "trygghet/", "titel": "Så kan du lita på Konrad – löften, status och villkor", "rubrik": "Så kan du lita på Konrad", "smula": "Så kan du lita på Konrad",
- "beskrivning": "Konrads löften i klartext: ta med hela bokföringen, inget lämnas in utan ditt ja, fristgaranti, data i EU, öppet om AI, paus och ingen bindningstid. Vid varje löfte står om det är byggt, beslutat eller kommer vid lansering, och var det står i villkoren."}
+ "beskrivning": "Konrads löften i klartext: ta med hela bokföringen, inget lämnas in utan ditt ja, fristgaranti, bokföringen förvaras i Sverige, öppet om AI, paus och ingen bindningstid. Vid varje löfte står om det är byggt, beslutat eller kommer vid lansering, och var det står i villkoren."}
 -->
 <article class="ram artikel">
 <p class="status">Utkast. Konrad är inte lanserat och har inga kunder än. Vid varje löfte står hur långt det har kommit. Villkoren ska granskas av jurist före lansering. Uppdaterad {{UPPDATERAD}}.</p>
@@ -22,7 +22,7 @@
 <tr><th scope="row"><a href="#ta-med-allt">Ta med allt, när du vill</a></th><td><span class="lage byggt">Byggt</span> <span class="lage beslutas">Garantin beslutas</span></td><td><a href="/villkor/#din-bokforing">Din bokföring</a></td></tr>
 <tr><th scope="row"><a href="#ditt-ja">Inget lämnas in utan ditt ja</a></th><td><span class="lage beslutat">Beslutat</span> <span class="lage byggt">Spärren byggd</span> <span class="snart">BankID vid lansering</span></td><td><a href="/villkor/#slutgranskning">Slutgranskning</a></td></tr>
 <tr><th scope="row"><a href="#fristgaranti">Fristgaranti</a></th><td><span class="lage beslutat">Beslutat</span> <span class="snart">vid lansering</span></td><td><a href="/villkor/#fristgaranti">Fristgaranti</a></td></tr>
-<tr><th scope="row"><a href="#eu">Din bokföring ligger i EU</a></th><td><span class="lage beslutat">Beslutat</span> <span class="lage beslutas">Serverplats och AI-tjänst beslutas</span></td><td>Inte än</td></tr>
+<tr><th scope="row"><a href="#eu">Din bokföring förvaras i Sverige</a></th><td><span class="lage beslutat">Beslutat</span> <span class="lage beslutas">Konrads serverplats och AI-tjänst beslutas</span></td><td>Inte än</td></tr>
 <tr><th scope="row"><a href="#ai">Du vet alltid vad som är AI</a></th><td><span class="lage byggt">Byggt</span> <span class="lage beslutat">Beslutat</span></td><td>Delvis</td></tr>
 <tr><th scope="row"><a href="#pausa">Pausa Konrad</a></th><td><span class="snart">vid lansering</span></td><td>Inte än</td></tr>
 <tr><th scope="row"><a href="#traffsakerhet">Öppen träffsäkerhet</a></th><td><span class="snart">vid lansering</span></td><td>Inte än</td></tr>
@@ -69,13 +69,14 @@
 </ul>
 <p class="villkorslank">I villkoren: <a href="/villkor/#fristgaranti">Fristgaranti</a>, med allt som ska vara uppfyllt och allt som inte ersätts.</p>
 
-<h2 id="eu">Din bokföring ligger i EU <span class="lage beslutat">Beslutat</span></h2>
-<p class="lofte">Kvitton, underlag och bokföring lagras i EU.</p>
+<h2 id="eu">Din bokföring förvaras i Sverige <span class="lage beslutat">Beslutat</span></h2>
+<p class="lofte">Din bokföring förvaras i Sverige, hos Accounted på Amazons servrar i Stockholm.</p>
 <h3>Så fungerar det</h3>
 <ul>
-<li><span class="lage beslutat">Beslutat</span> Kvitton och andra underlag lagras inte hos Konrad. De laddas upp direkt till Accounted, bokföringssystemet som Konrad arbetar i, och arkiveras i Tyskland i 7 år, den tid bokföringslagen kräver {{k:bfl-7-2}}. Konrad sparar bara en hänvisning till varje underlag. <span class="kontrolleras">Att lagringen sker i EU ska bekräftas i avtalet med Accounted före lansering.</span></li>
-<li>Huvudregeln är att räkenskapsinformation förvaras i Sverige. Elektroniska handlingar får förvaras i ett annat EU-land om platsen anmäls till Skatteverket {{k:bfl-7-3a}}. <span class="kontrolleras">Hur anmälan görs för ditt bolag beslutas före lansering.</span></li>
-<li><span class="lage beslutat">Beslutat</span> Konrads egen server hyrs av Hetzner, ett tyskt bolag, i ett datacenter i EU. <span class="lage beslutas">Beslutas</span> vilket datacenter. Förslaget är Helsingfors med en krypterad kopia i Tyskland.</li>
+<li><span class="lage beslutat">Beslutat</span> Kvitton och andra underlag lagras inte hos Konrad. De laddas upp direkt till Accounted, bokföringssystemet som Konrad arbetar i, och arkiveras där i 7 år, den tid bokföringslagen kräver {{k:bfl-7-2}}. Konrad sparar bara en hänvisning till varje underlag.</li>
+<li>Accounted lagrar databasen, bokföringen och de uppladdade underlagen i Sverige, hos Amazon Web Services i Stockholm. Det står i Accounteds personuppgiftsbiträdesavtal och integritetspolicy {{k:accounted-dpa}} {{k:accounted-integritet}}. <span class="kontrolleras">Konrads eget avtal med Accounted är inte skrivet än. Platsen skrivs in i det före lansering.</span></li>
+<li>Bokföringslagen säger att räkenskapsinformation ska förvaras i Sverige {{k:bfl-7-2}}. Eftersom bokföringen redan ligger i Sverige behöver ditt bolag inte anmäla någon förvaring utomlands till Skatteverket, vilket annars krävs {{k:bfl-7-3a}}.</li>
+<li><span class="lage beslutat">Beslutat</span> Konrads egen server hyrs av Hetzner, ett tyskt bolag, i ett datacenter i EU. Där ligger bara en arbetskopia som Konrad läser ur, inte din bokföring. <span class="lage beslutas">Beslutas</span> vilket datacenter. Förslaget är Helsingfors med en krypterad kopia i Tyskland.</li>
 <li><span class="snart">vid lansering</span> Mejl som du skickar till din kvittoadress tas emot hos Amazon Web Services i Irland och raderas där efter högst 7 dagar.</li>
 <li><span class="lage beslutas">Beslutas</span> Vilken AI-tjänst Konrad använder för att läsa kvitton och svara på frågor, och var den körs. Den väljs efter prov på riktiga svenska kvitton, och vi använder EU-region där det går. Löftet om EU gäller inte AI-tjänsten förrän det är beslutat.</li>
 <li><span class="snart">vid lansering</span> Personuppgiftsbiträdesavtal med dig och med varje underleverantör, som dataskyddsförordningen kräver {{k:gdpr-28}}.</li>

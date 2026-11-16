@@ -1,4 +1,16 @@
 {
+ "accounted-dpa": {
+  "kort": "Accounted, biträdesavtal",
+  "namn": "Accounted (Arcim Technology AB): personuppgiftsbiträdesavtal, punkt 12, förvaring i Sverige (Stockholm)",
+  "url": "https://app.accounted.se/dpa",
+  "datum": "2026-11-16"
+ },
+ "accounted-integritet": {
+  "kort": "Accounted, integritetspolicy",
+  "namn": "Accounted (Arcim Technology AB): integritetspolicy, underbiträden – all data i tjänsten lagras i Sverige (AWS eu-north-1, Stockholm)",
+  "url": "https://app.accounted.se/privacy",
+  "datum": "2026-11-16"
+ },
  "skv-312-2027": {
   "kort": "Skatteverket",
   "namn": "Skatteverket: Ändrade regler för delägare i fåmansföretag inför inkomstdeklarationen 2027",
