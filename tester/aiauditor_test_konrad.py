@@ -140,6 +140,18 @@ class KonradTest(unittest.TestCase):
         self.assertNotIn('type="email"', h)
         self.assertIn("vid lansering", h)
 
+    def test_startprogram_ren_text_bara_beviljade(self):
+        """Bara program vi faktiskt är med i, som ren text, med förbehåll – inga logotyper (NVIDIA och AWS kräver tillstånd)."""
+        h = sidor()["konrad/index.html"]
+        sek = re.search(r'<p class="program">.*?</p>', h, re.S).group(0)
+        t = text(sek)
+        self.assertIn("Foodbergs Stockholm AB deltar i startprogrammen NVIDIA Inception och AWS Activate", t)
+        self.assertIn("har inte granskat eller godkänt Konrad", t)
+        self.assertNotIn("<img", sek)
+        hela = text(h)
+        for ej in ("Google for Startups", "Microsoft for Startups", "Almi", "Cloudflare", "EuroHPC", "Scaleway"):
+            self.assertNotIn(ej, hela)
+
     def test_konrad_ar_ett_ai_system(self):
         t = text(sidor()["konrad/index.html"])
         self.assertIn("Konrad är vårt system, din AI-kamrer", t)

@@ -116,6 +116,7 @@ summary{font-weight:600;cursor:pointer}
 details p{margin:10px 0 0;color:var(--text2)}
 .slut{text-align:center}
 .slut .ingress{margin-inline:auto}
+.slut .program{margin:22px auto 0;max-width:62ch;font-size:14px;color:var(--dampad)}
 .form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
 .form input{font:16px var(--brod);padding:12px 14px;border:1px solid var(--linje);border-radius:10px;min-width:0;width:280px;max-width:100%;background:var(--yta);color:var(--text)}
 footer{border-top:1px solid var(--linje);padding-block:28px;font-size:14px;color:var(--dampad)}

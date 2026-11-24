@@ -62,3 +62,8 @@
 - Fortfarande noindex, utanför sajtkarta, llms.txt och flöden. Tester: tester/aiauditor_test_konrad.py.
 - Backning: `git revert <commit>` (commit-id står i git log: "Konrad: en sajt på aiauditor.se/konrad/").
 - Rättelse samma kväll: tillvalet "20 % av första årets besparing" (avgiftsvakten) är kvar i den beslutade prislistan och återinfört på /konrad/.
+
+## 2026-11-24 – Konrad: startprogrammen NVIDIA Inception och AWS Activate (Olles beslut 24 nov)
+- En rad sist på /konrad/, ren text utan logotyper (NVIDIA och AWS kräver tillstånd för logotyp). Källor: NVIDIA:s beviljande 24 nov och AWS Activate-krediterna utfärdade 11 nov, AWS-konto registrerat på Foodbergs Stockholm AB.
+- Bara beviljade program får stå här. Test: test_startprogram_ren_text_bara_beviljade.
+- Backning: `git revert` på commiten.
